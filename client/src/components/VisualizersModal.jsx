@@ -564,118 +564,503 @@ function BSTVisualizer() {
   );
 }
 
-// 4. Subnetting & CIDR Visualizer
+// 4. Subnetting & CIDR Visualizer (Full First-Principles Engine)
 function SubnetVisualizer() {
-  const [ip, setIp] = useState('192.168.10.68');
+  const [ipInput, setIpInput] = useState('192.168.10.68/26');
   const [cidr, setCidr] = useState(26);
+  const [subnetsDivCount, setSubnetsDivCount] = useState(4); // 2, 4, 8, 16
+  const [testDstIp, setTestDstIp] = useState('192.168.10.85');
+  const [routeResult, setRouteResult] = useState(null);
 
-  const maskInt = (0xFFFFFFFF << (32 - cidr)) >>> 0;
-  const maskOctets = [
-    (maskInt >>> 24) & 255,
-    (maskInt >>> 16) & 255,
-    (maskInt >>> 8) & 255,
-    maskInt & 255,
-  ];
+  // Helper functions
+  const ipToLong = (ipStr) => {
+    const clean = (ipStr || '').split('/')[0].trim();
+    const parts = clean.split('.').map(p => {
+      const n = parseInt(p.trim(), 10);
+      return isNaN(n) ? 0 : Math.max(0, Math.min(255, n));
+    });
+    while (parts.length < 4) parts.push(0);
+    return (((parts[0] & 255) << 24) | ((parts[1] & 255) << 16) | ((parts[2] & 255) << 8) | (parts[3] & 255)) >>> 0;
+  };
 
-  const ipOctets = ip.split('.').map(Number);
-  const ipInt = ((ipOctets[0] << 24) | (ipOctets[1] << 16) | (ipOctets[2] << 8) | ipOctets[3]) >>> 0;
+  const longToIp = (num) => {
+    return [
+      (num >>> 24) & 255,
+      (num >>> 16) & 255,
+      (num >>> 8) & 255,
+      num & 255
+    ].join('.');
+  };
 
-  const netInt = (ipInt & maskInt) >>> 0;
-  const netOctets = [
-    (netInt >>> 24) & 255,
-    (netInt >>> 16) & 255,
-    (netInt >>> 8) & 255,
-    netInt & 255,
-  ];
+  const cidrToMask = (c) => {
+    if (c <= 0) return 0;
+    if (c >= 32) return 0xFFFFFFFF >>> 0;
+    return ((0xFFFFFFFF << (32 - c)) >>> 0);
+  };
 
-  const bcastInt = (netInt | (~maskInt >>> 0)) >>> 0;
-  const bcastOctets = [
-    (bcastInt >>> 24) & 255,
-    (bcastInt >>> 16) & 255,
-    (bcastInt >>> 8) & 255,
-    bcastInt & 255,
-  ];
+  const toBinaryOctets = (num) => {
+    return [
+      ((num >>> 24) & 255).toString(2).padStart(8, '0'),
+      ((num >>> 16) & 255).toString(2).padStart(8, '0'),
+      ((num >>> 8) & 255).toString(2).padStart(8, '0'),
+      (num & 255).toString(2).padStart(8, '0')
+    ];
+  };
 
-  const usableHosts = Math.max(0, Math.pow(2, 32 - cidr) - 2);
+  // Synchronize input
+  const handleIpInputChange = (val) => {
+    setIpInput(val);
+    if (val.includes('/')) {
+      const parts = val.split('/');
+      const parsedCidr = parseInt(parts[1], 10);
+      if (!isNaN(parsedCidr) && parsedCidr >= 1 && parsedCidr <= 32) {
+        setCidr(parsedCidr);
+      }
+    }
+  };
+
+  const handleCidrChange = (newCidr) => {
+    const clamped = Math.max(1, Math.min(32, newCidr));
+    setCidr(clamped);
+    const baseIp = ipInput.split('/')[0].trim();
+    setIpInput(`${baseIp}/${clamped}`);
+  };
+
+  const applyPreset = (presetIp, presetCidr) => {
+    setIpInput(`${presetIp}/${presetCidr}`);
+    setCidr(presetCidr);
+    setRouteResult(null);
+  };
+
+  // Calculations
+  const cleanIp = ipInput.split('/')[0].trim() || '192.168.10.68';
+  const ipLong = ipToLong(cleanIp);
+  const maskLong = cidrToMask(cidr);
+  const netLong = (ipLong & maskLong) >>> 0;
+  const wildcardLong = (~maskLong) >>> 0;
+  const bcastLong = (netLong | wildcardLong) >>> 0;
+
+  const totalAddresses = Math.pow(2, 32 - cidr);
+  const usableHosts = cidr >= 31 ? (cidr === 31 ? 2 : 1) : Math.max(0, totalAddresses - 2);
+
+  const firstUsableLong = cidr >= 31 ? netLong : (usableHosts > 0 ? (netLong + 1) >>> 0 : netLong);
+  const lastUsableLong = cidr >= 31 ? bcastLong : (usableHosts > 0 ? (bcastLong - 1) >>> 0 : bcastLong);
+
+  const ipOctets = [(ipLong >>> 24) & 255, (ipLong >>> 16) & 255, (ipLong >>> 8) & 255, ipLong & 255];
+  const maskOctets = [(maskLong >>> 24) & 255, (maskLong >>> 16) & 255, (maskLong >>> 8) & 255, maskLong & 255];
+  const netOctets = [(netLong >>> 24) & 255, (netLong >>> 16) & 255, (netLong >>> 8) & 255, netLong & 255];
+  const bcastOctets = [(bcastLong >>> 24) & 255, (bcastLong >>> 16) & 255, (bcastLong >>> 8) & 255, bcastLong & 255];
+  const wildcardOctets = [(wildcardLong >>> 24) & 255, (wildcardLong >>> 16) & 255, (wildcardLong >>> 8) & 255, wildcardLong & 255];
+
+  // Classful classification
+  const firstOctet = ipOctets[0];
+  let ipClass = 'Class A';
+  let defaultMask = 8;
+  if (firstOctet >= 128 && firstOctet <= 191) {
+    ipClass = 'Class B';
+    defaultMask = 16;
+  } else if (firstOctet >= 192 && firstOctet <= 223) {
+    ipClass = 'Class C';
+    defaultMask = 24;
+  } else if (firstOctet >= 224 && firstOctet <= 239) {
+    ipClass = 'Class D (Multicast)';
+    defaultMask = 0;
+  } else if (firstOctet >= 240) {
+    ipClass = 'Class E (Experimental)';
+    defaultMask = 0;
+  }
+
+  // RFC 1918 Scope
+  let scope = 'Public Internet';
+  if (firstOctet === 10) scope = 'Private (RFC 1918 Class A)';
+  else if (firstOctet === 172 && ipOctets[1] >= 16 && ipOctets[1] <= 31) scope = 'Private (RFC 1918 Class B)';
+  else if (firstOctet === 192 && ipOctets[1] === 168) scope = 'Private (RFC 1918 Class C)';
+  else if (firstOctet === 127) scope = 'Loopback Host';
+
+  // Subnet borrowed bits from classful boundary
+  const borrowedBits = defaultMask > 0 ? Math.max(0, cidr - defaultMask) : 0;
+  const numSubnetsFromClass = defaultMask > 0 ? Math.pow(2, borrowedBits) : 1;
+
+  // VLSM Subnet partition list
+  const borrowBits = Math.round(Math.log2(subnetsDivCount));
+  const newPartitionCidr = cidr + borrowBits;
+  const canPartition = newPartitionCidr <= 32;
+  const partitionSubnetSize = canPartition ? Math.pow(2, 32 - newPartitionCidr) : 0;
+  
+  const partitionsList = [];
+  if (canPartition) {
+    for (let i = 0; i < subnetsDivCount; i++) {
+      const sNet = (netLong + i * partitionSubnetSize) >>> 0;
+      const sMask = cidrToMask(newPartitionCidr);
+      const sBcast = (sNet | ((~sMask) >>> 0)) >>> 0;
+      const sUsable = newPartitionCidr >= 31 ? (newPartitionCidr === 31 ? 2 : 1) : Math.max(0, partitionSubnetSize - 2);
+      const sFirst = newPartitionCidr >= 31 ? sNet : (sNet + 1) >>> 0;
+      const sLast = newPartitionCidr >= 31 ? sBcast : (sBcast - 1) >>> 0;
+      const isTargetInSubnet = ipLong >= sNet && ipLong <= sBcast;
+      partitionsList.push({
+        index: i,
+        network: longToIp(sNet) + `/${newPartitionCidr}`,
+        firstHost: longToIp(sFirst),
+        lastHost: longToIp(sLast),
+        broadcast: longToIp(sBcast),
+        usable: sUsable,
+        isActive: isTargetInSubnet
+      });
+    }
+  }
+
+  // Route test handler
+  const handleTestRoute = () => {
+    const dstLong = ipToLong(testDstIp);
+    const matches = (dstLong & maskLong) >>> 0 === netLong;
+    setRouteResult({
+      dst: testDstIp,
+      matches,
+      dstNet: longToIp((dstLong & maskLong) >>> 0)
+    });
+  };
+
+  const binaryIp = toBinaryOctets(ipLong);
+  const binaryMask = toBinaryOctets(maskLong);
+  const binaryNet = toBinaryOctets(netLong);
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
-        <div>
-          <label className="text-xs font-bold text-slate-800 dark:text-slate-300 block mb-1">Host IPv4 Address:</label>
-          <input 
-            type="text" 
-            value={ip} 
-            onChange={e => setIp(e.target.value)}
-            className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-sm font-mono font-bold text-slate-950 dark:text-white rounded-xl p-2.5 focus:border-blue-600" 
-          />
-        </div>
-        <div>
-          <div className="flex justify-between items-center mb-1">
-            <label className="text-xs font-bold text-slate-800 dark:text-slate-300">Prefix Length (/{cidr}):</label>
-            <span className="text-xs font-mono text-blue-700 dark:text-blue-400 font-bold">{maskOctets.join('.')}</span>
+      {/* 1. Header Controls & GATE Presets */}
+      <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-3xl space-y-4 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 className="text-base font-serif font-bold text-slate-950 dark:text-white">CIDR Subnetting & Supernetting Engine</h3>
+            <p className="text-xs text-slate-600 dark:text-slate-400">First-principles bitwise decomposition, VLSM partitioning, and Longest Prefix Match</p>
           </div>
-          <input 
-            type="range" 
-            min="16" 
-            max="30" 
-            value={cidr} 
-            onChange={e => setCidr(parseInt(e.target.value))}
-            className="w-full accent-blue-600 cursor-pointer mt-2" 
-          />
+          <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold">
+            <span className="text-slate-500 text-[11px] mr-1">GATE Presets:</span>
+            {[
+              { label: 'GATE 2024 (DA)', ip: '192.168.10.68', cidr: 26 },
+              { label: 'GATE 2020 (CS)', ip: '172.16.10.25', cidr: 20 },
+              { label: 'GATE 2017 (CS)', ip: '200.10.0.0', cidr: 21 },
+              { label: 'GATE 2015 (CS)', ip: '203.10.24.0', cidr: 28 },
+            ].map(p => (
+              <button
+                key={p.label}
+                onClick={() => applyPreset(p.ip, p.cidr)}
+                className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg text-[11px] font-bold transition border border-slate-200 dark:border-slate-700"
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Input Form */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center pt-1">
+          <div className="md:col-span-5">
+            <label className="text-xs font-bold text-slate-800 dark:text-slate-300 block mb-1">
+              Host / Network IPv4 Address with CIDR:
+            </label>
+            <input 
+              type="text" 
+              value={ipInput} 
+              onChange={e => handleIpInputChange(e.target.value)}
+              placeholder="e.g. 192.168.10.68/26"
+              className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-sm font-mono font-bold text-slate-950 dark:text-white rounded-xl p-3 focus:outline-none focus:border-blue-600 shadow-inner" 
+            />
+          </div>
+
+          <div className="md:col-span-7 space-y-1">
+            <div className="flex justify-between items-center">
+              <label className="text-xs font-bold text-slate-800 dark:text-slate-300">
+                Prefix Length (/{cidr}) — Mask: <span className="font-mono text-blue-700 dark:text-blue-400">{longToIp(maskLong)}</span>
+              </label>
+              <span className="text-xs font-mono font-bold text-slate-600 dark:text-slate-400">
+                {cidr} Net bits / {32 - cidr} Host bits
+              </span>
+            </div>
+            <input 
+              type="range" 
+              min="1" 
+              max="32" 
+              value={cidr} 
+              onChange={e => handleCidrChange(parseInt(e.target.value))}
+              className="w-full accent-blue-600 cursor-pointer h-2 bg-slate-200 dark:bg-slate-800 rounded-lg" 
+            />
+            {/* Quick prefix chips */}
+            <div className="flex flex-wrap gap-1 pt-1">
+              {[8, 16, 20, 22, 24, 26, 27, 28, 29, 30].map(c => (
+                <button
+                  key={c}
+                  onClick={() => handleCidrChange(c)}
+                  className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${
+                    cidr === c 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                  }`}
+                >
+                  /{c}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Bit allocation bar */}
-      <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2 shadow-sm">
-        <h4 className="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">IPv4 Bit Split (Total 32 Bits):</h4>
-        <div className="flex h-11 rounded-xl overflow-hidden border border-slate-300 dark:border-slate-700 font-mono text-xs font-bold shadow-inner">
-          <div 
-            style={{ width: `${(cidr/32)*100}%` }}
-            className="bg-blue-600 flex items-center justify-center text-white"
-          >
-            Network / Subnet ({cidr} bits)
+      {/* 2. Visual 32-Bit Allocation Bar & 4-Octet Binary Map */}
+      <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-3xl space-y-4 shadow-sm">
+        <div className="flex items-center justify-between">
+          <h4 className="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">
+            32-Bit Binary IPv4 Octet Decomposition:
+          </h4>
+          <div className="flex items-center gap-3 text-[11px] font-bold">
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Network ({Math.min(defaultMask, cidr)}b)</span>
+            {borrowedBits > 0 && (
+              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Subnet ({borrowedBits}b)</span>
+            )}
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Host ({32 - cidr}b)</span>
           </div>
+        </div>
+
+        {/* 32-Bit Split Ribbon */}
+        <div className="flex h-11 rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700 font-mono text-xs font-bold shadow-inner">
           <div 
-            style={{ width: `${((32-cidr)/32)*100}%` }}
-            className="bg-teal-600 flex items-center justify-center text-white"
+            style={{ width: `${(Math.min(defaultMask, cidr) / 32) * 100}%` }}
+            className="bg-blue-600 flex items-center justify-center text-white px-2 truncate"
           >
-            Host ({32-cidr} bits)
+            Network ({Math.min(defaultMask, cidr)})
           </div>
+          {borrowedBits > 0 && (
+            <div 
+              style={{ width: `${(borrowedBits / 32) * 100}%` }}
+              className="bg-amber-500 flex items-center justify-center text-slate-950 px-2 truncate"
+            >
+              Subnet ({borrowedBits})
+            </div>
+          )}
+          <div 
+            style={{ width: `${((32 - cidr) / 32) * 100}%` }}
+            className="bg-emerald-600 flex items-center justify-center text-white px-2 truncate"
+          >
+            Host ({32 - cidr})
+          </div>
+        </div>
+
+        {/* 4-Octet Binary Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {[0, 1, 2, 3].map(octIdx => {
+            const startBit = octIdx * 8;
+            const endBit = startBit + 8;
+            return (
+              <div key={octIdx} className="p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-1.5 font-mono text-xs">
+                <div className="flex justify-between items-center text-slate-500 text-[11px] font-bold">
+                  <span>Octet {octIdx + 1}</span>
+                  <span className="text-slate-900 dark:text-white font-extrabold text-sm">{ipOctets[octIdx]}</span>
+                </div>
+                {/* 8 Bits visual display */}
+                <div className="flex gap-0.5 justify-center py-1">
+                  {binaryIp[octIdx].split('').map((bit, bitIdx) => {
+                    const globalBitIdx = startBit + bitIdx;
+                    let color = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-300';
+                    if (globalBitIdx < defaultMask) {
+                      color = 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 border-blue-300';
+                    } else if (globalBitIdx < cidr) {
+                      color = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-300';
+                    }
+                    return (
+                      <span key={bitIdx} className={`w-5 h-6 rounded flex items-center justify-center font-bold border text-[11px] ${color}`}>
+                        {bit}
+                      </span>
+                    );
+                  })}
+                </div>
+                <div className="text-[10px] text-slate-500 text-center font-mono">
+                  Mask: {maskOctets[octIdx]} ({binaryMask[octIdx]})
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Computed Subnet Parameters Grid */}
+      {/* 3. Core Computed Subnet Parameters Matrix */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-3 font-mono text-xs shadow-sm">
-          <div className="flex justify-between">
-            <span className="text-slate-600 dark:text-slate-400 font-semibold">Network Address:</span>
-            <span className="font-bold text-blue-700 dark:text-blue-400 text-sm">{netOctets.join('.')}</span>
+        {/* Left Column: Addressing Parameters */}
+        <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-3xl space-y-3 font-mono text-xs shadow-sm">
+          <h4 className="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider font-sans mb-1">
+            GATE Network Address Properties:
+          </h4>
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Network Address (Subnet ID):</span>
+            <span className="font-bold text-blue-700 dark:text-blue-400 text-sm">{longToIp(netLong)}</span>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
             <span className="text-slate-600 dark:text-slate-400 font-semibold">Subnet Mask:</span>
-            <span className="font-bold text-slate-950 dark:text-slate-200 text-sm">{maskOctets.join('.')}</span>
+            <span className="font-bold text-slate-950 dark:text-slate-200 text-sm">{longToIp(maskLong)}</span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-slate-600 dark:text-slate-400 font-semibold">Broadcast Address:</span>
-            <span className="font-bold text-rose-700 dark:text-rose-400 text-sm">{bcastOctets.join('.')}</span>
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Wildcard / Inverted Mask:</span>
+            <span className="font-bold text-teal-700 dark:text-teal-400 text-sm">{longToIp(wildcardLong)}</span>
+          </div>
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Directed Broadcast (DBA):</span>
+            <span className="font-bold text-rose-700 dark:text-rose-400 text-sm">{longToIp(bcastLong)}</span>
+          </div>
+          <div className="flex justify-between items-center py-1">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Address Class & Scope:</span>
+            <span className="font-bold text-slate-900 dark:text-white font-sans text-xs">
+              {ipClass} • <span className="text-blue-600 dark:text-blue-400">{scope}</span>
+            </span>
           </div>
         </div>
 
-        <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-3 font-mono text-xs shadow-sm">
-          <div className="flex justify-between">
-            <span className="text-slate-600 dark:text-slate-400 font-semibold">First Usable Host:</span>
-            <span className="font-bold text-emerald-700 dark:text-emerald-400 text-sm">{netOctets[0]}.{netOctets[1]}.{netOctets[2]}.{netOctets[3]+1}</span>
+        {/* Right Column: Capacity & Host Ranges */}
+        <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-3xl space-y-3 font-mono text-xs shadow-sm">
+          <h4 className="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider font-sans mb-1">
+            Host Allocation & Capacity:
+          </h4>
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">First Usable Host IP:</span>
+            <span className="font-bold text-emerald-700 dark:text-emerald-400 text-sm">
+              {usableHosts > 0 ? longToIp(firstUsableLong) : 'N/A (Host Route)'}
+            </span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-slate-600 dark:text-slate-400 font-semibold">Last Usable Host:</span>
-            <span className="font-bold text-emerald-700 dark:text-emerald-400 text-sm">{bcastOctets[0]}.{bcastOctets[1]}.{bcastOctets[2]}.{bcastOctets[3]-1}</span>
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Last Usable Host IP:</span>
+            <span className="font-bold text-emerald-700 dark:text-emerald-400 text-sm">
+              {usableHosts > 0 ? longToIp(lastUsableLong) : 'N/A (Host Route)'}
+            </span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-slate-600 dark:text-slate-400 font-semibold">Total Usable Hosts ($2^{32-n} - 2$):</span>
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Usable Host Capacity ($2^{32-n} - 2$):</span>
             <span className="font-bold text-amber-700 dark:text-amber-400 text-sm">{usableHosts.toLocaleString()}</span>
           </div>
+          <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Total Block Addresses ($2^{32-n}$):</span>
+            <span className="font-bold text-slate-900 dark:text-white text-sm">{totalAddresses.toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between items-center py-1">
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Borrowed Bits from Class:</span>
+            <span className="font-bold text-indigo-700 dark:text-indigo-400 font-sans text-xs">
+              {borrowedBits} bits ({numSubnetsFromClass.toLocaleString()} subnets possible)
+            </span>
+          </div>
         </div>
+      </div>
+
+      {/* 4. Interactive VLSM Subnet Partitioning Table */}
+      <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-3xl space-y-4 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h4 className="text-sm font-serif font-bold text-slate-950 dark:text-white">
+              Subnet Partitioning & VLSM Division (GATE Question Solver)
+            </h4>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
+              Divide current block into equal subnets (borrowing {borrowBits} bit{borrowBits !== 1 ? 's' : ''} $\to$ /{newPartitionCidr})
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Divide into:</span>
+            {[2, 4, 8, 16].map(num => (
+              <button
+                key={num}
+                onClick={() => setSubnetsDivCount(num)}
+                className={`px-3 py-1 rounded-xl text-xs font-bold transition ${
+                  subnetsDivCount === num 
+                    ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white shadow-sm' 
+                    : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                }`}
+              >
+                {num} Subnets
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {canPartition ? (
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+            <table className="w-full text-left text-xs font-mono">
+              <thead className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
+                <tr>
+                  <th className="py-2.5 px-3">#</th>
+                  <th className="py-2.5 px-3">Subnet Network ID</th>
+                  <th className="py-2.5 px-3">Usable Host Range</th>
+                  <th className="py-2.5 px-3">Directed Broadcast</th>
+                  <th className="py-2.5 px-3">Hosts</th>
+                  <th className="py-2.5 px-3 text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80">
+                {partitionsList.map(sub => (
+                  <tr 
+                    key={sub.index} 
+                    className={`transition ${sub.isActive ? 'bg-blue-50/80 dark:bg-blue-950/40 font-bold' : 'hover:bg-slate-50 dark:hover:bg-slate-850/50'}`}
+                  >
+                    <td className="py-2.5 px-3 text-slate-500">Subnet {sub.index}</td>
+                    <td className="py-2.5 px-3 text-blue-700 dark:text-blue-400 font-bold">{sub.network}</td>
+                    <td className="py-2.5 px-3 text-emerald-700 dark:text-emerald-400 font-medium">
+                      {sub.firstHost} – {sub.lastHost}
+                    </td>
+                    <td className="py-2.5 px-3 text-rose-700 dark:text-rose-400">{sub.broadcast}</td>
+                    <td className="py-2.5 px-3 text-slate-900 dark:text-slate-100 font-bold">{sub.usable}</td>
+                    <td className="py-2.5 px-3 text-center">
+                      {sub.isActive ? (
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-sans font-bold bg-blue-600 text-white">
+                          Contains Host IP
+                        </span>
+                      ) : (
+                        <span className="text-slate-400 text-[10px] font-sans">Available</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="p-4 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-2xl text-xs text-amber-800 dark:text-amber-300">
+            Cannot partition further: new prefix length (/{newPartitionCidr}) exceeds 32 bits.
+          </div>
+        )}
+      </div>
+
+      {/* 5. Packet Route Matching / Longest Prefix Match (LPM) Tester */}
+      <div className="p-5 bg-white dark:bg-[#13161f] border border-slate-200 dark:border-slate-800 rounded-3xl space-y-3 shadow-sm">
+        <h4 className="text-xs font-bold text-slate-900 dark:text-slate-200 uppercase tracking-wider">
+          Destination Packet Route Match Tester:
+        </h4>
+        <div className="flex flex-wrap gap-2 items-center">
+          <input 
+            type="text" 
+            value={testDstIp}
+            onChange={e => { setTestDstIp(e.target.value); setRouteResult(null); }}
+            placeholder="Enter destination IP (e.g. 192.168.10.85)"
+            className="flex-1 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-2.5 text-sm font-mono text-slate-950 dark:text-white focus:outline-none focus:border-blue-600 shadow-inner"
+          />
+          <button 
+            onClick={handleTestRoute}
+            className="px-5 py-2.5 bg-slate-900 hover:bg-black dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition shadow-sm"
+          >
+            Check Route Match
+          </button>
+        </div>
+
+        {routeResult && (
+          <div className={`p-4 rounded-2xl border text-xs font-mono space-y-1 ${
+            routeResult.matches 
+              ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-700/60 text-emerald-900 dark:text-emerald-300' 
+              : 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-700/60 text-rose-900 dark:text-rose-300'
+          }`}>
+            <div className="font-bold text-sm">
+              {routeResult.matches ? 'MATCH: Packet belongs to this Subnet!' : 'NO MATCH: Forwarded to Default Gateway / Next Hop'}
+            </div>
+            <div>
+              Bitwise Operation: ({routeResult.dst} & {longToIp(maskLong)}) = <strong className="font-extrabold">{routeResult.dstNet}</strong>
+            </div>
+            <div className="text-[11px] opacity-90">
+              {routeResult.matches 
+                ? `Resulting Network ID (${routeResult.dstNet}) matches this interface subnet (${longToIp(netLong)}). Packet will be directly delivered via ARP.` 
+                : `Resulting Network ID (${routeResult.dstNet}) does not match this subnet (${longToIp(netLong)}). Router must lookup routing table for next hop.`}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
