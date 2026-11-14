@@ -5,8 +5,17 @@ export default function ScratchpadModal({ isOpen, onClose }) {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [tool, setTool] = useState('pen'); // 'pen' | 'eraser'
-  const [color, setColor] = useState('#818cf8'); // Indigo
-  const [lineWidth, setLineWidth] = useState(2);
+  
+  const isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+  const bgColor = isDark ? '#0f1117' : '#fdfbf7';
+  const defaultPenColor = isDark ? '#38bdf8' : '#1e3a8a';
+
+  const [color, setColor] = useState(defaultPenColor);
+  const [lineWidth, setLineWidth] = useState(2.5);
+
+  useEffect(() => {
+    setColor(defaultPenColor);
+  }, [isDark]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -15,9 +24,9 @@ export default function ScratchpadModal({ isOpen, onClose }) {
     const ctx = canvas.getContext('2d');
     canvas.width = canvas.parentElement.clientWidth;
     canvas.height = canvas.parentElement.clientHeight;
-    ctx.fillStyle = '#0f172a';
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }, [isOpen]);
+  }, [isOpen, isDark]);
 
   const getCoordinates = (e) => {
     const canvas = canvasRef.current;
@@ -51,8 +60,8 @@ export default function ScratchpadModal({ isOpen, onClose }) {
     if (!canvas) return;
     const { x, y } = getCoordinates(e);
     const ctx = canvas.getContext('2d');
-    ctx.strokeStyle = tool === 'eraser' ? '#0f172a' : color;
-    ctx.lineWidth = tool === 'eraser' ? 24 : lineWidth;
+    ctx.strokeStyle = tool === 'eraser' ? bgColor : color;
+    ctx.lineWidth = tool === 'eraser' ? 28 : lineWidth;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     ctx.lineTo(x, y);
@@ -67,30 +76,34 @@ export default function ScratchpadModal({ isOpen, onClose }) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#0f172a';
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
+
+  const paletteColors = isDark 
+    ? ['#38bdf8', '#34d399', '#fbbf24', '#f87171', '#c084fc', '#ffffff'] 
+    : ['#1e3a8a', '#047857', '#b45309', '#b91c1c', '#6d28d9', '#0f172a'];
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/75 backdrop-blur-sm">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-4xl h-[85vh] sm:h-[80vh] flex flex-col shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-[#fdfbf7] dark:bg-[#0f1117] border border-slate-300 dark:border-slate-800 rounded-3xl w-full max-w-4xl h-[85vh] sm:h-[80vh] flex flex-col shadow-2xl overflow-hidden transition-colors">
         {/* Controls */}
-        <div className="p-3 border-b border-slate-800 bg-slate-950 flex flex-wrap items-center justify-between gap-2">
+        <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 flex flex-wrap items-center justify-between gap-3 backdrop-blur">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <span className="text-xs font-bold text-slate-300">Rough Sheet / Scratchpad</span>
-            <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-lg border border-slate-800">
+            <span className="text-xs font-serif font-bold text-slate-950 dark:text-slate-100">Rough Sheet / Scratchpad</span>
+            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
               <button
                 onClick={() => setTool('pen')}
-                className={`p-1.5 rounded transition ${tool === 'pen' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                className={`p-1.5 rounded-lg transition ${tool === 'pen' ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
                 title="Pen"
               >
                 <PenTool className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setTool('eraser')}
-                className={`p-1.5 rounded transition ${tool === 'eraser' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'}`}
+                className={`p-1.5 rounded-lg transition ${tool === 'eraser' ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
                 title="Eraser"
               >
                 <Eraser className="w-4 h-4" />
@@ -98,20 +111,20 @@ export default function ScratchpadModal({ isOpen, onClose }) {
             </div>
 
             {/* Colors */}
-            <div className="flex items-center gap-1.5">
-              {['#818cf8', '#34d399', '#f87171', '#fbbf24', '#ffffff'].map(c => (
+            <div className="flex items-center gap-1.5 px-2">
+              {paletteColors.map(c => (
                 <button
                   key={c}
                   onClick={() => { setColor(c); setTool('pen'); }}
                   style={{ backgroundColor: c }}
-                  className={`w-4 h-4 rounded-full transition ${color === c && tool === 'pen' ? 'ring-2 ring-white scale-110' : ''}`}
+                  className={`w-4 h-4 rounded-full transition ${color === c && tool === 'pen' ? 'ring-2 ring-blue-600 scale-125' : 'hover:scale-110'}`}
                 />
               ))}
             </div>
 
             <button
               onClick={clearCanvas}
-              className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded transition"
+              className="p-1.5 text-slate-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
               title="Clear Canvas"
             >
               <Trash2 className="w-4 h-4" />
@@ -120,7 +133,7 @@ export default function ScratchpadModal({ isOpen, onClose }) {
 
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition ml-auto"
+            className="p-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition ml-auto"
           >
             <X className="w-5 h-5" />
           </button>

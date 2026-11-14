@@ -222,7 +222,7 @@
     "answer": "C",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` \u2794 **Topic:** `Verbal & Quantitative Aptitude`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A 4 \u00d7 4 digital image has pixel intensities (\ud835\udc48) as shown in the figure. The number of  pixels with \ud835\udc48\u22644 is:\n- Applying the governing theorems and axioms of `Verbal & Quantitative Aptitude`, systematically analyze each alternative.\n- Rigorous evaluation confirms that **Option (C)** satisfies all necessary constraints and conditions.\n- Conflicting options violate boundary cases, conservation laws, or standard definitions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Verbal & Quantitative Aptitude. Eliminate impossible boundary cases and verify standard properties.",
-    "visual": null,
+    "visual": "<div class=\"my-4 flex justify-center\">\n<svg viewBox=\"0 0 400 230\" class=\"w-full max-w-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-3 shadow-sm\">\n  <text x=\"200\" y=\"22\" text-anchor=\"middle\" font-family=\"'Playfair Display', Georgia, serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#050811\">4 \u00d7 4 Digital Image Pixel Intensities (U)</text>\n  <rect x=\"120\" y=\"35\" width=\"40\" height=\"40\" fill=\"rgba(239, 68, 68, 0.08)\" stroke=\"#cbd5e1\" stroke-width=\"1.5\" /> <text x=\"140.0\" y=\"60.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#64748b\">6</text> <rect x=\"160\" y=\"35\" width=\"40\" height=\"40\" fill=\"rgba(239, 68, 68, 0.08)\" stroke=\"#cbd5e1\" stroke-width=\"1.5\" /> <text x=\"180.0\" y=\"60.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#64748b\">7</text> <rect x=\"200\" y=\"35\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"220.0\" y=\"60.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">0</text> <rect x=\"240\" y=\"35\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"260.0\" y=\"60.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">2</text> <rect x=\"120\" y=\"75\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"140.0\" y=\"100.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">4</text> <rect x=\"160\" y=\"75\" width=\"40\" height=\"40\" fill=\"rgba(239, 68, 68, 0.08)\" stroke=\"#cbd5e1\" stroke-width=\"1.5\" /> <text x=\"180.0\" y=\"100.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#64748b\">7</text> <rect x=\"200\" y=\"75\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"220.0\" y=\"100.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">3</text> <rect x=\"240\" y=\"75\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"260.0\" y=\"100.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">3</text> <rect x=\"120\" y=\"115\" width=\"40\" height=\"40\" fill=\"rgba(239, 68, 68, 0.08)\" stroke=\"#cbd5e1\" stroke-width=\"1.5\" /> <text x=\"140.0\" y=\"140.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#64748b\">5</text> <rect x=\"160\" y=\"115\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"180.0\" y=\"140.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">1</text> <rect x=\"200\" y=\"115\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"220.0\" y=\"140.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">4</text> <rect x=\"240\" y=\"115\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"260.0\" y=\"140.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">4</text> <rect x=\"120\" y=\"155\" width=\"40\" height=\"40\" fill=\"rgba(239, 68, 68, 0.08)\" stroke=\"#cbd5e1\" stroke-width=\"1.5\" /> <text x=\"140.0\" y=\"180.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#64748b\">6</text> <rect x=\"160\" y=\"155\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"180.0\" y=\"180.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">1</text> <rect x=\"200\" y=\"155\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"220.0\" y=\"180.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">3</text> <rect x=\"240\" y=\"155\" width=\"40\" height=\"40\" fill=\"rgba(16, 185, 129, 0.15)\" stroke=\"#059669\" stroke-width=\"1.5\" /> <text x=\"260.0\" y=\"180.0\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#047857\">2</text>\n  <text x=\"200\" y=\"215\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"11\" font-weight=\"600\" fill=\"#047857\">Green highlighted cells indicate U \u2264 4 (Total = 11 pixels)</text>\n</svg>\n</div>",
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
     "example": "Use 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.",
     "pitfall": "Choosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an')."
@@ -292,13 +292,13 @@
       },
       {
         "label": "D",
-        "text": "P = 5; Q = 3; R = 6 1 2 4 3 P Q R"
+        "text": "P = 5; Q = 3; R = 6"
       }
     ],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` \u2794 **Topic:** `Verbal & Quantitative Aptitude`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** In the given figure, the numbers associated with the rectangle, triangle, and ellipse  are 1, 2, and 3, res...\n- Applying the governing theorems and axioms of `Verbal & Quantitative Aptitude`, systematically analyze each alternative.\n- Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n- Conflicting options violate boundary cases, conservation laws, or standard definitions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Verbal & Quantitative Aptitude. Eliminate impossible boundary cases and verify standard properties.",
-    "visual": null,
+    "visual": "<div class=\"my-4 flex justify-center\">\n<svg viewBox=\"0 0 420 230\" class=\"w-full max-w-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-3 shadow-sm\">\n  <text x=\"210\" y=\"20\" text-anchor=\"middle\" font-family=\"'Playfair Display', Georgia, serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#050811\">Venn Diagram: Intersecting Shapes</text>\n  \n  <!-- Rectangle (Associated with 1) -->\n  <rect x=\"50\" y=\"65\" width=\"195\" height=\"120\" rx=\"6\" fill=\"rgba(37, 99, 235, 0.08)\" stroke=\"#1d4ed8\" stroke-width=\"2.5\" />\n  \n  <!-- Triangle (Associated with 2) -->\n  <polygon points=\"245,35 150,195 340,195\" fill=\"rgba(217, 119, 6, 0.08)\" stroke=\"#b45309\" stroke-width=\"2.5\" />\n  \n  <!-- Ellipse (Associated with 3) -->\n  <ellipse cx=\"260\" cy=\"135\" rx=\"98\" ry=\"58\" fill=\"rgba(16, 185, 129, 0.08)\" stroke=\"#047857\" stroke-width=\"2.5\" />\n  \n  <!-- Labels -->\n  <!-- Only Rectangle: 1 -->\n  <text x=\"95\" y=\"125\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"bold\" fill=\"#1d4ed8\">1</text>\n  \n  <!-- Only Triangle: 2 -->\n  <text x=\"245\" y=\"62\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"bold\" fill=\"#b45309\">2</text>\n  \n  <!-- Only Ellipse: 3 -->\n  <text x=\"325\" y=\"135\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"bold\" fill=\"#047857\">3</text>\n  \n  <!-- Rectangle & Ellipse only: 4 -->\n  <text x=\"145\" y=\"150\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#050811\">4</text>\n  \n  <!-- Rectangle & Triangle only: R -->\n  <text x=\"195\" y=\"105\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#7c3aed\">R</text>\n  \n  <!-- Triangle & Ellipse only: Q -->\n  <text x=\"285\" y=\"160\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#7c3aed\">Q</text>\n  \n  <!-- All Three Intersecting: P -->\n  <text x=\"230\" y=\"138\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"bold\" fill=\"#dc2626\">P</text>\n  \n  <!-- Legend -->\n  <text x=\"210\" y=\"218\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"600\" fill=\"#475569\">Rectangle = 1 | Triangle = 2 | Ellipse = 3</text>\n</svg>\n</div>",
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
     "example": "Use 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.",
     "pitfall": "Choosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an')."
@@ -602,7 +602,7 @@
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` \u2794 **Topic:** `Verbal & Quantitative Aptitude`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A regular dodecagon (12-sided regular polygon) is inscribed in a circle of radius r  cm as shown in the fig...\n- Applying the governing theorems and axioms of `Verbal & Quantitative Aptitude`, systematically analyze each alternative.\n- Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n- Conflicting options violate boundary cases, conservation laws, or standard definitions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Verbal & Quantitative Aptitude. Eliminate impossible boundary cases and verify standard properties.",
-    "visual": null,
+    "visual": "<div class=\"my-4 flex justify-center\">\n<svg viewBox=\"0 0 340 230\" class=\"w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-2 shadow-sm\">\n  <text x=\"170\" y=\"20\" text-anchor=\"middle\" font-family=\"'Playfair Display', Georgia, serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#050811\">Regular Dodecagon Inscribed in Circle</text>\n  <!-- Circle of radius 75 -->\n  <circle cx=\"170\" cy=\"120\" r=\"75\" fill=\"none\" stroke=\"#94a3b8\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\" />\n  \n  <!-- 12-sided regular polygon -->\n  <!-- Vertices at angle i * 30 deg -->\n  <polygon points=\"\n    245,120 235,157 207,185 170,195 133,185 105,157 \n    95,120 105,83 133,55 170,45 207,55 235,83\n  \" fill=\"rgba(59, 130, 246, 0.08)\" stroke=\"#2563eb\" stroke-width=\"2.5\" />\n  \n  <!-- Radius line from center to vertex -->\n  <line x1=\"170\" y1=\"120\" x2=\"245\" y2=\"120\" stroke=\"#dc2626\" stroke-width=\"2\" />\n  <circle cx=\"170\" cy=\"120\" r=\"3\" fill=\"#0f172a\" />\n  <text x=\"205\" y=\"113\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#dc2626\">radius r</text>\n  \n  <!-- Angle subtended at center = 360/12 = 30 deg -->\n  <line x1=\"170\" y1=\"120\" x2=\"235\" y2=\"157\" stroke=\"#dc2626\" stroke-width=\"1.5\" stroke-dasharray=\"3 3\" />\n  <text x=\"195\" y=\"136\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"9\" font-weight=\"bold\" fill=\"#dc2626\">30\u00b0</text>\n  \n  <text x=\"170\" y=\"218\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"600\" fill=\"#475569\">Side length s = 2r \u00b7 sin(15\u00b0) = r\u221a(2 - \u221a3)</text>\n</svg>\n</div>",
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
     "example": "Use 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.",
     "pitfall": "Choosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an')."
@@ -3948,7 +3948,7 @@
     "answer": "7 to 7",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` \u2794 **Topic:** `Verbal Ability & Grammar`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Suppose a message of size 15000 bytes is transmitted from a source to a destination  using IPv4 protocol vi...\n- Applying the governing theorems and axioms of `Verbal Ability & Grammar`, systematically analyze each alternative.\n- Rigorous evaluation confirms that **7 to 7** satisfies all necessary constraints and conditions.\n- Conflicting options violate boundary cases, conservation laws, or standard definitions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **7 to 7**",
     "hint": "Analyze the governing theorems in Data Link Layer & Flow Control. Eliminate impossible boundary cases and verify standard properties.",
-    "visual": null,
+    "visual": "<div class=\"my-4 flex justify-center\">\n<svg viewBox=\"0 0 460 150\" class=\"w-full max-w-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-3 shadow-sm\">\n  <text x=\"230\" y=\"20\" text-anchor=\"middle\" font-family=\"'Playfair Display', Georgia, serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#050811\">IPv4 Packet Fragmentation Network</text>\n  \n  <!-- Source -->\n  <rect x=\"20\" y=\"55\" width=\"60\" height=\"35\" rx=\"6\" fill=\"#eff6ff\" stroke=\"#3b82f6\" stroke-width=\"2\" />\n  <text x=\"50\" y=\"77\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#1e40af\">Source</text>\n  \n  <!-- Link 1: MTU 5000 -->\n  <line x1=\"80\" y1=\"72\" x2=\"140\" y2=\"72\" stroke=\"#64748b\" stroke-width=\"2\" />\n  <text x=\"110\" y=\"64\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"9.5\" font-weight=\"bold\" fill=\"#475569\">MTU 5000</text>\n  \n  <!-- Router 1 -->\n  <circle cx=\"165\" cy=\"72\" r=\"22\" fill=\"#fef3c7\" stroke=\"#d97706\" stroke-width=\"2\" />\n  <text x=\"165\" y=\"76\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#92400e\">R1</text>\n  \n  <!-- Link 2: MTU 3000 -->\n  <line x1=\"187\" y1=\"72\" x2=\"265\" y2=\"72\" stroke=\"#64748b\" stroke-width=\"2\" />\n  <text x=\"226\" y=\"64\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"9.5\" font-weight=\"bold\" fill=\"#475569\">MTU 3000</text>\n  \n  <!-- Router 2 -->\n  <circle cx=\"290\" cy=\"72\" r=\"22\" fill=\"#fef3c7\" stroke=\"#d97706\" stroke-width=\"2\" />\n  <text x=\"290\" y=\"76\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#92400e\">R2</text>\n  \n  <!-- Link 3: MTU 1500 -->\n  <line x1=\"312\" y1=\"72\" x2=\"375\" y2=\"72\" stroke=\"#64748b\" stroke-width=\"2\" />\n  <text x=\"343\" y=\"64\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"9.5\" font-weight=\"bold\" fill=\"#475569\">MTU 1500</text>\n  \n  <!-- Destination -->\n  <rect x=\"375\" y=\"55\" width=\"65\" height=\"35\" rx=\"6\" fill=\"#eff6ff\" stroke=\"#3b82f6\" stroke-width=\"2\" />\n  <text x=\"407\" y=\"77\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#1e40af\">Dest</text>\n  \n  <text x=\"230\" y=\"132\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"600\" fill=\"#64748b\">Message Size = 15,000 bytes (IP header = 20 bytes)</text>\n</svg>\n</div>",
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
     "example": "Use 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.",
     "pitfall": "Choosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an')."
@@ -4409,7 +4409,7 @@
       },
       {
         "label": "D",
-        "text": "vain Data Science and Artificial Intelligence (DA)"
+        "text": "vain"
       }
     ],
     "answer": "D",
@@ -4485,7 +4485,7 @@
       },
       {
         "label": "D",
-        "text": "6 Data Science and Artificial Intelligence (DA)"
+        "text": "6"
       }
     ],
     "answer": "A",
@@ -4637,7 +4637,7 @@
       },
       {
         "label": "D",
-        "text": "9/2 Data Science and Artificial Intelligence (DA)"
+        "text": "9/2"
       }
     ],
     "answer": "B",
@@ -4865,7 +4865,7 @@
       },
       {
         "label": "D",
-        "text": "1/2 Data Science and Artificial Intelligence (DA)"
+        "text": "1/2"
       }
     ],
     "answer": "A",
@@ -4941,7 +4941,7 @@
       },
       {
         "label": "D",
-        "text": "20% Data Science and Artificial Intelligence (DA)"
+        "text": "20%"
       }
     ],
     "answer": "B",
@@ -5055,7 +5055,7 @@
       },
       {
         "label": "D",
-        "text": "hexagon Data Science and Artificial Intelligence (DA)"
+        "text": "hexagon"
       }
     ],
     "answer": "A",
@@ -5207,7 +5207,7 @@
       },
       {
         "label": "D",
-        "text": "1 Data Science and Artificial Intelligence (DA)"
+        "text": "1"
       }
     ],
     "answer": "A",
@@ -5359,7 +5359,7 @@
       },
       {
         "label": "D",
-        "text": "gray Data Science and Artificial Intelligence (DA)"
+        "text": "gray"
       }
     ],
     "answer": "A",
@@ -5511,7 +5511,7 @@
       },
       {
         "label": "D",
-        "text": "(p) \u2212 (i), (q) \u2212 (iii), (r) \u2212 (ii) Data Science and Artificial Intelligence (DA)"
+        "text": "(p) \u2212 (i), (q) \u2212 (iii), (r) \u2212 (ii)"
       }
     ],
     "answer": "A",
@@ -5663,7 +5663,7 @@
       },
       {
         "label": "D",
-        "text": "(p) \u2212 (iii), (q) \u2212 (ii), (r) \u2212 (i) Data Science and Artificial Intelligence (DA)"
+        "text": "(p) \u2212 (iii), (q) \u2212 (ii), (r) \u2212 (i)"
       }
     ],
     "answer": "C",
@@ -5815,7 +5815,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc3e2 + 1 Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc3e2 + 1"
       }
     ],
     "answer": "B",
@@ -5967,7 +5967,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc62\u2217\ud835\udc47\ud835\udc62\u2217= \ud835\udf062 Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc62\u2217\ud835\udc47\ud835\udc62\u2217= \ud835\udf062"
       }
     ],
     "answer": "A",
@@ -6119,7 +6119,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc4c and \ud835\udc4b are conditionally independent given \ud835\udc4a Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc4c and \ud835\udc4b are conditionally independent given \ud835\udc4a"
       }
     ],
     "answer": "C",
@@ -6271,7 +6271,7 @@
       },
       {
         "label": "D",
-        "text": "(\u03a0\ud835\udc5b\ud835\udc4e\ud835\udc5a\ud835\udc52(Defender)\u222a\u03a0\ud835\udc5b\ud835\udc4e\ud835\udc5a\ud835\udc52(Forward)) \u2216\u03a0\ud835\udc5b\ud835\udc4e\ud835\udc5a\ud835\udc52(Team) = \ud835\udf19 Data Science and Artificial Intelligence (DA)"
+        "text": "(\u03a0\ud835\udc5b\ud835\udc4e\ud835\udc5a\ud835\udc52(Defender)\u222a\u03a0\ud835\udc5b\ud835\udc4e\ud835\udc5a\ud835\udc52(Forward)) \u2216\u03a0\ud835\udc5b\ud835\udc4e\ud835\udc5a\ud835\udc52(Team) = \ud835\udf19"
       }
     ],
     "answer": "C",
@@ -6423,7 +6423,7 @@
       },
       {
         "label": "D",
-        "text": "(ii) only Data Science and Artificial Intelligence (DA)"
+        "text": "(ii) only"
       }
     ],
     "answer": "A, B, C",
@@ -6861,7 +6861,7 @@
       },
       {
         "label": "D",
-        "text": "8 Data Science and Artificial Intelligence (DA)"
+        "text": "8"
       }
     ],
     "answer": "C",
@@ -6937,7 +6937,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc4e= 1, \ud835\udc4f= 1, \ud835\udc50= \u22124 Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc4e= 1, \ud835\udc4f= 1, \ud835\udc50= \u22124"
       }
     ],
     "answer": "A",
@@ -7013,7 +7013,7 @@
       },
       {
         "label": "D",
-        "text": "9 Data Science and Artificial Intelligence (DA)"
+        "text": "9"
       }
     ],
     "answer": "D",
@@ -7089,7 +7089,7 @@
       },
       {
         "label": "D",
-        "text": "[1, 1, 2, 1, 5] computeS(X) \ud835\udc46[1] \u21901 for \ud835\udc56 \u21902 to \ud835\udc59\ud835\udc52\ud835\udc5b\ud835\udc54\ud835\udc61\u210e(\ud835\udc4b) \ud835\udc46[\ud835\udc56] \u21901 if \ud835\udc4b[\ud835\udc56\u22121] \u2264\ud835\udc4b[\ud835\udc56] \ud835\udc46[\ud835\udc56] \u2190\ud835\udc46[\ud835\udc56] + \ud835\udc46[\ud835\udc56\u22121] end if end for return S Data Science and Artificial Intelligence (DA)"
+        "text": "[1, 1, 2, 1, 5] computeS(X) \ud835\udc46[1] \u21901 for \ud835\udc56 \u21902 to \ud835\udc59\ud835\udc52\ud835\udc5b\ud835\udc54\ud835\udc61\u210e(\ud835\udc4b) \ud835\udc46[\ud835\udc56] \u21901 if \ud835\udc4b[\ud835\udc56\u22121] \u2264\ud835\udc4b[\ud835\udc56] \ud835\udc46[\ud835\udc56] \u2190\ud835\udc46[\ud835\udc56] + \ud835\udc46[\ud835\udc56\u22121] end if end for return S"
       }
     ],
     "answer": "C",
@@ -7241,7 +7241,7 @@
       },
       {
         "label": "D",
-        "text": "It swaps the elements in D at indices s1 and s2, and leaves the remaining elements unchanged. Data Science and Artificial Intelligence (DA)"
+        "text": "It swaps the elements in D at indices s1 and s2, and leaves the remaining elements unchanged."
       }
     ],
     "answer": "C",
@@ -7355,7 +7355,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc5d= 36, \ud835\udc5e= 36,\ud835\udc5f= 36 Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc5d= 36, \ud835\udc5e= 36,\ud835\udc5f= 36"
       }
     ],
     "answer": "A",
@@ -7507,7 +7507,7 @@
       },
       {
         "label": "D",
-        "text": "(ii) and (iii) only Data Science and Artificial Intelligence (DA)"
+        "text": "(ii) and (iii) only"
       }
     ],
     "answer": "B",
@@ -7583,7 +7583,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc49\ud835\udc4a\u2192\ud835\udc4c Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc49\ud835\udc4a\u2192\ud835\udc4c"
       }
     ],
     "answer": "A, B, D",
@@ -7659,7 +7659,7 @@
       },
       {
         "label": "D",
-        "text": "{\ud835\udc31= [ \ud835\udc651 \ud835\udc652 \ud835\udc653 ] \u2208\u211d3:    5\ud835\udc651 + 2\ud835\udc653 + 4 = 0} Data Science and Artificial Intelligence (DA)"
+        "text": "{\ud835\udc31= [ \ud835\udc651 \ud835\udc652 \ud835\udc653 ] \u2208\u211d3:    5\ud835\udc651 + 2\ud835\udc653 + 4 = 0}"
       }
     ],
     "answer": "A, C",
@@ -7735,7 +7735,7 @@
       },
       {
         "label": "D",
-        "text": "There exist \ud835\udc74\u2208\u211d3\u00d72, \ud835\udc91\u2208\u211d3, and \ud835\udc92\u2208\u211d3  such that \ud835\udc74\ud835\udc31= \ud835\udc91 has a unique solution and M\ud835\udc31= \ud835\udc92 has no solutions. Data Science and Artificial Intelligence (DA)"
+        "text": "There exist \ud835\udc74\u2208\u211d3\u00d72, \ud835\udc91\u2208\u211d3, and \ud835\udc92\u2208\u211d3  such that \ud835\udc74\ud835\udc31= \ud835\udc91 has a unique solution and M\ud835\udc31= \ud835\udc92 has no solutions."
       }
     ],
     "answer": "B, D",
@@ -7887,7 +7887,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc65= 0 is a local minimum of f Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc65= 0 is a local minimum of f"
       }
     ],
     "answer": "A, B",
@@ -7963,7 +7963,7 @@
       },
       {
         "label": "D",
-        "text": "P R Q S V T U Data Science and Artificial Intelligence (DA)"
+        "text": "P R Q S V T U"
       }
     ],
     "answer": "B, D",
@@ -8039,7 +8039,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc3b\u2264\ud835\udc3f\u22642\ud835\udc3b\u22121 Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc3b\u2264\ud835\udc3f\u22642\ud835\udc3b\u22121"
       }
     ],
     "answer": "A, B, C",
@@ -8115,7 +8115,7 @@
       },
       {
         "label": "D",
-        "text": "(iv) is linearly separable. Data Science and Artificial Intelligence (DA)"
+        "text": "(iv) is linearly separable."
       }
     ],
     "answer": "A, D",
@@ -8174,7 +8174,7 @@
       },
       {
         "label": "D",
-        "text": "\ud835\udc603 \u2227\ud835\udc604 Data Science and Artificial Intelligence (DA)"
+        "text": "\ud835\udc603 \u2227\ud835\udc604"
       }
     ],
     "answer": "A, C",
@@ -12922,7 +12922,7 @@
       },
       {
         "label": "D",
-        "text": "P is 1:10 de-multiplexer; Q is 1:5 de-multiplexer; T is 2:1 multiplexer X P Q T S R DDS M S-address R-address Code Word"
+        "text": "P is 1:10 de-multiplexer; Q is 1:5 de-multiplexer; T is 2:1 multiplexer"
       }
     ],
     "answer": "C",
@@ -17165,7 +17165,7 @@
       },
       {
         "label": "D",
-        "text": "\u2220\ud835\udc36\ud835\udc35\ud835\udc34+  \u2220\ud835\udc34\ud835\udc37\ud835\udc36 A B D E C F GA 3/3"
+        "text": "\u2220\ud835\udc36\ud835\udc35\ud835\udc34 + \u2220\ud835\udc34\ud835\udc37\ud835\udc36"
       }
     ],
     "answer": "A",
@@ -17241,7 +17241,7 @@
       },
       {
         "label": "D",
-        "text": "\u2220\ud835\udc36\ud835\udc35\ud835\udc34+  \u2220\ud835\udc34\ud835\udc37\ud835\udc36 A B D E C F"
+        "text": "\u2220\ud835\udc36\ud835\udc35\ud835\udc34 + \u2220\ud835\udc34\ud835\udc37\ud835\udc36"
       }
     ],
     "answer": "A",
@@ -20045,7 +20045,7 @@
       },
       {
         "label": "D",
-        "text": "3 1 2 1 1 1 2 CS(Set A) 11/17"
+        "text": "3 1 2 1 1 1 2"
       }
     ],
     "answer": "A",
@@ -26846,7 +26846,7 @@
     "answer": "B",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` \u2794 **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** What is the minimal form of the Karnaugh map shown below? Assume that X denotes a don\u2019t care  term.      ab...\n- Applying the governing theorems and axioms of `Calculus (Limits, Continuity, Integrals)`, systematically analyze each alternative.\n- Rigorous evaluation confirms that **Option (B)** satisfies all necessary constraints and conditions.\n- Conflicting options violate boundary cases, conservation laws, or standard definitions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **Option (B)**",
     "hint": "Analyze the governing theorems in Linear Algebra (Matrices, Eigenvalues, Rank). Eliminate impossible boundary cases and verify standard properties.",
-    "visual": null,
+    "visual": "<div class=\"my-4 flex justify-center\">\n<svg viewBox=\"0 0 340 220\" class=\"w-full max-w-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-2 shadow-sm\">\n  <text x=\"170\" y=\"20\" text-anchor=\"middle\" font-family=\"'Playfair Display', Georgia, serif\" font-size=\"13\" font-weight=\"bold\" fill=\"#050811\">4-Variable Karnaugh Map (AB \u00d7 CD)</text>\n  \n  <!-- K-Map Grid 4x4 -->\n  <line x1=\"70\" y1=\"50\" x2=\"270\" y2=\"50\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"70\" y1=\"90\" x2=\"270\" y2=\"90\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"70\" y1=\"130\" x2=\"270\" y2=\"130\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"70\" y1=\"170\" x2=\"270\" y2=\"170\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"70\" y1=\"210\" x2=\"270\" y2=\"210\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  \n  <line x1=\"70\" y1=\"50\" x2=\"70\" y2=\"210\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"120\" y1=\"50\" x2=\"120\" y2=\"210\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"170\" y1=\"50\" x2=\"170\" y2=\"210\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"220\" y1=\"50\" x2=\"220\" y2=\"210\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  <line x1=\"270\" y1=\"50\" x2=\"270\" y2=\"210\" stroke=\"#94a3b8\" stroke-width=\"1.5\" />\n  \n  <!-- Column Labels CD: 00, 01, 11, 10 -->\n  <text x=\"95\" y=\"42\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">00</text>\n  <text x=\"145\" y=\"42\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">01</text>\n  <text x=\"195\" y=\"42\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">11</text>\n  <text x=\"245\" y=\"42\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">10</text>\n  <text x=\"45\" y=\"42\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"11\" font-weight=\"bold\" fill=\"#3b82f6\">CD \u2192</text>\n  \n  <!-- Row Labels AB: 00, 01, 11, 10 -->\n  <text x=\"50\" y=\"75\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">00</text>\n  <text x=\"50\" y=\"115\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">01</text>\n  <text x=\"50\" y=\"155\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">11</text>\n  <text x=\"50\" y=\"195\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"10.5\" font-weight=\"bold\" fill=\"#1e293b\">10</text>\n  \n  <!-- Cell Values -->\n  <text x=\"95\" y=\"75\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#059669\">X</text>\n  <text x=\"145\" y=\"75\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#64748b\">0</text>\n  <text x=\"195\" y=\"75\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#059669\">X</text>\n  <text x=\"245\" y=\"75\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#64748b\">0</text>\n  \n  <text x=\"95\" y=\"115\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#64748b\">0</text>\n  <text x=\"145\" y=\"115\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#2563eb\">1</text>\n  <text x=\"195\" y=\"115\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#2563eb\">1</text>\n  <text x=\"245\" y=\"115\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#64748b\">0</text>\n  \n  <text x=\"95\" y=\"155\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#2563eb\">1</text>\n  <text x=\"145\" y=\"155\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#2563eb\">1</text>\n  <text x=\"195\" y=\"155\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#2563eb\">1</text>\n  <text x=\"245\" y=\"155\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#2563eb\">1</text>\n  \n  <text x=\"95\" y=\"195\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#059669\">X</text>\n  <text x=\"145\" y=\"195\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#059669\">X</text>\n  <text x=\"195\" y=\"195\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#64748b\">0</text>\n  <text x=\"245\" y=\"195\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"bold\" fill=\"#64748b\">0</text>\n</svg>\n</div>",
     "core_concept": "L'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).",
     "example": "For lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.",
     "pitfall": "Do not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently."
@@ -27296,7 +27296,7 @@
       },
       {
         "label": "D",
-        "text": "\uf0d5B(r1) \uf02d \uf0d5C(r2) \u2260 \uf0c6 4 1 1 2 2 4 3 3 5 5 4 3 3 7 1 3 B D S T A C E F G 2012                                                                                                                                            COMPUTER SCIENCE & INFORMATION TECH. \u2013  CS CS-A 11/20"
+        "text": "\u220fB(r1) - \u220fC(r2) \u2260 \u2205"
       }
     ],
     "answer": "A",

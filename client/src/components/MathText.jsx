@@ -24,12 +24,12 @@ export default function MathText({ text, className = '' }) {
           return (
             <div 
               key={segIdx} 
-              className="my-2.5 py-1 px-3 bg-slate-950/60 rounded-lg overflow-x-auto text-center" 
+              className="my-3 py-2 px-3 bg-slate-100/70 dark:bg-slate-850/80 border border-slate-250 dark:border-slate-800 rounded-xl overflow-x-auto text-center text-slate-950 dark:text-slate-50 shadow-xs font-medium" 
               dangerouslySetInnerHTML={{ __html: html }} 
             />
           );
         } catch (e) {
-          return <pre key={segIdx} className="font-mono text-indigo-300 text-xs overflow-x-auto">{formula}</pre>;
+          return <pre key={segIdx} className="font-mono text-amber-800 dark:text-amber-300 text-xs overflow-x-auto">{formula}</pre>;
         }
       }
 
@@ -41,12 +41,12 @@ export default function MathText({ text, className = '' }) {
           return (
             <span 
               key={segIdx} 
-              className="inline-block px-0.5 overflow-x-auto align-middle" 
+              className="inline-block px-0.5 overflow-x-auto align-middle text-slate-950 dark:text-slate-50" 
               dangerouslySetInnerHTML={{ __html: html }} 
             />
           );
         } catch (e) {
-          return <code key={segIdx} className="font-mono text-indigo-300 text-xs">{formula}</code>;
+          return <code key={segIdx} className="font-mono text-amber-800 dark:text-amber-300 text-xs font-semibold">{formula}</code>;
         }
       }
 
@@ -60,7 +60,7 @@ export default function MathText({ text, className = '' }) {
               return (
                 <code 
                   key={subIdx} 
-                  className="px-1.5 py-0.5 mx-0.5 bg-slate-800 border border-slate-700/60 text-indigo-300 rounded font-mono text-[11px] md:text-xs"
+                  className="px-1.5 py-0.5 mx-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-amber-900 dark:text-amber-300 rounded font-mono text-[11px] md:text-xs font-semibold"
                 >
                   {sub.slice(1, -1)}
                 </code>
@@ -68,7 +68,7 @@ export default function MathText({ text, className = '' }) {
             }
             if (sub.startsWith('**') && sub.endsWith('**')) {
               return (
-                <strong key={subIdx} className="font-bold text-white">
+                <strong key={subIdx} className="font-bold text-slate-950 dark:text-white">
                   {sub.slice(2, -2)}
                 </strong>
               );
@@ -81,7 +81,7 @@ export default function MathText({ text, className = '' }) {
   };
 
   return (
-    <div className={`space-y-1.5 break-words leading-relaxed ${className}`}>
+    <div className={`space-y-1.5 break-words leading-relaxed text-slate-950 dark:text-slate-50 font-normal ${className}`}>
       {lines.map((line, lineIdx) => {
         const trimmed = line.trim();
         if (!trimmed) {
@@ -91,14 +91,14 @@ export default function MathText({ text, className = '' }) {
         // Headings ### or ## or #
         if (trimmed.startsWith('### ')) {
           return (
-            <h4 key={lineIdx} className="text-xs md:text-sm font-bold text-indigo-400 mt-2 mb-1 flex items-center gap-1.5">
+            <h4 key={lineIdx} className="text-xs md:text-sm font-serif font-bold text-blue-900 dark:text-blue-300 mt-2 mb-1 flex items-center gap-1.5">
               {renderInlineFormatted(trimmed.slice(4))}
             </h4>
           );
         }
         if (trimmed.startsWith('## ')) {
           return (
-            <h3 key={lineIdx} className="text-sm md:text-base font-extrabold text-white mt-3 mb-1.5">
+            <h3 key={lineIdx} className="text-sm md:text-base font-serif font-extrabold text-slate-950 dark:text-white mt-3 mb-1.5">
               {renderInlineFormatted(trimmed.slice(3))}
             </h3>
           );
@@ -107,8 +107,8 @@ export default function MathText({ text, className = '' }) {
         // Bullet lists
         if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
           return (
-            <div key={lineIdx} className="flex items-start gap-2 pl-2 text-slate-300">
-              <span className="text-indigo-400 font-bold leading-tight select-none mt-1 text-[10px]">●</span>
+            <div key={lineIdx} className="flex items-start gap-2 pl-2 text-slate-950 dark:text-slate-50">
+              <span className="text-amber-700 dark:text-amber-400 font-bold leading-tight select-none mt-1 text-[10px]">●</span>
               <div className="flex-1">{renderInlineFormatted(trimmed.slice(2))}</div>
             </div>
           );
@@ -118,8 +118,8 @@ export default function MathText({ text, className = '' }) {
         const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
         if (numMatch) {
           return (
-            <div key={lineIdx} className="flex items-start gap-2 pl-2 text-slate-300">
-              <span className="font-mono text-indigo-400 font-semibold text-xs min-w-[18px] text-right mt-0.5">
+            <div key={lineIdx} className="flex items-start gap-2 pl-2 text-slate-950 dark:text-slate-50">
+              <span className="font-mono text-blue-700 dark:text-blue-400 font-bold text-xs min-w-[18px] text-right mt-0.5">
                 {numMatch[1]}.
               </span>
               <div className="flex-1">{renderInlineFormatted(numMatch[2])}</div>
@@ -129,7 +129,7 @@ export default function MathText({ text, className = '' }) {
 
         // Standard paragraph line
         return (
-          <p key={lineIdx} className="text-slate-200">
+          <p key={lineIdx} className="text-slate-950 dark:text-slate-50 font-normal leading-relaxed">
             {renderInlineFormatted(line)}
           </p>
         );
