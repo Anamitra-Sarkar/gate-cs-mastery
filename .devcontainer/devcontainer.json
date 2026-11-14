@@ -1,0 +1,15 @@
+{
+  "name": "GATE CS & DA Mastery Platform",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "forwardPorts": [5000, 5173],
+  "postCreateCommand": "npm install && cd client && npm install && npm run build",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  }
+}

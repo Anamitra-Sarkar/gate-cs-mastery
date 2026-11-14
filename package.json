@@ -1,0 +1,19 @@
+{
+  "name": "gate-cs-mastery",
+  "version": "1.0.0",
+  "description": "Interactive GATE CS & DA Exam Mastery Platform",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "node server/index.js",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "install:all": "npm install && npm --prefix client install",
+    "test": "node scripts/test_server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
