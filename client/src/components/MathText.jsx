@@ -1,11 +1,79 @@
 import React from 'react';
 import katex from 'katex';
 
+// Pre-clean LaTeX math syntax, bracket delimiters, and isolated raw LaTeX symbols
+function preCleanMath(text) {
+  if (!text) return '';
+  // 1. Standardize \[ ... \] and \( ... \) to $$ and $
+  let s = text.replace(/\\\[([\s\S]+?)\\\]/g, '\n\n$$$$$1$$$$\n\n');
+  s = s.replace(/\\\(([\s\S]+?)\\\)/g, ' $$$1$$ ');
+
+  // 2. Clean isolated raw LaTeX symbol commands when found outside of math blocks
+  const rawReplacements = [
+    [/\\to\b/g, '→'],
+    [/\\rightarrow\b/g, '→'],
+    [/\\leftarrow\b/g, '←'],
+    [/\\Rightarrow\b/g, '⇒'],
+    [/\\Leftarrow\b/g, '⇐'],
+    [/\\iff\b/g, '⟺'],
+    [/\\times\b/g, '×'],
+    [/\\le\b|\\leq\b/g, '≤'],
+    [/\\ge\b|\\geq\b/g, '≥'],
+    [/\\neq\b/g, '≠'],
+    [/\\pm\b/g, '±'],
+    [/\\approx\b/g, '≈'],
+    [/\\equiv\b/g, '≡'],
+    [/\\in\b/g, '∈'],
+    [/\\notin\b/g, '∉'],
+    [/\\subset\b/g, '⊂'],
+    [/\\subseteq\b/g, '⊆'],
+    [/\\cup\b/g, '∪'],
+    [/\\cap\b/g, '∩'],
+    [/\\cdot\b/g, '·'],
+    [/\\ldots\b|\\dots\b/g, '…'],
+    [/\\infty\b/g, '∞'],
+    [/\\Theta\b/g, 'Θ'],
+    [/\\Omega\b/g, 'Ω'],
+    [/\\Sigma\b/g, 'Σ'],
+    [/\\Delta\b/g, 'Δ'],
+    [/\\alpha\b/g, 'α'],
+    [/\\beta\b/g, 'β'],
+    [/\\gamma\b/g, 'γ'],
+    [/\\lambda\b/g, 'λ'],
+    [/\\mu\b/g, 'μ'],
+    [/\\pi\b/g, 'π'],
+    [/\\sigma\b/g, 'σ'],
+    [/\\phi\b/g, 'φ'],
+  ];
+
+  const parts = s.split(/(\$\$[\s\S]+?\$\$|\$.+?\$)/g);
+  for (let i = 0; i < parts.length; i += 2) {
+    if (parts[i]) {
+      let seg = parts[i];
+      // Replace raw $\to$ or $\times$ if someone wrote isolated dollar tags
+      seg = seg.replace(/\$\\to\$/g, '→');
+      seg = seg.replace(/\$\\rightarrow\$/g, '→');
+      seg = seg.replace(/\$\\times\$/g, '×');
+      seg = seg.replace(/\$\\le\$/g, '≤');
+      seg = seg.replace(/\$\\ge\$/g, '≥');
+      seg = seg.replace(/\$\\neq\$/g, '≠');
+
+      for (const [re, rep] of rawReplacements) {
+        seg = seg.replace(re, rep);
+      }
+      parts[i] = seg;
+    }
+  }
+  return parts.join('');
+}
+
 export default function MathText({ text, className = '' }) {
   if (!text) return null;
 
+  const cleanedText = preCleanMath(text);
+
   // Split lines to handle markdown structure (headings, lists, block math)
-  const lines = text.split('\n');
+  const lines = cleanedText.split('\n');
 
   const renderInlineFormatted = (rawStr) => {
     if (!rawStr) return null;

@@ -195,7 +195,7 @@ function CPUSchedulerVisualizer() {
 
         {algo === 'RR' && (
           <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">Time Quantum ($q$):</span>
+            <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">Time Quantum (q):</span>
             <input 
               type="range" 
               min="1" 
@@ -929,11 +929,11 @@ function SubnetVisualizer() {
             </span>
           </div>
           <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
-            <span className="text-slate-600 dark:text-slate-400 font-semibold">Usable Host Capacity (2^(32-n) - 2):</span>
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Usable Host Capacity (2³²⁻ⁿ − 2):</span>
             <span className="font-bold text-amber-700 dark:text-amber-400 text-sm">{usableHosts.toLocaleString()}</span>
           </div>
           <div className="flex justify-between items-center py-1 border-b border-slate-100 dark:border-slate-800">
-            <span className="text-slate-600 dark:text-slate-400 font-semibold">Total Block Addresses (2^(32-n)):</span>
+            <span className="text-slate-600 dark:text-slate-400 font-semibold">Total Block Addresses (2³²⁻ⁿ):</span>
             <span className="font-bold text-slate-900 dark:text-white text-sm">{totalAddresses.toLocaleString()}</span>
           </div>
           <div className="flex justify-between items-center py-1">
@@ -953,7 +953,7 @@ function SubnetVisualizer() {
               Subnet Partitioning & VLSM Division (GATE Question Solver)
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-400">
-              Divide current block into equal subnets (borrowing {borrowBits} bit{borrowBits !== 1 ? 's' : ''} $\to$ /{newPartitionCidr})
+              Divide current block into equal subnets (borrowing {borrowBits} bit{borrowBits !== 1 ? 's' : ''} → /{newPartitionCidr})
             </p>
           </div>
           <div className="flex items-center gap-1.5">
