@@ -1,13 +1,13 @@
 {
-  "xp": 250,
+  "xp": 270,
   "streak": 3,
   "level": 3,
-  "totalAttempted": 23,
-  "totalCorrect": 21,
+  "totalAttempted": 24,
+  "totalCorrect": 22,
   "subjectStats": {
     "General Aptitude": {
-      "attempted": 6,
-      "correct": 6
+      "attempted": 7,
+      "correct": 7
     },
     "Programming & Data Structures": {
       "attempted": 3,
@@ -31,7 +31,7 @@
       "selected": "A",
       "isCorrect": true,
       "timeSpent": 12,
-      "timestamp": 1794676899695
+      "timestamp": 1794677093721
     }
   },
   "bookmarks": []
