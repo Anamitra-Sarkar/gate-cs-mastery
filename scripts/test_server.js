@@ -11,10 +11,11 @@ assert(fs.existsSync(dataFile), 'Questions data file must exist');
 
 const questions = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
 console.log(`[PASS] Loaded master question bank: ${questions.length} questions`);
-assert(questions.length >= 600, 'Must have at least 600 questions');
+assert(questions.length >= 1200, `Must have at least 1200 questions, found ${questions.length}`);
 
 // Verify question schema
 let checked = 0;
+const yearsFound = new Set();
 for (const q of questions) {
   assert(q.id, 'Question must have id');
   assert(q.subject, `Question ${q.id} must have subject`);
@@ -23,11 +24,74 @@ for (const q of questions) {
   assert(q.answer !== undefined, `Question ${q.id} must have answer`);
   assert(q.explanation, `Question ${q.id} must have explanation`);
   assert(q.hint, `Question ${q.id} must have hint`);
+  if (q.year) yearsFound.add(q.year);
   checked++;
 }
-console.log(`[PASS] Verified strict schema on all ${checked} questions.`);
+console.log(`[PASS] Verified strict schema on all ${checked} questions across ${yearsFound.size} exam years.`);
 
-// 2. Start server and run HTTP API Tests
+// 2. Unit Test: Evaluation Logic for MCQ, MSQ, and NAT
+function evaluateGATEAnswer(userAns, officialAnswer, qType = 'MCQ') {
+  if (!userAns && userAns !== 0) return false;
+  const cleanUser = String(userAns).trim().toUpperCase();
+  const cleanKey = String(officialAnswer).trim().toUpperCase();
+
+  // 1. MSQ handling
+  if (qType === 'MSQ' || cleanKey.includes(',')) {
+    const userChoices = (Array.isArray(userAns) ? userAns : cleanUser.split(','))
+      .map(s => String(s).trim().toUpperCase())
+      .filter(Boolean);
+    const keyChoices = cleanKey.split(',')
+      .map(s => s.trim().toUpperCase())
+      .filter(Boolean);
+    
+    userChoices.sort();
+    keyChoices.sort();
+    return userChoices.length === keyChoices.length && 
+           userChoices.every((val, idx) => val === keyChoices[idx]);
+  }
+
+  // 2. NAT handling
+  if (qType === 'NAT' || (!cleanKey.match(/^[A-D]$/) && !cleanKey.includes(','))) {
+    const rangeMatch = cleanKey.match(/([-+]?[0-9]*\.?[0-9]+)\s*(?:TO|to|–|-|:)\s*([-+]?[0-9]*\.?[0-9]+)/);
+    const numUser = parseFloat(cleanUser);
+    if (!isNaN(numUser)) {
+      if (rangeMatch) {
+        const minVal = parseFloat(rangeMatch[1]);
+        const maxVal = parseFloat(rangeMatch[2]);
+        if (!isNaN(minVal) && !isNaN(maxVal)) {
+          return numUser >= Math.min(minVal, maxVal) && numUser <= Math.max(minVal, maxVal);
+        }
+      }
+      const numKey = parseFloat(cleanKey);
+      if (!isNaN(numKey)) {
+        return Math.abs(numUser - numKey) <= 0.01;
+      }
+    }
+  }
+
+  // 3. Standard MCQ direct match
+  return cleanUser === cleanKey;
+}
+
+// Unit test cases:
+// A) MSQ multi-select
+assert.strictEqual(evaluateGATEAnswer(['A', 'C'], 'A, C', 'MSQ'), true);
+assert.strictEqual(evaluateGATEAnswer(['C', 'A'], 'A, C', 'MSQ'), true); // order independent
+assert.strictEqual(evaluateGATEAnswer(['A'], 'A, C', 'MSQ'), false); // partial answer rejected
+assert.strictEqual(evaluateGATEAnswer(['A', 'B', 'C'], 'A, C', 'MSQ'), false); // extra choice rejected
+// B) NAT numerical tolerance & range
+assert.strictEqual(evaluateGATEAnswer('29', '28 to 30', 'NAT'), true);
+assert.strictEqual(evaluateGATEAnswer('28.0', '28 to 30', 'NAT'), true);
+assert.strictEqual(evaluateGATEAnswer('31', '28 to 30', 'NAT'), false);
+assert.strictEqual(evaluateGATEAnswer('5', '5.0', 'NAT'), true);
+assert.strictEqual(evaluateGATEAnswer('0.5', '.50', 'NAT'), true);
+// C) MCQ
+assert.strictEqual(evaluateGATEAnswer('B', 'B', 'MCQ'), true);
+assert.strictEqual(evaluateGATEAnswer('b', 'B', 'MCQ'), true);
+assert.strictEqual(evaluateGATEAnswer('A', 'B', 'MCQ'), false);
+console.log(`[PASS] Evaluator Unit Tests: MCQ, MSQ multi-select, and NAT ranges pass.`);
+
+// 3. Start server and run HTTP API Tests
 const server = require('../server/index.js');
 
 function req(method, pathUrl, body = null) {
@@ -89,6 +153,12 @@ async function runTests() {
     assert(osRes.data.questions.every(q => q.subject === 'Operating Systems'));
     console.log(`[PASS] GET /api/questions subject filter: returned ${osRes.data.total} OS questions`);
 
+    // Test GET /api/questions filtered by Year
+    const yRes = await req('GET', '/api/questions?year=2024');
+    assert.strictEqual(yRes.status, 200);
+    assert(yRes.data.questions.every(q => String(q.year) === '2024'));
+    console.log(`[PASS] GET /api/questions year filter (2024): returned ${yRes.data.total} questions`);
+
     // Test GET /api/questions/:id
     const targetQ = qRes.data.questions[0];
     const singleQ = await req('GET', `/api/questions/${targetQ.id}`);
@@ -137,7 +207,7 @@ async function runTests() {
     assert(htmlRes.raw.includes('<!doctype html>'), 'Root URL must serve built HTML client');
     console.log(`[PASS] GET / serves compiled client bundle`);
 
-    console.log('\n🌟 ALL 10 TEST SUITES PASSED FLAWLESSLY! 🌟\n');
+    console.log('\n🌟 ALL 12 TEST SUITES PASSED FLAWLESSLY! 🌟\n');
     process.exit(0);
   } catch (err) {
     console.error('Test failed with error:', err);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Zap, Timer, Flame, Award, X, RotateCcw, ArrowRight } from 'lucide-react';
 import MathText from './MathText';
 import confetti from 'canvas-confetti';
+import { evaluateGATEAnswer } from './QuestionCard';
 
 export default function SpeedRunModal({ isOpen, onClose, allQuestions, onAddXP }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -55,7 +56,7 @@ export default function SpeedRunModal({ isOpen, onClose, allQuestions, onAddXP }
   const handleAnswer = (selectedLabel) => {
     if (!currentQ || isGameOver) return;
 
-    const isCorrect = String(selectedLabel).trim().toUpperCase() === String(currentQ.answer).trim().toUpperCase();
+    const isCorrect = evaluateGATEAnswer(selectedLabel, currentQ.answer, 'MCQ');
 
     if (isCorrect) {
       const multiplier = Math.min(5, Math.floor(streak / 2) + 1);

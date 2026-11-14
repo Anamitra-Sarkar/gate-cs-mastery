@@ -37,6 +37,7 @@ export default function App() {
   const [selectedSubtopic, setSelectedSubtopic] = useState('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
+  const [selectedYear, setSelectedYear] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
 
   // User Stats & State
@@ -70,8 +71,8 @@ export default function App() {
       .then(data => setStats(data))
       .catch(e => console.error('Failed to load stats:', e));
 
-    // Also prefetch a pool for mock exam & speed run
-    fetch('/api/questions?limit=500')
+    // Also prefetch full pool for mock exam & speed run
+    fetch('/api/questions?limit=2500')
       .then(res => res.json())
       .then(data => setAllQuestionsList(data.questions || []))
       .catch(e => console.error('Failed to prefetch questions pool:', e));
@@ -88,6 +89,7 @@ export default function App() {
     if (selectedSubtopic !== 'All') params.append('subtopic', selectedSubtopic);
     if (selectedDifficulty !== 'All') params.append('difficulty', selectedDifficulty);
     if (selectedType !== 'All') params.append('type', selectedType);
+    if (selectedYear !== 'All') params.append('year', selectedYear);
     if (searchTerm.trim()) params.append('search', searchTerm.trim());
 
     fetch(`/api/questions?${params.toString()}`)
@@ -99,7 +101,7 @@ export default function App() {
       })
       .catch(e => console.error('Failed to fetch questions:', e))
       .finally(() => setLoading(false));
-  }, [selectedSubject, selectedSubtopic, selectedDifficulty, selectedType, searchTerm, page]);
+  }, [selectedSubject, selectedSubtopic, selectedDifficulty, selectedType, selectedYear, searchTerm, page]);
 
   // Handlers
   const handleSelectTopicFromGrid = (subj) => {
@@ -236,6 +238,18 @@ export default function App() {
                   <option value="MCQ">MCQ (Multiple Choice)</option>
                   <option value="NAT">NAT (Numerical)</option>
                   <option value="MSQ">MSQ (Multi-Select)</option>
+                </select>
+
+                {/* Year Selector */}
+                <select
+                  value={selectedYear}
+                  onChange={e => { setSelectedYear(e.target.value); setPage(1); }}
+                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-2 focus:border-indigo-500"
+                >
+                  <option value="All">All Years (1991–2025)</option>
+                  {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => (
+                    <option key={yr} value={yr}>GATE {yr}</option>
+                  ))}
                 </select>
 
                 {/* Search box */}

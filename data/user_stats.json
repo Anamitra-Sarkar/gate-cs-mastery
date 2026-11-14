@@ -1,13 +1,17 @@
 {
-  "xp": 170,
+  "xp": 190,
   "streak": 3,
   "level": 2,
-  "totalAttempted": 17,
-  "totalCorrect": 15,
+  "totalAttempted": 19,
+  "totalCorrect": 17,
   "subjectStats": {
     "General Aptitude": {
-      "attempted": 3,
-      "correct": 3
+      "attempted": 4,
+      "correct": 4
+    },
+    "Programming & Data Structures": {
+      "attempted": 1,
+      "correct": 1
     }
   },
   "attempts": {
@@ -15,7 +19,13 @@
       "selected": "A",
       "isCorrect": true,
       "timeSpent": 12,
-      "timestamp": 1794674402952
+      "timestamp": 1794674513155
+    },
+    "GATE_1991_CS_Q2_4433": {
+      "selected": "A",
+      "isCorrect": true,
+      "timeSpent": 12,
+      "timestamp": 1794675323514
     }
   },
   "bookmarks": []

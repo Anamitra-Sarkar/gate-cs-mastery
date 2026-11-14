@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Clock, Calculator, CheckCircle, AlertCircle, Bookmark, ChevronRight, ChevronLeft, X, Award, RotateCcw } from 'lucide-react';
 import MathText from './MathText';
 import confetti from 'canvas-confetti';
+import { evaluateGATEAnswer } from './QuestionCard';
 
 export default function MockExamModal({ isOpen, onClose, allQuestions }) {
   const [examStarted, setExamStarted] = useState(false);
@@ -11,7 +12,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
   const [examQuestions, setExamQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Responses map: { [qId]: { selected: 'A', status: 'ANSWERED' | 'REVIEW' | 'ANS_REVIEW' | 'NOT_ANSWERED' } }
+  // Responses map: { [qId]: { selected: 'A' | ['A', 'B'], status: 'ANSWERED' | 'REVIEW' | 'ANS_REVIEW' | 'NOT_ANSWERED' } }
   const [responses, setResponses] = useState({});
   const [calcOpen, setCalcOpen] = useState(false);
   const [calcInput, setCalcInput] = useState('0');
@@ -28,7 +29,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
     
     // Init status
     const initialResp = {};
-    selected.forEach((q, idx) => {
+    selected.forEach((q) => {
       initialResp[q.id] = { selected: null, status: 'NOT_VISITED' };
     });
     setResponses(initialResp);
@@ -57,12 +58,26 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
 
   const handleSelectOption = (opt) => {
     if (!currentQ) return;
+    const isMSQ = currentQ.type === 'MSQ' || (typeof currentQ.answer === 'string' && currentQ.answer.includes(','));
+    let newSelected;
+    if (isMSQ) {
+      const prev = responses[currentQ.id]?.selected;
+      const currentList = Array.isArray(prev) ? prev : (prev ? String(prev).split(',').map(s => s.trim()) : []);
+      newSelected = currentList.includes(opt) ? currentList.filter(x => x !== opt) : [...currentList, opt];
+      newSelected = newSelected.sort();
+    } else {
+      newSelected = opt;
+    }
+
+    const hasSelection = Array.isArray(newSelected) ? newSelected.length > 0 : Boolean(newSelected);
     setResponses(prev => ({
       ...prev,
       [currentQ.id]: {
         ...prev[currentQ.id],
-        selected: opt,
-        status: prev[currentQ.id]?.status === 'REVIEW' ? 'ANS_REVIEW' : 'ANSWERED'
+        selected: newSelected,
+        status: hasSelection 
+          ? (prev[currentQ.id]?.status === 'REVIEW' ? 'ANS_REVIEW' : 'ANSWERED')
+          : 'NOT_ANSWERED'
       }
     }));
   };
@@ -117,13 +132,21 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
       const qMarks = q.marks || 1;
       maxMarks += qMarks;
       const resp = responses[q.id];
-      if (resp && resp.selected) {
-        if (String(resp.selected).trim().toUpperCase() === String(q.answer).trim().toUpperCase()) {
+      const isMSQ = q.type === 'MSQ' || (typeof q.answer === 'string' && q.answer.includes(','));
+      const isNAT = q.type === 'NAT' || (!q.options || q.options.length === 0);
+      const neg = typeof q.negative_marks === 'number' ? q.negative_marks : 
+                  (isNAT || isMSQ ? 0 : (qMarks === 2 ? 0.66 : 0.33));
+
+      const hasSelection = resp && (Array.isArray(resp.selected) ? resp.selected.length > 0 : Boolean(resp.selected));
+
+      if (hasSelection) {
+        const isCorr = evaluateGATEAnswer(resp.selected, q.answer, isMSQ ? 'MSQ' : (isNAT ? 'NAT' : 'MCQ'));
+        if (isCorr) {
           correct += 1;
           totalMarksScored += qMarks;
         } else {
           wrong += 1;
-          totalMarksScored -= (q.negative_marks || (qMarks === 2 ? 0.66 : 0.33));
+          totalMarksScored -= neg;
         }
       } else {
         unattempted += 1;
@@ -272,22 +295,28 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                     <div className="space-y-3">
                       {examQuestions.map((q, idx) => {
                         const userResp = responses[q.id]?.selected;
-                        const isCorrect = userResp && String(userResp).trim().toUpperCase() === String(q.answer).trim().toUpperCase();
+                        const isMSQ = q.type === 'MSQ' || (typeof q.answer === 'string' && q.answer.includes(','));
+                        const isNAT = q.type === 'NAT' || (!q.options || q.options.length === 0);
+                        const hasSelection = userResp && (Array.isArray(userResp) ? userResp.length > 0 : Boolean(userResp));
+                        const isCorrect = hasSelection && evaluateGATEAnswer(userResp, q.answer, isMSQ ? 'MSQ' : (isNAT ? 'NAT' : 'MCQ'));
+                        const qMarks = q.marks || 1;
+                        const neg = typeof q.negative_marks === 'number' ? q.negative_marks : (isNAT || isMSQ ? 0 : (qMarks === 2 ? 0.66 : 0.33));
+                        const displayResp = Array.isArray(userResp) ? userResp.join(', ') : userResp;
                         return (
                           <div key={q.id} className="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-2">
                             <div className="flex items-center justify-between">
                               <span className="text-xs font-bold text-slate-400">Question {idx + 1} • {q.subject} ({q.topic})</span>
                               <span className={`px-2 py-0.5 text-xs font-bold rounded ${
-                                !userResp ? 'bg-slate-800 text-slate-400' : (isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400')
+                                !hasSelection ? 'bg-slate-800 text-slate-400' : (isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400')
                               }`}>
-                                {!userResp ? 'Unattempted' : (isCorrect ? '+1.0 Correct' : '-0.33 Incorrect')}
+                                {!hasSelection ? 'Unattempted' : (isCorrect ? `+${qMarks}.0 Correct` : (neg > 0 ? `-${neg.toFixed(2)} Incorrect` : '0.0 Incorrect'))}
                               </span>
                             </div>
                             <div className="text-sm text-slate-200">
                               <MathText text={q.question} />
                             </div>
                             <div className="text-xs font-mono flex gap-4 pt-1 border-t border-slate-800/80">
-                              <span className="text-slate-400">Your Answer: <strong className={isCorrect ? 'text-emerald-400' : 'text-rose-400'}>{userResp || 'None'}</strong></span>
+                              <span className="text-slate-400">Your Answer: <strong className={isCorrect ? 'text-emerald-400' : 'text-rose-400'}>{displayResp || 'None'}</strong></span>
                               <span className="text-slate-400">Correct Key: <strong className="text-emerald-400">{q.answer}</strong></span>
                             </div>
                             <div className="p-3 bg-slate-950/70 rounded-lg text-xs text-slate-300 border border-slate-800">
@@ -345,7 +374,10 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                   <div className="space-y-3 pt-2">
                     {currentQ.options && currentQ.options.length > 0 ? (
                       currentQ.options.map((opt) => {
-                        const isSelected = responses[currentQ.id]?.selected === opt.label;
+                        const userSel = responses[currentQ.id]?.selected;
+                        const isSelected = Array.isArray(userSel) 
+                          ? userSel.includes(opt.label) 
+                          : userSel === opt.label;
                         return (
                           <button
                             key={opt.label}

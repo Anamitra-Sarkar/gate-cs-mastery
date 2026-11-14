@@ -1,116 +1,123 @@
 {
-  "General Aptitude": {
-    "total": 271,
-    "subtopics": {
-      "Verbal & Quantitative Aptitude": 192,
-      "Verbal Ability & Grammar": 71,
-      "Logical Reasoning & Data Interpretation": 8
-    }
-  },
-  "Engineering Mathematics": {
-    "total": 58,
-    "subtopics": {
-      "Linear Algebra (Matrices, Eigenvalues, Rank)": 38,
-      "Probability & Distributions": 19,
-      "Statistics & Bayes Theorem": 1
-    }
-  },
-  "Theory of Computation": {
-    "total": 38,
-    "subtopics": {
-      "Regular Languages & Finite Automata": 34,
-      "Context-Free Languages & Pushdown Automata": 4
-    }
-  },
-  "Databases": {
-    "total": 51,
-    "subtopics": {
-      "Relational Algebra & Tuple Calculus": 41,
-      "Transactions & Concurrency Control": 7,
-      "ER Modeling & Integrity Constraints": 1,
-      "Functional Dependencies & Normalization": 2
-    }
-  },
-  "Discrete Mathematics": {
-    "total": 55,
-    "subtopics": {
-      "Recurrence Relations": 5,
-      "Graph Theory & Connectivity": 24,
-      "Propositional & First-Order Logic": 23,
-      "Sets, Relations & Functions": 3
-    }
-  },
-  "Algorithms": {
-    "total": 24,
-    "subtopics": {
-      "Asymptotic Analysis & Recurrences": 10,
-      "Graph Algorithms (MST, Shortest Paths)": 4,
-      "Hashing & Complexity Classes": 5,
-      "Sorting & Searching Algorithms": 4,
-      "Greedy Strategy": 1
-    }
-  },
-  "Computer Organization & Architecture": {
-    "total": 48,
-    "subtopics": {
-      "Instruction Set & Addressing Modes": 30,
-      "Cache Memory & Hierarchy": 13,
-      "ALU, Arithmetic & Floating Point": 5
-    }
-  },
-  "Operating Systems": {
-    "total": 42,
-    "subtopics": {
-      "CPU Scheduling": 16,
-      "Memory Management & Paging": 10,
-      "File Systems & Storage": 1,
-      "Processes & Threads": 8,
-      "Virtual Memory & Page Replacement": 5,
-      "Deadlocks": 2
-    }
-  },
-  "Computer Networks": {
-    "total": 40,
-    "subtopics": {
-      "Data Link Layer & Flow Control": 32,
-      "Network Layer & Subnetting (CIDR)": 7,
-      "Routing Algorithms": 1
-    }
-  },
   "Programming & Data Structures": {
-    "total": 95,
+    "total": 422,
     "subtopics": {
-      "C Programming & Pointers": 75,
-      "Recursion & Function Stacks": 8,
-      "Trees & Binary Search Trees": 6,
+      "C Programming & Pointers": 332,
+      "Recursion & Function Stacks": 71,
       "Linear Data Structures (Arrays, Lists, Stacks)": 5,
-      "Heaps & Priority Queues": 1
-    }
-  },
-  "Compiler Design": {
-    "total": 16,
-    "subtopics": {
-      "Lexical Analysis & Tokens": 12,
-      "Syntax Directed Translation (SDT)": 1,
-      "Intermediate Code & Three-Address Code": 2,
-      "Parsing Techniques (LL, LR, SLR, LALR)": 1
+      "Trees & Binary Search Trees": 11,
+      "Heaps & Priority Queues": 3
     }
   },
   "Digital Logic": {
-    "total": 23,
+    "total": 39,
     "subtopics": {
-      "Boolean Algebra & Logic Gates": 18,
-      "Combinational Circuits (MUX, Decoders, Adders)": 1,
+      "Boolean Algebra & Logic Gates": 33,
       "Number Representations & Minimization": 2,
-      "Sequential Circuits (Flip-Flops & Counters)": 2
+      "Sequential Circuits (Flip-Flops & Counters)": 3,
+      "Combinational Circuits (MUX, Decoders, Adders)": 1
+    }
+  },
+  "Operating Systems": {
+    "total": 69,
+    "subtopics": {
+      "Processes & Threads": 15,
+      "CPU Scheduling": 27,
+      "Memory Management & Paging": 14,
+      "Virtual Memory & Page Replacement": 9,
+      "File Systems & Disk Scheduling": 1,
+      "Concurrency & Synchronization": 1,
+      "Deadlocks": 2
+    }
+  },
+  "Discrete Mathematics": {
+    "total": 84,
+    "subtopics": {
+      "Graph Theory & Connectivity": 34,
+      "Propositional & First-Order Logic": 42,
+      "Recurrence Relations": 4,
+      "Sets, Relations & Functions": 4
+    }
+  },
+  "General Aptitude": {
+    "total": 299,
+    "subtopics": {
+      "Verbal Ability & Grammar": 69,
+      "Verbal & Quantitative Aptitude": 226,
+      "Logical Reasoning & Data Interpretation": 4
+    }
+  },
+  "Computer Networks": {
+    "total": 89,
+    "subtopics": {
+      "Data Link Layer & Flow Control": 79,
+      "Network Layer & Subnetting (CIDR)": 8,
+      "Error Detection & LANs": 1,
+      "Routing Protocols": 1
+    }
+  },
+  "Databases": {
+    "total": 138,
+    "subtopics": {
+      "Relational Algebra & Tuple Calculus": 121,
+      "ER Modeling & Integrity Constraints": 2,
+      "Indexing & B/B+ Trees": 1,
+      "Transactions & Concurrency Control": 7,
+      "Functional Dependencies & Normalization": 5,
+      "SQL Queries": 2
+    }
+  },
+  "Computer Organization & Architecture": {
+    "total": 98,
+    "subtopics": {
+      "Instruction Set & Addressing Modes": 79,
+      "Cache Memory & Hierarchy": 16,
+      "ALU, Arithmetic & Floating Point": 3
+    }
+  },
+  "Compiler Design": {
+    "total": 22,
+    "subtopics": {
+      "Lexical Analysis & Tokens": 17,
+      "Parsing Techniques (LL, LR, SLR, LALR)": 2,
+      "Syntax Directed Translation (SDT)": 1,
+      "Intermediate Code & Three-Address Code": 2
+    }
+  },
+  "Theory of Computation": {
+    "total": 80,
+    "subtopics": {
+      "Regular Languages & Finite Automata": 73,
+      "Turing Machines & Computability": 2,
+      "Grammars & Chomsky Hierarchy": 1,
+      "Context-Free Languages & Pushdown Automata": 4
+    }
+  },
+  "Engineering Mathematics": {
+    "total": 70,
+    "subtopics": {
+      "Linear Algebra (Matrices, Eigenvalues, Rank)": 42,
+      "Calculus (Limits, Continuity, Integrals)": 2,
+      "Statistics & Bayes Theorem": 2,
+      "Probability & Distributions": 24
+    }
+  },
+  "Algorithms": {
+    "total": 43,
+    "subtopics": {
+      "Asymptotic Analysis & Recurrences": 22,
+      "Graph Algorithms (MST, Shortest Paths)": 7,
+      "Sorting & Searching Algorithms": 6,
+      "Greedy Strategy": 2,
+      "Hashing & Complexity Classes": 6
     }
   },
   "Data Science & AI": {
-    "total": 14,
+    "total": 11,
     "subtopics": {
-      "Machine Learning (Supervised & Unsupervised)": 11,
+      "Machine Learning (Supervised & Unsupervised)": 9,
       "AI Search & Heuristics": 1,
-      "Neural Networks & Deep Learning": 2
+      "Neural Networks & Deep Learning": 1
     }
   }
 }

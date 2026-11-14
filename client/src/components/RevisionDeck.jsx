@@ -49,7 +49,7 @@ export default function RevisionDeck({
               activeFilter === 'all' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
             }`}
           >
-            All Review Deck ({bookmarks.length + mistakeIds.length})
+            All Review Deck ({targetIds.length})
           </button>
           <button
             onClick={() => setActiveFilter('bookmarked')}

@@ -8,11 +8,55 @@ import {
   Bookmark, 
   Sparkles,
   HelpCircle,
-  ChevronDown,
-  ChevronUp
+  CheckSquare,
+  Square
 } from 'lucide-react';
 import MathText from './MathText';
 import confetti from 'canvas-confetti';
+
+export function evaluateGATEAnswer(userAns, officialAnswer, qType = 'MCQ') {
+  if (!userAns && userAns !== 0) return false;
+  const cleanUser = String(userAns).trim().toUpperCase();
+  const cleanKey = String(officialAnswer).trim().toUpperCase();
+
+  // 1. MSQ handling (comma separated or multi-character)
+  if (qType === 'MSQ' || cleanKey.includes(',')) {
+    const userChoices = (Array.isArray(userAns) ? userAns : cleanUser.split(','))
+      .map(s => String(s).trim().toUpperCase())
+      .filter(Boolean);
+    const keyChoices = cleanKey.split(',')
+      .map(s => s.trim().toUpperCase())
+      .filter(Boolean);
+    
+    userChoices.sort();
+    keyChoices.sort();
+    return userChoices.length === keyChoices.length && 
+           userChoices.every((val, idx) => val === keyChoices[idx]);
+  }
+
+  // 2. NAT handling
+  if (qType === 'NAT' || (!cleanKey.match(/^[A-D]$/) && !cleanKey.includes(','))) {
+    // Range with "TO" or "-" or ":"
+    const rangeMatch = cleanKey.match(/([-+]?[0-9]*\.?[0-9]+)\s*(?:TO|to|–|-|:)\s*([-+]?[0-9]*\.?[0-9]+)/);
+    const numUser = parseFloat(cleanUser);
+    if (!isNaN(numUser)) {
+      if (rangeMatch) {
+        const minVal = parseFloat(rangeMatch[1]);
+        const maxVal = parseFloat(rangeMatch[2]);
+        if (!isNaN(minVal) && !isNaN(maxVal)) {
+          return numUser >= Math.min(minVal, maxVal) && numUser <= Math.max(minVal, maxVal);
+        }
+      }
+      const numKey = parseFloat(cleanKey);
+      if (!isNaN(numKey)) {
+        return Math.abs(numUser - numKey) <= 0.01;
+      }
+    }
+  }
+
+  // 3. Standard MCQ direct match
+  return cleanUser === cleanKey;
+}
 
 export default function QuestionCard({ 
   question, 
@@ -21,80 +65,89 @@ export default function QuestionCard({
   onAskAI, 
   onRecordAttempt 
 }) {
+  const isMSQ = question.type === 'MSQ' || (typeof question.answer === 'string' && question.answer.includes(','));
+  const isNAT = question.type === 'NAT' || (!question.options || question.options.length === 0);
+
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedMsqOptions, setSelectedMsqOptions] = useState([]);
   const [natAnswer, setNatAnswer] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
   const qMarks = question.marks || 1;
-  const negMarks = question.negative_marks || (qMarks === 2 ? 0.66 : 0.33);
+  const negMarks = typeof question.negative_marks === 'number' ? question.negative_marks : 
+                  (isNAT || isMSQ ? 0 : (qMarks === 2 ? 0.66 : 0.33));
 
-  // Check correct
-  const checkIsCorrect = (userAns) => {
-    if (!userAns) return false;
-    const cleanUser = String(userAns).trim().toUpperCase();
-    const cleanKey = String(question.answer).trim().toUpperCase();
-
-    // If NAT range (e.g. "28 to 30")
-    if (cleanKey.includes('TO')) {
-      const parts = cleanKey.split('TO').map(p => parseFloat(p.trim()));
-      const numUser = parseFloat(cleanUser);
-      if (!isNaN(numUser) && !isNaN(parts[0]) && !isNaN(parts[1])) {
-        return numUser >= parts[0] && numUser <= parts[1];
-      }
-    }
-
-    // Direct match or comma separated MSQ
-    if (cleanKey.includes(',')) {
-      const keys = cleanKey.split(',').map(s => s.trim());
-      return keys.includes(cleanUser);
-    }
-
-    return cleanUser === cleanKey;
-  };
-
-  const handleSelectOption = (lbl) => {
-    if (isSubmitted) return;
+  // MCQ Selection
+  const handleSelectMCQ = (lbl) => {
+    if (isSubmitted || isMSQ) return;
     setSelectedOption(lbl);
     setIsSubmitted(true);
     setShowExplanation(true);
 
-    const isCorrect = checkIsCorrect(lbl);
-    if (isCorrect) {
+    const correct = evaluateGATEAnswer(lbl, question.answer, 'MCQ');
+    if (correct) {
       confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
     }
     if (onRecordAttempt) {
-      onRecordAttempt(question.id, lbl, isCorrect, 15);
+      onRecordAttempt(question.id, lbl, correct, 15);
     }
   };
 
+  // MSQ Toggle
+  const handleToggleMSQ = (lbl) => {
+    if (isSubmitted) return;
+    setSelectedMsqOptions(prev => 
+      prev.includes(lbl) ? prev.filter(x => x !== lbl) : [...prev, lbl]
+    );
+  };
+
+  const handleMsqSubmit = () => {
+    if (isSubmitted || selectedMsqOptions.length === 0) return;
+    setIsSubmitted(true);
+    setShowExplanation(true);
+
+    const correct = evaluateGATEAnswer(selectedMsqOptions, question.answer, 'MSQ');
+    if (correct) {
+      confetti({ particleCount: 50, spread: 70, origin: { y: 0.7 } });
+    }
+    if (onRecordAttempt) {
+      onRecordAttempt(question.id, selectedMsqOptions.join(', '), correct, 25);
+    }
+  };
+
+  // NAT Submit
   const handleNatSubmit = () => {
     if (isSubmitted || !natAnswer.trim()) return;
     setIsSubmitted(true);
     setShowExplanation(true);
-    const isCorrect = checkIsCorrect(natAnswer);
-    if (isCorrect) {
+
+    const correct = evaluateGATEAnswer(natAnswer, question.answer, 'NAT');
+    if (correct) {
       confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
     }
     if (onRecordAttempt) {
-      onRecordAttempt(question.id, natAnswer, isCorrect, 15);
+      onRecordAttempt(question.id, natAnswer, correct, 20);
     }
   };
 
-  const isCorrect = checkIsCorrect(selectedOption || natAnswer);
+  const currentAnswer = isMSQ ? selectedMsqOptions : (isNAT ? natAnswer : selectedOption);
+  const isCorrect = evaluateGATEAnswer(currentAnswer, question.answer, isMSQ ? 'MSQ' : (isNAT ? 'NAT' : 'MCQ'));
+
+  const paperLabel = question.paper || question.id.split('_').slice(0, 3).join(' ');
 
   return (
     <div className={`p-6 rounded-2xl bg-slate-900 border transition-all duration-300 shadow-xl ${
       isSubmitted 
-        ? (isCorrect ? 'border-emerald-500/50 bg-emerald-950/10' : 'border-rose-500/40 bg-rose-950/10 animate-shake') 
+        ? (isCorrect ? 'border-emerald-500/50 bg-emerald-950/10' : 'border-rose-500/40 bg-rose-950/10') 
         : 'border-slate-800 hover:border-slate-700'
     }`}>
       {/* Question Header Badges */}
       <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800 text-xs">
         <div className="flex items-center gap-2">
           <span className="px-2.5 py-0.5 rounded-md font-mono font-bold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
-            {question.id.split('_').slice(0, 3).join(' ')}
+            {paperLabel} {question.q_no ? `• Q.${question.q_no}` : ''}
           </span>
           <span className="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 font-medium">
             {question.subject}
@@ -105,6 +158,12 @@ export default function QuestionCard({
         </div>
 
         <div className="flex items-center gap-2">
+          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+            isMSQ ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' :
+            (isNAT ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'bg-blue-500/20 text-blue-300 border border-blue-500/30')
+          }`}>
+            {isMSQ ? 'MSQ' : (isNAT ? 'NAT' : 'MCQ')}
+          </span>
           <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
             question.difficulty === 'Easy' ? 'bg-emerald-500/10 text-emerald-400' :
             (question.difficulty === 'Medium' ? 'bg-amber-500/10 text-amber-400' : 'bg-rose-500/10 text-rose-400')
@@ -141,50 +200,78 @@ export default function QuestionCard({
         />
       )}
 
-      {/* Options Grid */}
+      {/* Options / Input Block */}
       <div className="space-y-2.5 pt-2">
         {question.options && question.options.length > 0 ? (
-          question.options.map(opt => {
-            const isSelected = selectedOption === opt.label;
-            const isAnswerKey = String(opt.label).trim().toUpperCase() === String(question.answer).trim().toUpperCase();
+          <>
+            {isMSQ && !isSubmitted && (
+              <p className="text-[11px] font-semibold text-purple-300 flex items-center gap-1.5 mb-1">
+                <Sparkles className="w-3.5 h-3.5" /> Multiple Choice Select (MSQ): Select all correct choices and submit.
+              </p>
+            )}
 
-            let optionStyle = 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/60';
-            if (isSubmitted) {
-              if (isAnswerKey) {
-                optionStyle = 'bg-emerald-500/20 border-emerald-500 text-emerald-200 font-medium shadow-md shadow-emerald-500/20';
-              } else if (isSelected) {
-                optionStyle = 'bg-rose-500/20 border-rose-500 text-rose-200';
-              } else {
-                optionStyle = 'bg-slate-950/40 border-slate-900 text-slate-600 opacity-60';
+            {question.options.map(opt => {
+              const labelUpper = String(opt.label).trim().toUpperCase();
+              const keyList = String(question.answer).split(',').map(s => s.trim().toUpperCase());
+              const isAnswerKey = keyList.includes(labelUpper);
+
+              const isSelected = isMSQ 
+                ? selectedMsqOptions.includes(opt.label)
+                : selectedOption === opt.label;
+
+              let optionStyle = 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/60';
+              if (isSubmitted) {
+                if (isAnswerKey) {
+                  optionStyle = 'bg-emerald-500/20 border-emerald-500 text-emerald-200 font-medium shadow-md shadow-emerald-500/20';
+                } else if (isSelected) {
+                  optionStyle = 'bg-rose-500/20 border-rose-500 text-rose-200';
+                } else {
+                  optionStyle = 'bg-slate-950/40 border-slate-900 text-slate-600 opacity-60';
+                }
+              } else if (isMSQ && isSelected) {
+                optionStyle = 'bg-purple-950/40 border-purple-500 text-purple-200 shadow-md shadow-purple-500/10';
               }
-            }
 
-            return (
-              <button
-                key={opt.label}
-                disabled={isSubmitted}
-                onClick={() => handleSelectOption(opt.label)}
-                className={`w-full text-left p-3.5 rounded-xl border flex items-start gap-3 transition-all ${optionStyle}`}
-              >
-                <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 ${
-                  isSubmitted && isAnswerKey 
-                    ? 'bg-emerald-500 text-slate-950' 
-                    : (isSubmitted && isSelected ? 'bg-rose-500 text-white' : 'bg-slate-800 text-slate-300')
-                }`}>
-                  {opt.label}
-                </span>
-                <div className="pt-0.5 text-xs md:text-sm flex-1">
-                  <MathText text={opt.text} />
-                </div>
-                {isSubmitted && isAnswerKey && (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5 animate-pop" />
-                )}
-                {isSubmitted && isSelected && !isAnswerKey && (
-                  <XCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
-                )}
-              </button>
-            );
-          })
+              return (
+                <button
+                  key={opt.label}
+                  disabled={isSubmitted}
+                  onClick={() => isMSQ ? handleToggleMSQ(opt.label) : handleSelectMCQ(opt.label)}
+                  className={`w-full text-left p-3.5 rounded-xl border flex items-start gap-3 transition-all ${optionStyle}`}
+                >
+                  <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 ${
+                    isSubmitted && isAnswerKey 
+                      ? 'bg-emerald-500 text-slate-950' 
+                      : (isSubmitted && isSelected ? 'bg-rose-500 text-white' : (isMSQ && isSelected ? 'bg-purple-600 text-white' : 'bg-slate-800 text-slate-300'))
+                  }`}>
+                    {opt.label}
+                  </span>
+                  <div className="pt-0.5 text-xs md:text-sm flex-1">
+                    <MathText text={opt.text} />
+                  </div>
+                  {isSubmitted && isAnswerKey && (
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5 animate-pop" />
+                  )}
+                  {isSubmitted && isSelected && !isAnswerKey && (
+                    <XCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                  )}
+                </button>
+              );
+            })}
+
+            {isMSQ && !isSubmitted && (
+              <div className="pt-2 flex justify-end">
+                <button
+                  disabled={selectedMsqOptions.length === 0}
+                  onClick={handleMsqSubmit}
+                  className="px-5 py-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 text-white font-semibold rounded-lg text-xs transition flex items-center gap-2 shadow-lg shadow-purple-600/20"
+                >
+                  <CheckSquare className="w-4 h-4" />
+                  Submit MSQ Response ({selectedMsqOptions.length} selected)
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           /* NAT Input */
           <div className="p-4 bg-slate-950 border border-slate-800 rounded-xl space-y-3">
@@ -220,7 +307,6 @@ export default function QuestionCard({
       {/* Action Footer: Hint, Explanation, Ask AI */}
       <div className="mt-5 pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2">
-          {/* Hint Button */}
           <button
             onClick={() => setShowHint(!showHint)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition font-medium"
@@ -229,7 +315,6 @@ export default function QuestionCard({
             <span>{showHint ? 'Hide Hint' : 'Show Hint'}</span>
           </button>
 
-          {/* Explanation Button */}
           <button
             onClick={() => setShowExplanation(!showExplanation)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/20 transition font-medium"
@@ -239,7 +324,6 @@ export default function QuestionCard({
           </button>
         </div>
 
-        {/* AI Tutor Context Button */}
         <button
           onClick={() => onAskAI(question)}
           className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-indigo-600 border border-slate-700 hover:border-indigo-500 text-slate-200 hover:text-white font-semibold transition"
