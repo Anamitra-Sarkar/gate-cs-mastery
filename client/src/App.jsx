@@ -24,6 +24,21 @@ import {
 export default function App() {
   const [currentTab, setCurrentTab] = useState('practice'); // 'topics' | 'practice' | 'revision'
   
+  // Theme State: 'light' (Warm Academic Paper) | 'dark' (Midnight Stone)
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('gate_theme') || 'light';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('gate_theme', theme);
+  }, [theme]);
+  
   // Data State
   const [topics, setTopics] = useState({});
   const [questions, setQuestions] = useState([]);
@@ -161,12 +176,14 @@ export default function App() {
   const hasActiveFilters = selectedSubject !== 'All' || selectedDifficulty !== 'All' || selectedType !== 'All' || selectedYear !== 'All' || searchTerm.trim();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-indigo-600 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[var(--bg-paper)] text-[var(--text-primary)] transition-colors duration-200">
       {/* Top Navigation Bar */}
       <Navbar
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
         stats={stats}
+        theme={theme}
+        setTheme={setTheme}
         onOpenAI={() => { setActiveQuestionForAI(questions[0] || null); setIsAIModalOpen(true); }}
         onOpenVisualizers={() => setIsVisualizersOpen(true)}
         onOpenMock={() => setIsMockExamOpen(true)}
@@ -190,8 +207,8 @@ export default function App() {
         {currentTab === 'practice' && (
           <div className="space-y-6">
             
-            {/* Filter & Search Bar: Clean & Segmented */}
-            <div className="p-5 sm:p-6 bg-[#111827] border border-slate-800 rounded-2xl shadow-xl space-y-4">
+            {/* Filter & Search Bar: Academic Card */}
+            <div className="academic-card p-5 sm:p-6 rounded-2xl space-y-4">
               
               {/* Row 1: Search + Format Segmented Control */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
@@ -203,20 +220,20 @@ export default function App() {
                     value={searchTerm}
                     onChange={e => { setSearchTerm(e.target.value); setPage(1); }}
                     placeholder="Search keywords, formulas, algorithms (e.g. Dijkstra, Paging, B+ Tree)..."
-                    className="w-full bg-[#0b0f19] border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition"
+                    className="w-full bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition shadow-inner"
                   />
                 </div>
 
                 {/* Segmented Format Pills: All / MCQ / MSQ / NAT */}
-                <div className="flex items-center gap-1 bg-[#0b0f19] p-1 rounded-xl border border-slate-800 text-xs self-start md:self-auto shrink-0">
+                <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0b0f19] p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-xs self-start md:self-auto shrink-0">
                   {['All', 'MCQ', 'MSQ', 'NAT'].map(ft => (
                     <button
                       key={ft}
                       onClick={() => { setSelectedType(ft); setPage(1); }}
                       className={`px-3 py-1.5 rounded-lg font-medium transition ${
                         selectedType === ft 
-                          ? 'bg-indigo-600 text-white shadow-sm' 
-                          : 'text-slate-400 hover:text-white'
+                          ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white shadow-sm font-semibold' 
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       {ft === 'All' ? 'All Formats' : ft}
@@ -232,7 +249,7 @@ export default function App() {
                 <select
                   value={selectedSubject}
                   onChange={e => { setSelectedSubject(e.target.value); setSelectedSubtopic('All'); setPage(1); }}
-                  className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                  className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-medium"
                 >
                   <option value="All">All Subjects ({totalQuestions})</option>
                   {Object.keys(topics).map(subj => (
@@ -245,7 +262,7 @@ export default function App() {
                   <select
                     value={selectedSubtopic}
                     onChange={e => { setSelectedSubtopic(e.target.value); setPage(1); }}
-                    className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                    className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-medium"
                   >
                     <option value="All">All Subtopics</option>
                     {Object.keys(topics[selectedSubject].subtopics).map(st => (
@@ -258,7 +275,7 @@ export default function App() {
                 <select
                   value={selectedYear}
                   onChange={e => { setSelectedYear(e.target.value); setPage(1); }}
-                  className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer font-mono"
+                  className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer font-mono shadow-sm"
                 >
                   <option value="All">All Exam Years (2025–1991)</option>
                   {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => (
@@ -270,7 +287,7 @@ export default function App() {
                 <select
                   value={selectedDifficulty}
                   onChange={e => { setSelectedDifficulty(e.target.value); setPage(1); }}
-                  className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                  className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-medium"
                 >
                   <option value="All">All Difficulties</option>
                   <option value="Easy">Easy (1 Mark)</option>
@@ -282,7 +299,7 @@ export default function App() {
                 {hasActiveFilters && (
                   <button
                     onClick={handleResetFilters}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 transition ml-auto"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition ml-auto font-medium"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     Reset Filters
@@ -294,19 +311,19 @@ export default function App() {
             {/* Questions Feed */}
             {loading ? (
               <div className="py-20 text-center space-y-3">
-                <RefreshCw className="w-7 h-7 text-indigo-400 animate-spin mx-auto" />
-                <p className="text-xs text-slate-400 font-medium">Fetching pristine questions...</p>
+                <RefreshCw className="w-7 h-7 text-amber-600 dark:text-amber-400 animate-spin mx-auto" />
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium font-serif">Fetching authentic questions...</p>
               </div>
             ) : questions.length === 0 ? (
-              <div className="py-16 text-center bg-[#111827] border border-slate-800 rounded-2xl space-y-3 p-8">
-                <BookOpen className="w-10 h-10 text-slate-500 mx-auto" />
-                <h3 className="text-base font-bold text-white">No questions matched the active filters</h3>
-                <p className="text-xs text-slate-400 max-w-sm mx-auto">
+              <div className="academic-card py-16 text-center rounded-2xl space-y-3 p-8">
+                <BookOpen className="w-10 h-10 text-slate-400 mx-auto" />
+                <h3 className="text-base font-serif font-bold text-slate-900 dark:text-white">No questions matched the active filters</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
                   Try loosening your search terms or clearing specific year/subject filters to view more questions.
                 </p>
                 <button
                   onClick={handleResetFilters}
-                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition"
+                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition shadow-sm"
                 >
                   Clear All Filters
                 </button>
@@ -325,26 +342,26 @@ export default function App() {
                 ))}
 
                 {/* Pagination Controls */}
-                <div className="flex flex-col sm:flex-row items-center justify-between p-4 sm:p-5 bg-[#111827] border border-slate-800 rounded-2xl text-xs gap-3">
-                  <span className="text-slate-400 font-medium">
-                    Showing <strong className="text-white">{questions.length}</strong> of <strong className="text-white">{totalQuestions}</strong> questions (Page {page} of {totalPages})
+                <div className="academic-card flex flex-col sm:flex-row items-center justify-between p-4 sm:p-5 rounded-2xl text-xs gap-3">
+                  <span className="text-slate-600 dark:text-slate-400 font-medium">
+                    Showing <strong className="text-slate-900 dark:text-white">{questions.length}</strong> of <strong className="text-slate-900 dark:text-white">{totalQuestions}</strong> questions (Page {page} of {totalPages})
                   </span>
 
                   <div className="flex items-center gap-2">
                     <button
                       disabled={page <= 1}
                       onClick={() => { setPage(p => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="px-3.5 py-2 bg-[#0b0f19] hover:bg-slate-800 border border-slate-800 disabled:opacity-30 text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold"
+                      className="px-3.5 py-2 bg-white hover:bg-slate-50 dark:bg-[#0b0f19] dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 disabled:opacity-30 text-slate-700 dark:text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold shadow-sm"
                     >
                       <ChevronLeft className="w-4 h-4" /> Prev
                     </button>
-                    <span className="px-3 py-1.5 font-mono text-indigo-300 font-bold bg-[#1a233a] border border-indigo-500/20 rounded-lg">
+                    <span className="px-3 py-1.5 font-mono text-slate-800 dark:text-blue-300 font-bold bg-slate-100 dark:bg-[#1a233a] border border-slate-200 dark:border-blue-500/20 rounded-lg">
                       {page} / {totalPages}
                     </span>
                     <button
                       disabled={page >= totalPages}
                       onClick={() => { setPage(p => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="px-3.5 py-2 bg-[#0b0f19] hover:bg-slate-800 border border-slate-800 disabled:opacity-30 text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold"
+                      className="px-3.5 py-2 bg-white hover:bg-slate-50 dark:bg-[#0b0f19] dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 disabled:opacity-30 text-slate-700 dark:text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold shadow-sm"
                     >
                       Next <ChevronRight className="w-4 h-4" />
                     </button>

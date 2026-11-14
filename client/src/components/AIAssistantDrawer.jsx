@@ -69,21 +69,21 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 w-full sm:max-w-lg bg-slate-950 border-l border-slate-800 shadow-2xl flex flex-col animate-slideLeft">
+    <div className="fixed inset-y-0 right-0 z-50 w-full sm:max-w-lg bg-white dark:bg-slate-950 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col animate-slideLeft transition-colors">
       {/* Header */}
-      <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
+      <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900/90">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
+          <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-slate-700 flex items-center justify-center text-amber-700 dark:text-amber-400">
             <Bot className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-white">GATE AI Tutor</h3>
-              <span className="px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded">
+              <h3 className="text-sm font-serif font-bold text-slate-900 dark:text-white">GATE AI Tutor</h3>
+              <span className="px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400 text-[10px] font-bold rounded border border-emerald-300 dark:border-emerald-700/50">
                 Groq Live
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">Contextual pedagogical mentor</p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400">Pedagogical mentor & concept guide</p>
           </div>
         </div>
 
@@ -93,7 +93,7 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
             <select
               value={currentModel}
               onChange={e => setCurrentModel(e.target.value)}
-              className="bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300 rounded-lg px-2.5 py-1 appearance-none pr-6 cursor-pointer focus:outline-none focus:border-indigo-500"
+              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-700 dark:text-slate-300 rounded-lg px-2.5 py-1 appearance-none pr-6 cursor-pointer focus:outline-none focus:border-blue-600 dark:focus:border-blue-500"
             >
               {models.map(m => (
                 <option key={m} value={m}>{m.split('/').pop()}</option>
@@ -104,7 +104,7 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
 
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition"
+            className="p-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -113,29 +113,29 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
 
       {/* Active Question Context Banner (if viewing a question) */}
       {activeQuestion && (
-        <div className="px-4 py-2 bg-indigo-950/40 border-b border-indigo-500/20 flex items-center justify-between text-xs">
-          <span className="text-indigo-300 truncate max-w-[280px]">
+        <div className="px-4 py-2 bg-amber-50/70 dark:bg-amber-950/20 border-b border-amber-200 dark:border-amber-800/30 flex items-center justify-between text-xs">
+          <span className="text-amber-900 dark:text-amber-200 truncate max-w-[280px]">
             Target: <strong>{activeQuestion.subject}</strong> ({activeQuestion.topic})
           </span>
-          <span className="px-1.5 py-0.5 bg-indigo-500/20 text-indigo-300 text-[10px] font-mono rounded">
+          <span className="px-1.5 py-0.5 bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 text-[10px] font-mono rounded">
             {activeQuestion.id.split('_').slice(0, 3).join(' ')}
           </span>
         </div>
       )}
 
       {/* Quick Prompt Chips */}
-      <div className="px-4 py-2 border-b border-slate-800/80 bg-slate-900/50 flex gap-1.5 overflow-x-auto text-[11px]">
+      <div className="px-4 py-2 border-b border-slate-200 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/50 flex gap-1.5 overflow-x-auto text-[11px]">
         {[
           { label: '💡 Gentle Hint', prompt: 'Give me a subtle hint to solve this problem without revealing the answer.' },
           { label: '🎯 First Principles', prompt: 'Explain the core theoretical concept behind this problem from first principles.' },
-          { label: '❌ Why Not C?', prompt: 'Why are the alternative options incorrect? Analyze the distractors.' },
+          { label: '❌ Distractor Analysis', prompt: 'Why are the alternative options incorrect? Analyze the distractors.' },
           { label: '📐 Key Formulas', prompt: 'What are the essential formulas and theorems needed to solve this problem?' },
         ].map(chip => (
           <button
             key={chip.label}
             onClick={() => handleSend(chip.prompt)}
             disabled={loading}
-            className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full whitespace-nowrap transition border border-slate-700/60"
+            className="px-2.5 py-1 bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full whitespace-nowrap transition border border-slate-200 dark:border-slate-700 shadow-sm"
           >
             {chip.label}
           </button>
@@ -143,15 +143,15 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/30 dark:bg-slate-950/40">
         {messages.map((msg, idx) => {
           const isUser = msg.role === 'user';
           return (
             <div key={idx} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[88%] rounded-2xl p-3.5 text-xs md:text-sm leading-relaxed ${
                 isUser 
-                  ? 'bg-indigo-600 text-white rounded-br-none shadow-md shadow-indigo-600/20' 
-                  : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none shadow'
+                  ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white rounded-br-none shadow-sm' 
+                  : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none shadow-sm'
               }`}>
                 <MathText text={msg.content} />
               </div>
@@ -161,8 +161,8 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl rounded-bl-none p-3 text-xs text-slate-400 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-indigo-400 animate-spin" />
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl rounded-bl-none p-3 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 shadow-sm">
+              <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400 animate-spin" />
               <span>Consulting {currentModel.split('/').pop()}...</span>
             </div>
           </div>
@@ -171,19 +171,19 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
       </div>
 
       {/* Input Field */}
-      <div className="p-3 border-t border-slate-800 bg-slate-900/80 flex items-center gap-2">
+      <div className="p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 flex items-center gap-2">
         <input
           type="text"
           value={inputPrompt}
           onChange={e => setInputPrompt(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleSend()}
           placeholder="Ask a question about this problem or topic..."
-          className="flex-1 bg-slate-950 border border-slate-800 text-xs md:text-sm rounded-xl px-3.5 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+          className="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs md:text-sm rounded-xl px-3.5 py-2.5 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500"
         />
         <button
           onClick={() => handleSend()}
           disabled={loading || !inputPrompt.trim()}
-          className="p-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 text-white rounded-xl transition shadow-md shadow-indigo-600/30"
+          className="p-2.5 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 disabled:opacity-40 text-white rounded-xl transition shadow-sm"
         >
           <Send className="w-4 h-4" />
         </button>
