@@ -17,11 +17,12 @@ import {
   Sparkles, 
   RefreshCw,
   BookOpen,
-  Award
+  Award,
+  RotateCcw
 } from 'lucide-react';
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState('topics'); // 'topics' | 'practice' | 'revision'
+  const [currentTab, setCurrentTab] = useState('practice'); // 'topics' | 'practice' | 'revision'
   
   // Data State
   const [topics, setTopics] = useState({});
@@ -71,7 +72,7 @@ export default function App() {
       .then(data => setStats(data))
       .catch(e => console.error('Failed to load stats:', e));
 
-    // Also prefetch full pool for mock exam & speed run
+    // Prefetch pool for mock exam & speed run
     fetch('/api/questions?limit=2500')
       .then(res => res.json())
       .then(data => setAllQuestionsList(data.questions || []))
@@ -147,8 +148,20 @@ export default function App() {
     setIsAIModalOpen(true);
   };
 
+  const handleResetFilters = () => {
+    setSelectedSubject('All');
+    setSelectedSubtopic('All');
+    setSelectedDifficulty('All');
+    setSelectedType('All');
+    setSelectedYear('All');
+    setSearchTerm('');
+    setPage(1);
+  };
+
+  const hasActiveFilters = selectedSubject !== 'All' || selectedDifficulty !== 'All' || selectedType !== 'All' || selectedYear !== 'All' || searchTerm.trim();
+
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-indigo-600 selection:text-white">
       {/* Top Navigation Bar */}
       <Navbar
         currentTab={currentTab}
@@ -162,7 +175,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-10">
         
         {/* VIEW 1: TOPIC SYLLABUS GRID */}
         {currentTab === 'topics' && (
@@ -176,25 +189,50 @@ export default function App() {
         {/* VIEW 2: QUESTION PRACTICE PLAYER */}
         {currentTab === 'practice' && (
           <div className="space-y-6">
-            {/* Filter Bar */}
-            <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                
-                {/* Back to Topics if filtered */}
-                {selectedSubject !== 'All' && (
-                  <button
-                    onClick={() => { setSelectedSubject('All'); setSelectedSubtopic('All'); }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg text-slate-300 transition"
-                  >
-                    <ArrowLeft className="w-3.5 h-3.5" /> All Subjects
-                  </button>
-                )}
+            
+            {/* Filter & Search Bar: Clean & Segmented */}
+            <div className="p-5 sm:p-6 bg-[#111827] border border-slate-800 rounded-2xl shadow-xl space-y-4">
+              
+              {/* Row 1: Search + Format Segmented Control */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                {/* Search Bar */}
+                <div className="relative flex-1">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={e => { setSearchTerm(e.target.value); setPage(1); }}
+                    placeholder="Search keywords, formulas, algorithms (e.g. Dijkstra, Paging, B+ Tree)..."
+                    className="w-full bg-[#0b0f19] border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition"
+                  />
+                </div>
 
+                {/* Segmented Format Pills: All / MCQ / MSQ / NAT */}
+                <div className="flex items-center gap-1 bg-[#0b0f19] p-1 rounded-xl border border-slate-800 text-xs self-start md:self-auto shrink-0">
+                  {['All', 'MCQ', 'MSQ', 'NAT'].map(ft => (
+                    <button
+                      key={ft}
+                      onClick={() => { setSelectedType(ft); setPage(1); }}
+                      className={`px-3 py-1.5 rounded-lg font-medium transition ${
+                        selectedType === ft 
+                          ? 'bg-indigo-600 text-white shadow-sm' 
+                          : 'text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      {ft === 'All' ? 'All Formats' : ft}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Row 2: Dropdown Selects for Subject, Subtopic, Year, Difficulty */}
+              <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs">
+                
                 {/* Subject Selector */}
                 <select
                   value={selectedSubject}
                   onChange={e => { setSelectedSubject(e.target.value); setSelectedSubtopic('All'); setPage(1); }}
-                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-2 focus:border-indigo-500"
+                  className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer"
                 >
                   <option value="All">All Subjects ({totalQuestions})</option>
                   {Object.keys(topics).map(subj => (
@@ -207,7 +245,7 @@ export default function App() {
                   <select
                     value={selectedSubtopic}
                     onChange={e => { setSelectedSubtopic(e.target.value); setPage(1); }}
-                    className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-2 focus:border-indigo-500"
+                    className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer"
                   >
                     <option value="All">All Subtopics</option>
                     {Object.keys(topics[selectedSubject].subtopics).map(st => (
@@ -216,11 +254,23 @@ export default function App() {
                   </select>
                 )}
 
+                {/* Year Selector (Modern First: 2025 -> 1991) */}
+                <select
+                  value={selectedYear}
+                  onChange={e => { setSelectedYear(e.target.value); setPage(1); }}
+                  className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer font-mono"
+                >
+                  <option value="All">All Exam Years (2025–1991)</option>
+                  {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => (
+                    <option key={yr} value={yr}>GATE {yr}</option>
+                  ))}
+                </select>
+
                 {/* Difficulty Selector */}
                 <select
                   value={selectedDifficulty}
                   onChange={e => { setSelectedDifficulty(e.target.value); setPage(1); }}
-                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-2 focus:border-indigo-500"
+                  className="bg-[#0b0f19] border border-slate-800 text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 cursor-pointer"
                 >
                   <option value="All">All Difficulties</option>
                   <option value="Easy">Easy (1 Mark)</option>
@@ -228,55 +278,38 @@ export default function App() {
                   <option value="Hard">Hard (Multi-Concept)</option>
                 </select>
 
-                {/* Question Type Selector */}
-                <select
-                  value={selectedType}
-                  onChange={e => { setSelectedType(e.target.value); setPage(1); }}
-                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-2 focus:border-indigo-500"
-                >
-                  <option value="All">All Formats</option>
-                  <option value="MCQ">MCQ (Multiple Choice)</option>
-                  <option value="NAT">NAT (Numerical)</option>
-                  <option value="MSQ">MSQ (Multi-Select)</option>
-                </select>
-
-                {/* Year Selector */}
-                <select
-                  value={selectedYear}
-                  onChange={e => { setSelectedYear(e.target.value); setPage(1); }}
-                  className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-2 focus:border-indigo-500"
-                >
-                  <option value="All">All Years (1991–2025)</option>
-                  {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => (
-                    <option key={yr} value={yr}>GATE {yr}</option>
-                  ))}
-                </select>
-
-                {/* Search box */}
-                <div className="relative flex-1 min-w-[200px]">
-                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={e => { setSearchTerm(e.target.value); setPage(1); }}
-                    placeholder="Search in questions or formulas..."
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:border-indigo-500"
-                  />
-                </div>
+                {/* Reset Filters Button */}
+                {hasActiveFilters && (
+                  <button
+                    onClick={handleResetFilters}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 transition ml-auto"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    Reset Filters
+                  </button>
+                )}
               </div>
             </div>
 
-            {/* Questions List */}
+            {/* Questions Feed */}
             {loading ? (
               <div className="py-20 text-center space-y-3">
-                <RefreshCw className="w-8 h-8 text-indigo-400 animate-spin mx-auto" />
-                <p className="text-xs text-slate-400">Loading GATE Question Bank...</p>
+                <RefreshCw className="w-7 h-7 text-indigo-400 animate-spin mx-auto" />
+                <p className="text-xs text-slate-400 font-medium">Fetching pristine questions...</p>
               </div>
             ) : questions.length === 0 ? (
-              <div className="py-16 text-center bg-slate-900/50 border border-slate-800 rounded-2xl space-y-2">
+              <div className="py-16 text-center bg-[#111827] border border-slate-800 rounded-2xl space-y-3 p-8">
                 <BookOpen className="w-10 h-10 text-slate-500 mx-auto" />
-                <h3 className="text-sm font-bold text-white">No questions matched the active filters</h3>
-                <p className="text-xs text-slate-400">Try loosening your search query or selecting "All Subjects".</p>
+                <h3 className="text-base font-bold text-white">No questions matched the active filters</h3>
+                <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                  Try loosening your search terms or clearing specific year/subject filters to view more questions.
+                </p>
+                <button
+                  onClick={handleResetFilters}
+                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition"
+                >
+                  Clear All Filters
+                </button>
               </div>
             ) : (
               <div className="space-y-6">
@@ -292,23 +325,26 @@ export default function App() {
                 ))}
 
                 {/* Pagination Controls */}
-                <div className="flex items-center justify-between p-4 bg-slate-900 border border-slate-800 rounded-2xl text-xs">
-                  <span className="text-slate-400">
-                    Showing <strong>{questions.length}</strong> of <strong>{totalQuestions}</strong> questions (Page {page} of {totalPages})
+                <div className="flex flex-col sm:flex-row items-center justify-between p-4 sm:p-5 bg-[#111827] border border-slate-800 rounded-2xl text-xs gap-3">
+                  <span className="text-slate-400 font-medium">
+                    Showing <strong className="text-white">{questions.length}</strong> of <strong className="text-white">{totalQuestions}</strong> questions (Page {page} of {totalPages})
                   </span>
 
                   <div className="flex items-center gap-2">
                     <button
                       disabled={page <= 1}
-                      onClick={() => setPage(p => Math.max(1, p - 1))}
-                      className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-200 rounded-lg transition flex items-center gap-1 font-medium"
+                      onClick={() => { setPage(p => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                      className="px-3.5 py-2 bg-[#0b0f19] hover:bg-slate-800 border border-slate-800 disabled:opacity-30 text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold"
                     >
                       <ChevronLeft className="w-4 h-4" /> Prev
                     </button>
+                    <span className="px-3 py-1.5 font-mono text-indigo-300 font-bold bg-[#1a233a] border border-indigo-500/20 rounded-lg">
+                      {page} / {totalPages}
+                    </span>
                     <button
                       disabled={page >= totalPages}
-                      onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                      className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-200 rounded-lg transition flex items-center gap-1 font-medium"
+                      onClick={() => { setPage(p => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                      className="px-3.5 py-2 bg-[#0b0f19] hover:bg-slate-800 border border-slate-800 disabled:opacity-30 text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold"
                     >
                       Next <ChevronRight className="w-4 h-4" />
                     </button>

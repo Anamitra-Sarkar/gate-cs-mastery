@@ -1,13 +1,13 @@
 {
-  "xp": 210,
+  "xp": 250,
   "streak": 3,
   "level": 3,
-  "totalAttempted": 21,
-  "totalCorrect": 19,
+  "totalAttempted": 23,
+  "totalCorrect": 21,
   "subjectStats": {
     "General Aptitude": {
-      "attempted": 4,
-      "correct": 4
+      "attempted": 6,
+      "correct": 6
     },
     "Programming & Data Structures": {
       "attempted": 3,
@@ -26,6 +26,12 @@
       "isCorrect": true,
       "timeSpent": 12,
       "timestamp": 1794676101316
+    },
+    "GATE_2025_CS1_Q1_2951": {
+      "selected": "A",
+      "isCorrect": true,
+      "timeSpent": 12,
+      "timestamp": 1794676899695
     }
   },
   "bookmarks": []
