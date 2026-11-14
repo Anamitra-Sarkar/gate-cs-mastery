@@ -1,37 +1,37 @@
 {
   "General Aptitude": {
-    "total": 366,
+    "total": 361,
     "subtopics": {
-      "Verbal Ability & Grammar": 219,
-      "Verbal & Quantitative Aptitude": 91,
+      "Verbal Ability & Grammar": 216,
+      "Verbal & Quantitative Aptitude": 89,
       "Quantitative Aptitude & Reasoning": 55,
       "Logical Reasoning & Data Interpretation": 1
     }
   },
   "Databases": {
-    "total": 157,
+    "total": 156,
     "subtopics": {
-      "Relational Databases & SQL": 121,
+      "Relational Databases & SQL": 120,
       "Relational Algebra & Tuple Calculus": 34,
       "Functional Dependencies & Normalization": 1,
       "Indexing & B/B+ Trees": 1
     }
   },
   "Engineering Mathematics": {
-    "total": 103,
+    "total": 98,
     "subtopics": {
       "Probability & Statistics": 41,
-      "Linear Algebra": 35,
-      "Calculus (Limits, Continuity, Integrals)": 23,
+      "Linear Algebra": 32,
+      "Calculus (Limits, Continuity, Integrals)": 21,
       "Linear Algebra (Matrices, Eigenvalues, Rank)": 4
     }
   },
   "Operating Systems": {
-    "total": 62,
+    "total": 59,
     "subtopics": {
       "Processes, Concurrency & Deadlocks": 38,
-      "Memory Management & Paging": 20,
-      "CPU Scheduling": 4
+      "Memory Management & Paging": 18,
+      "CPU Scheduling": 3
     }
   },
   "Compiler Design": {
@@ -44,18 +44,18 @@
     }
   },
   "Digital Logic": {
-    "total": 79,
+    "total": 77,
     "subtopics": {
-      "Digital Circuits & Boolean Logic": 72,
+      "Digital Circuits & Boolean Logic": 70,
       "Boolean Algebra & Logic Gates": 6,
       "Number Representations & Minimization": 1
     }
   },
   "Theory of Computation": {
-    "total": 78,
+    "total": 77,
     "subtopics": {
       "Context-Free Languages & Pushdown Automata": 18,
-      "Regular Languages & Finite Automata": 51,
+      "Regular Languages & Finite Automata": 50,
       "Turing Machines & Computability": 8,
       "Grammars & Chomsky Hierarchy": 1
     }
@@ -71,19 +71,19 @@
     }
   },
   "Programming & Data Structures": {
-    "total": 286,
+    "total": 284,
     "subtopics": {
-      "C Programming & Pointers": 250,
-      "Recursion & Function Stacks": 31,
+      "C Programming & Pointers": 249,
+      "Recursion & Function Stacks": 30,
       "Trees & Binary Search Trees": 3,
       "Linear Data Structures (Arrays, Lists, Stacks)": 2
     }
   },
   "Computer Networks": {
-    "total": 46,
+    "total": 45,
     "subtopics": {
       "Computer Networks & Protocols": 18,
-      "Data Link Layer & Flow Control": 28
+      "Data Link Layer & Flow Control": 27
     }
   },
   "Data Science & AI": {
@@ -95,9 +95,9 @@
     }
   },
   "Computer Organization & Architecture": {
-    "total": 58,
+    "total": 56,
     "subtopics": {
-      "Instruction Set & Addressing Modes": 44,
+      "Instruction Set & Addressing Modes": 42,
       "Cache Memory & Hierarchy": 9,
       "Pipelining & Processor Design": 5
     }

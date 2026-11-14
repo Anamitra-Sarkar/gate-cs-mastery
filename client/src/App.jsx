@@ -214,26 +214,26 @@ export default function App() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                 {/* Search Bar */}
                 <div className="relative flex-1">
-                  <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                  <Search className="w-4.5 h-4.5 text-slate-500 dark:text-slate-400 absolute left-3.5 top-3.5" />
                   <input
                     type="text"
                     value={searchTerm}
                     onChange={e => { setSearchTerm(e.target.value); setPage(1); }}
                     placeholder="Search keywords, formulas, algorithms (e.g. Dijkstra, Paging, B+ Tree)..."
-                    className="w-full bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition shadow-inner"
+                    className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-950 dark:text-white placeholder-slate-500 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 transition shadow-inner font-medium"
                   />
                 </div>
 
                 {/* Segmented Format Pills: All / MCQ / MSQ / NAT */}
-                <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0b0f19] p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-xs self-start md:self-auto shrink-0">
+                <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0b0f19] p-1 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm self-start md:self-auto shrink-0 shadow-sm">
                   {['All', 'MCQ', 'MSQ', 'NAT'].map(ft => (
                     <button
                       key={ft}
                       onClick={() => { setSelectedType(ft); setPage(1); }}
-                      className={`px-3 py-1.5 rounded-lg font-medium transition ${
+                      className={`px-3.5 py-1.5 rounded-lg font-bold transition ${
                         selectedType === ft 
-                          ? 'bg-slate-900 text-white dark:bg-blue-600 dark:text-white shadow-sm font-semibold' 
-                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                          ? 'bg-slate-950 text-white dark:bg-blue-600 dark:text-white shadow-sm' 
+                          : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
                       }`}
                     >
                       {ft === 'All' ? 'All Formats' : ft}
@@ -243,13 +243,13 @@ export default function App() {
               </div>
 
               {/* Row 2: Dropdown Selects for Subject, Subtopic, Year, Difficulty */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs">
+              <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs sm:text-sm">
                 
                 {/* Subject Selector */}
                 <select
                   value={selectedSubject}
                   onChange={e => { setSelectedSubject(e.target.value); setSelectedSubtopic('All'); setPage(1); }}
-                  className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-medium"
+                  className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold"
                 >
                   <option value="All">All Subjects ({totalQuestions})</option>
                   {Object.keys(topics).map(subj => (
@@ -262,7 +262,7 @@ export default function App() {
                   <select
                     value={selectedSubtopic}
                     onChange={e => { setSelectedSubtopic(e.target.value); setPage(1); }}
-                    className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-medium"
+                    className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold"
                   >
                     <option value="All">All Subtopics</option>
                     {Object.keys(topics[selectedSubject].subtopics).map(st => (
@@ -275,7 +275,7 @@ export default function App() {
                 <select
                   value={selectedYear}
                   onChange={e => { setSelectedYear(e.target.value); setPage(1); }}
-                  className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer font-mono shadow-sm"
+                  className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer font-mono font-semibold shadow-sm"
                 >
                   <option value="All">All Exam Years (2025–1991)</option>
                   {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => (
@@ -287,7 +287,7 @@ export default function App() {
                 <select
                   value={selectedDifficulty}
                   onChange={e => { setSelectedDifficulty(e.target.value); setPage(1); }}
-                  className="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-medium"
+                  className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold"
                 >
                   <option value="All">All Difficulties</option>
                   <option value="Easy">Easy (1 Mark)</option>
@@ -299,7 +299,7 @@ export default function App() {
                 {hasActiveFilters && (
                   <button
                     onClick={handleResetFilters}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition ml-auto font-medium"
+                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition ml-auto font-bold border border-slate-300 dark:border-slate-700 shadow-sm"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     Reset Filters
@@ -312,18 +312,18 @@ export default function App() {
             {loading ? (
               <div className="py-20 text-center space-y-3">
                 <RefreshCw className="w-7 h-7 text-amber-600 dark:text-amber-400 animate-spin mx-auto" />
-                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium font-serif">Fetching authentic questions...</p>
+                <p className="text-sm text-slate-800 dark:text-slate-200 font-bold font-serif">Fetching authentic questions...</p>
               </div>
             ) : questions.length === 0 ? (
               <div className="academic-card py-16 text-center rounded-2xl space-y-3 p-8">
-                <BookOpen className="w-10 h-10 text-slate-400 mx-auto" />
-                <h3 className="text-base font-serif font-bold text-slate-900 dark:text-white">No questions matched the active filters</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+                <BookOpen className="w-10 h-10 text-slate-500 mx-auto" />
+                <h3 className="text-base sm:text-lg font-serif font-bold text-slate-950 dark:text-white">No questions matched the active filters</h3>
+                <p className="text-sm text-slate-700 dark:text-slate-300 max-w-sm mx-auto font-medium">
                   Try loosening your search terms or clearing specific year/subject filters to view more questions.
                 </p>
                 <button
                   onClick={handleResetFilters}
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition shadow-sm"
+                  className="px-5 py-2.5 bg-slate-950 hover:bg-slate-900 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs sm:text-sm font-bold rounded-xl transition shadow-sm"
                 >
                   Clear All Filters
                 </button>
@@ -342,26 +342,26 @@ export default function App() {
                 ))}
 
                 {/* Pagination Controls */}
-                <div className="academic-card flex flex-col sm:flex-row items-center justify-between p-4 sm:p-5 rounded-2xl text-xs gap-3">
-                  <span className="text-slate-600 dark:text-slate-400 font-medium">
-                    Showing <strong className="text-slate-900 dark:text-white">{questions.length}</strong> of <strong className="text-slate-900 dark:text-white">{totalQuestions}</strong> questions (Page {page} of {totalPages})
+                <div className="academic-card flex flex-col sm:flex-row items-center justify-between p-4.5 sm:p-5 rounded-2xl text-xs sm:text-sm gap-3">
+                  <span className="text-slate-800 dark:text-slate-200 font-semibold">
+                    Showing <strong className="text-slate-950 dark:text-white font-extrabold">{questions.length}</strong> of <strong className="text-slate-950 dark:text-white font-extrabold">{totalQuestions}</strong> questions (Page {page} of {totalPages})
                   </span>
 
                   <div className="flex items-center gap-2">
                     <button
                       disabled={page <= 1}
                       onClick={() => { setPage(p => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="px-3.5 py-2 bg-white hover:bg-slate-50 dark:bg-[#0b0f19] dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 disabled:opacity-30 text-slate-700 dark:text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold shadow-sm"
+                      className="px-4 py-2 bg-white hover:bg-slate-50 dark:bg-[#0b0f19] dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 disabled:opacity-30 text-slate-900 dark:text-white rounded-xl transition flex items-center gap-1 font-bold shadow-sm"
                     >
                       <ChevronLeft className="w-4 h-4" /> Prev
                     </button>
-                    <span className="px-3 py-1.5 font-mono text-slate-800 dark:text-blue-300 font-bold bg-slate-100 dark:bg-[#1a233a] border border-slate-200 dark:border-blue-500/20 rounded-lg">
+                    <span className="px-3.5 py-1.5 font-mono text-slate-950 dark:text-white font-extrabold bg-slate-100 dark:bg-[#1a233a] border border-slate-300 dark:border-blue-500/30 rounded-xl">
                       {page} / {totalPages}
                     </span>
                     <button
                       disabled={page >= totalPages}
                       onClick={() => { setPage(p => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                      className="px-3.5 py-2 bg-white hover:bg-slate-50 dark:bg-[#0b0f19] dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 disabled:opacity-30 text-slate-700 dark:text-slate-200 rounded-xl transition flex items-center gap-1 font-semibold shadow-sm"
+                      className="px-4 py-2 bg-white hover:bg-slate-50 dark:bg-[#0b0f19] dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 disabled:opacity-30 text-slate-900 dark:text-white rounded-xl transition flex items-center gap-1 font-bold shadow-sm"
                     >
                       Next <ChevronRight className="w-4 h-4" />
                     </button>
