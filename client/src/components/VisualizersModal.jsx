@@ -7,17 +7,17 @@ export default function VisualizersModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-5xl h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-5xl h-[92vh] sm:h-[88vh] flex flex-col shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-500/20 text-indigo-400 rounded-lg">
-              <Cpu className="w-5 h-5" />
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="p-1.5 sm:p-2 bg-indigo-500/20 text-indigo-400 rounded-lg shrink-0">
+              <Cpu className="w-4 sm:w-5 h-4 sm:h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white">Interactive GATE CS Concept Visualizers</h2>
-              <p className="text-xs text-slate-400">Playful first-principles interactive models for high-yield GATE topics</p>
+              <h2 className="text-sm sm:text-lg font-bold text-white">GATE CS Concept Visualizers</h2>
+              <p className="text-[11px] sm:text-xs text-slate-400 hidden xs:block">Playful first-principles interactive models for high-yield GATE topics</p>
             </div>
           </div>
           <button 
@@ -29,13 +29,13 @@ export default function VisualizersModal({ isOpen, onClose }) {
         </div>
 
         {/* Tab Bar */}
-        <div className="flex items-center gap-1 px-6 py-2 bg-slate-900 border-b border-slate-800 overflow-x-auto text-sm">
+        <div className="flex items-center gap-1 px-3 sm:px-6 py-2 bg-slate-900 border-b border-slate-800 overflow-x-auto text-xs sm:text-sm">
           {[
-            { id: 'cpu', label: 'CPU Scheduling (Gantt)', icon: Cpu },
-            { id: 'cache', label: 'Cache Hit/Miss Simulator', icon: HardDrive },
-            { id: 'bst', label: 'BST & Tree Traversals', icon: GitFork },
-            { id: 'subnet', label: 'Subnetting & CIDR Calc', icon: Network },
-            { id: 'pipeline', label: '5-Stage Pipeline Hazards', icon: Binary },
+            { id: 'cpu', label: 'CPU Scheduling', icon: Cpu },
+            { id: 'cache', label: 'Cache Simulator', icon: HardDrive },
+            { id: 'bst', label: 'BST Traversals', icon: GitFork },
+            { id: 'subnet', label: 'CIDR Subnetting', icon: Network },
+            { id: 'pipeline', label: 'Pipeline Hazards', icon: Binary },
           ].map(tab => {
             const Icon = tab.icon;
             const active = activeTab === tab.id;
@@ -43,13 +43,13 @@ export default function VisualizersModal({ isOpen, onClose }) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-lg font-medium transition whitespace-nowrap ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg font-medium transition whitespace-nowrap text-xs sm:text-sm ${
                   active 
                     ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' 
                     : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
                 }`}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                 {tab.label}
               </button>
             );
@@ -57,7 +57,7 @@ export default function VisualizersModal({ isOpen, onClose }) {
         </div>
 
         {/* Content Body */}
-        <div className="flex-1 overflow-y-auto p-6 bg-slate-950/40">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-6 bg-slate-950/40">
           {activeTab === 'cpu' && <CPUSchedulerVisualizer />}
           {activeTab === 'cache' && <CacheSimulator />}
           {activeTab === 'bst' && <BSTVisualizer />}

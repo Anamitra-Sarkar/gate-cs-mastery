@@ -69,7 +69,7 @@ export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-slate-950 border-l border-slate-800 shadow-2xl flex flex-col animate-slideLeft">
+    <div className="fixed inset-y-0 right-0 z-50 w-full sm:max-w-lg bg-slate-950 border-l border-slate-800 shadow-2xl flex flex-col animate-slideLeft">
       {/* Header */}
       <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
         <div className="flex items-center gap-2.5">

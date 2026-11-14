@@ -13,7 +13,7 @@ app.use(express.json());
 // Load Groq API key
 let GROQ_API_KEY = process.env.GROQ_API_KEY || '';
 const keyPath = '/home/anamitra/Downloads/API_Keys_and_Secrets/groq_api.txt';
-if (fs.existsSync(keyPath)) {
+if (!GROQ_API_KEY && fs.existsSync(keyPath)) {
   GROQ_API_KEY = fs.readFileSync(keyPath, 'utf8').trim();
 }
 
@@ -26,16 +26,31 @@ let questions = [];
 let topics = {};
 
 try {
-  if (fs.existsSync(questionsFile)) {
-    questions = JSON.parse(fs.readFileSync(questionsFile, 'utf8'));
-    console.log(`Loaded ${questions.length} questions.`);
+  questions = require('../data/gate_master_questions.json');
+  console.log(`Loaded ${questions.length} questions via require.`);
+} catch (e1) {
+  try {
+    if (fs.existsSync(questionsFile)) {
+      questions = JSON.parse(fs.readFileSync(questionsFile, 'utf8'));
+      console.log(`Loaded ${questions.length} questions via fs.`);
+    }
+  } catch (err) {
+    console.error('Error reading questions:', err);
   }
-  if (fs.existsSync(topicsFile)) {
-    topics = JSON.parse(fs.readFileSync(topicsFile, 'utf8'));
-    console.log(`Loaded ${Object.keys(topics).length} topics.`);
+}
+
+try {
+  topics = require('../data/topics.json');
+  console.log(`Loaded ${Object.keys(topics).length} topics via require.`);
+} catch (e2) {
+  try {
+    if (fs.existsSync(topicsFile)) {
+      topics = JSON.parse(fs.readFileSync(topicsFile, 'utf8'));
+      console.log(`Loaded ${Object.keys(topics).length} topics via fs.`);
+    }
+  } catch (err) {
+    console.error('Error reading topics:', err);
   }
-} catch (err) {
-  console.error('Error reading question data:', err);
 }
 
 // In-memory / persistent user state
@@ -337,6 +352,10 @@ if (fs.existsSync(distPath)) {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`GATE CS Mastery Server running at http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`GATE CS Mastery Server running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Calculator, CheckCircle, AlertCircle, Bookmark, ChevronRight, ChevronLeft, X, Award, RotateCcw } from 'lucide-react';
+import { 
+  Clock, 
+  Calculator, 
+  CheckCircle, 
+  AlertCircle, 
+  Bookmark, 
+  ChevronRight, 
+  ChevronLeft, 
+  X, 
+  Award, 
+  RotateCcw,
+  LayoutGrid
+} from 'lucide-react';
 import MathText from './MathText';
 import confetti from 'canvas-confetti';
 import { evaluateGATEAnswer } from './QuestionCard';
@@ -16,6 +28,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
   const [responses, setResponses] = useState({});
   const [calcOpen, setCalcOpen] = useState(false);
   const [calcInput, setCalcInput] = useState('0');
+  const [mobilePaletteOpen, setMobilePaletteOpen] = useState(false);
 
   // Initialize Exam
   const startExam = (mins) => {
@@ -82,11 +95,18 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
     }));
   };
 
+  const handleSaveAndNext = () => {
+    if (currentIndex < examQuestions.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
   const handleClearResponse = () => {
     if (!currentQ) return;
     setResponses(prev => ({
       ...prev,
       [currentQ.id]: {
+        ...prev[currentQ.id],
         selected: null,
         status: 'NOT_ANSWERED'
       }
@@ -95,13 +115,13 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
 
   const handleMarkForReview = () => {
     if (!currentQ) return;
-    const current = responses[currentQ.id];
-    const newStatus = current?.selected ? 'ANS_REVIEW' : 'REVIEW';
+    const userSel = responses[currentQ.id]?.selected;
+    const hasSelection = Array.isArray(userSel) ? userSel.length > 0 : Boolean(userSel);
     setResponses(prev => ({
       ...prev,
       [currentQ.id]: {
         ...prev[currentQ.id],
-        status: newStatus
+        status: hasSelection ? 'ANS_REVIEW' : 'REVIEW'
       }
     }));
     if (currentIndex < examQuestions.length - 1) {
@@ -109,18 +129,11 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
     }
   };
 
-  const handleSaveAndNext = () => {
-    if (currentIndex < examQuestions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
   const handleSubmitExam = () => {
     setExamSubmitted(true);
-    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+    confetti({ particleCount: 70, spread: 80, origin: { y: 0.5 } });
   };
 
-  // Calculate Results
   const computeScore = () => {
     let correct = 0;
     let wrong = 0;
@@ -131,31 +144,28 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
     examQuestions.forEach(q => {
       const qMarks = q.marks || 1;
       maxMarks += qMarks;
-      const resp = responses[q.id];
+      const userResp = responses[q.id]?.selected;
       const isMSQ = q.type === 'MSQ' || (typeof q.answer === 'string' && q.answer.includes(','));
       const isNAT = q.type === 'NAT' || (!q.options || q.options.length === 0);
-      const neg = typeof q.negative_marks === 'number' ? q.negative_marks : 
-                  (isNAT || isMSQ ? 0 : (qMarks === 2 ? 0.66 : 0.33));
+      const neg = typeof q.negative_marks === 'number' ? q.negative_marks : (isNAT || isMSQ ? 0 : (qMarks === 2 ? 0.66 : 0.33));
 
-      const hasSelection = resp && (Array.isArray(resp.selected) ? resp.selected.length > 0 : Boolean(resp.selected));
+      const hasSelection = userResp && (Array.isArray(userResp) ? userResp.length > 0 : Boolean(userResp));
 
-      if (hasSelection) {
-        const isCorr = evaluateGATEAnswer(resp.selected, q.answer, isMSQ ? 'MSQ' : (isNAT ? 'NAT' : 'MCQ'));
-        if (isCorr) {
-          correct += 1;
+      if (!hasSelection) {
+        unattempted++;
+      } else {
+        const isCorrect = evaluateGATEAnswer(userResp, q.answer, isMSQ ? 'MSQ' : (isNAT ? 'NAT' : 'MCQ'));
+        if (isCorrect) {
+          correct++;
           totalMarksScored += qMarks;
         } else {
-          wrong += 1;
+          wrong++;
           totalMarksScored -= neg;
         }
-      } else {
-        unattempted += 1;
       }
     });
 
-    totalMarksScored = Math.max(0, totalMarksScored);
-    const accuracy = (correct + wrong) > 0 ? Math.round((correct / (correct + wrong)) * 100) : 0;
-
+    const accuracy = correct + wrong > 0 ? Math.round((correct / (correct + wrong)) * 100) : 0;
     return {
       correct,
       wrong,
@@ -175,33 +185,42 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 bg-black/80 backdrop-blur-md">
-      <div className="bg-slate-950 border border-slate-800 rounded-2xl w-full max-w-6xl h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/80 backdrop-blur-md">
+      <div className="bg-slate-950 border border-slate-800 rounded-2xl w-full max-w-6xl h-[95vh] sm:h-[92vh] flex flex-col shadow-2xl overflow-hidden relative">
         
         {/* Top bar */}
-        <div className="px-6 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
-          <div className="flex items-center gap-3">
-            <span className="px-2.5 py-1 bg-indigo-600/30 text-indigo-400 border border-indigo-500/40 text-xs font-bold rounded">
+        <div className="px-3 sm:px-6 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-900/90 gap-2">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-indigo-600/30 text-indigo-400 border border-indigo-500/40 text-[11px] sm:text-xs font-bold rounded">
               GATE Official CBT Mock
             </span>
-            <span className="text-sm font-semibold text-slate-200 hidden md:inline">
-              Computer Science & Data Science Examination
+            <span className="text-xs sm:text-sm font-semibold text-slate-200 hidden md:inline">
+              CS & DA Real-time Simulation
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {examStarted && !examSubmitted && (
               <>
                 <button
-                  onClick={() => setCalcOpen(!calcOpen)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded-lg transition"
+                  onClick={() => setMobilePaletteOpen(!mobilePaletteOpen)}
+                  className="flex items-center gap-1 px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs text-indigo-300 rounded-lg transition md:hidden"
+                  title="Question Grid"
                 >
-                  <Calculator className="w-3.5 h-3.5 text-indigo-400" />
-                  GATE Scientific Calc
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  <span>Q.{currentIndex + 1}/{examQuestions.length}</span>
                 </button>
 
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-rose-500/10 border border-rose-500/30 rounded-lg text-rose-400 font-mono text-sm font-bold">
-                  <Clock className="w-4 h-4 animate-pulse" />
+                <button
+                  onClick={() => setCalcOpen(!calcOpen)}
+                  className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 rounded-lg transition"
+                >
+                  <Calculator className="w-3.5 h-3.5 text-indigo-400" />
+                  <span className="hidden sm:inline">GATE Calc</span>
+                </button>
+
+                <div className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-rose-500/10 border border-rose-500/30 rounded-lg text-rose-400 font-mono text-xs sm:text-sm font-bold">
+                  <Clock className="w-3.5 sm:w-4 h-3.5 sm:h-4 animate-pulse" />
                   {formatTime(timeLeft)}
                 </div>
               </>
@@ -209,7 +228,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
 
             <button
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition"
+              className="p-1 sm:p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition"
             >
               <X className="w-5 h-5" />
             </button>
@@ -219,7 +238,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
         {/* Modal Content */}
         {!examStarted ? (
           /* Selection Screen */
-          <div className="flex-1 flex flex-col items-center justify-center p-8 text-center space-y-6">
+          <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8 text-center space-y-6 overflow-y-auto">
             <div className="p-4 bg-indigo-500/10 border border-indigo-500/30 rounded-2xl text-indigo-400 max-w-md">
               <Award className="w-12 h-12 mx-auto mb-3" />
               <h3 className="text-xl font-bold text-white mb-1">Select GATE Mock Duration</h3>
@@ -231,7 +250,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-2xl">
               <button
                 onClick={() => startExam(15)}
-                className="p-6 bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-xl transition text-left group"
+                className="p-5 sm:p-6 bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-xl transition text-left group"
               >
                 <div className="text-sm font-bold text-indigo-400 mb-1">Rapid Sprint Mock</div>
                 <div className="text-2xl font-bold text-white mb-2">15 Mins</div>
@@ -240,7 +259,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
 
               <button
                 onClick={() => startExam(30)}
-                className="p-6 bg-slate-900 border border-indigo-500/50 bg-indigo-500/5 hover:border-indigo-500 rounded-xl transition text-left group ring-1 ring-indigo-500/30"
+                className="p-5 sm:p-6 bg-slate-900 border border-indigo-500/50 bg-indigo-500/5 hover:border-indigo-500 rounded-xl transition text-left group ring-1 ring-indigo-500/30"
               >
                 <div className="text-sm font-bold text-emerald-400 mb-1">Standard Sectional Mock</div>
                 <div className="text-2xl font-bold text-white mb-2">30 Mins</div>
@@ -249,7 +268,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
 
               <button
                 onClick={() => startExam(60)}
-                className="p-6 bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-xl transition text-left group"
+                className="p-5 sm:p-6 bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-xl transition text-left group"
               >
                 <div className="text-sm font-bold text-purple-400 mb-1">Full Section Mock</div>
                 <div className="text-2xl font-bold text-white mb-2">60 Mins</div>
@@ -259,7 +278,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
           </div>
         ) : examSubmitted ? (
           /* Results Screen */
-          <div className="flex-1 overflow-y-auto p-8 space-y-8">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-6">
             {(() => {
               const res = computeScore();
               return (
@@ -270,22 +289,22 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                   </div>
 
                   {/* Summary Scorecard */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                    <div className="p-3 sm:p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
                       <div className="text-xs text-slate-400 mb-1">Total Score</div>
-                      <div className="text-3xl font-extrabold text-indigo-400">{res.totalMarksScored} <span className="text-xs text-slate-400">/ {res.maxMarks}</span></div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-indigo-400">{res.totalMarksScored} <span className="text-xs text-slate-400">/ {res.maxMarks}</span></div>
                     </div>
-                    <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+                    <div className="p-3 sm:p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
                       <div className="text-xs text-slate-400 mb-1">Accuracy</div>
-                      <div className="text-3xl font-extrabold text-emerald-400">{res.accuracy}%</div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400">{res.accuracy}%</div>
                     </div>
-                    <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+                    <div className="p-3 sm:p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
                       <div className="text-xs text-slate-400 mb-1">Correct Answers</div>
-                      <div className="text-3xl font-extrabold text-emerald-400">{res.correct}</div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400">{res.correct}</div>
                     </div>
-                    <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+                    <div className="p-3 sm:p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
                       <div className="text-xs text-slate-400 mb-1">Incorrect Answers</div>
-                      <div className="text-3xl font-extrabold text-rose-400">{res.wrong}</div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-rose-400">{res.wrong}</div>
                     </div>
                   </div>
 
@@ -304,7 +323,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                         const displayResp = Array.isArray(userResp) ? userResp.join(', ') : userResp;
                         return (
                           <div key={q.id} className="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-2">
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-wrap items-center justify-between gap-2">
                               <span className="text-xs font-bold text-slate-400">Question {idx + 1} • {q.subject} ({q.topic})</span>
                               <span className={`px-2 py-0.5 text-xs font-bold rounded ${
                                 !hasSelection ? 'bg-slate-800 text-slate-400' : (isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400')
@@ -312,14 +331,14 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                                 {!hasSelection ? 'Unattempted' : (isCorrect ? `+${qMarks}.0 Correct` : (neg > 0 ? `-${neg.toFixed(2)} Incorrect` : '0.0 Incorrect'))}
                               </span>
                             </div>
-                            <div className="text-sm text-slate-200">
+                            <div className="text-sm text-slate-200 overflow-x-auto break-words">
                               <MathText text={q.question} />
                             </div>
-                            <div className="text-xs font-mono flex gap-4 pt-1 border-t border-slate-800/80">
+                            <div className="text-xs font-mono flex flex-wrap gap-4 pt-1 border-t border-slate-800/80">
                               <span className="text-slate-400">Your Answer: <strong className={isCorrect ? 'text-emerald-400' : 'text-rose-400'}>{displayResp || 'None'}</strong></span>
                               <span className="text-slate-400">Correct Key: <strong className="text-emerald-400">{q.answer}</strong></span>
                             </div>
-                            <div className="p-3 bg-slate-950/70 rounded-lg text-xs text-slate-300 border border-slate-800">
+                            <div className="p-3 bg-slate-950/70 rounded-lg text-xs text-slate-300 border border-slate-800 overflow-x-auto">
                               <MathText text={q.explanation} />
                             </div>
                           </div>
@@ -328,7 +347,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                     </div>
                   </div>
 
-                  <div className="flex justify-center gap-3 pt-4">
+                  <div className="flex flex-wrap justify-center gap-3 pt-4">
                     <button
                       onClick={() => setExamStarted(false)}
                       className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-sm transition"
@@ -348,14 +367,14 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
           </div>
         ) : (
           /* Active Examination Interface */
-          <div className="flex-1 flex overflow-hidden">
+          <div className="flex-1 flex overflow-hidden relative">
             {/* Left Question Body */}
-            <div className="flex-1 flex flex-col overflow-y-auto p-6 space-y-4 border-r border-slate-800">
+            <div className="flex-1 flex flex-col overflow-y-auto p-4 sm:p-6 space-y-4 md:border-r border-slate-800">
               {currentQ && (
                 <>
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                  <div className="flex flex-wrap items-center justify-between pb-3 border-b border-slate-800 gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-white">Question {currentIndex + 1} of {examQuestions.length}</span>
+                      <span className="text-xs sm:text-sm font-bold text-white">Question {currentIndex + 1} of {examQuestions.length}</span>
                       <span className="px-2 py-0.5 bg-slate-800 text-slate-300 text-xs rounded font-medium">
                         {currentQ.subject}
                       </span>
@@ -366,7 +385,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                   </div>
 
                   {/* Question Text */}
-                  <div className="text-base text-slate-100 font-normal leading-relaxed py-2">
+                  <div className="text-sm sm:text-base text-slate-100 font-normal leading-relaxed py-2 overflow-x-auto break-words">
                     <MathText text={currentQ.question} />
                   </div>
 
@@ -382,7 +401,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                           <button
                             key={opt.label}
                             onClick={() => handleSelectOption(opt.label)}
-                            className={`w-full text-left p-4 rounded-xl border flex items-start gap-3 transition ${
+                            className={`w-full text-left p-3.5 sm:p-4 rounded-xl border flex items-start gap-3 transition ${
                               isSelected 
                                 ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-lg shadow-indigo-600/20' 
                                 : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-850'
@@ -393,7 +412,7 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                             }`}>
                               {opt.label}
                             </span>
-                            <div className="pt-0.5 text-sm flex-1">
+                            <div className="pt-0.5 text-xs sm:text-sm flex-1 overflow-x-auto break-words">
                               <MathText text={opt.text} />
                             </div>
                           </button>
@@ -413,36 +432,36 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                     )}
                   </div>
 
-                  {/* Navigation Action Buttons */}
-                  <div className="mt-auto pt-6 border-t border-slate-800 flex items-center justify-between">
-                    <div className="flex gap-2">
+                  {/* Navigation Action Buttons (Responsive Grid on small screens) */}
+                  <div className="mt-auto pt-6 border-t border-slate-800 grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-2">
+                    <div className="contents sm:flex sm:gap-2">
                       <button
                         onClick={handleClearResponse}
-                        className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg transition"
+                        className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg transition text-center"
                       >
                         Clear Response
                       </button>
                       <button
                         onClick={handleMarkForReview}
-                        className="px-3.5 py-2 bg-purple-600/20 border border-purple-500/40 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold rounded-lg transition"
+                        className="px-3 py-2 bg-purple-600/20 border border-purple-500/40 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold rounded-lg transition text-center"
                       >
-                        Mark for Review & Next
+                        Review & Next
                       </button>
                     </div>
 
-                    <div className="flex gap-2">
+                    <div className="contents sm:flex sm:gap-2">
                       <button
                         disabled={currentIndex === 0}
                         onClick={() => setCurrentIndex(currentIndex - 1)}
-                        className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-300 text-xs font-semibold rounded-lg transition flex items-center gap-1"
+                        className="px-3 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-300 text-xs font-semibold rounded-lg transition flex items-center justify-center gap-1"
                       >
-                        <ChevronLeft className="w-4 h-4" /> Previous
+                        <ChevronLeft className="w-4 h-4" /> Prev
                       </button>
                       <button
                         onClick={handleSaveAndNext}
-                        className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1 shadow-md shadow-indigo-600/30"
+                        className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg transition flex items-center justify-center gap-1 shadow-md shadow-indigo-600/30"
                       >
-                        Save & Next <ChevronRight className="w-4 h-4" />
+                        Next <ChevronRight className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
@@ -450,8 +469,8 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
               )}
             </div>
 
-            {/* Right Question Palette */}
-            <div className="w-72 bg-slate-900 p-5 flex flex-col justify-between hidden md:flex">
+            {/* Right Question Palette (Desktop) */}
+            <div className="w-72 bg-slate-900 p-5 flex flex-col justify-between hidden md:flex shrink-0">
               <div className="space-y-4">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
                   Question Palette
@@ -507,12 +526,60 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
                 Submit Examination
               </button>
             </div>
+
+            {/* Mobile Question Palette Drawer */}
+            {mobilePaletteOpen && (
+              <div className="absolute inset-0 bg-slate-950/95 z-30 p-4 flex flex-col md:hidden animate-fadeIn">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200">
+                    Question Palette ({examQuestions.length} Questions)
+                  </h4>
+                  <button
+                    onClick={() => setMobilePaletteOpen(false)}
+                    className="p-1 text-slate-400 hover:text-white"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-5 gap-2.5 py-4 overflow-y-auto flex-1">
+                  {examQuestions.map((q, idx) => {
+                    const st = responses[q.id]?.status;
+                    let bg = 'bg-slate-800 text-slate-400';
+                    if (st === 'ANSWERED') bg = 'bg-emerald-600 text-white font-bold';
+                    else if (st === 'NOT_ANSWERED') bg = 'bg-rose-600 text-white font-bold';
+                    else if (st === 'REVIEW') bg = 'bg-purple-600 text-white font-bold';
+                    else if (st === 'ANS_REVIEW') bg = 'bg-purple-600 text-white font-bold ring-2 ring-emerald-400';
+
+                    const isCurrent = currentIndex === idx;
+                    return (
+                      <button
+                        key={q.id}
+                        onClick={() => { setCurrentIndex(idx); setMobilePaletteOpen(false); }}
+                        className={`w-full aspect-square rounded-lg text-xs flex items-center justify-center transition ${bg} ${
+                          isCurrent ? 'ring-2 ring-indigo-400 scale-105' : ''
+                        }`}
+                      >
+                        {idx + 1}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={handleSubmitExam}
+                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl transition"
+                >
+                  Submit Examination
+                </button>
+              </div>
+            )}
           </div>
         )}
 
         {/* Scientific Calculator Popup */}
         {calcOpen && (
-          <div className="absolute top-16 right-8 w-64 bg-slate-900 border border-slate-700 rounded-xl p-3 shadow-2xl z-50 animate-pop">
+          <div className="absolute top-14 right-2 sm:right-6 w-[280px] max-w-[92vw] bg-slate-900 border border-slate-700 rounded-xl p-3 shadow-2xl z-50 animate-pop">
             <div className="flex justify-between items-center mb-2 pb-1 border-b border-slate-800">
               <span className="text-xs font-bold text-slate-300">TCS iON Scientific Calc</span>
               <button onClick={() => setCalcOpen(false)} className="text-slate-400 hover:text-white">
@@ -550,7 +617,6 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
               <button
                 onClick={() => {
                   try {
-                    // Safe evaluation of basic math
                     const sanitized = calcInput.replace(/[^0-9+\-*/.()]/g, '');
                     setCalcInput(String(Function(`'use strict'; return (${sanitized})`)()));
                   } catch (e) {

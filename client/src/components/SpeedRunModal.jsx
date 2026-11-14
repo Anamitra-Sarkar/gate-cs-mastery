@@ -87,26 +87,26 @@ export default function SpeedRunModal({ isOpen, onClose, allQuestions, onAddXP }
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-      <div className="bg-slate-950 border border-slate-800 rounded-2xl w-full max-w-2xl h-[70vh] flex flex-col shadow-2xl overflow-hidden relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-md">
+      <div className="bg-slate-950 border border-slate-800 rounded-2xl w-full max-w-2xl h-[85vh] sm:h-[75vh] flex flex-col shadow-2xl overflow-hidden relative">
         
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80 gap-2">
           <div className="flex items-center gap-2">
-            <Zap className="w-5 h-5 text-amber-400 fill-amber-400 animate-bounce" />
-            <span className="font-bold text-white text-base">GATE Speed Sprint (60s)</span>
+            <Zap className="w-4 sm:w-5 h-4 sm:h-5 text-amber-400 fill-amber-400 animate-bounce shrink-0" />
+            <span className="font-bold text-white text-sm sm:text-base">GATE Speed Sprint (60s)</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {isPlaying && (
               <>
-                <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold rounded-lg text-xs">
+                <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold rounded-lg text-xs">
                   <Flame className="w-3.5 h-3.5 fill-amber-400" />
                   {streak}x Combo
                 </div>
 
-                <div className="flex items-center gap-1.5 px-3 py-1 bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono font-bold rounded-lg text-sm">
-                  <Timer className="w-4 h-4" />
+                <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 bg-rose-500/10 border border-rose-500/30 text-rose-400 font-mono font-bold rounded-lg text-xs sm:text-sm">
+                  <Timer className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                   {timeLeft}s
                 </div>
               </>
@@ -114,7 +114,7 @@ export default function SpeedRunModal({ isOpen, onClose, allQuestions, onAddXP }
 
             <button
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition"
+              className="p-1 sm:p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition"
             >
               <X className="w-5 h-5" />
             </button>
