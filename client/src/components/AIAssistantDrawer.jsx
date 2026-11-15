@@ -14,18 +14,14 @@ import {
   Check, 
   Compass, 
   ArrowRight,
-  Zap
+  Zap,
+  RotateCcw
 } from 'lucide-react';
 import MathText from './MathText';
 
-export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
-  const [models, setModels] = useState(['llama-3.3-70b-versatile']);
-  const [currentModel, setCurrentModel] = useState('llama-3.3-70b-versatile');
-  const [copiedIdx, setCopiedIdx] = useState(null);
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: `### Welcome to Your Personal GATE CS/DA Mentor! 🎓
+const INITIAL_WELCOME_MESSAGE = {
+  role: 'assistant',
+  content: `### Welcome to Your Personal GATE CS/DA Mentor! 🎓
 
 I am powered by **Groq Live Acceleration** to provide instantaneous, step-by-step reasoning for all GATE Computer Science and Data Science problems.
 
@@ -36,11 +32,21 @@ I am powered by **Groq Live Acceleration** to provide instantaneous, step-by-ste
 - 📝 **Step Verification:** Walk through equations and boundary conditions step-by-step.
 
 Feel free to ask about the active question or any concept in the syllabus!`
-    }
-  ]);
+};
+
+export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
+  const [models, setModels] = useState(['llama-3.3-70b-versatile']);
+  const [currentModel, setCurrentModel] = useState('llama-3.3-70b-versatile');
+  const [copiedIdx, setCopiedIdx] = useState(null);
+  const [messages, setMessages] = useState([INITIAL_WELCOME_MESSAGE]);
   const [inputPrompt, setInputPrompt] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
+
+  const handleClearChat = () => {
+    setMessages([INITIAL_WELCOME_MESSAGE]);
+    setInputPrompt('');
+  };
 
   // Fetch models dynamically from backend
   useEffect(() => {
@@ -142,6 +148,18 @@ Feel free to ask about the active question or any concept in the syllabus!`
               </select>
               <ChevronDown className="w-3 h-3 text-slate-400 absolute right-2 top-2.5 pointer-events-none" />
             </div>
+
+            {/* New Chat / Clear Button */}
+            <button
+              type="button"
+              onClick={handleClearChat}
+              aria-label="New Chat"
+              title="Start a new chat session"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-100 dark:bg-[#151928] dark:hover:bg-[#1d2235] text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-semibold transition active:scale-95 shadow-xs"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-blue-500" />
+              <span className="hidden sm:inline">New Chat</span>
+            </button>
 
             <button
               onClick={onClose}

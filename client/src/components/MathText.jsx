@@ -12,7 +12,10 @@ import {
   Copy,
   Check,
   Code2,
-  Terminal
+  Terminal,
+  Database,
+  FileCode2,
+  Code
 } from 'lucide-react';
 
 // Pre-clean LaTeX math syntax, bracket delimiters, exponents, and isolated raw LaTeX symbols
@@ -99,7 +102,28 @@ function CodeBlock({ code, lang = 'c' }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const displayLang = (lang || 'C').toUpperCase();
+  const normalizedLang = (lang || 'code').toLowerCase();
+  let displayLang = normalizedLang.toUpperCase();
+  let LangIcon = Code;
+  let iconColor = 'text-slate-400';
+
+  if (normalizedLang === 'c' || normalizedLang === 'cpp') {
+    displayLang = 'C';
+    LangIcon = Terminal;
+    iconColor = 'text-blue-400';
+  } else if (normalizedLang === 'sql') {
+    displayLang = 'SQL';
+    LangIcon = Database;
+    iconColor = 'text-sky-400';
+  } else if (normalizedLang === 'python' || normalizedLang === 'py') {
+    displayLang = 'PYTHON';
+    LangIcon = FileCode2;
+    iconColor = 'text-emerald-400';
+  } else if (normalizedLang === 'text' || normalizedLang === 'pseudocode') {
+    displayLang = 'PSEUDOCODE';
+    LangIcon = Terminal;
+    iconColor = 'text-amber-400';
+  }
 
   return (
     <div className="my-3.5 rounded-2xl overflow-hidden border border-slate-750/90 dark:border-slate-800 bg-[#0b0f19] dark:bg-[#070b14] shadow-lg text-left">
@@ -113,7 +137,7 @@ function CodeBlock({ code, lang = 'c' }) {
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
           </div>
           <div className="flex items-center gap-1.5 text-slate-400">
-            <Terminal className="w-3.5 h-3.5 text-blue-400" />
+            <LangIcon className={`w-3.5 h-3.5 ${iconColor}`} />
             <span className="font-mono text-[11px] font-bold tracking-wider text-slate-300">
               {displayLang}
             </span>
@@ -149,8 +173,48 @@ function CodeBlock({ code, lang = 'c' }) {
   );
 }
 
+// Dedicated Responsive Glassmorphic Table View
+function TableView({ headers, rows }) {
+  if (!headers || headers.length === 0) return null;
+
+  return (
+    <div className="my-4 rounded-2xl overflow-hidden border border-slate-250 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900/60">
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-xs sm:text-sm border-collapse">
+          <thead>
+            <tr className="bg-slate-100/90 dark:bg-slate-850/90 border-b border-slate-200 dark:border-slate-800">
+              {headers.map((h, i) => (
+                <th 
+                  key={i} 
+                  className="px-4 py-2.5 font-mono font-bold tracking-wider text-slate-800 dark:text-slate-200 uppercase text-[11px]"
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-150 dark:divide-slate-800/60">
+            {rows.map((row, rIdx) => (
+              <tr 
+                key={rIdx} 
+                className="even:bg-slate-50/60 dark:even:bg-slate-900/30 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 transition-colors"
+              >
+                {row.map((cell, cIdx) => (
+                  <td key={cIdx} className="px-4 py-2.5 font-mono text-slate-700 dark:text-slate-300">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 // Helper to check if a raw line looks like C or pseudo-code
-function isCodeLine(line) {
+function isCCodeLine(line) {
   const t = line.trim();
   if (!t) return false;
   return (
@@ -168,7 +232,45 @@ function isCodeLine(line) {
   );
 }
 
-// Tokenize text into semantic blocks (code blocks, headings, quotes, lists, and unified paragraphs)
+// Helper to check if a line looks like SQL
+function isSQLLine(line) {
+  const t = line.trim();
+  if (!t) return false;
+  return (
+    /^(SELECT|INSERT\s+INTO|UPDATE|DELETE\s+FROM|CREATE\s+TABLE|ALTER\s+TABLE|DROP\s+TABLE)\b/i.test(t) ||
+    /^(FROM|WHERE|GROUP\s+BY|HAVING|ORDER\s+BY|INNER\s+JOIN|LEFT\s+JOIN|RIGHT\s+JOIN|FULL\s+OUTER\s+JOIN|UNION|EXCEPT|INTERSECT)\b/i.test(t)
+  );
+}
+
+// Helper to check if a line looks like Python
+function isPythonLine(line) {
+  const t = line.trim();
+  if (!t) return false;
+  return (
+    /^(def|class|import|from)\s+[a-zA-Z_]/.test(t) ||
+    /^(elif|except|finally)\s*:/.test(t) ||
+    /^(if|for|while)\s+.*:$/.test(t)
+  );
+}
+
+// Check if a line is a markdown table row
+function isTableLine(line) {
+  const t = line.trim();
+  return t.startsWith('|') && t.endsWith('|') && t.includes('|');
+}
+
+// Parse markdown table block
+function parseTableBlock(tableLines) {
+  if (tableLines.length < 2) return null;
+  const rows = tableLines.map(l => {
+    return l.trim().slice(1, -1).split('|').map(c => c.trim());
+  });
+  const headers = rows[0];
+  const dataRows = rows.slice(1).filter(r => !r.every(c => /^:?-+:?$/.test(c)));
+  return { headers, dataRows };
+}
+
+// Tokenize text into semantic blocks (code blocks, tables, headings, quotes, lists, and unified paragraphs)
 function parseBlocks(text) {
   if (!text) return [];
   const lines = text.split('\n');
@@ -187,7 +289,7 @@ function parseBlocks(text) {
 
   const flushCode = () => {
     if (codeLines.length > 0) {
-      blocks.push({ type: 'code', lang: codeLang || 'c', code: codeLines.join('\n') });
+      blocks.push({ type: 'code', lang: codeLang || 'code', code: codeLines.join('\n') });
       codeLines = [];
       codeLang = '';
     }
@@ -215,7 +317,22 @@ function parseBlocks(text) {
       continue;
     }
 
-    // 2. Headings (must have space after # to prevent collision with #include)
+    // 2. Markdown Table Detection
+    if (isTableLine(line)) {
+      flushParagraph();
+      const tableLines = [line];
+      while (i + 1 < lines.length && isTableLine(lines[i + 1])) {
+        i++;
+        tableLines.push(lines[i]);
+      }
+      const tableData = parseTableBlock(tableLines);
+      if (tableData) {
+        blocks.push({ type: 'table', headers: tableData.headers, rows: tableData.dataRows });
+        continue;
+      }
+    }
+
+    // 3. Headings (must have space after # to prevent collision with #include)
     if (/^#{1,6}\s+/.test(trimmed)) {
       flushParagraph();
       const level = trimmed.match(/^#+/)[0].length;
@@ -227,28 +344,28 @@ function parseBlocks(text) {
       continue;
     }
 
-    // 3. Blockquotes
+    // 4. Blockquotes
     if (trimmed.startsWith('> ')) {
       flushParagraph();
       blocks.push({ type: 'quote', text: trimmed.slice(2).trim() });
       continue;
     }
 
-    // 4. Horizontal Rules
+    // 5. Horizontal Rules
     if (trimmed === '---' || trimmed === '***' || trimmed === '===') {
       flushParagraph();
       blocks.push({ type: 'hr' });
       continue;
     }
 
-    // 5. Bullet Lists
+    // 6. Bullet Lists
     if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
       flushParagraph();
       blocks.push({ type: 'bullet', text: trimmed.slice(2).trim() });
       continue;
     }
 
-    // 6. Numbered Lists
+    // 7. Numbered Lists
     const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
     if (numMatch) {
       flushParagraph();
@@ -256,24 +373,59 @@ function parseBlocks(text) {
       continue;
     }
 
-    // 7. Blank Line => End of current paragraph
+    // 8. Blank Line => End of current paragraph
     if (!trimmed) {
       flushParagraph();
       continue;
     }
 
-    // 8. Auto-Detect Contiguous Raw Code Blocks (e.g., #include, int main, for loops without ```)
-    if (isCodeLine(line)) {
+    // 9. Auto-Detect SQL Query Blocks
+    if (isSQLLine(line)) {
+      flushParagraph();
+      const sqlCode = [line];
+      while (
+        i + 1 < lines.length && 
+        (isSQLLine(lines[i + 1]) || (!lines[i + 1].trim() && i + 2 < lines.length && isSQLLine(lines[i + 2])))
+      ) {
+        i++;
+        sqlCode.push(lines[i]);
+      }
+      while (sqlCode.length > 0 && !sqlCode[sqlCode.length - 1].trim()) {
+        sqlCode.pop();
+      }
+      blocks.push({ type: 'code', lang: 'sql', code: sqlCode.join('\n') });
+      continue;
+    }
+
+    // 10. Auto-Detect Python Function Blocks
+    if (isPythonLine(line)) {
+      flushParagraph();
+      const pyCode = [line];
+      while (
+        i + 1 < lines.length && 
+        (isPythonLine(lines[i + 1]) || lines[i + 1].startsWith('    ') || lines[i + 1].startsWith('\t') || (!lines[i + 1].trim() && i + 2 < lines.length && (isPythonLine(lines[i + 2]) || lines[i + 2].startsWith('    '))))
+      ) {
+        i++;
+        pyCode.push(lines[i]);
+      }
+      while (pyCode.length > 0 && !pyCode[pyCode.length - 1].trim()) {
+        pyCode.pop();
+      }
+      blocks.push({ type: 'code', lang: 'python', code: pyCode.join('\n') });
+      continue;
+    }
+
+    // 11. Auto-Detect Contiguous Raw C Code Blocks
+    if (isCCodeLine(line)) {
       flushParagraph();
       const rawCode = [line];
       while (
         i + 1 < lines.length && 
-        (isCodeLine(lines[i + 1]) || (!lines[i + 1].trim() && i + 2 < lines.length && isCodeLine(lines[i + 2])))
+        (isCCodeLine(lines[i + 1]) || (!lines[i + 1].trim() && i + 2 < lines.length && isCCodeLine(lines[i + 2])))
       ) {
         i++;
         rawCode.push(lines[i]);
       }
-      // Trim trailing blank lines
       while (rawCode.length > 0 && !rawCode[rawCode.length - 1].trim()) {
         rawCode.pop();
       }
@@ -281,7 +433,7 @@ function parseBlocks(text) {
       continue;
     }
 
-    // 9. Normal Paragraph Text (joined with previous lines to allow natural browser wrapping)
+    // 12. Normal Paragraph Text
     currentParagraph.push(trimmed);
   }
 
@@ -372,12 +524,17 @@ export default function MathText({ text, className = '' }) {
   return (
     <div className={`space-y-3 break-words leading-relaxed text-slate-950 dark:text-slate-100 font-normal px-0.5 ${className}`}>
       {blocks.map((block, blockIdx) => {
-        // 1. Code Block
+        // 1. Code Block (C, SQL, Python, Pseudocode)
         if (block.type === 'code') {
           return <CodeBlock key={blockIdx} code={block.code} lang={block.lang} />;
         }
 
-        // 2. Headings
+        // 2. Table Block
+        if (block.type === 'table') {
+          return <TableView key={blockIdx} headers={block.headers} rows={block.rows} />;
+        }
+
+        // 3. Headings
         if (block.type === 'heading') {
           const headingText = block.text;
           const lower = headingText.toLowerCase();
@@ -498,7 +655,7 @@ export default function MathText({ text, className = '' }) {
           );
         }
 
-        // 3. Blockquotes
+        // 4. Blockquotes
         if (block.type === 'quote') {
           return (
             <div key={blockIdx} className="my-2.5 pl-4 py-2 border-l-4 border-amber-500 bg-amber-50/60 dark:bg-amber-950/20 text-slate-900 dark:text-slate-100 rounded-r-xl italic">
@@ -507,12 +664,12 @@ export default function MathText({ text, className = '' }) {
           );
         }
 
-        // 4. Horizontal Rules
+        // 5. Horizontal Rules
         if (block.type === 'hr') {
           return <hr key={blockIdx} className="my-4 border-t border-slate-200 dark:border-slate-800" />;
         }
 
-        // 5. Bullet Lists
+        // 6. Bullet Lists
         if (block.type === 'bullet') {
           return (
             <div key={blockIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-950 dark:text-slate-100">
@@ -522,7 +679,7 @@ export default function MathText({ text, className = '' }) {
           );
         }
 
-        // 6. Numbered Lists
+        // 7. Numbered Lists
         if (block.type === 'number') {
           return (
             <div key={blockIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-950 dark:text-slate-100">
@@ -534,7 +691,7 @@ export default function MathText({ text, className = '' }) {
           );
         }
 
-        // 7. Unified Natural Flowing Paragraphs
+        // 8. Unified Natural Flowing Paragraphs
         return (
           <p key={blockIdx} className="text-slate-950 dark:text-slate-100 font-normal leading-relaxed my-2 px-0.5">
             {renderInlineFormatted(block.text)}
