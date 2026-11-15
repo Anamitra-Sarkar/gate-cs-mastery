@@ -28,13 +28,7 @@ function preCleanMath(text) {
   s = s.replace(/\\\[([\s\S]+?)\\\]/g, '\n\n$$$$$1$$$$\n\n');
   s = s.replace(/\\\(([\s\S]+?)\\\)/g, ' $$$1$$ ');
 
-  // 2. Fix common exponent corruption (e.g. 𝑛2 -> 𝑛², 2𝑛 -> 2ⁿ, 105 distinct -> 10⁵)
-  s = s.replace(/105\s*distinct/g, '10⁵ distinct');
-  s = s.replace(/([a-zA-Z\u{1D400}-\u{1D7FF}])2(\s|[\),;.])/gu, '$1²$2');
-  s = s.replace(/([a-zA-Z\u{1D400}-\u{1D7FF}])3(\s|[\),;.])/gu, '$1³$2');
-  s = s.replace(/\b2([nNkK])\b/g, '2^$1');
-
-  // 3. Clean isolated raw LaTeX symbol commands when found outside of math blocks
+  // 2. Clean isolated raw LaTeX symbol commands and exponent corruption outside of math blocks
   const rawReplacements = [
     [/\\to\b/g, '→'],
     [/\\rightarrow\b/g, '→'],
@@ -76,6 +70,11 @@ function preCleanMath(text) {
   for (let i = 0; i < parts.length; i += 2) {
     if (parts[i]) {
       let seg = parts[i];
+      seg = seg.replace(/105\s*distinct/g, '10⁵ distinct');
+      seg = seg.replace(/([a-zA-Z\u{1D400}-\u{1D7FF}])2(\s|[\),;.])/gu, '$1²$2');
+      seg = seg.replace(/([a-zA-Z\u{1D400}-\u{1D7FF}])3(\s|[\),;.])/gu, '$1³$2');
+      seg = seg.replace(/\b2([nNkK])\b/g, '2^$1');
+
       seg = seg.replace(/\$\\to\$/g, '→');
       seg = seg.replace(/\$\\rightarrow\$/g, '→');
       seg = seg.replace(/\$\\times\$/g, '×');
