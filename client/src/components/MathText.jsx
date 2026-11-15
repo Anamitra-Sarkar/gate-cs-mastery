@@ -441,6 +441,14 @@ function parseBlocks(text) {
   return blocks;
 }
 
+function sanitizeFormula(formula) {
+  if (!formula) return '';
+  let s = formula.trim();
+  s = s.replace(/\\text\{_+([a-zA-Z0-9\s]*)\}/g, '\\underline{\\hspace{1.5cm}}');
+  s = s.replace(/_{2,}/g, '\\underline{\\hspace{1.5cm}}');
+  return s;
+}
+
 export default function MathText({ text, className = '' }) {
   if (!text) return null;
 
@@ -458,7 +466,7 @@ export default function MathText({ text, className = '' }) {
 
       // Display math $$...$$
       if (segment.startsWith('$$') && segment.endsWith('$$')) {
-        const formula = segment.slice(2, -2).trim();
+        const formula = sanitizeFormula(segment.slice(2, -2));
         try {
           const html = katex.renderToString(formula, { displayMode: true, throwOnError: false });
           return (
@@ -475,7 +483,7 @@ export default function MathText({ text, className = '' }) {
 
       // Inline math $...$
       if (segment.startsWith('$') && segment.endsWith('$') && segment.length > 2) {
-        const formula = segment.slice(1, -1).trim();
+        const formula = sanitizeFormula(segment.slice(1, -1));
         try {
           const html = katex.renderToString(formula, { displayMode: false, throwOnError: false });
           return (
