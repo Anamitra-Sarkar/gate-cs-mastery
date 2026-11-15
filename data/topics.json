@@ -1,320 +1,133 @@
-[
-  {
-    "subject": "General Aptitude",
-    "totalQuestions": 213,
-    "topics": [
-      {
-        "name": "Verbal Ability & Grammar",
-        "count": 85
-      },
-      {
-        "name": "Verbal & Quantitative Aptitude",
-        "count": 97
-      },
-      {
-        "name": "Quantitative Aptitude & Reasoning",
-        "count": 30
-      },
-      {
-        "name": "Logical Reasoning & Data Interpretation",
-        "count": 1
-      }
-    ]
+{
+  "General Aptitude": {
+    "total": 237,
+    "subtopics": {
+      "Verbal Ability & Grammar": 95,
+      "Verbal & Quantitative Aptitude": 97,
+      "Quantitative Aptitude & Reasoning": 44,
+      "Logical Reasoning & Data Interpretation": 1
+    }
   },
-  {
-    "subject": "Engineering Mathematics",
-    "totalQuestions": 70,
-    "topics": [
-      {
-        "name": "Probability & Statistics",
-        "count": 15
-      },
-      {
-        "name": "Linear Algebra & Calculus",
-        "count": 17
-      },
-      {
-        "name": "Linear Algebra",
-        "count": 18
-      },
-      {
-        "name": "Linear Algebra & Probability",
-        "count": 8
-      },
-      {
-        "name": "Calculus (Limits, Continuity, Integrals)",
-        "count": 10
-      },
-      {
-        "name": "Linear Algebra & Eigenvalues",
-        "count": 1
-      },
-      {
-        "name": "Linear Algebra & Combinatorics",
-        "count": 1
-      }
-    ]
+  "Engineering Mathematics": {
+    "total": 92,
+    "subtopics": {
+      "Probability & Statistics": 21,
+      "Linear Algebra & Calculus": 17,
+      "Linear Algebra": 24,
+      "Linear Algebra & Probability": 8,
+      "Calculus (Limits, Continuity, Integrals)": 16,
+      "Linear Algebra & Eigenvalues": 1,
+      "Linear Algebra & Combinatorics": 1,
+      "Linear Algebra (Matrices, Eigenvalues, Rank)": 4
+    }
   },
-  {
-    "subject": "Operating Systems",
-    "totalQuestions": 46,
-    "topics": [
-      {
-        "name": "Processes, Concurrency & Deadlocks",
-        "count": 27
-      },
-      {
-        "name": "Memory Management & Paging",
-        "count": 10
-      },
-      {
-        "name": "Processes & CPU Scheduling",
-        "count": 6
-      },
-      {
-        "name": "CPU Scheduling",
-        "count": 3
-      }
-    ]
+  "Operating Systems": {
+    "total": 65,
+    "subtopics": {
+      "Processes, Concurrency & Deadlocks": 38,
+      "Memory Management & Paging": 18,
+      "Processes & CPU Scheduling": 6,
+      "CPU Scheduling": 3
+    }
   },
-  {
-    "subject": "Data Science & AI",
-    "totalQuestions": 62,
-    "topics": [
-      {
-        "name": "Probability Distributions & Bayes Reasoning",
-        "count": 23
-      },
-      {
-        "name": "Artificial Intelligence & Heuristic Search",
-        "count": 7
-      },
-      {
-        "name": "Machine Learning & Pattern Recognition",
-        "count": 15
-      },
-      {
-        "name": "Applied Data Science Concepts",
-        "count": 11
-      },
-      {
-        "name": "Data Warehousing & Multidimensional OLAP",
-        "count": 1
-      },
-      {
-        "name": "Data Mining & Feature Engineering",
-        "count": 2
-      },
-      {
-        "name": "Machine Learning & Data Science",
-        "count": 3
-      }
-    ]
+  "Data Science & AI": {
+    "total": 73,
+    "subtopics": {
+      "Probability Distributions & Bayes Reasoning": 23,
+      "Artificial Intelligence & Heuristic Search": 7,
+      "Machine Learning & Pattern Recognition": 15,
+      "Applied Data Science Concepts": 11,
+      "Searching, Sorting & Graph Algorithms": 9,
+      "Data Warehousing & Multidimensional OLAP": 1,
+      "Python Programming & Data Structures": 1,
+      "Data Mining & Feature Engineering": 2,
+      "Machine Learning & Data Science": 4
+    }
   },
-  {
-    "subject": "Compiler Design",
-    "totalQuestions": 15,
-    "topics": [
-      {
-        "name": "Lexical Analysis & Parsing",
-        "count": 5
-      },
-      {
-        "name": "Lexical Analysis & Tokens",
-        "count": 6
-      },
-      {
-        "name": "Parsing Techniques (LL, LR, SLR, LALR)",
-        "count": 1
-      },
-      {
-        "name": "Intermediate Code & Three-Address Code",
-        "count": 1
-      },
-      {
-        "name": "Syntax Directed Translation",
-        "count": 1
-      },
-      {
-        "name": "Syntax Directed Translation (SDT)",
-        "count": 1
-      }
-    ]
+  "Compiler Design": {
+    "total": 21,
+    "subtopics": {
+      "Lexical Analysis & Parsing": 7,
+      "Lexical Analysis & Tokens": 9,
+      "Parsing Techniques (LL, LR, SLR, LALR)": 2,
+      "Intermediate Code & Three-Address Code": 1,
+      "Syntax Directed Translation": 1,
+      "Syntax Directed Translation (SDT)": 1
+    }
   },
-  {
-    "subject": "Databases",
-    "totalQuestions": 102,
-    "topics": [
-      {
-        "name": "Relational Databases & SQL",
-        "count": 93
-      },
-      {
-        "name": "Relational Algebra & Tuple Calculus",
-        "count": 9
-      }
-    ]
+  "Databases": {
+    "total": 159,
+    "subtopics": {
+      "Relational Databases & SQL": 125,
+      "Relational Algebra & Tuple Calculus": 33,
+      "Indexing & B/B+ Trees": 1
+    }
   },
-  {
-    "subject": "Digital Logic",
-    "totalQuestions": 44,
-    "topics": [
-      {
-        "name": "Digital Circuits & Boolean Logic",
-        "count": 39
-      },
-      {
-        "name": "Combinational & Sequential Circuits",
-        "count": 2
-      },
-      {
-        "name": "Boolean Algebra & Logic Gates",
-        "count": 3
-      }
-    ]
+  "Digital Logic": {
+    "total": 72,
+    "subtopics": {
+      "Digital Circuits & Boolean Logic": 63,
+      "Combinational & Sequential Circuits": 2,
+      "Boolean Algebra & Logic Gates": 6,
+      "Number Representations & Minimization": 1
+    }
   },
-  {
-    "subject": "Programming & Data Structures",
-    "totalQuestions": 98,
-    "topics": [
-      {
-        "name": "Python Programming & Data Structures",
-        "count": 11
-      },
-      {
-        "name": "C Programming & Pointers",
-        "count": 59
-      },
-      {
-        "name": "C Programming & Data Structures",
-        "count": 12
-      },
-      {
-        "name": "Recursion & Arrays",
-        "count": 1
-      },
-      {
-        "name": "C Programming & Numerical Simulation",
-        "count": 1
-      },
-      {
-        "name": "Recursion & Function Stacks",
-        "count": 13
-      },
-      {
-        "name": "Trees & Binary Search Trees",
-        "count": 1
-      }
-    ]
+  "Programming & Data Structures": {
+    "total": 299,
+    "subtopics": {
+      "Python Programming & Data Structures": 10,
+      "C Programming & Pointers": 246,
+      "C Programming & Data Structures": 12,
+      "Recursion & Arrays": 1,
+      "C Programming & Numerical Simulation": 1,
+      "Recursion & Function Stacks": 25,
+      "Trees & Binary Search Trees": 2,
+      "Linear Data Structures (Arrays, Lists, Stacks)": 2
+    }
   },
-  {
-    "subject": "Theory of Computation",
-    "totalQuestions": 61,
-    "topics": [
-      {
-        "name": "Context-Free Languages & Pushdown Automata",
-        "count": 18
-      },
-      {
-        "name": "Regular Languages & Finite Automata",
-        "count": 37
-      },
-      {
-        "name": "Turing Machines & Computability",
-        "count": 6
-      }
-    ]
+  "Theory of Computation": {
+    "total": 85,
+    "subtopics": {
+      "Context-Free Languages & Pushdown Automata": 18,
+      "Regular Languages & Finite Automata": 58,
+      "Turing Machines & Computability": 8,
+      "Grammars & Chomsky Hierarchy": 1
+    }
   },
-  {
-    "subject": "Algorithms",
-    "totalQuestions": 54,
-    "topics": [
-      {
-        "name": "Asymptotic Analysis & Recurrences",
-        "count": 17
-      },
-      {
-        "name": "Searching & Sorting",
-        "count": 4
-      },
-      {
-        "name": "Searching, Sorting & Graph Algorithms",
-        "count": 9
-      },
-      {
-        "name": "Algorithm Design & Complexity",
-        "count": 3
-      },
-      {
-        "name": "Graph Algorithms",
-        "count": 15
-      },
-      {
-        "name": "Hashing & Data Structures",
-        "count": 4
-      },
-      {
-        "name": "Graph Algorithms (MST, Shortest Paths)",
-        "count": 2
-      }
-    ]
+  "Algorithms": {
+    "total": 60,
+    "subtopics": {
+      "Asymptotic Analysis & Recurrences": 23,
+      "Searching & Sorting": 6,
+      "Algorithm Design & Complexity": 3,
+      "Graph Algorithms": 22,
+      "Hashing & Data Structures": 4,
+      "Graph Algorithms (MST, Shortest Paths)": 2
+    }
   },
-  {
-    "subject": "Computer Networks",
-    "totalQuestions": 30,
-    "topics": [
-      {
-        "name": "Computer Networks & Protocols",
-        "count": 14
-      },
-      {
-        "name": "Network Layer & Routing",
-        "count": 11
-      },
-      {
-        "name": "Data Link Layer & Flow Control",
-        "count": 5
-      }
-    ]
+  "Computer Networks": {
+    "total": 56,
+    "subtopics": {
+      "Computer Networks & Protocols": 18,
+      "Network Layer & Routing": 11,
+      "Data Link Layer & Flow Control": 27
+    }
   },
-  {
-    "subject": "Computer Organization & Architecture",
-    "totalQuestions": 45,
-    "topics": [
-      {
-        "name": "Pipelining & Instruction Set",
-        "count": 33
-      },
-      {
-        "name": "Instruction Set & Addressing Modes",
-        "count": 6
-      },
-      {
-        "name": "Cache Memory & Hierarchy",
-        "count": 5
-      },
-      {
-        "name": "Pipelining & Processor Design",
-        "count": 1
-      }
-    ]
+  "Computer Organization & Architecture": {
+    "total": 89,
+    "subtopics": {
+      "Pipelining & Instruction Set": 34,
+      "Instruction Set & Addressing Modes": 41,
+      "Cache Memory & Hierarchy": 9,
+      "Pipelining & Processor Design": 5
+    }
   },
-  {
-    "subject": "Discrete Mathematics",
-    "totalQuestions": 13,
-    "topics": [
-      {
-        "name": "Propositional & First-Order Logic",
-        "count": 4
-      },
-      {
-        "name": "Graph Theory & Connectivity",
-        "count": 8
-      },
-      {
-        "name": "Sets, Relations & Functions",
-        "count": 1
-      }
-    ]
+  "Discrete Mathematics": {
+    "total": 30,
+    "subtopics": {
+      "Propositional & First-Order Logic": 18,
+      "Graph Theory & Connectivity": 11,
+      "Sets, Relations & Functions": 1
+    }
   }
-]
+}
