@@ -1,38 +1,11 @@
 {
-  "xp": 330,
-  "streak": 3,
-  "level": 4,
-  "totalAttempted": 30,
-  "totalCorrect": 28,
-  "subjectStats": {
-    "General Aptitude": {
-      "attempted": 13,
-      "correct": 13
-    },
-    "Programming & Data Structures": {
-      "attempted": 3,
-      "correct": 3
-    }
-  },
-  "attempts": {
-    "GATE_2012_CS_Q1_3802": {
-      "selected": "A",
-      "isCorrect": true,
-      "timeSpent": 12,
-      "timestamp": 1794674513155
-    },
-    "GATE_1991_CS_Q2_4433": {
-      "selected": "A",
-      "isCorrect": true,
-      "timeSpent": 12,
-      "timestamp": 1794676101316
-    },
-    "GATE_2025_CS1_Q1_2951": {
-      "selected": "A",
-      "isCorrect": true,
-      "timeSpent": 12,
-      "timestamp": 1794685336463
-    }
-  },
+  "xp": 0,
+  "streak": 1,
+  "level": 1,
+  "totalAttempted": 0,
+  "totalCorrect": 0,
+  "lastActiveDate": "2026-11-15",
+  "subjectStats": {},
+  "attempts": {},
   "bookmarks": []
 }

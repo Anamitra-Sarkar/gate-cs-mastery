@@ -110,7 +110,14 @@ export default function App() {
 
     fetch('/api/stats')
       .then(res => res.json())
-      .then(data => setStats(data))
+      .then(serverStats => {
+        try {
+          const local = localStorage.getItem(STATS_KEY);
+          if (!local && serverStats) {
+            setStats(serverStats);
+          }
+        } catch (e) {}
+      })
       .catch(e => console.error('Failed to load stats:', e));
 
     // Prefetch pool for mock exam & speed run
@@ -246,6 +253,7 @@ export default function App() {
     try {
       localStorage.setItem(STATS_KEY, JSON.stringify(freshStats));
     } catch (e) {}
+    fetch('/api/stats/reset', { method: 'POST' }).catch(() => {});
   };
 
   const handleResetFilters = () => {

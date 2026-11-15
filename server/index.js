@@ -161,6 +161,21 @@ app.get('/api/stats', (req, res) => {
   res.json(userStats);
 });
 
+app.post('/api/stats/reset', (req, res) => {
+  userStats = {
+    xp: 0,
+    streak: 1,
+    level: 1,
+    totalAttempted: 0,
+    totalCorrect: 0,
+    subjectStats: {},
+    attempts: {},
+    bookmarks: []
+  };
+  saveStats();
+  res.json(userStats);
+});
+
 app.post('/api/stats/attempt', (req, res) => {
   const { questionId, selected, isCorrect, timeSpent } = req.body;
   const q = questions.find(item => item.id === questionId);
