@@ -117,6 +117,8 @@ export default function ScratchpadModal({ isOpen, onClose }) {
                   key={c}
                   onClick={() => { setColor(c); setTool('pen'); }}
                   style={{ backgroundColor: c }}
+                  aria-label={`Select ink color ${c}`}
+                  title={`Color ${c}`}
                   className={`w-4 h-4 rounded-full transition ${color === c && tool === 'pen' ? 'ring-2 ring-blue-600 scale-125' : 'hover:scale-110'}`}
                 />
               ))}
@@ -126,6 +128,7 @@ export default function ScratchpadModal({ isOpen, onClose }) {
               onClick={clearCanvas}
               className="p-1.5 text-slate-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition"
               title="Clear Canvas"
+              aria-label="Clear entire canvas"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -133,6 +136,8 @@ export default function ScratchpadModal({ isOpen, onClose }) {
 
           <button
             onClick={onClose}
+            aria-label="Close scratchpad"
+            title="Close"
             className="p-1.5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition ml-auto"
           >
             <X className="w-5 h-5" />

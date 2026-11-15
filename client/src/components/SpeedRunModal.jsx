@@ -16,9 +16,16 @@ export default function SpeedRunModal({ isOpen, onClose, allQuestions, onAddXP }
   const [feedback, setFeedback] = useState(null); // 'correct' | 'wrong'
 
   const startGame = () => {
-    // Only pick MCQs with options for speed run
-    const mcqs = allQuestions.filter(q => q.options && q.options.length >= 2);
-    const shuffled = [...mcqs].sort(() => 0.5 - Math.random());
+    // Only pick clean, verified modern MCQs for speed run (zero OCR corruption)
+    const mcqs = (allQuestions || []).filter(q => {
+      if (!q.options || q.options.length < 2) return false;
+      if (q.year && parseInt(q.year) < 2000) return false;
+      const text = (q.question || '') + ' ' + q.options.map(o => o.text).join(' ');
+      if (text.includes('llo>') || text.includes('~~~') || text.includes('..,,') || text.includes('Nt>nulll')) return false;
+      return true;
+    });
+    const pool = mcqs.length >= 10 ? mcqs : (allQuestions || []).filter(q => q.options && q.options.length >= 2);
+    const shuffled = [...pool].sort(() => 0.5 - Math.random());
     setShuffledList(shuffled);
     setCurrentQIndex(0);
     setScore(0);

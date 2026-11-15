@@ -351,35 +351,37 @@ export default function QuestionCard({
 
       {/* Hint Drawer */}
       {showHint && question.hint && (
-        <div className="mt-4 p-4.5 bg-amber-50/90 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-700/50 rounded-2xl text-xs sm:text-sm text-amber-950 dark:text-amber-100 animate-fadeIn space-y-1.5 shadow-sm">
-          <div className="flex items-center gap-1.5 font-bold text-amber-900 dark:text-amber-300">
-            <Lightbulb className="w-4 h-4 shrink-0" />
-            Strategic Hint:
+        <div className="mt-5 p-5 sm:p-6 bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/60 rounded-3xl text-xs sm:text-sm text-amber-950 dark:text-amber-100 animate-fadeIn space-y-2.5 shadow-sm">
+          <div className="flex items-center gap-2 font-bold text-amber-900 dark:text-amber-300">
+            <Lightbulb className="w-4.5 h-4.5 shrink-0 text-amber-600 dark:text-amber-400" />
+            <span className="text-xs sm:text-sm uppercase tracking-wider font-serif">Strategic Hint</span>
           </div>
-          <p className="leading-relaxed text-amber-950 dark:text-amber-100 font-medium">{question.hint}</p>
+          <div className="px-1 text-sm sm:text-base leading-relaxed text-amber-950 dark:text-amber-100 font-medium">
+            <MathText text={question.hint} />
+          </div>
         </div>
       )}
 
       {/* Comprehensive Solution & Concept Drawer */}
       {showExplanation && (
-        <div className="mt-4 p-5 sm:p-6 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-2xl space-y-4 animate-fadeIn text-xs sm:text-sm shadow-sm">
+        <div className="mt-5 p-6 sm:p-8 bg-white dark:bg-[#111420] border border-slate-300 dark:border-slate-800 rounded-3xl space-y-5 animate-fadeIn text-xs sm:text-sm shadow-md">
           {/* Solution Navigation Tabs */}
-          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 gap-2 overflow-x-auto">
-            <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-250 dark:border-slate-700 text-xs sm:text-sm">
+          <div className="flex flex-wrap items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 gap-3">
+            <div className="flex flex-wrap items-center gap-1.5 bg-slate-100 dark:bg-slate-850 p-1 rounded-2xl border border-slate-250 dark:border-slate-700 text-xs sm:text-sm shadow-inner">
               <button
                 onClick={() => setActiveSolutionTab('solution')}
-                className={`px-3.5 py-1.5 rounded-lg font-bold transition ${
+                className={`px-4 py-2 rounded-xl font-bold transition ${
                   activeSolutionTab === 'solution' 
                     ? 'bg-slate-950 text-white dark:bg-blue-600 shadow-sm' 
                     : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
                 }`}
               >
-                Step-by-Step Proof
+                Comprehensive Solution
               </button>
               {question.core_concept && (
                 <button
                   onClick={() => setActiveSolutionTab('concept')}
-                  className={`px-3.5 py-1.5 rounded-lg font-bold transition ${
+                  className={`px-4 py-2 rounded-xl font-bold transition ${
                     activeSolutionTab === 'concept' 
                       ? 'bg-slate-950 text-white dark:bg-blue-600 shadow-sm' 
                       : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
@@ -391,7 +393,7 @@ export default function QuestionCard({
               {question.example && (
                 <button
                   onClick={() => setActiveSolutionTab('example')}
-                  className={`px-3.5 py-1.5 rounded-lg font-bold transition ${
+                  className={`px-4 py-2 rounded-xl font-bold transition ${
                     activeSolutionTab === 'example' 
                       ? 'bg-slate-950 text-white dark:bg-blue-600 shadow-sm' 
                       : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
@@ -403,7 +405,7 @@ export default function QuestionCard({
               {question.pitfall && (
                 <button
                   onClick={() => setActiveSolutionTab('trap')}
-                  className={`px-3.5 py-1.5 rounded-lg font-bold transition ${
+                  className={`px-4 py-2 rounded-xl font-bold transition ${
                     activeSolutionTab === 'trap' 
                       ? 'bg-rose-600 text-white shadow-sm' 
                       : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
@@ -414,51 +416,53 @@ export default function QuestionCard({
               )}
             </div>
 
-            <span className="font-mono text-emerald-900 dark:text-emerald-300 font-extrabold px-3 py-1 bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700 rounded-xl text-xs sm:text-sm whitespace-nowrap shadow-sm">
+            <span className="font-mono text-emerald-900 dark:text-emerald-300 font-extrabold px-3.5 py-1.5 bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700 rounded-xl text-xs sm:text-sm whitespace-nowrap shadow-sm">
               Official Key: ({question.answer})
             </span>
           </div>
 
           {/* Tab Content Display */}
           {activeSolutionTab === 'concept' && question.core_concept && (
-            <div className="p-4.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
-              <div className="flex items-center gap-2 font-bold text-blue-900 dark:text-blue-300 text-xs sm:text-sm uppercase tracking-wider">
-                <Compass className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <div className="p-6 sm:p-7 bg-blue-50/70 dark:bg-blue-950/30 rounded-2xl border border-blue-200 dark:border-blue-900/60 space-y-3 shadow-xs">
+              <div className="flex items-center gap-2 font-bold text-blue-900 dark:text-blue-300 text-xs sm:text-sm uppercase tracking-wider font-serif">
+                <Compass className="w-4.5 h-4.5 text-blue-600 dark:text-blue-400" />
                 Fundamental Theory & Theorems
               </div>
-              <p className="text-slate-950 dark:text-slate-100 font-medium leading-relaxed text-sm sm:text-base">
-                {question.core_concept}
-              </p>
+              <div className="px-1 text-slate-950 dark:text-slate-100 font-normal leading-relaxed sm:leading-loose text-sm sm:text-base">
+                <MathText text={question.core_concept} />
+              </div>
             </div>
           )}
 
           {activeSolutionTab === 'example' && question.example && (
-            <div className="p-4.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
-              <div className="flex items-center gap-2 font-bold text-amber-900 dark:text-amber-300 text-xs sm:text-sm uppercase tracking-wider">
-                <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+            <div className="p-6 sm:p-7 bg-amber-50/70 dark:bg-amber-950/30 rounded-2xl border border-amber-200 dark:border-amber-900/60 space-y-3 shadow-xs">
+              <div className="flex items-center gap-2 font-bold text-amber-900 dark:text-amber-300 text-xs sm:text-sm uppercase tracking-wider font-serif">
+                <Sparkles className="w-4.5 h-4.5 text-amber-600 dark:text-amber-400" />
                 Concrete Example & Mental Model
               </div>
-              <p className="text-slate-950 dark:text-slate-100 font-medium leading-relaxed text-sm sm:text-base">
-                {question.example}
-              </p>
+              <div className="px-1 text-slate-950 dark:text-slate-100 font-normal leading-relaxed sm:leading-loose text-sm sm:text-base">
+                <MathText text={question.example} />
+              </div>
             </div>
           )}
 
           {activeSolutionTab === 'trap' && question.pitfall && (
-            <div className="p-4.5 bg-rose-50 dark:bg-rose-950/30 rounded-xl border border-rose-300 dark:border-rose-800 space-y-2">
-              <div className="flex items-center gap-2 font-bold text-rose-900 dark:text-rose-300 text-xs sm:text-sm uppercase tracking-wider">
-                <AlertTriangle className="w-4 h-4 text-rose-600" />
+            <div className="p-6 sm:p-7 bg-rose-50/80 dark:bg-rose-950/30 rounded-2xl border border-rose-300 dark:border-rose-900/60 space-y-3 shadow-xs">
+              <div className="flex items-center gap-2 font-bold text-rose-900 dark:text-rose-300 text-xs sm:text-sm uppercase tracking-wider font-serif">
+                <AlertTriangle className="w-4.5 h-4.5 text-rose-600" />
                 Common GATE Trap to Avoid
               </div>
-              <p className="text-rose-950 dark:text-rose-100 font-medium leading-relaxed text-sm sm:text-base">
-                {question.pitfall}
-              </p>
+              <div className="px-1 text-rose-950 dark:text-rose-100 font-normal leading-relaxed sm:leading-loose text-sm sm:text-base">
+                <MathText text={question.pitfall} />
+              </div>
             </div>
           )}
 
           {activeSolutionTab === 'solution' && (
-            <div className="leading-relaxed text-slate-950 dark:text-slate-100 font-medium break-words overflow-x-auto space-y-2 bg-slate-50 dark:bg-slate-800 p-4.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm sm:text-base">
-              <MathText text={question.explanation} />
+            <div className="leading-relaxed sm:leading-loose text-slate-950 dark:text-slate-100 font-normal break-words overflow-x-auto space-y-3 bg-slate-50/70 dark:bg-[#151928] p-6 sm:p-8 rounded-2xl border border-slate-250 dark:border-slate-800 shadow-inner text-sm sm:text-base">
+              <div className="max-w-4xl px-1 sm:px-2">
+                <MathText text={question.explanation} />
+              </div>
             </div>
           )}
 

@@ -30,13 +30,22 @@ export default function MockExamModal({ isOpen, onClose, allQuestions }) {
   const [calcInput, setCalcInput] = useState('0');
   const [mobilePaletteOpen, setMobilePaletteOpen] = useState(false);
 
-  // Initialize Exam
+  // Initialize Exam with Verified, High-Confidence Questions (Filtering OCR Noise)
   const startExam = (mins) => {
     setDurationMins(mins);
     setTimeLeft(mins * 60);
-    // Pick well-balanced questions across topics
-    const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
     const count = mins === 180 ? 65 : (mins === 60 ? 30 : 15);
+    
+    // Pick well-balanced questions from verified pool (>= 2000, zero OCR corruption)
+    const validPool = (allQuestions || []).filter(q => {
+      if (q.year && parseInt(q.year) < 2000) return false;
+      const text = (q.question || '') + ' ' + (q.options ? q.options.map(o => o.text).join(' ') : '');
+      if (text.includes('llo>') || text.includes('~~~') || text.includes('..,,') || text.includes('Nt>nulll')) return false;
+      return true;
+    });
+
+    const poolToUse = validPool.length >= count ? validPool : (allQuestions || []);
+    const shuffled = [...poolToUse].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, count);
     setExamQuestions(selected);
     

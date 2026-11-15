@@ -56,15 +56,41 @@ export default function App() {
   const [selectedYear, setSelectedYear] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // User Stats & State
-  const [stats, setStats] = useState({
-    xp: 140,
-    streak: 3,
-    level: 2,
-    totalAttempted: 14,
-    totalCorrect: 12,
-    bookmarks: [],
-    attempts: {}
+  // Real Device-Cached User Stats & Progress
+  const STATS_KEY = 'gate_cs_mastery_user_stats';
+
+  const [stats, setStats] = useState(() => {
+    try {
+      const raw = localStorage.getItem(STATS_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        const today = new Date().toISOString().slice(0, 10);
+        const last = parsed.lastActiveDate;
+        if (last && last !== today) {
+          const diffDays = Math.round((new Date(today) - new Date(last)) / (1000 * 60 * 60 * 24));
+          if (diffDays === 1) {
+            parsed.streak = (parsed.streak || 1) + 1;
+          } else if (diffDays > 1) {
+            parsed.streak = 1;
+          }
+          parsed.lastActiveDate = today;
+          localStorage.setItem(STATS_KEY, JSON.stringify(parsed));
+        }
+        return parsed;
+      }
+    } catch (e) {}
+
+    return {
+      xp: 0,
+      streak: 1,
+      level: 1,
+      totalAttempted: 0,
+      totalCorrect: 0,
+      lastActiveDate: new Date().toISOString().slice(0, 10),
+      bookmarks: [],
+      attempts: {},
+      subjectStats: {}
+    };
   });
 
   // Modal States
@@ -135,27 +161,68 @@ export default function App() {
   };
 
   const handleToggleBookmark = (qId) => {
+    setStats(prev => {
+      const bms = prev.bookmarks || [];
+      const updated = bms.includes(qId) 
+        ? bms.filter(id => id !== qId)
+        : [...bms, qId];
+      const newStats = { ...prev, bookmarks: updated };
+      try { localStorage.setItem(STATS_KEY, JSON.stringify(newStats)); } catch (e) {}
+      return newStats;
+    });
+
     fetch('/api/bookmarks/toggle', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ questionId: qId })
-    })
-      .then(res => res.json())
-      .then(data => {
-        setStats(prev => ({ ...prev, bookmarks: data.bookmarks }));
-      })
-      .catch(e => console.error('Toggle bookmark error:', e));
+    }).catch(() => {});
   };
 
   const handleRecordAttempt = (questionId, selected, isCorrect, timeSpent) => {
+    const qObj = questions.find(q => q.id === questionId) || allQuestionsList.find(q => q.id === questionId);
+    const subj = qObj?.subject || 'General Aptitude';
+
+    setStats(prev => {
+      const prevAttempts = prev.attempts || {};
+      const alreadyAnswered = !!prevAttempts[questionId];
+      
+      // Real XP Award: +20 XP for correct, +5 XP for attempt (only once per unique question)
+      const xpGained = alreadyAnswered ? 0 : (isCorrect ? 20 : 5);
+      const newXP = (prev.xp || 0) + xpGained;
+      const newLevel = Math.floor(newXP / 100) + 1;
+
+      const subjStat = prev.subjectStats?.[subj] || { attempted: 0, correct: 0 };
+      const updatedSubjectStats = {
+        ...(prev.subjectStats || {}),
+        [subj]: {
+          attempted: subjStat.attempted + (alreadyAnswered ? 0 : 1),
+          correct: subjStat.correct + (!alreadyAnswered && isCorrect ? 1 : 0)
+        }
+      };
+
+      const newStats = {
+        ...prev,
+        xp: newXP,
+        level: newLevel,
+        totalAttempted: (prev.totalAttempted || 0) + (alreadyAnswered ? 0 : 1),
+        totalCorrect: (prev.totalCorrect || 0) + (!alreadyAnswered && isCorrect ? 1 : 0),
+        attempts: {
+          ...prevAttempts,
+          [questionId]: { selected, isCorrect, timeSpent, timestamp: Date.now() }
+        },
+        subjectStats: updatedSubjectStats,
+        lastActiveDate: new Date().toISOString().slice(0, 10)
+      };
+
+      try { localStorage.setItem(STATS_KEY, JSON.stringify(newStats)); } catch (e) {}
+      return newStats;
+    });
+
     fetch('/api/stats/attempt', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ questionId, selected, isCorrect, timeSpent })
-    })
-      .then(res => res.json())
-      .then(updatedStats => setStats(updatedStats))
-      .catch(e => console.error('Attempt recording error:', e));
+    }).catch(() => {});
   };
 
   const handleAskAI = (question) => {
@@ -192,12 +259,13 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6 pb-36 lg:pb-12">
         
         {/* VIEW 1: TOPIC SYLLABUS GRID */}
         {currentTab === 'topics' && (
           <TopicGrid
             topics={topics}
+            stats={stats}
             onSelectTopic={handleSelectTopicFromGrid}
             onSelectSubtopic={handleSelectSubtopicFromGrid}
           />
@@ -208,7 +276,7 @@ export default function App() {
           <div className="space-y-6">
             
             {/* Filter & Search Bar: Academic Card */}
-            <div className="academic-card p-5 sm:p-6 rounded-2xl space-y-4">
+            <div className="academic-card p-5 sm:p-6 rounded-3xl space-y-4 shadow-sm">
               
               {/* Row 1: Search + Format Segmented Control */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
@@ -225,12 +293,12 @@ export default function App() {
                 </div>
 
                 {/* Segmented Format Pills: All / MCQ / MSQ / NAT */}
-                <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0b0f19] p-1 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm self-start md:self-auto shrink-0 shadow-sm">
+                <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0b0f19] p-1 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm self-start md:self-auto shrink-0 shadow-sm overflow-x-auto max-w-full">
                   {['All', 'MCQ', 'MSQ', 'NAT'].map(ft => (
                     <button
                       key={ft}
                       onClick={() => { setSelectedType(ft); setPage(1); }}
-                      className={`px-3.5 py-1.5 rounded-lg font-bold transition ${
+                      className={`px-3.5 py-1.5 rounded-lg font-bold transition whitespace-nowrap ${
                         selectedType === ft 
                           ? 'bg-slate-950 text-white dark:bg-blue-600 dark:text-white shadow-sm' 
                           : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white'
@@ -242,14 +310,14 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Row 2: Dropdown Selects for Subject, Subtopic, Year, Difficulty */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs sm:text-sm">
+              {/* Row 2: Responsive Dropdown Selects Grid for Subject, Subtopic, Year, Difficulty */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1 text-xs sm:text-sm">
                 
                 {/* Subject Selector */}
                 <select
                   value={selectedSubject}
                   onChange={e => { setSelectedSubject(e.target.value); setSelectedSubtopic('All'); setPage(1); }}
-                  className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold"
+                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold truncate"
                 >
                   <option value="All">All Subjects ({totalQuestions})</option>
                   {Object.keys(topics).map(subj => (
@@ -258,24 +326,25 @@ export default function App() {
                 </select>
 
                 {/* Subtopic Selector */}
-                {selectedSubject !== 'All' && topics[selectedSubject]?.subtopics && (
-                  <select
-                    value={selectedSubtopic}
-                    onChange={e => { setSelectedSubtopic(e.target.value); setPage(1); }}
-                    className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold"
-                  >
-                    <option value="All">All Subtopics</option>
-                    {Object.keys(topics[selectedSubject].subtopics).map(st => (
+                <select
+                  value={selectedSubtopic}
+                  onChange={e => { setSelectedSubtopic(e.target.value); setPage(1); }}
+                  disabled={selectedSubject === 'All'}
+                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold disabled:opacity-50 truncate"
+                >
+                  <option value="All">{selectedSubject === 'All' ? 'Select a Subject First' : 'All Subtopics'}</option>
+                  {selectedSubject !== 'All' && topics[selectedSubject]?.subtopics && (
+                    Object.keys(topics[selectedSubject].subtopics).map(st => (
                       <option key={st} value={st}>{st}</option>
-                    ))}
-                  </select>
-                )}
+                    ))
+                  )}
+                </select>
 
                 {/* Year Selector (Modern First: 2025 -> 1991) */}
                 <select
                   value={selectedYear}
                   onChange={e => { setSelectedYear(e.target.value); setPage(1); }}
-                  className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer font-mono font-semibold shadow-sm"
+                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer font-mono font-semibold shadow-sm truncate"
                 >
                   <option value="All">All Exam Years (2025–1991)</option>
                   {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => (
@@ -287,25 +356,27 @@ export default function App() {
                 <select
                   value={selectedDifficulty}
                   onChange={e => { setSelectedDifficulty(e.target.value); setPage(1); }}
-                  className="bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold"
+                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold truncate"
                 >
                   <option value="All">All Difficulties</option>
                   <option value="Easy">Easy (1 Mark)</option>
                   <option value="Medium">Medium (2 Marks)</option>
                   <option value="Hard">Hard (Multi-Concept)</option>
                 </select>
+              </div>
 
-                {/* Reset Filters Button */}
-                {hasActiveFilters && (
+              {/* Reset Filters Bar */}
+              {hasActiveFilters && (
+                <div className="flex justify-end pt-1">
                   <button
                     onClick={handleResetFilters}
-                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition ml-auto font-bold border border-slate-300 dark:border-slate-700 shadow-sm"
+                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition font-bold border border-slate-300 dark:border-slate-700 shadow-sm"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    Reset Filters
+                    Reset All Filters
                   </button>
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             {/* Questions Feed */}

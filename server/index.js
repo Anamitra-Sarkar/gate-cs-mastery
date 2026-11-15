@@ -80,6 +80,7 @@ function saveStats() {
 
 // API Routes
 app.get('/api/topics', (req, res) => {
+  res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
   // Enhance topics with user progress
   const enriched = {};
   for (const [subj, data] of Object.entries(topics)) {
@@ -96,6 +97,7 @@ app.get('/api/topics', (req, res) => {
 });
 
 app.get('/api/questions', (req, res) => {
+  res.set('Cache-Control', 'public, max-age=30, stale-while-revalidate=120');
   const { subject, subtopic, difficulty, type, year, search, limit = 50, page = 1, random } = req.query;
   
   let filtered = [...questions];
@@ -233,12 +235,18 @@ app.get('/api/ai/models', (req, res) => {
         const parsed = JSON.parse(data);
         const models = (parsed.data || [])
           .map(m => m.id)
-          .filter(id => !id.includes('whisper') && !id.includes('guard'));
+          .filter(id => {
+            const lower = id.toLowerCase();
+            if (lower.includes('whisper') || lower.includes('guard') || lower.includes('tts') || lower.includes('embed') || lower.includes('arabic') || lower.includes('allam')) {
+              return false;
+            }
+            return lower.includes('llama') || lower.includes('qwen') || lower.includes('deepseek') || lower.includes('gemma') || lower.includes('mixtral');
+          });
         
-        const preferred = models.includes('qwen/qwen3.8-27b') ? 'qwen/qwen3.8-27b' : models[0];
+        const preferred = models.find(m => m.includes('llama-3.3-70b')) || models.find(m => m.includes('qwen')) || models[0] || 'llama-3.3-70b-versatile';
         res.json({
-          active: preferred || 'qwen/qwen3.8-27b',
-          available: models.length ? models : ['qwen/qwen3.8-27b', 'openai/gpt-oss-120b']
+          active: preferred,
+          available: models.length ? models : ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant']
         });
       } catch (err) {
         res.json({
