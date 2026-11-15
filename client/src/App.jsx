@@ -230,6 +230,24 @@ export default function App() {
     setIsAIModalOpen(true);
   };
 
+  const handleResetProgress = () => {
+    const freshStats = {
+      xp: 0,
+      streak: 1,
+      level: 1,
+      totalAttempted: 0,
+      totalCorrect: 0,
+      lastActiveDate: new Date().toISOString().slice(0, 10),
+      bookmarks: [],
+      attempts: {},
+      subjectStats: {}
+    };
+    setStats(freshStats);
+    try {
+      localStorage.setItem(STATS_KEY, JSON.stringify(freshStats));
+    } catch (e) {}
+  };
+
   const handleResetFilters = () => {
     setSelectedSubject('All');
     setSelectedSubtopic('All');
@@ -256,6 +274,7 @@ export default function App() {
         onOpenMock={() => setIsMockExamOpen(true)}
         onOpenSpeedRun={() => setIsSpeedRunOpen(true)}
         onOpenScratchpad={() => setIsScratchpadOpen(true)}
+        onResetProgress={handleResetProgress}
       />
 
       {/* Main Container */}
