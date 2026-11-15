@@ -8,6 +8,7 @@ import VisualizersModal from './components/VisualizersModal';
 import AIAssistantDrawer from './components/AIAssistantDrawer';
 import ScratchpadModal from './components/ScratchpadModal';
 import RevisionDeck from './components/RevisionDeck';
+import CustomSelect from './components/CustomSelect';
 import { 
   Filter, 
   Search, 
@@ -341,55 +342,52 @@ export default function App() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1 text-xs sm:text-sm">
                 
                 {/* Subject Selector */}
-                <select
+                <CustomSelect
                   value={selectedSubject}
-                  onChange={e => { setSelectedSubject(e.target.value); setSelectedSubtopic('All'); setPage(1); }}
-                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold truncate"
-                >
-                  <option value="All">All Subjects ({totalQuestions})</option>
-                  {Object.keys(topics).map(subj => (
-                    <option key={subj} value={subj}>{subj}</option>
-                  ))}
-                </select>
+                  onChange={val => { setSelectedSubject(val); setSelectedSubtopic('All'); setPage(1); }}
+                  options={[
+                    { value: 'All', label: `All Subjects (${totalQuestions})` },
+                    ...Object.keys(topics).map(subj => ({ value: subj, label: subj }))
+                  ]}
+                />
 
                 {/* Subtopic Selector */}
-                <select
+                <CustomSelect
                   value={selectedSubtopic}
-                  onChange={e => { setSelectedSubtopic(e.target.value); setPage(1); }}
+                  onChange={val => { setSelectedSubtopic(val); setPage(1); }}
                   disabled={selectedSubject === 'All'}
-                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold disabled:opacity-50 truncate"
-                >
-                  <option value="All">{selectedSubject === 'All' ? 'Select a Subject First' : 'All Subtopics'}</option>
-                  {selectedSubject !== 'All' && topics[selectedSubject]?.subtopics && (
-                    Object.keys(topics[selectedSubject].subtopics).map(st => (
-                      <option key={st} value={st}>{st}</option>
-                    ))
-                  )}
-                </select>
+                  options={[
+                    { value: 'All', label: selectedSubject === 'All' ? 'Select a Subject First' : 'All Subtopics' },
+                    ...(selectedSubject !== 'All' && topics[selectedSubject]?.subtopics
+                      ? Object.keys(topics[selectedSubject].subtopics).map(st => ({ value: st, label: st }))
+                      : [])
+                  ]}
+                />
 
                 {/* Year Selector (Modern First: 2025 -> 1991) */}
-                <select
+                <CustomSelect
                   value={selectedYear}
-                  onChange={e => { setSelectedYear(e.target.value); setPage(1); }}
-                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer font-mono font-semibold shadow-sm truncate"
-                >
-                  <option value="All">All Exam Years (2025–1991)</option>
-                  {[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => (
-                    <option key={yr} value={yr}>GATE {yr}</option>
-                  ))}
-                </select>
+                  onChange={val => { setSelectedYear(val); setPage(1); }}
+                  options={[
+                    { value: 'All', label: 'All Exam Years (2025–1991)' },
+                    ...[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2016, 2014, 2013, 2012, 2006, 2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991].map(yr => ({
+                      value: String(yr),
+                      label: `GATE ${yr}`
+                    }))
+                  ]}
+                />
 
                 {/* Difficulty Selector */}
-                <select
+                <CustomSelect
                   value={selectedDifficulty}
-                  onChange={e => { setSelectedDifficulty(e.target.value); setPage(1); }}
-                  className="w-full bg-white dark:bg-[#0b0f19] border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-blue-600 dark:focus:border-blue-500 cursor-pointer shadow-sm font-semibold truncate"
-                >
-                  <option value="All">All Difficulties</option>
-                  <option value="Easy">Easy (1 Mark)</option>
-                  <option value="Medium">Medium (2 Marks)</option>
-                  <option value="Hard">Hard (Multi-Concept)</option>
-                </select>
+                  onChange={val => { setSelectedDifficulty(val); setPage(1); }}
+                  options={[
+                    { value: 'All', label: 'All Difficulties' },
+                    { value: 'Easy', label: 'Easy (1 Mark)' },
+                    { value: 'Medium', label: 'Medium (2 Marks)' },
+                    { value: 'Hard', label: 'Hard (Multi-Concept)' }
+                  ]}
+                />
               </div>
 
               {/* Reset Filters Bar */}
