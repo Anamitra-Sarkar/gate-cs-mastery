@@ -1,113 +1,92 @@
 {
   "General Aptitude": {
-    "total": 361,
-    "subtopics": {
-      "Verbal Ability & Grammar": 216,
-      "Verbal & Quantitative Aptitude": 89,
-      "Quantitative Aptitude & Reasoning": 55,
-      "Logical Reasoning & Data Interpretation": 1
-    }
-  },
-  "Databases": {
-    "total": 156,
-    "subtopics": {
-      "Relational Databases & SQL": 120,
-      "Relational Algebra & Tuple Calculus": 34,
-      "Functional Dependencies & Normalization": 1,
-      "Indexing & B/B+ Trees": 1
-    }
+    "Verbal Ability & Grammar": 93,
+    "Verbal & Quantitative Aptitude": 97,
+    "Quantitative Aptitude & Reasoning": 41,
+    "Logical Reasoning & Data Interpretation": 1
   },
   "Engineering Mathematics": {
-    "total": 98,
-    "subtopics": {
-      "Probability & Statistics": 41,
-      "Linear Algebra": 32,
-      "Calculus (Limits, Continuity, Integrals)": 21,
-      "Linear Algebra (Matrices, Eigenvalues, Rank)": 4
-    }
+    "Probability & Statistics": 20,
+    "Linear Algebra & Calculus": 17,
+    "Linear Algebra": 21,
+    "Linear Algebra & Probability": 8,
+    "Calculus (Limits, Continuity, Integrals)": 13,
+    "Linear Algebra & Eigenvalues": 1,
+    "Linear Algebra & Combinatorics": 1,
+    "Linear Algebra (Matrices, Eigenvalues, Rank)": 4
   },
   "Operating Systems": {
-    "total": 59,
-    "subtopics": {
-      "Processes, Concurrency & Deadlocks": 38,
-      "Memory Management & Paging": 18,
-      "CPU Scheduling": 3
-    }
-  },
-  "Compiler Design": {
-    "total": 14,
-    "subtopics": {
-      "Lexical Analysis & Tokens": 10,
-      "Parsing Techniques (LL, LR, SLR, LALR)": 2,
-      "Intermediate Code & Three-Address Code": 1,
-      "Syntax Directed Translation (SDT)": 1
-    }
-  },
-  "Digital Logic": {
-    "total": 77,
-    "subtopics": {
-      "Digital Circuits & Boolean Logic": 70,
-      "Boolean Algebra & Logic Gates": 6,
-      "Number Representations & Minimization": 1
-    }
-  },
-  "Theory of Computation": {
-    "total": 77,
-    "subtopics": {
-      "Context-Free Languages & Pushdown Automata": 18,
-      "Regular Languages & Finite Automata": 50,
-      "Turing Machines & Computability": 8,
-      "Grammars & Chomsky Hierarchy": 1
-    }
-  },
-  "Algorithms": {
-    "total": 68,
-    "subtopics": {
-      "Asymptotic Analysis & Recurrences": 24,
-      "Searching & Sorting": 9,
-      "Graph Algorithms": 28,
-      "Hashing & Data Structures": 5,
-      "Graph Algorithms (MST, Shortest Paths)": 2
-    }
-  },
-  "Programming & Data Structures": {
-    "total": 284,
-    "subtopics": {
-      "C Programming & Pointers": 249,
-      "Recursion & Function Stacks": 30,
-      "Trees & Binary Search Trees": 3,
-      "Linear Data Structures (Arrays, Lists, Stacks)": 2
-    }
-  },
-  "Computer Networks": {
-    "total": 45,
-    "subtopics": {
-      "Computer Networks & Protocols": 18,
-      "Data Link Layer & Flow Control": 27
-    }
+    "Processes, Concurrency & Deadlocks": 34,
+    "Memory Management & Paging": 12,
+    "Processes & CPU Scheduling": 6,
+    "CPU Scheduling": 3
   },
   "Data Science & AI": {
-    "total": 13,
-    "subtopics": {
-      "Machine Learning & Data Science": 9,
-      "Machine Learning (Supervised & Unsupervised)": 3,
-      "AI Search & Heuristics": 1
-    }
+    "Probability Distributions & Bayes Reasoning": 23,
+    "Artificial Intelligence & Heuristic Search": 7,
+    "Machine Learning & Pattern Recognition": 15,
+    "Applied Data Science Concepts": 11,
+    "Data Warehousing & Multidimensional OLAP": 1,
+    "Data Mining & Feature Engineering": 2,
+    "Machine Learning & Data Science": 4
+  },
+  "Compiler Design": {
+    "Lexical Analysis & Parsing": 7,
+    "Lexical Analysis & Tokens": 8,
+    "Parsing Techniques (LL, LR, SLR, LALR)": 2,
+    "Intermediate Code & Three-Address Code": 1,
+    "Syntax Directed Translation": 1,
+    "Syntax Directed Translation (SDT)": 1
+  },
+  "Databases": {
+    "Relational Databases & SQL": 116,
+    "Relational Algebra & Tuple Calculus": 28
+  },
+  "Digital Logic": {
+    "Digital Circuits & Boolean Logic": 55,
+    "Combinational & Sequential Circuits": 2,
+    "Boolean Algebra & Logic Gates": 6,
+    "Number Representations & Minimization": 1
+  },
+  "Programming & Data Structures": {
+    "Python Programming & Data Structures": 11,
+    "C Programming & Pointers": 176,
+    "C Programming & Data Structures": 12,
+    "Recursion & Arrays": 1,
+    "C Programming & Numerical Simulation": 1,
+    "Recursion & Function Stacks": 23,
+    "Trees & Binary Search Trees": 2,
+    "Linear Data Structures (Arrays, Lists, Stacks)": 2
+  },
+  "Theory of Computation": {
+    "Context-Free Languages & Pushdown Automata": 18,
+    "Regular Languages & Finite Automata": 44,
+    "Turing Machines & Computability": 7,
+    "Grammars & Chomsky Hierarchy": 1
+  },
+  "Algorithms": {
+    "Asymptotic Analysis & Recurrences": 19,
+    "Searching & Sorting": 5,
+    "Searching, Sorting & Graph Algorithms": 9,
+    "Algorithm Design & Complexity": 3,
+    "Graph Algorithms": 21,
+    "Hashing & Data Structures": 4,
+    "Graph Algorithms (MST, Shortest Paths)": 2
+  },
+  "Computer Networks": {
+    "Computer Networks & Protocols": 15,
+    "Network Layer & Routing": 11,
+    "Data Link Layer & Flow Control": 24
   },
   "Computer Organization & Architecture": {
-    "total": 56,
-    "subtopics": {
-      "Instruction Set & Addressing Modes": 42,
-      "Cache Memory & Hierarchy": 9,
-      "Pipelining & Processor Design": 5
-    }
+    "Pipelining & Instruction Set": 33,
+    "Instruction Set & Addressing Modes": 31,
+    "Cache Memory & Hierarchy": 6,
+    "Pipelining & Processor Design": 3
   },
   "Discrete Mathematics": {
-    "total": 30,
-    "subtopics": {
-      "Propositional & First-Order Logic": 18,
-      "Graph Theory & Connectivity": 11,
-      "Sets, Relations & Functions": 1
-    }
+    "Propositional & First-Order Logic": 16,
+    "Graph Theory & Connectivity": 10,
+    "Sets, Relations & Functions": 1
   }
 }
