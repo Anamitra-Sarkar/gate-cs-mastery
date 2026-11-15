@@ -1,19 +1,19 @@
 {
   "General Aptitude": {
-    "total": 237,
+    "total": 231,
     "subtopics": {
-      "Verbal Ability & Grammar": 95,
-      "Verbal & Quantitative Aptitude": 96,
+      "Verbal Ability & Grammar": 90,
+      "Verbal & Quantitative Aptitude": 95,
       "Quantitative Aptitude & Reasoning": 45,
       "Logical Reasoning & Data Interpretation": 1
     }
   },
   "Engineering Mathematics": {
-    "total": 93,
+    "total": 94,
     "subtopics": {
       "Probability & Statistics": 21,
       "Linear Algebra & Calculus": 17,
-      "Linear Algebra": 24,
+      "Linear Algebra": 25,
       "Linear Algebra & Probability": 8,
       "Calculus (Limits, Continuity, Integrals)": 17,
       "Linear Algebra & Eigenvalues": 1,
@@ -46,15 +46,17 @@
     }
   },
   "Compiler Design": {
-    "total": 22,
+    "total": 24,
     "subtopics": {
       "Lexical Analysis & Parsing": 7,
       "Lexical Analysis & Tokens": 9,
       "Parsing Techniques (LL, LR, SLR, LALR)": 2,
+      "Code Optimization & Basic Blocks": 1,
       "Intermediate Code & Three-Address Code": 1,
       "Compiler Architecture & Intermediate Code": 1,
       "Syntax Directed Translation": 1,
-      "Syntax Directed Translation (SDT)": 1
+      "Syntax Directed Translation (SDT)": 1,
+      "Bottom-Up Parsing & Shift-Reduce": 1
     }
   },
   "Databases": {
@@ -76,7 +78,7 @@
     }
   },
   "Programming & Data Structures": {
-    "total": 297,
+    "total": 298,
     "subtopics": {
       "Python Programming & Data Structures": 10,
       "C Programming & Pointers": 244,
@@ -84,6 +86,7 @@
       "Recursion & Arrays": 1,
       "C Programming & Numerical Simulation": 1,
       "Recursion & Function Stacks": 25,
+      "Binary Trees & Traversals": 1,
       "Trees & Binary Search Trees": 2,
       "Linear Data Structures (Arrays, Lists, Stacks)": 2
     }
@@ -128,11 +131,13 @@
     }
   },
   "Discrete Mathematics": {
-    "total": 31,
+    "total": 33,
     "subtopics": {
       "Propositional & First-Order Logic": 18,
+      "Graph Theory & Trees": 1,
       "Graph Theory & Connectivity": 11,
       "Sets, Relations & Functions": 1,
+      "Graph Theory": 1,
       "Relations & Equivalence": 1
     }
   }

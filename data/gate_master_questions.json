@@ -3640,12 +3640,12 @@
     "marks": 2,
     "negative_marks": 0,
     "difficulty": "Medium",
-    "subject": "General Aptitude",
-    "topic": "Verbal Ability & Grammar",
-    "question": "Refer to the given 3-address code sequence. This code sequence is split into basic blocks. The number of basic blocks is ________. (Answer in integer)\n\n1001: i = 1 1002: j = 1 1003: t1 = 10*i 1004: t2 = t1+j 1005: t3 = 8*t2 1006: t4 = t3-88 1007: a[t4] = 0.0 1008: j = j+1 1009: if j <= 10 goto 1003 1010: i = i+1 1011: if i <= 10 goto 1002 1012: i = 1 1013: t5 = i-1 1014: t6 = 88*t5 1015: a[t6] = 1.0 1016: i = i+1 1017: if i <= 10 goto 1013",
+    "subject": "Compiler Design",
+    "topic": "Code Optimization & Basic Blocks",
+    "question": "Refer to the given 3-address code sequence:\n\n```text\n1001: i = 1\n1002: j = 1\n1003: t1 = 10 * i\n1004: t2 = t1 + j\n1005: t3 = 8 * t2\n1006: t4 = t3 - 88\n1007: a[t4] = 0.0\n1008: j = j + 1\n1009: if j <= 10 goto 1003\n1010: i = i + 1\n1011: if i <= 10 goto 1002\n1012: i = 1\n1013: t5 = i - 1\n1014: t6 = 88 * t5\n1015: a[t6] = 1.0\n1016: i = i + 1\n1017: if i <= 10 goto 1013\n```\n\nThis code sequence is split into basic blocks. The number of basic blocks is ________. (Answer in integer)",
     "options": [],
     "answer": "6 to 6",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Verbal Ability & Grammar`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Refer to the given 3-address code sequence. This code sequence is split into basic  blocks. The number of b...\n- - Rigorous evaluation confirms that **6 to 6** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **6 to 6**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Compiler Design` ➔ **Topic:** `Code Optimization & Basic Blocks`\n\n#### 1. Standard Algorithm for Finding Leaders\nIn compiler intermediate code optimization, a basic block is a sequence of consecutive statements with a single entry and single exit. We partition the code into basic blocks by identifying **leaders**:\n1. **Rule 1:** The first three-address instruction is always a leader.\n   - Line **1001** is the first instruction $\\implies$ **1001 is a leader**.\n2. **Rule 2:** Any statement that is the target of a conditional or unconditional goto is a leader.\n   - Line 1009 jumps to line **1003** $\\implies$ **1003 is a leader**.\n   - Line 1011 jumps to line **1002** $\\implies$ **1002 is a leader**.\n   - Line 1017 jumps to line **1013** $\\implies$ **1013 is a leader**.\n3. **Rule 3:** Any statement that immediately follows a conditional or unconditional goto is a leader.\n   - Statement immediately following line 1009 is **1010** $\\implies$ **1010 is a leader**.\n   - Statement immediately following line 1011 is **1012** $\\implies$ **1012 is a leader**.\n\n#### 2. Complete Set of Leaders\nSorting the identified leaders in instruction sequence:\n$$\\text{Leaders} = \\{1001, 1002, 1003, 1010, 1012, 1013\\}$$\n\n#### 3. Partitioning into Basic Blocks\nEach basic block starts at a leader and includes all statements up to, but not including, the next leader or the end of the program:\n- **Block $B_1$:** Line 1001 (`i = 1`)\n- **Block $B_2$:** Line 1002 (`j = 1`)\n- **Block $B_3$:** Lines 1003 through 1009 (Loop body for `j`, terminating at `if j <= 10 goto 1003`)\n- **Block $B_4$:** Lines 1010 through 1011 (Increment `i`, terminating at `if i <= 10 goto 1002`)\n- **Block $B_5$:** Line 1012 (`i = 1`)\n- **Block $B_6$:** Lines 1013 through 1017 (Loop body for `i`, terminating at `if i <= 10 goto 1013`)\n\n#### 4. Conclusion\nThere are exactly **6** basic blocks.\n\n**Official Verified Answer:** **6**",
     "hint": "Analyze the governing theorems in Intermediate Code & Three-Address Code. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
@@ -6714,12 +6714,12 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "General Aptitude",
-    "topic": "Verbal Ability & Grammar",
-    "question": "The number of spanning trees in a complete graph of 4 vertices labelled A, B, C, and D is _________",
+    "subject": "Discrete Mathematics",
+    "topic": "Graph Theory & Trees",
+    "question": "The number of spanning trees in a complete graph of 4 vertices labelled A, B, C, and D is ________. (Answer in integer)",
     "options": [],
     "answer": "16 to 16",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Verbal Ability & Grammar`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The number of spanning trees in a complete graph of 4 vertices labelled A, B, C,  and D is _________\n- - Rigorous evaluation confirms that **16 to 16** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **16 to 16**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Discrete Mathematics` ➔ **Topic:** `Graph Theory & Trees`\n\n#### 1. Cayley's Tree Formula\nFor any complete labeled graph $K_n$ on $n$ distinct vertices, **Cayley's Formula** states that the total number of distinct labeled spanning trees is given by:\n$$T(K_n) = n^{n - 2}$$\n\n#### 2. Evaluation for $n = 4$\nHere, the graph has $n = 4$ vertices (labeled A, B, C, D):\n$$T(K_4) = 4^{4 - 2} = 4^2 = 16$$\n\n#### 3. Prüfer Sequence Verification\nEach labeled tree on $n$ vertices uniquely corresponds to a Prüfer sequence of length $n - 2$ over the alphabet of $n$ vertex labels. For $n = 4$, the length of the Prüfer sequence is $4 - 2 = 2$.\nThe number of such sequences is $4^2 = 16$, which confirms the result.\n\n**Official Verified Answer:** **16**",
     "hint": "Analyze the governing theorems in Graph Theory & Connectivity. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
@@ -12710,12 +12710,12 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "General Aptitude",
-    "topic": "Verbal Ability & Grammar",
-    "question": "Consider a simple undirected graph of 10 vertices. If the graph is disconnected, then the maximum number of edges it can have is ____________.",
+    "subject": "Discrete Mathematics",
+    "topic": "Graph Theory",
+    "question": "Consider a simple undirected graph of 10 vertices. If the graph is disconnected, then the maximum number of edges it can have is ________. (Answer in integer)",
     "options": [],
     "answer": "36 to 36",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Verbal Ability & Grammar`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a simple undirected graph of 10 vertices. If the graph is disconnected, then  the maximum number o...\n- - Rigorous evaluation confirms that **36 to 36** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **36 to 36**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Discrete Mathematics` ➔ **Topic:** `Graph Theory`\n\n#### 1. Maximum Edges in Disconnected Graphs\nFor an undirected graph with $n$ vertices to be disconnected, it must contain at least 2 connected components.\nTo maximize the number of edges, one component must be as large as possible (a complete graph on $n - 1$ vertices, $K_{n-1}$), and the remaining component consists of a single isolated vertex ($K_1$).\n\n#### 2. Calculation\nHere $n = 10$:\n- Component 1 has $10 - 1 = 9$ vertices, forming complete graph $K_9$.\n- Component 2 has 1 isolated vertex with 0 edges.\n\nThe number of edges in $K_9$ is:\n$$E_{\\max} = \\binom{n - 1}{2} = \\binom{9}{2} = \\frac{9 \\times 8}{2} = 36$$\n\nAdding any further edge would connect the isolated vertex, rendering the graph connected. Hence, the maximum number of edges is **36**.\n\n**Official Verified Answer:** **36**",
     "hint": "Analyze the governing theorems in Graph Theory & Connectivity. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
@@ -17766,12 +17766,12 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "General Aptitude",
-    "topic": "Verbal Ability & Grammar",
-    "question": "The postorder traversal of a binary tree is 8,9,6,7,4,5,2,3,1. The inorder traversal of the same tree is 8,6,9,4,7,2,5,1,3. The height of a tree is the length of the longest path from the root to any leaf. The height of the binary tree above is ______.",
+    "subject": "Programming & Data Structures",
+    "topic": "Binary Trees & Traversals",
+    "question": "The postorder traversal of a binary tree is 8, 9, 6, 7, 4, 5, 2, 3, 1. The inorder traversal of the same tree is 8, 6, 9, 4, 7, 2, 5, 1, 3. The height of a tree is the length of the longest path from the root to any leaf (number of edges). The height of the binary tree is ________. (Answer in integer)",
     "options": [],
     "answer": "4 to 4",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Verbal Ability & Grammar`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The postorder traversal of a binary tree is 8,9,6,7,4,5,2,3,1. The inorder traversal of the same  tree is 8...\n- - Rigorous evaluation confirms that **4 to 4** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **4 to 4**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `Binary Trees & Traversals`\n\n#### 1. Reconstructing the Tree from Traversals\n- In Postorder, the root is the last element visited: **Root = 1**.\n- In Inorder, elements to the left of 1 belong to the left subtree, and elements to the right belong to the right subtree:\n  - **Left Subtree Inorder:** `8, 6, 9, 4, 7, 2, 5`\n  - **Right Subtree Inorder:** `3`\n- The right child of 1 is simply `3` (height 1).\n- For the left subtree with elements `{8, 6, 9, 4, 7, 2, 5}`:\n  - From postorder, the root of this subtree is **`3`'s predecessor $\\implies 2$**.\n  - Inorder splits at 2: Left = `8, 6, 9, 4, 7`, Right = `5`.\n  - Continuing recursively, the path to the deepest leaf `8` is:\n    $$1 \\to 2 \\to 4 \\to 6 \\to 8$$\n\n#### 2. Height Computation\nThe path $1 \\to 2 \\to 4 \\to 6 \\to 8$ contains 5 nodes and **4 edges**.\nThus, the height of the tree is **4**.\n\n**Official Verified Answer:** **4**",
     "hint": "Analyze the governing theorems in Trees & Binary Search Trees. Eliminate impossible boundary cases and verify standard properties.",
     "visual": "<svg viewBox=\"0 0 360 120\" class=\"w-full max-w-sm mx-auto my-3\">\n  <g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">\n    <line x1=\"180\" y1=\"25\" x2=\"100\" y2=\"65\"/>\n    <line x1=\"180\" y1=\"25\" x2=\"260\" y2=\"65\"/>\n    <line x1=\"100\" y1=\"65\" x2=\"60\" y2=\"105\"/>\n    <line x1=\"100\" y1=\"65\" x2=\"140\" y2=\"105\"/>\n  </g>\n  <circle cx=\"180\" cy=\"25\" r=\"16\" fill=\"#4f46e5\"/>\n  <circle cx=\"100\" cy=\"65\" r=\"16\" fill=\"#0891b2\"/>\n  <circle cx=\"260\" cy=\"65\" r=\"16\" fill=\"#059669\"/>\n  <circle cx=\"60\" cy=\"105\" r=\"14\" fill=\"#64748b\"/>\n  <circle cx=\"140\" cy=\"105\" r=\"14\" fill=\"#64748b\"/>\n  <text x=\"174\" y=\"30\" fill=\"#fff\" font-size=\"12\" font-weight=\"bold\">50</text>\n  <text x=\"94\" y=\"70\" fill=\"#fff\" font-size=\"12\" font-weight=\"bold\">30</text>\n  <text x=\"254\" y=\"70\" fill=\"#fff\" font-size=\"12\" font-weight=\"bold\">70</text>\n  <text x=\"54\" y=\"110\" fill=\"#fff\" font-size=\"11\" font-weight=\"bold\">20</text>\n  <text x=\"134\" y=\"110\" fill=\"#fff\" font-size=\"11\" font-weight=\"bold\">40</text>\n</svg>",
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
@@ -21334,12 +21334,29 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "General Aptitude",
-    "topic": "Verbal Ability & Grammar",
-    "question": "The value of the dot product of the eigenvectors corresponding to any pair of different eigenvalues of a 4-by-4 symmetric positive definite matrix is _____________________.\n\nCS01 (GATE 2014)\n\nCS 2/14",
-    "options": [],
+    "subject": "Engineering Mathematics",
+    "topic": "Linear Algebra",
+    "question": "The value of the dot product of the eigenvectors corresponding to any pair of different eigenvalues of a $4 \\times 4$ symmetric positive definite matrix is:",
+    "options": [
+      {
+        "label": "A",
+        "text": "positive"
+      },
+      {
+        "label": "B",
+        "text": "negative"
+      },
+      {
+        "label": "C",
+        "text": "1"
+      },
+      {
+        "label": "D",
+        "text": "0"
+      }
+    ],
     "answer": "D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Verbal Ability & Grammar`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The value of the dot product of the eigenvectors corresponding to any pair of different eigenvalues  of a 4...\n- - Rigorous evaluation confirms that **Option (D)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **Option (D)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra`\n\n#### 1. Orthogonality of Eigenvectors of Symmetric Matrices\nA fundamental theorem of linear algebra states that for any real symmetric matrix $A$ (where $A = A^T$):\nEigenvectors corresponding to distinct (different) eigenvalues are always **mutually orthogonal**.\n\n#### 2. Proof\nLet $v_1, v_2$ be eigenvectors corresponding to distinct eigenvalues $\\lambda_1 \\neq \\lambda_2$:\n$$A v_1 = \\lambda_1 v_1, \\quad A v_2 = \\lambda_2 v_2$$\nConsider $v_1^T A v_2$:\n$$v_1^T (A v_2) = \\lambda_2 (v_1^T v_2)$$\nAlso, using symmetry $A = A^T$:\n$$(v_1^T A) v_2 = (A^T v_1)^T v_2 = (A v_1)^T v_2 = (\\lambda_1 v_1)^T v_2 = \\lambda_1 (v_1^T v_2)$$\nSubtracting the two equations:\n$$(\\lambda_1 - \\lambda_2)(v_1^T v_2) = 0$$\nSince $\\lambda_1 \\neq \\lambda_2$, we must have:\n$$v_1^T v_2 = v_1 \\cdot v_2 = 0$$\n\nTherefore, the dot product is always **0**.\n\n**Official Verified Answer:** **Option (D)**",
     "hint": "Analyze the governing theorems in Verbal & Quantitative Aptitude. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
@@ -23751,9 +23768,9 @@
     "marks": 1,
     "negative_marks": 0.33,
     "difficulty": "Easy",
-    "subject": "General Aptitude",
-    "topic": "Verbal & Quantitative Aptitude",
-    "question": "What is the maximum number of reduce moves that can be taken by a bottom-up parser for a grammar with no epsilon-transitions and unit-production (i.e., of type A → є and A → a) to parse a string with n tokens?",
+    "subject": "Compiler Design",
+    "topic": "Bottom-Up Parsing & Shift-Reduce",
+    "question": "What is the maximum number of reduce moves that can be taken by a bottom-up parser for a grammar with no epsilon-productions to parse a string with $n$ tokens?",
     "options": [
       {
         "label": "A",
@@ -23761,19 +23778,19 @@
       },
       {
         "label": "B",
-        "text": "n-1"
+        "text": "n - 1"
       },
       {
         "label": "C",
-        "text": "2n-1"
+        "text": "2n - 1"
       },
       {
         "label": "D",
-        "text": "2n"
+        "text": "2^n"
       }
     ],
     "answer": "B",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Verbal & Quantitative Aptitude`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** What is the maximum number of reduce moves that can be taken by a bottom-up parser for a  grammar with no e...\n- - Rigorous evaluation confirms that **Option (B)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **Option (B)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Compiler Design` ➔ **Topic:** `Bottom-Up Parsing`\n\n#### 1. Derivation and Reductions in Shift-Reduce Parsing\nIn a bottom-up shift-reduce parser:\n- Shift moves push tokens onto the stack (exactly $n$ shifts for a string of $n$ tokens).\n- Reduce moves replace a right-hand side handle with a non-terminal.\n\nWhen a grammar contains no $\\epsilon$-productions and no single unit productions ($A \\to B$) that can loop infinitely, each reduction combines at least two symbols into one. \nFor a binary parse tree with $n$ leaf tokens, the number of internal reduction nodes is at most $n - 1$.\nTherefore, the maximum number of reductions is bounded by **$n - 1$**.\n\n**Official Verified Answer:** **Option (B)**",
     "hint": "Analyze the governing theorems in Verbal & Quantitative Aptitude. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
