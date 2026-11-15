@@ -22,73 +22,79 @@ import {
 function preCleanMath(text) {
   if (!text) return '';
   
-  let s = text;
+  // Protect markdown code fences ```...``` from being modified by math cleanup
+  const codeBlockSegments = text.split(/(```[\s\S]*?```)/g);
+  for (let c = 0; c < codeBlockSegments.length; c += 2) {
+    if (!codeBlockSegments[c]) continue;
+    let s = codeBlockSegments[c];
 
-  // 1. Standardize \[ ... \] and \( ... \) to $$ and $
-  s = s.replace(/\\\[([\s\S]+?)\\\]/g, '\n\n$$$$$1$$$$\n\n');
-  s = s.replace(/\\\(([\s\S]+?)\\\)/g, ' $$$1$$ ');
+    // 1. Standardize \[ ... \] and \( ... \) to $$ and $
+    s = s.replace(/\\\[([\s\S]+?)\\\]/g, '\n\n$$$$$1$$$$\n\n');
+    s = s.replace(/\\\(([\s\S]+?)\\\)/g, ' $$$1$$ ');
 
-  // 2. Clean isolated raw LaTeX symbol commands and exponent corruption outside of math blocks
-  const rawReplacements = [
-    [/\\to\b/g, '→'],
-    [/\\rightarrow\b/g, '→'],
-    [/\\leftarrow\b/g, '←'],
-    [/\\Rightarrow\b/g, '⇒'],
-    [/\\Leftarrow\b/g, '⇐'],
-    [/\\iff\b/g, '⟺'],
-    [/\\times\b/g, '×'],
-    [/\\le\b|\\leq\b/g, '≤'],
-    [/\\ge\b|\\geq\b/g, '≥'],
-    [/\\neq\b/g, '≠'],
-    [/\\pm\b/g, '±'],
-    [/\\approx\b/g, '≈'],
-    [/\\equiv\b/g, '≡'],
-    [/\\in\b/g, '∈'],
-    [/\\notin\b/g, '∉'],
-    [/\\subset\b/g, '⊂'],
-    [/\\subseteq\b/g, '⊆'],
-    [/\\cup\b/g, '∪'],
-    [/\\cap\b/g, '∩'],
-    [/\\cdot\b/g, '·'],
-    [/\\ldots\b|\\dots\b/g, '…'],
-    [/\\infty\b/g, '∞'],
-    [/\\Theta\b/g, 'Θ'],
-    [/\\Omega\b/g, 'Ω'],
-    [/\\Sigma\b/g, 'Σ'],
-    [/\\Delta\b/g, 'Δ'],
-    [/\\alpha\b/g, 'α'],
-    [/\\beta\b/g, 'β'],
-    [/\\gamma\b/g, 'γ'],
-    [/\\lambda\b/g, 'λ'],
-    [/\\mu\b/g, 'μ'],
-    [/\\pi\b/g, 'π'],
-    [/\\sigma\b/g, 'σ'],
-    [/\\phi\b/g, 'φ'],
-  ];
+    // 2. Clean isolated raw LaTeX symbol commands and exponent corruption outside of math blocks
+    const rawReplacements = [
+      [/\\to\b/g, '→'],
+      [/\\rightarrow\b/g, '→'],
+      [/\\leftarrow\b/g, '←'],
+      [/\\Rightarrow\b/g, '⇒'],
+      [/\\Leftarrow\b/g, '⇐'],
+      [/\\iff\b/g, '⟺'],
+      [/\\times\b/g, '×'],
+      [/\\le\b|\\leq\b/g, '≤'],
+      [/\\ge\b|\\geq\b/g, '≥'],
+      [/\\neq\b/g, '≠'],
+      [/\\pm\b/g, '±'],
+      [/\\approx\b/g, '≈'],
+      [/\\equiv\b/g, '≡'],
+      [/\\in\b/g, '∈'],
+      [/\\notin\b/g, '∉'],
+      [/\\subset\b/g, '⊂'],
+      [/\\subseteq\b/g, '⊆'],
+      [/\\cup\b/g, '∪'],
+      [/\\cap\b/g, '∩'],
+      [/\\cdot\b/g, '·'],
+      [/\\ldots\b|\\dots\b/g, '…'],
+      [/\\infty\b/g, '∞'],
+      [/\\Theta\b/g, 'Θ'],
+      [/\\Omega\b/g, 'Ω'],
+      [/\\Sigma\b/g, 'Σ'],
+      [/\\Delta\b/g, 'Δ'],
+      [/\\alpha\b/g, 'α'],
+      [/\\beta\b/g, 'β'],
+      [/\\gamma\b/g, 'γ'],
+      [/\\lambda\b/g, 'λ'],
+      [/\\mu\b/g, 'μ'],
+      [/\\pi\b/g, 'π'],
+      [/\\sigma\b/g, 'σ'],
+      [/\\phi\b/g, 'φ'],
+    ];
 
-  const parts = s.split(/(\$\$[\s\S]+?\$\$|\$.+?\$)/g);
-  for (let i = 0; i < parts.length; i += 2) {
-    if (parts[i]) {
-      let seg = parts[i];
-      seg = seg.replace(/105\s*distinct/g, '10⁵ distinct');
-      seg = seg.replace(/([a-zA-Z\u{1D400}-\u{1D7FF}])2(\s|[\),;.])/gu, '$1²$2');
-      seg = seg.replace(/([a-zA-Z\u{1D400}-\u{1D7FF}])3(\s|[\),;.])/gu, '$1³$2');
-      seg = seg.replace(/\b2([nNkK])\b/g, '2^$1');
+    const parts = s.split(/(\$\$[\s\S]+?\$\$|\$.+?\$)/g);
+    for (let i = 0; i < parts.length; i += 2) {
+      if (parts[i]) {
+        let seg = parts[i];
+        seg = seg.replace(/105\s*distinct/g, '10⁵ distinct');
+        seg = seg.replace(/\bO\(n2\)/g, 'O(n²)');
+        seg = seg.replace(/\bO\(n3\)/g, 'O(n³)');
+        seg = seg.replace(/\b2([nNkK])\b/g, '2^$1');
 
-      seg = seg.replace(/\$\\to\$/g, '→');
-      seg = seg.replace(/\$\\rightarrow\$/g, '→');
-      seg = seg.replace(/\$\\times\$/g, '×');
-      seg = seg.replace(/\$\\le\$/g, '≤');
-      seg = seg.replace(/\$\\ge\$/g, '≥');
-      seg = seg.replace(/\$\\neq\$/g, '≠');
+        seg = seg.replace(/\$\\to\$/g, '→');
+        seg = seg.replace(/\$\\rightarrow\$/g, '→');
+        seg = seg.replace(/\$\\times\$/g, '×');
+        seg = seg.replace(/\$\\le\$/g, '≤');
+        seg = seg.replace(/\$\\ge\$/g, '≥');
+        seg = seg.replace(/\$\\neq\$/g, '≠');
 
-      for (const [re, rep] of rawReplacements) {
-        seg = seg.replace(re, rep);
+        for (const [re, rep] of rawReplacements) {
+          seg = seg.replace(re, rep);
+        }
+        parts[i] = seg;
       }
-      parts[i] = seg;
     }
+    codeBlockSegments[c] = parts.join('');
   }
-  return parts.join('');
+  return codeBlockSegments.join('');
 }
 
 // Dedicated IDE/Terminal-Style Code Block
