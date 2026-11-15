@@ -842,7 +842,7 @@
     "difficulty": "Hard",
     "subject": "Engineering Mathematics",
     "topic": "Linear Algebra",
-    "question": "The number of additions and multiplications involved in performing Gaussian elimina- tion on any n × n upper triangular matrix is of the order",
+    "question": "The number of additions and multiplications involved in performing Gaussian elimination on any n × n upper triangular matrix is of the order",
     "options": [
       {
         "label": "A",
@@ -1108,7 +1108,7 @@
     "difficulty": "Easy",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "If a relational decomposition is not dependency-preserving, which one of the following relational operators will be executed more frequently in order to maintain the depen- dencies?",
+    "question": "If a relational decomposition is not dependency-preserving, which one of the following relational operators will be executed more frequently in order to maintain the dependencies?",
     "options": [
       {
         "label": "A",
@@ -1184,7 +1184,7 @@
     "difficulty": "Easy",
     "subject": "Databases",
     "topic": "Relational Algebra & Tuple Calculus",
-    "question": "Consider the following three relations: Car (model, year, serial, color) Make (maker, model) Own (owner, serial) A tuple in Car represents a speciﬁc car of a given model, made in a given year, with a serial number and a color. A tuple in Make speciﬁes that a maker company makes cars of a certain model. A tuple in Own speciﬁes that an owner owns the car with a given serial number. Keys are underlined; (owner, serial) together form key for Own. (▷◁denotes natural join) πowner(Own ▷◁(σcolor=“red”(Car ▷◁(σmaker=“ABC”Make)))) Which one of the following options describes what the above expression computes?",
+    "question": "Consider the following three relations: Car (model, year, serial, color) Make (maker, model) Own (owner, serial) A tuple in Car represents a specific car of a given model, made in a given year, with a serial number and a color. A tuple in Make specifies that a maker company makes cars of a certain model. A tuple in Own specifies that an owner owns the car with a given serial number. Keys are underlined; (owner, serial) together form key for Own. (▷◁denotes natural join) πowner(Own ▷◁(σcolor=“red”(Car ▷◁(σmaker=“ABC”Make)))) Which one of the following options describes what the above expression computes?",
     "options": [
       {
         "label": "A",
@@ -1564,7 +1564,7 @@
     "difficulty": "Easy",
     "subject": "Data Science & AI",
     "topic": "Machine Learning & Data Science",
-    "question": "Consider designing a linear classiﬁer y = sign(f(x; w, b)), f(x; w, b) = w⊤x + b on a dataset D = {(x1, y1), (x2, y2), . . . , (xN, yN)}, xi ∈Rd, yi ∈{+1, −1}, i = 1, 2, . . . , N. Recall that the sign function outputs +1 if the argument is positive, and −1 if the argument is non-positive. The parameters w and b are updated as per the following training algorithm: wnew = wold + ynxn, bnew = bold + yn whenever sign(f(xn; wold, bold)) ̸= yn. In other words, whenever the classiﬁer wrongly predicts a sample (xn, yn) from the dataset, wold gets updated to wnew, and likewise bold gets updated to bnew. Consider the case (xn, +1), f(xn; wold, bold) < 0. Then",
+    "question": "Consider designing a linear classifier y = sign(f(x; w, b)), f(x; w, b) = w⊤x + b on a dataset D = {(x1, y1), (x2, y2), . . . , (xN, yN)}, xi ∈Rd, yi ∈{+1, −1}, i = 1, 2, . . . , N. Recall that the sign function outputs +1 if the argument is positive, and −1 if the argument is non-positive. The parameters w and b are updated as per the following training algorithm: wnew = wold + ynxn, bnew = bold + yn whenever sign(f(xn; wold, bold)) ̸= yn. In other words, whenever the classifier wrongly predicts a sample (xn, yn) from the dataset, wold gets updated to wnew, and likewise bold gets updated to bnew. Consider the case (xn, +1), f(xn; wold, bold) < 0. Then",
     "options": [
       {
         "label": "A",
@@ -1584,7 +1584,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning & Data Science`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider designing a linear classiﬁer y = sign(f(x; w, b)), f(x; w, b) = w⊤x + b on a dataset D = {(x1, y1)...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning & Data Science`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider designing a linear classifier y = sign(f(x; w, b)), f(x; w, b) = w⊤x + b on a dataset D = {(x1, y1)...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Asymptotic Analysis & Recurrences. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Supervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.",
@@ -1678,7 +1678,7 @@
     "difficulty": "Easy",
     "subject": "Engineering Mathematics",
     "topic": "Calculus (Limits, Continuity, Integrals)",
-    "question": "Consider two functions f : R →R and g : R →(1, ∞). Both functions are differen- tiable at a point c. Which of the following functions is/are ALWAYS differentiable at c? The symbol · denotes product and the symbol ◦denotes composition of functions.",
+    "question": "Consider two functions f : R →R and g : R →(1, ∞). Both functions are differentiable at a point c. Which of the following functions is/are ALWAYS differentiable at c? The symbol · denotes product and the symbol ◦denotes composition of functions.",
     "options": [
       {
         "label": "A",
@@ -2175,7 +2175,7 @@
     "difficulty": "Easy",
     "subject": "General Aptitude",
     "topic": "Verbal Ability & Grammar",
-    "question": "Let C1 and C2 be two sets of objects. Let D(x, y) be a measure of dissimilarity between two objects x and y. Consider the following deﬁnitions of dissimilarity between C1 and C2. DIS-1(C1, C2) = max x∈C1, y∈C2D(x, y) DIS-2(C1, C2) = min x∈C1, y∈C2D(x, y) Which of the following statements is/are correct?",
+    "question": "Let C1 and C2 be two sets of objects. Let D(x, y) be a measure of dissimilarity between two objects x and y. Consider the following definitions of dissimilarity between C1 and C2. DIS-1(C1, C2) = max x∈C1, y∈C2D(x, y) DIS-2(C1, C2) = min x∈C1, y∈C2D(x, y) Which of the following statements is/are correct?",
     "options": [
       {
         "label": "A",
@@ -2234,15 +2234,15 @@
     "difficulty": "Easy",
     "subject": "Engineering Mathematics",
     "topic": "Probability & Statistics",
-    "question": "There are three boxes containing white balls and black balls. Box-1 contains 2 black and 1 white balls. Box-2 contains 1 black and 2 white balls. Box-3 contains 3 black and 3 white balls. In a random experiment, one of these boxes is selected, where the probability of choos- ing Box-1 is 1 2, Box-2 is 1 6, and Box-3 is 1\n3. A ball is drawn at random from the selected\nbox. Given that the ball drawn is white, the probability that it is drawn from Box-2 is (Round off to two decimal places)",
+    "question": "There are three boxes containing white balls and black balls. Box-1 contains 2 black and 1 white balls. Box-2 contains 1 black and 2 white balls. Box-3 contains 3 black and 3 white balls.\n\nIn a random experiment, one of these boxes is selected, where the probability of choosing Box-1 is $1/2$, Box-2 is $1/6$, and Box-3 is $1/3$.\n\nA ball is drawn at random from the selected box. Given that the ball drawn is white, the probability that it is drawn from Box-2 is _______ . (Round off to two decimal places)",
     "options": [],
     "answer": "0.25 to 0.25",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Probability & Statistics`\n\n#### 1. Core Principle & Theory\nProbability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.\n\n#### 2. Concrete Example & Mental Model\nFor rolling two fair 6-sided dice, expected sum is E[Die 1] + E[Die 2] = 3.5 + 3.5 = 7.0 by linearity of expectation.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** There are three boxes containing white balls and black balls. Box-1 contains 2 black and 1 white balls. Box...\n- - Rigorous evaluation confirms that **0.25 to 0.25** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nIndependent events: P(A cap B) = P(A)P(B). Mutually exclusive events: P(A cap B) = 0. Non-zero mutually exclusive events can NEVER be independent.\n\n**Official Verified Answer:** **0.25 to 0.25**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Probability & Statistics`\n\n#### 1. Core Principle & Theory\nAccording to **Bayes' Theorem**, given an event $W$ (drawing a white ball) and mutually exclusive, exhaustive box selections $B_1, B_2, B_3$:\n$$P(B_2 | W) = \\frac{P(B_2) \\cdot P(W | B_2)}{P(W)}$$\nwhere by the **Law of Total Probability**:\n$$P(W) = P(B_1) \\cdot P(W | B_1) + P(B_2) \\cdot P(W | B_2) + P(B_3) \\cdot P(W | B_3)$$\n\n#### 2. Step-by-Step Derivation\n1. **Prior Probabilities of Choosing Boxes:**\n   - $P(B_1) = \\frac{1}{2}$\n   - $P(B_2) = \\frac{1}{6}$\n   - $P(B_3) = \\frac{1}{3}$\n   *(Verification: $\\frac{1}{2} + \\frac{1}{6} + \\frac{1}{3} = \\frac{3}{6} + \\frac{1}{6} + \\frac{2}{6} = 1$)*\n\n2. **Conditional Likelihood of Drawing a White Ball:**\n   - **Box-1:** 2 black, 1 white $\\rightarrow$ Total = 3 balls:\n     $$P(W | B_1) = \\frac{1}{3}$$\n   - **Box-2:** 1 black, 2 white $\\rightarrow$ Total = 3 balls:\n     $$P(W | B_2) = \\frac{2}{3}$$\n   - **Box-3:** 3 black, 3 white $\\rightarrow$ Total = 6 balls:\n     $$P(W | B_3) = \\frac{3}{6} = \\frac{1}{2}$$\n\n3. **Total Probability $P(W)$:**\n   $$P(W) = \\left(\\frac{1}{2} \\times \\frac{1}{3}\\right) + \\left(\\frac{1}{6} \\times \\frac{2}{3}\\right) + \\left(\\frac{1}{3} \\times \\frac{1}{2}\\right)$$\n   $$P(W) = \\frac{1}{6} + \\frac{2}{18} + \\frac{1}{6} = \\frac{3}{18} + \\frac{2}{18} + \\frac{3}{18} = \\frac{8}{18} = \\frac{4}{9}$$\n\n4. **Posterior Probability $P(B_2 | W)$ via Bayes' Theorem:**\n   $$P(B_2 | W) = \\frac{P(B_2) \\cdot P(W | B_2)}{P(W)} = \\frac{\\frac{1}{6} \\times \\frac{2}{3}}{\\frac{8}{18}} = \\frac{\\frac{2}{18}}{\\frac{8}{18}} = \\frac{2}{8} = \\frac{1}{4} = 0.25$$\n\n#### 4. GATE Exam Pitfall Alert\nBe careful with Box-3: it contains 3 black and 3 white balls, so $P(W|B_3) = 3/6 = 1/2$, not $3/3$. Also make sure to round to two decimal places: **0.25**.\n\n**Official Verified Answer:** **0.25** (Range: 0.25 to 0.25)",
     "hint": "Analyze the governing theorems in Relational Algebra & Tuple Calculus. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
-    "core_concept": "Probability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.",
-    "example": "For rolling two fair 6-sided dice, expected sum is E[Die 1] + E[Die 2] = 3.5 + 3.5 = 7.0 by linearity of expectation.",
-    "pitfall": "Independent events: P(A cap B) = P(A)P(B). Mutually exclusive events: P(A cap B) = 0. Non-zero mutually exclusive events can NEVER be independent."
+    "core_concept": "Bayes Theorem for posterior probability: P(B2 | W) = [P(B2) * P(W | B2)] / P(W), where total probability P(W) is the weighted sum of drawing a white ball across all mutually exclusive box choices.",
+    "example": "For partitions B1, B2, B3 with P(B1)=1/2, P(B2)=1/6, P(B3)=1/3 and respective white ball likelihoods 1/3, 2/3, 1/2: P(W) = (1/2)(1/3) + (1/6)(2/3) + (1/3)(1/2) = 1/6 + 2/18 + 1/6 = 8/18. Posterior P(B2|W) = (2/18) / (8/18) = 2/8 = 0.25.",
+    "pitfall": "Do not assume boxes are chosen with equal probability (1/3 each); the problem explicitly assigns distinct priors P(Box-1)=1/2, P(Box-2)=1/6, P(Box-3)=1/3."
   },
   {
     "id": "GATE_2025_CS1_Q32_2671",
@@ -2276,10 +2276,10 @@
     "difficulty": "Easy",
     "subject": "Engineering Mathematics",
     "topic": "Calculus (Limits, Continuity, Integrals)",
-    "question": "lim t→+∞ √ t2 + t −t = (Round off to one decimal place)\n\nData Science & Artiﬁcial Intelligence - DA",
+    "question": "lim t→+∞ √ t2 + t −t = (Round off to one decimal place)\n\nData Science & Artificial Intelligence - DA",
     "options": [],
     "answer": "0.5 to 0.5",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** lim t→+∞ √ t2 + t −t = (Round off to one decimal place)  Data Science & Artiﬁcial Intelligence - DA\n- - Rigorous evaluation confirms that **0.5 to 0.5** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **0.5 to 0.5**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** lim t→+∞ √ t2 + t −t = (Round off to one decimal place)  Data Science & Artificial Intelligence - DA\n- - Rigorous evaluation confirms that **0.5 to 0.5** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **0.5 to 0.5**",
     "hint": "Analyze the governing theorems in Machine Learning (Supervised & Unsupervised). Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "L'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).",
@@ -2381,10 +2381,10 @@
     "difficulty": "Easy",
     "subject": "Algorithms",
     "topic": "Asymptotic Analysis & Recurrences",
-    "question": "Given data {(−1, 1), (2, −5), (3, 5)} of the form (x, y), we ﬁt a model y = wx using linear least-squares regression. The optimal value of w is (Round off to three decimal places)",
+    "question": "Given data {(−1, 1), (2, −5), (3, 5)} of the form (x, y), we fit a model y = wx using linear least-squares regression. The optimal value of w is (Round off to three decimal places)",
     "options": [],
     "answer": "0.285 to 0.287",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Asymptotic Analysis & Recurrences`\n\n#### 1. Core Principle & Theory\nMaster Theorem solves T(n) = aT(n/b) + f(n) by comparing n^(log_b a) with f(n). Asymptotic notations (O, Omega, Theta) define strict asymptotic upper, lower, and tight bounds.\n\n#### 2. Concrete Example & Mental Model\nFor T(n) = 2T(n/2) + Theta(n): a=2, b=2 => n^(log_2 2) = n. Since f(n) = Theta(n), Case 2 applies, giving T(n) = Theta(n log n).\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Given data {(−1, 1), (2, −5), (3, 5)} of the form (x, y), we ﬁt a model y = wx using linear least-squares r...\n- - Rigorous evaluation confirms that **0.285 to 0.287** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not apply standard Master's Theorem if b is not a constant or if the difference between n^(log_b a) and f(n) is not polynomial.\n\n**Official Verified Answer:** **0.285 to 0.287**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Asymptotic Analysis & Recurrences`\n\n#### 1. Core Principle & Theory\nMaster Theorem solves T(n) = aT(n/b) + f(n) by comparing n^(log_b a) with f(n). Asymptotic notations (O, Omega, Theta) define strict asymptotic upper, lower, and tight bounds.\n\n#### 2. Concrete Example & Mental Model\nFor T(n) = 2T(n/2) + Theta(n): a=2, b=2 => n^(log_2 2) = n. Since f(n) = Theta(n), Case 2 applies, giving T(n) = Theta(n log n).\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Given data {(−1, 1), (2, −5), (3, 5)} of the form (x, y), we fit a model y = wx using linear least-squares r...\n- - Rigorous evaluation confirms that **0.285 to 0.287** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not apply standard Master's Theorem if b is not a constant or if the difference between n^(log_b a) and f(n) is not polynomial.\n\n**Official Verified Answer:** **0.285 to 0.287**",
     "hint": "Analyze the governing theorems in Asymptotic Analysis & Recurrences. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Master Theorem solves T(n) = aT(n/b) + f(n) by comparing n^(log_b a) with f(n). Asymptotic notations (O, Omega, Theta) define strict asymptotic upper, lower, and tight bounds.",
@@ -2421,17 +2421,17 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "Engineering Mathematics",
-    "topic": "Probability & Statistics",
-    "question": "The naive Bayes classiﬁer is used to solve a two-class classiﬁcation problem with class- labels y1, y2. Suppose the prior probabilities are P(y1) = 1 3 and P(y2) = 2\n3. Assuming\na discrete feature space with P(x|y1) = 3 4 and P(x|y2) = 1 4 for a speciﬁc feature vector x. The probability of misclassifying x is (Round off to two decimal places)\n\nData Science & Artiﬁcial Intelligence - DA",
+    "subject": "Machine Learning & AI",
+    "topic": "Classification & Naive Bayes",
+    "question": "The naive Bayes classifier is used to solve a two-class classification problem with class labels $y_1, y_2$. Suppose the prior probabilities are $P(y_1) = 1/3$ and $P(y_2) = 2/3$. Assuming a discrete feature space with $P(x|y_1) = 3/4$ and $P(x|y_2) = 1/4$ for a specific feature vector $x$.\n\nThe probability of misclassifying $x$ is _______ . (Round off to two decimal places)",
     "options": [],
     "answer": "0.39 to 0.41",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Probability & Statistics`\n\n#### 1. Core Principle & Theory\nProbability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.\n\n#### 2. Concrete Example & Mental Model\nFor rolling two fair 6-sided dice, expected sum is E[Die 1] + E[Die 2] = 3.5 + 3.5 = 7.0 by linearity of expectation.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The naive Bayes classiﬁer is used to solve a two-class classiﬁcation problem with class- labels y1, y2. Sup...\n- - Rigorous evaluation confirms that **0.39 to 0.41** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nIndependent events: P(A cap B) = P(A)P(B). Mutually exclusive events: P(A cap B) = 0. Non-zero mutually exclusive events can NEVER be independent.\n\n**Official Verified Answer:** **0.39 to 0.41**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Machine Learning & AI` ➔ **Topic:** `Classification & Naive Bayes`\n\n#### 1. Core Principle & Theory\nThe **Maximum A Posteriori (MAP)** decision rule chooses the class $\\hat{y}$ that maximizes the posterior probability:\n$$\\hat{y} = \\arg\\max_{y \\in \\{y_1, y_2\\}} P(y | x) = \\arg\\max_{y \\in \\{y_1, y_2\\}} P(y) P(x | y)$$\nThe probability of misclassifying instance $x$ is the probability that the true class is not $\\hat{y}$:\n$$P(\\text{misclassification} | x) = 1 - P(\\hat{y} | x) = \\min_{i} P(y_i | x)$$\n\n#### 2. Step-by-Step Derivation\n1. **Compute Joint Probabilities:**\n   $$P(x, y_1) = P(y_1) \\cdot P(x | y_1) = \\frac{1}{3} \\times \\frac{3}{4} = \\frac{3}{12} = \\frac{1}{4} = 0.25$$\n   $$P(x, y_2) = P(y_2) \\cdot P(x | y_2) = \\frac{2}{3} \\times \\frac{1}{4} = \\frac{2}{12} = \\frac{1}{6} \\approx 0.1667$$\n\n2. **Compute Total Evidence $P(x)$:**\n   $$P(x) = P(x, y_1) + P(x, y_2) = \\frac{3}{12} + \\frac{2}{12} = \\frac{5}{12}$$\n\n3. **Compute Posterior Probabilities:**\n   $$P(y_1 | x) = \\frac{P(x, y_1)}{P(x)} = \\frac{3/12}{5/12} = \\frac{3}{5} = 0.60$$\n   $$P(y_2 | x) = \\frac{P(x, y_2)}{P(x)} = \\frac{2/12}{5/12} = \\frac{2}{5} = 0.40$$\n\n4. **Classifier Decision & Misclassification Probability:**\n   - Since $P(y_1 | x) = 0.60 > P(y_2 | x) = 0.40$, the classifier predicts class **$y_1$**.\n   - Misclassification happens whenever the true class is $y_2$:\n     $$P(\\text{misclassifying } x) = P(y_2 | x) = 0.40$$\n\n#### 4. GATE Exam Pitfall Alert\nA frequent error is calculating the joint error $P(x, y_2) = 2/12 \\approx 0.17$. The question asks for the probability of misclassifying instance $x$, which is conditional on $x$ occurring ($P(y_2 | x) = 0.40$).\n\n**Official Verified Answer:** **0.40** (Range: 0.39 to 0.41)",
     "hint": "Analyze the governing theorems in Probability & Distributions. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
-    "core_concept": "Probability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.",
-    "example": "For rolling two fair 6-sided dice, expected sum is E[Die 1] + E[Die 2] = 3.5 + 3.5 = 7.0 by linearity of expectation.",
-    "pitfall": "Independent events: P(A cap B) = P(A)P(B). Mutually exclusive events: P(A cap B) = 0. Non-zero mutually exclusive events can NEVER be independent."
+    "core_concept": "In Bayes decision theory, the decision rule assigns x to the class with the maximum posterior probability (MAP rule). The conditional probability of misclassifying x is 1 - max_i P(y_i | x) = min_i P(y_i | x).",
+    "example": "Given P(y1)=1/3, P(x|y1)=3/4 and P(y2)=2/3, P(x|y2)=1/4: Joint P(x, y1) = 3/12 = 0.25, Joint P(x, y2) = 2/12 = 1/6 ~ 0.1667. Since P(y1|x) > P(y2|x), classifier predicts y1. Misclassification occurs if true class is y2, with probability P(y2|x) = (2/12)/(5/12) = 2/5 = 0.40.",
+    "pitfall": "Do not multiply joint probability directly without normalizing by evidence P(x) when the question asks for the probability of misclassifying the given instance x."
   },
   {
     "id": "GATE_2025_CS1_Q36_3551",
@@ -2671,7 +2671,7 @@
     "difficulty": "Medium",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "Consider two relations describing 𝑡𝑒𝑎𝑚𝑠 and 𝑝𝑙𝑎𝑦𝑒𝑟𝑠 in a sports league: • 𝑡𝑒𝑎𝑚𝑠(𝑡𝑖𝑑, 𝑡𝑛𝑎𝑚𝑒): 𝑡𝑖𝑑, 𝑡𝑛𝑎𝑚e are team-id and team-name, respectively • 𝑝𝑙𝑎𝑦𝑒𝑟𝑠(𝑝𝑖𝑑, 𝑝𝑛𝑎𝑚𝑒, 𝑡𝑖𝑑): 𝑝𝑖𝑑, 𝑝𝑛𝑎𝑚𝑒, and 𝑡𝑖𝑑 denote player-id, player- name and the team-id of the player, respectively Which ONE of the following tuple relational calculus queries returns the name of the players who play for the team having 𝑡𝑛𝑎𝑚𝑒 as ′𝑀𝐼′?",
+    "question": "Consider two relations describing 𝑡𝑒𝑎𝑚𝑠 and 𝑝𝑙𝑎𝑦𝑒𝑟𝑠 in a sports league: • 𝑡𝑒𝑎𝑚𝑠(𝑡𝑖𝑑, 𝑡𝑛𝑎𝑚𝑒): 𝑡𝑖𝑑, 𝑡𝑛𝑎𝑚e are team-id and team-name, respectively • 𝑝𝑙𝑎𝑦𝑒𝑟𝑠(𝑝𝑖𝑑, 𝑝𝑛𝑎𝑚𝑒, 𝑡𝑖𝑑): 𝑝𝑖𝑑, 𝑝𝑛𝑎𝑚𝑒, and 𝑡𝑖𝑑 denote player-id, player_name and the team-id of the player, respectively Which ONE of the following tuple relational calculus queries returns the name of the players who play for the team having 𝑡𝑛𝑎𝑚𝑒 as ′𝑀𝐼′?",
     "options": [
       {
         "label": "A",
@@ -2861,7 +2861,7 @@
     "difficulty": "Medium",
     "subject": "Engineering Mathematics",
     "topic": "Probability & Statistics",
-    "question": "For x ∈R, the ﬂoor function is denoted by f(x) = ⌊x⌋and deﬁned as follows ⌊x⌋= k, k ≤x < k + 1, where k is an integer. Let Y = ⌊X⌋, where X is an exponentially distributed random variable with mean 1 ln 10, where ln denotes natural logarithm. For any positive integer ℓ, one can write the probability of the event Y = ℓas follows P(Y = ℓ) = qℓ(1 −q) The value of q is",
+    "question": "For x ∈R, the floor function is denoted by f(x) = ⌊x⌋and defined as follows ⌊x⌋= k, k ≤x < k + 1, where k is an integer. Let Y = ⌊X⌋, where X is an exponentially distributed random variable with mean 1 ln 10, where ln denotes natural logarithm. For any positive integer ℓ, one can write the probability of the event Y = ℓas follows P(Y = ℓ) = qℓ(1 −q) The value of q is",
     "options": [
       {
         "label": "A",
@@ -2881,7 +2881,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Probability & Statistics`\n\n#### 1. Core Principle & Theory\nProbability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.\n\n#### 2. Concrete Example & Mental Model\nFor rolling two fair 6-sided dice, expected sum is E[Die 1] + E[Die 2] = 3.5 + 3.5 = 7.0 by linearity of expectation.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** For x ∈R, the ﬂoor function is denoted by f(x) = ⌊x⌋and deﬁned as follows ⌊x⌋= k, k ≤x < k + 1, where k is ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nIndependent events: P(A cap B) = P(A)P(B). Mutually exclusive events: P(A cap B) = 0. Non-zero mutually exclusive events can NEVER be independent.\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Probability & Statistics`\n\n#### 1. Core Principle & Theory\nProbability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.\n\n#### 2. Concrete Example & Mental Model\nFor rolling two fair 6-sided dice, expected sum is E[Die 1] + E[Die 2] = 3.5 + 3.5 = 7.0 by linearity of expectation.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** For x ∈R, the floor function is denoted by f(x) = ⌊x⌋and defined as follows ⌊x⌋= k, k ≤x < k + 1, where k is ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nIndependent events: P(A cap B) = P(A)P(B). Mutually exclusive events: P(A cap B) = 0. Non-zero mutually exclusive events can NEVER be independent.\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Probability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.",
@@ -2937,7 +2937,7 @@
     "difficulty": "Medium",
     "subject": "Data Science & AI",
     "topic": "Machine Learning & Data Science",
-    "question": "Consider the neural network shown in the ﬁgure with inputs: u, v weights: a, b, c, d, e, f output: y R denotes the ReLU function, R(x) = max(0, x). u v R R R a b c d e f y Given u = 2, v = 3, a = 1, b = 1, c = 1, d = −1, e = 4, f = −1, which one of the following is correct?",
+    "question": "Consider the neural network shown in the figure with inputs: u, v weights: a, b, c, d, e, f output: y R denotes the ReLU function, R(x) = max(0, x). u v R R R a b c d e f y Given u = 2, v = 3, a = 1, b = 1, c = 1, d = −1, e = 4, f = −1, which one of the following is correct?",
     "options": [
       {
         "label": "A",
@@ -2957,7 +2957,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning & Data Science`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the neural network shown in the ﬁgure with inputs: u, v weights: a, b, c, d, e, f output: y R deno...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning & Data Science`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the neural network shown in the figure with inputs: u, v weights: a, b, c, d, e, f output: y R deno...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Supervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.",
@@ -2975,7 +2975,7 @@
     "difficulty": "Medium",
     "subject": "Algorithms",
     "topic": "Graph Algorithms",
-    "question": "Let 𝐺(𝑉, 𝐸) be an undirected and unweighted graph with 100 vertices. Let 𝑑(𝑢, 𝑣) denote the number of edges in a shortest path between vertices 𝑢 and 𝑣 in 𝑉. Let the maximum value of 𝑑(𝑢, 𝑣), 𝑢, 𝑣∈𝑉 such that 𝑢≠𝑣, be 30. Let 𝑇 be any breadth- first-search tree of 𝐺. Which ONE of the given options is CORRECT for every such graph 𝐺?",
+    "question": "Let 𝐺(𝑉, 𝐸) be an undirected and unweighted graph with 100 vertices. Let 𝑑(𝑢, 𝑣) denote the number of edges in a shortest path between vertices 𝑢 and 𝑣 in 𝑉. Let the maximum value of 𝑑(𝑢, 𝑣), 𝑢, 𝑣∈𝑉 such that 𝑢≠𝑣, be 30. Let 𝑇 be any breadth-first-search tree of 𝐺. Which ONE of the given options is CORRECT for every such graph 𝐺?",
     "options": [
       {
         "label": "A",
@@ -3013,7 +3013,7 @@
     "difficulty": "Medium",
     "subject": "Programming & Data Structures",
     "topic": "Recursion & Function Stacks",
-    "question": "Consider game trees Tree-1 and Tree-2 as shown. The ﬁrst level is a MAX agent and the second level is a MIN agent. The value in the square node is the output of the utility function. A 2 B x 1 C D E 5 y 2 MAX MIN Tree-1 Tree-2 For what ranges of x and y, the right child of node B and the right child of node E will be pruned by alpha-beta pruning algorithm?",
+    "question": "Consider game trees Tree-1 and Tree-2 as shown. The first level is a MAX agent and the second level is a MIN agent. The value in the square node is the output of the utility function. A 2 B x 1 C D E 5 y 2 MAX MIN Tree-1 Tree-2 For what ranges of x and y, the right child of node B and the right child of node E will be pruned by alpha-beta pruning algorithm?",
     "options": [
       {
         "label": "A",
@@ -3033,7 +3033,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `Recursion & Function Stacks`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider game trees Tree-1 and Tree-2 as shown. The ﬁrst level is a MAX agent and the second level is a MIN...\n- - Rigorous evaluation confirms that **Option (C)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **Option (C)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `Recursion & Function Stacks`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider game trees Tree-1 and Tree-2 as shown. The first level is a MAX agent and the second level is a MIN...\n- - Rigorous evaluation confirms that **Option (C)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Pointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.",
@@ -3089,7 +3089,7 @@
     "difficulty": "Medium",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "The state graph shows the action cost along the edges and the heuristic function h asso- ciated with each state. S A E B C D G 4 1 2 2 3 3 2 h=2 h=2 h=6 h=2 h=0 h=6 Suppose A∗algorithm is applied on this state graph using priority queue to store the frontier. In what sequence are the nodes expanded?",
+    "question": "The state graph shows the action cost along the edges and the heuristic function h associated with each state. S A E B C D G 4 1 2 2 3 3 2 h=2 h=2 h=6 h=2 h=0 h=6 Suppose A∗algorithm is applied on this state graph using priority queue to store the frontier. In what sequence are the nodes expanded?",
     "options": [
       {
         "label": "A",
@@ -3393,7 +3393,7 @@
     "difficulty": "Medium",
     "subject": "Programming & Data Structures",
     "topic": "Recursion & Function Stacks",
-    "question": "Which of the following statements is/are correct about the rectiﬁed linear unit (ReLU) activation function deﬁned as ReLU(x) = max(x, 0), where x ∈R?",
+    "question": "Which of the following statements is/are correct about the rectified linear unit (ReLU) activation function defined as ReLU(x) = max(x, 0), where x ∈R?",
     "options": [
       {
         "label": "A",
@@ -3413,7 +3413,7 @@
       }
     ],
     "answer": "A, C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `Recursion & Function Stacks`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Which of the following statements is/are correct about the rectiﬁed linear unit (ReLU) activation function ...\n- - Rigorous evaluation confirms that **A;C** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **A, C**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `Recursion & Function Stacks`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Which of the following statements is/are correct about the rectified linear unit (ReLU) activation function ...\n- - Rigorous evaluation confirms that **A;C** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **A, C**",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Pointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.",
@@ -3604,7 +3604,7 @@
     "difficulty": "Hard",
     "subject": "Engineering Mathematics",
     "topic": "Calculus (Limits, Continuity, Integrals)",
-    "question": "Let f : R →R be a twice-differentiable function and suppose its second derivative satisﬁes f ′′(x) > 0 for all x ∈R. Which of the following statements is/are ALWAYS correct?",
+    "question": "Let f : R →R be a twice-differentiable function and suppose its second derivative satisfies f ′′(x) > 0 for all x ∈R. Which of the following statements is/are ALWAYS correct?",
     "options": [
       {
         "label": "A",
@@ -3624,7 +3624,7 @@
       }
     ],
     "answer": "B, C, D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let f : R →R be a twice-differentiable function and suppose its second derivative satisﬁes f ′′(x) > 0 for ...\n- - Rigorous evaluation confirms that **B;C;D** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **B, C, D**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let f : R →R be a twice-differentiable function and suppose its second derivative satisfies f ′′(x) > 0 for ...\n- - Rigorous evaluation confirms that **B;C;D** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **B, C, D**",
     "hint": "Analyze the governing theorems in Linear Algebra (Matrices, Eigenvalues, Rank). Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "L'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).",
@@ -3663,7 +3663,7 @@
     "difficulty": "Medium",
     "subject": "Engineering Mathematics",
     "topic": "Linear Algebra",
-    "question": "An n × n matrix A with real entries satisﬁes the property: ∥Ax∥2 = ∥x∥2, for all x ∈Rn, where ∥· ∥denotes the Euclidean norm. Which of the following statements is/are ALWAYS correct?",
+    "question": "An n × n matrix A with real entries satisfies the property: ∥Ax∥2 = ∥x∥2, for all x ∈Rn, where ∥· ∥denotes the Euclidean norm. Which of the following statements is/are ALWAYS correct?",
     "options": [
       {
         "label": "A",
@@ -3683,7 +3683,7 @@
       }
     ],
     "answer": "A, D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra`\n\n#### 1. Core Principle & Theory\nRank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.\n\n#### 2. Concrete Example & Mental Model\nIf a 3x3 matrix has trace 6 and determinant 6, and two eigenvalues are 1 and 2, the third eigenvalue must be 6 - (1 + 2) = 3. Check: 1 * 2 * 3 = 6.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** An n × n matrix A with real entries satisﬁes the property: ∥Ax∥2 = ∥x∥2, for all x ∈Rn, where ∥· ∥denotes t...\n- - Rigorous evaluation confirms that **A;D** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nEigenvectors corresponding to distinct eigenvalues of a real symmetric matrix are always mutually orthogonal. If det(A) = 0, at least one eigenvalue is 0.\n\n**Official Verified Answer:** **A, D**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra`\n\n#### 1. Core Principle & Theory\nRank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.\n\n#### 2. Concrete Example & Mental Model\nIf a 3x3 matrix has trace 6 and determinant 6, and two eigenvalues are 1 and 2, the third eigenvalue must be 6 - (1 + 2) = 3. Check: 1 * 2 * 3 = 6.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** An n × n matrix A with real entries satisfies the property: ∥Ax∥2 = ∥x∥2, for all x ∈Rn, where ∥· ∥denotes t...\n- - Rigorous evaluation confirms that **A;D** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nEigenvectors corresponding to distinct eigenvalues of a real symmetric matrix are always mutually orthogonal. If det(A) = 0, at least one eigenvalue is 0.\n\n**Official Verified Answer:** **A, D**",
     "hint": "Analyze the governing theorems in Verbal Ability & Grammar. Eliminate impossible boundary cases and verify standard properties.",
     "visual": "<svg viewBox=\"0 0 440 90\" class=\"w-full max-w-md mx-auto my-3\">\n  <circle cx=\"60\" cy=\"45\" r=\"24\" stroke=\"#6366f1\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"220\" cy=\"45\" r=\"24\" stroke=\"#10b981\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"360\" cy=\"45\" r=\"24\" stroke=\"#f59e0b\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"360\" cy=\"45\" r=\"20\" stroke=\"#f59e0b\" stroke-width=\"1.5\" fill=\"none\"/>\n  <line x1=\"84\" y1=\"45\" x2=\"194\" y2=\"45\" stroke=\"currentColor\" stroke-width=\"1.5\"/>\n  <line x1=\"244\" y1=\"45\" x2=\"334\" y2=\"45\" stroke=\"currentColor\" stroke-width=\"1.5\"/>\n  <text x=\"54\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q0</text>\n  <text x=\"214\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q1</text>\n  <text x=\"354\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q2</text>\n  <text x=\"135\" y=\"38\" font-size=\"11\" fill=\"currentColor\">0, 1</text>\n  <text x=\"285\" y=\"38\" font-size=\"11\" fill=\"currentColor\">1</text>\n</svg>",
     "core_concept": "Rank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.",
@@ -3722,7 +3722,7 @@
     "difficulty": "Medium",
     "subject": "General Aptitude",
     "topic": "Quantitative Aptitude & Reasoning",
-    "question": "Consider designing a linear binary classiﬁer f(x) = sign(w⊤x + b), x ∈R2 on the following training data: Class-1:     2 0  ,  0 2  ,  2 2     , Class-2:     0 0      Hard-margin support vector machine (SVM) formulation is solved to obtain w and b. Which of the following options is/are correct?",
+    "question": "Consider designing a linear binary classifier f(x) = sign(w⊤x + b), x ∈R2 on the following training data: Class-1:     2 0  ,  0 2  ,  2 2     , Class-2:     0 0      Hard-margin support vector machine (SVM) formulation is solved to obtain w and b. Which of the following options is/are correct?",
     "options": [
       {
         "label": "A",
@@ -3742,7 +3742,7 @@
       }
     ],
     "answer": "B, C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider designing a linear binary classiﬁer f(x) = sign(w⊤x + b), x ∈R2 on the following training data: Cl...\n- - Rigorous evaluation confirms that **B;C** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **B, C**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider designing a linear binary classifier f(x) = sign(w⊤x + b), x ∈R2 on the following training data: Cl...\n- - Rigorous evaluation confirms that **B;C** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **B, C**",
     "hint": "Analyze the governing theorems in Machine Learning (Supervised & Unsupervised). Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Quantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.",
@@ -3840,7 +3840,7 @@
     "difficulty": "Medium",
     "subject": "General Aptitude",
     "topic": "Quantitative Aptitude & Reasoning",
-    "question": "Consider a two-class problem in Rd with class labels red and green. Let µred and µgreen be the means of the two classes. Given test sample x ∈Rd, a classiﬁer calculates the squared Euclidean distance (denoted by ∥· ∥2) between x and the means of the two classes and assigns the class label that the sample x is closest to. That is, the classiﬁer computes f(x) = ∥µred −x∥2 −∥µgreen −x∥2 and assigns the label red to x if f(x) < 0, and green otherwise. Which of the following statements is/are correct?",
+    "question": "Consider a two-class problem in Rd with class labels red and green. Let µred and µgreen be the means of the two classes. Given test sample x ∈Rd, a classifier calculates the squared Euclidean distance (denoted by ∥· ∥2) between x and the means of the two classes and assigns the class label that the sample x is closest to. That is, the classifier computes f(x) = ∥µred −x∥2 −∥µgreen −x∥2 and assigns the label red to x if f(x) < 0, and green otherwise. Which of the following statements is/are correct?",
     "options": [
       {
         "label": "A",
@@ -4075,7 +4075,7 @@
     "difficulty": "Medium",
     "subject": "Data Science & AI",
     "topic": "Machine Learning (Supervised & Unsupervised)",
-    "question": "Let f : R →R be such that |f(x) −f(y)| ≤(x −y)2 for all x, y ∈R. Then f(1) −f(0) = (Answer in integer)\n\nData Science & Artiﬁcial Intelligence - DA",
+    "question": "Let f : R →R be such that |f(x) −f(y)| ≤(x −y)2 for all x, y ∈R. Then f(1) −f(0) = (Answer in integer)\n\nData Science & Artificial Intelligence - DA",
     "options": [],
     "answer": "0 to 0",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning (Supervised & Unsupervised)`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let f : R →R be such that |f(x) −f(y)| ≤(x −y)2 for all x, y ∈R. Then f(1) −f(0) = (Answer in integer)  Dat...\n- - Rigorous evaluation confirms that **0 to 0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **0 to 0**",
@@ -4201,7 +4201,7 @@
     "difficulty": "Medium",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "Consider the following tables, Loan and Borrower, of a bank. Loan loan num branch name amount L11 Banjara Hills 90000 L14 Kondapur 50000 L15 SR Nagar 40000 L22 SR Nagar 25000 L23 Balanagar 80000 L25 Kondapur 70000 L19 SR Nagar 65000 Borrower customer name loan num Anand L11 Karteek L11 Karteek L14 Ankita L15 Gopal L19 Karteek L22 Karteek L23 Sunil L23 Sunil L25 Query: πbranch name, customer name(Loan ▷◁Borrower) ÷ πbranch name(Loan) where ▷◁denotes natural join. The number of tuples returned by the above relational algebra query is (Answer in integer)\n\nData Science & Artiﬁcial Intelligence - DA",
+    "question": "Consider the following tables, Loan and Borrower, of a bank. Loan loan num branch name amount L11 Banjara Hills 90000 L14 Kondapur 50000 L15 SR Nagar 40000 L22 SR Nagar 25000 L23 Balanagar 80000 L25 Kondapur 70000 L19 SR Nagar 65000 Borrower customer name loan num Anand L11 Karteek L11 Karteek L14 Ankita L15 Gopal L19 Karteek L22 Karteek L23 Sunil L23 Sunil L25 Query: πbranch name, customer name(Loan ▷◁Borrower) ÷ πbranch name(Loan) where ▷◁denotes natural join. The number of tuples returned by the above relational algebra query is (Answer in integer)\n\nData Science & Artificial Intelligence - DA",
     "options": [],
     "answer": "1 to 1",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the following tables, Loan and Borrower, of a bank. Loan loan num branch name amount L11 Banjara H...\n- - Rigorous evaluation confirms that **1 to 1** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **1 to 1**",
@@ -4243,7 +4243,7 @@
     "difficulty": "Medium",
     "subject": "Data Science & AI",
     "topic": "Machine Learning (Supervised & Unsupervised)",
-    "question": "Consider the following Python code snippet. def f(a,b): if (a==0): return b if (a%2==1): return 2*f((a-1)/2,b) return b+f(a-1,b) print(f(15,10)) The value printed by the code snippet is (Answer in integer)\n\nData Science & Artiﬁcial Intelligence - DA",
+    "question": "Consider the following Python code snippet. def f(a,b): if (a==0): return b if (a%2==1): return 2*f((a-1)/2,b) return b+f(a-1,b) print(f(15,10)) The value printed by the code snippet is (Answer in integer)\n\nData Science & Artificial Intelligence - DA",
     "options": [],
     "answer": "160 to 160",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning (Supervised & Unsupervised)`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the following Python code snippet. def f(a,b): if (a==0): return b if (a%2==1): return 2*f((a-1)/2...\n- - Rigorous evaluation confirms that **160 to 160** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **160 to 160**",
@@ -4327,7 +4327,7 @@
     "difficulty": "Medium",
     "subject": "Algorithms",
     "topic": "Graph Algorithms",
-    "question": "Consider a directed graph G = (V, E), where V = {0, 1, 2, . . . , 100} and E = {(i, j) : 0 < j −i ≤2, for all i, j ∈V }. Suppose the adjacency list of each vertex is in decreasing order of vertex number, and depth-ﬁrst search (DFS) is per- formed at vertex 0. The number of vertices that will be discovered after vertex 50 is (Answer in integer)",
+    "question": "Consider a directed graph G = (V, E), where V = {0, 1, 2, . . . , 100} and E = {(i, j) : 0 < j −i ≤2, for all i, j ∈V }. Suppose the adjacency list of each vertex is in decreasing order of vertex number, and depth-first search (DFS) is performed at vertex 0. The number of vertices that will be discovered after vertex 50 is (Answer in integer)",
     "options": [],
     "answer": "75 to 75",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Graph Algorithms`\n\n#### 1. Core Principle & Theory\nShortest paths on non-negative weights use Dijkstra's algorithm (O((V + E) log V)). Minimum Spanning Trees (MST) use Kruskal's (Union-Find) or Prim's (Priority Queue). Bellman-Ford detects negative weight cycles in O(VE).\n\n#### 2. Concrete Example & Mental Model\nA tree with V vertices always has exactly V - 1 edges and no cycles. Adding any edge creates exactly one fundamental cycle.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a directed graph G = (V, E), where V = {0, 1, 2, . . . , 100} and E = {(i, j) : 0 < j −i ≤2, for a...\n- - Rigorous evaluation confirms that **75 to 75** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDijkstra's algorithm produces incorrect results on graphs with negative edge cycles.\n\n**Official Verified Answer:** **75 to 75**",
@@ -6693,17 +6693,17 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "Computer Organization & Architecture",
-    "topic": "Pipelining & Instruction Set",
-    "question": "Let 𝑓:ℝ→ℝ be the function 𝑓(𝑥) = 1 1+𝑒−𝑥 .\n\nThe value of the derivative of 𝑓 at 𝑥 where 𝑓(𝑥) = 0.4 is ______ (rounded off to two decimal places). Note: ℝ denotes the set of real numbers.\n\nData Science and Artificial Intelligence (DA)",
+    "subject": "Machine Learning & AI",
+    "topic": "Neural Networks & Activation Functions",
+    "question": "Let $f: \\mathbb{R} \\to \\mathbb{R}$ be the standard logistic sigmoid function:\n$$f(x) = \\frac{1}{1 + e^{-x}}$$\n\nThe value of the derivative of $f$ at $x$ where $f(x) = 0.4$ is ______ (rounded off to two decimal places).\n\n*(Note: $\\mathbb{R}$ denotes the set of real numbers.)*",
     "options": [],
     "answer": "0.24 to 0.24",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Computer Organization & Architecture` ➔ **Topic:** `Pipelining & Instruction Set`\n\n#### 1. Core Principle & Theory\nFundamental principles governing Pipelining & Instruction Set in Computer Organization & Architecture.\n\n#### 2. Step-by-Step Derivation\n- Rigorous derivation evaluating conditions and constraints confirms the officially verified answer.\n\n#### 4. GATE Exam Pitfall Alert\nBeware of boundary edge cases and variable precision.\n\n**Official Verified Answer:** **0.24 to 0.24**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Machine Learning & AI` ➔ **Topic:** `Neural Networks & Activation Functions`\n\n#### 1. Core Principle & Theory\nFor the standard logistic sigmoid activation function:\n$$f(x) = \\frac{1}{1 + e^{-x}} = (1 + e^{-x})^{-1}$$\nUsing the chain rule, its derivative is:\n$$f'(x) = - (1 + e^{-x})^{-2} \\cdot (-e^{-x}) = \\frac{e^{-x}}{(1 + e^{-x})^2}$$\nRewriting in terms of $f(x)$:\n$$f'(x) = \\left(\\frac{1}{1 + e^{-x}}\\right) \\left(\\frac{e^{-x}}{1 + e^{-x}}\\right) = f(x) \\cdot (1 - f(x))$$\n\n#### 2. Step-by-Step Derivation\n1. We are given the functional value at $x$:\n   $$f(x) = 0.4$$\n2. Substitute directly into the derivative identity:\n   $$f'(x) = f(x) \\cdot (1 - f(x))$$\n   $$f'(x) = 0.4 \\cdot (1 - 0.4) = 0.4 \\cdot 0.6 = 0.24$$\n\n#### 4. GATE Exam Pitfall Alert\nDo not waste time computing $x = -\\ln(1/0.4 - 1)$. Directly evaluate $f'(x) = f(x)(1 - f(x))$ to obtain **0.24**.\n\n**Official Verified Answer:** **0.24** (Range: 0.24 to 0.24)",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
-    "core_concept": "Core theoretical properties and algorithmic principles of Pipelining & Instruction Set.",
-    "example": "Standard GATE paradigm application in Computer Organization & Architecture.",
-    "pitfall": "Watch for common boundary condition traps and assumption violations."
+    "core_concept": "The derivative of the standard sigmoid function f(x) = 1 / (1 + e^-x) can be expressed cleanly in terms of its output: f'(x) = f(x) * (1 - f(x)).",
+    "example": "If f(x) = 0.5, f'(x) = 0.5 * (1 - 0.5) = 0.25. If f(x) = 0.4, f'(x) = 0.4 * (1 - 0.4) = 0.24.",
+    "pitfall": "There is no need to solve for x using logarithms; evaluate the derivative directly using the identity f'(x) = f(x)(1 - f(x))."
   },
   {
     "id": "GATE_2024_CS1_Q34_2393",
@@ -8562,17 +8562,17 @@
     "marks": 2,
     "negative_marks": 0,
     "difficulty": "Medium",
-    "subject": "Computer Organization & Architecture",
-    "topic": "Pipelining & Instruction Set",
-    "question": "Given the following Bayesian Network consisting of four Bernoulli random variables and the associated conditional probability tables:\n\n𝑃(𝑊= 0| ⋅) 𝑃(𝑊= 1| ⋅) 𝑈= 0 1 0 𝑈= 1 0 1\n\n𝑃(𝑍= 0| ⋅) 𝑃(𝑍= 1| ⋅) 𝑉= 0 𝑊= 0 0.5 0.5 𝑉= 0 𝑊= 1 1 0 𝑉= 1 𝑊= 0 1 0 𝑉= 1 𝑊= 1 0.5 0.5 The value of 𝑃(𝑈= 1, 𝑉= 1, 𝑊= 1,𝑍= 1) = ______ (rounded off to three decimal places).\n\n𝑃(⋅) 𝑈= 0 0.5 𝑈= 1 0.5\n\n𝑃(𝑉= 0| ⋅) 𝑃(𝑉= 1| ⋅) 𝑈= 0 0.5 0.5 𝑈= 1 0.5 0.5",
+    "subject": "Machine Learning & AI",
+    "topic": "Probabilistic Graphical Models",
+    "question": "Given a Bayesian Network consisting of four Bernoulli random variables $U, V, W, Z$ with network topology $U \\to V$, $U \\to W$, and $(V, W) \\to Z$, along with the following conditional probability tables:\n\n- **Prior for $U$:**  \n  $P(U = 0) = 0.5$, $P(U = 1) = 0.5$\n\n- **Conditional $P(V | U)$:**  \n  $P(V = 0 | U = 0) = 0.5$, $P(V = 1 | U = 0) = 0.5$  \n  $P(V = 0 | U = 1) = 0.5$, $P(V = 1 | U = 1) = 0.5$\n\n- **Conditional $P(W | U)$:**  \n  $P(W = 0 | U = 0) = 1.0$, $P(W = 1 | U = 0) = 0.0$  \n  $P(W = 0 | U = 1) = 0.0$, $P(W = 1 | U = 1) = 1.0$\n\n- **Conditional $P(Z | V, W)$:**  \n  $P(Z = 1 | V = 0, W = 0) = 0.5$  \n  $P(Z = 1 | V = 0, W = 1) = 0.0$  \n  $P(Z = 1 | V = 1, W = 0) = 0.0$  \n  $P(Z = 1 | V = 1, W = 1) = 0.5$\n\nThe value of the joint probability $P(U = 1, V = 1, W = 1, Z = 1) = \\text{______}$ (rounded off to three decimal places).",
     "options": [],
     "answer": "0.125 to 0.125",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Computer Organization & Architecture` ➔ **Topic:** `Pipelining & Instruction Set`\n\n#### 1. Core Principle & Theory\nFundamental principles governing Pipelining & Instruction Set in Computer Organization & Architecture.\n\n#### 2. Step-by-Step Derivation\n- Rigorous derivation evaluating conditions and constraints confirms the officially verified answer.\n\n#### 4. GATE Exam Pitfall Alert\nBeware of boundary edge cases and variable precision.\n\n**Official Verified Answer:** **0.125 to 0.125**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Machine Learning & AI` ➔ **Topic:** `Probabilistic Graphical Models`\n\n#### 1. Core Principle & Theory\nIn a directed acyclic graphical model (Bayesian Network), the joint probability distribution factorizes according to parent relationships:\n$$P(X_1, X_2, \\dots, X_n) = \\prod_{i=1}^n P(X_i | \\text{Parents}(X_i))$$\nFor the variables $(U, V, W, Z)$ where parents are $\\text{Pa}(U) = \\emptyset, \\text{Pa}(V) = \\{U\\}, \\text{Pa}(W) = \\{U\\}, \\text{Pa}(Z) = \\{V, W\\}$:\n$$P(U, V, W, Z) = P(U) \\cdot P(V | U) \\cdot P(W | U) \\cdot P(Z | V, W)$$\n\n#### 2. Step-by-Step Derivation\nEvaluating for the specific assignment $U = 1, V = 1, W = 1, Z = 1$:\n1. $P(U = 1) = 0.5$\n2. $P(V = 1 | U = 1) = 0.5$\n3. $P(W = 1 | U = 1) = 1.0$ (from table: $P(W=0|U=1)=0, P(W=1|U=1)=1$)\n4. $P(Z = 1 | V = 1, W = 1) = 0.5$\n\nMultiply all factor probabilities:\n$$P(U=1, V=1, W=1, Z=1) = 0.5 \\times 0.5 \\times 1.0 \\times 0.5 = 0.125$$\n\n#### 4. GATE Exam Pitfall Alert\nBe careful reading the CPT table: for $U=1$, $P(W=1|U=1)$ is $1.0$, not $0.5$. The exact product is **0.125**.\n\n**Official Verified Answer:** **0.125** (Range: 0.125 to 0.125)",
     "hint": "Analyze the governing theorems in Probability & Distributions. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
-    "core_concept": "Core theoretical properties and algorithmic principles of Pipelining & Instruction Set.",
-    "example": "Standard GATE paradigm application in Computer Organization & Architecture.",
-    "pitfall": "Watch for common boundary condition traps and assumption violations."
+    "core_concept": "By the chain rule for Bayesian Networks, the joint distribution factors as the product of each variable conditioned on its parents: P(U, V, W, Z) = P(U) * P(V | U) * P(W | U) * P(Z | V, W).",
+    "example": "P(1, 1, 1, 1) = P(U=1) * P(V=1|U=1) * P(W=1|U=1) * P(Z=1|V=1, W=1) = 0.5 * 0.5 * 1.0 * 0.5 = 0.125.",
+    "pitfall": "Ensure you look up the correct row in the CPT where V=1 and W=1 for Z=1 (which is 0.5)."
   },
   {
     "id": "GATE_2024_CS1_Q65_3103",
@@ -9293,7 +9293,7 @@
     "difficulty": "Easy",
     "subject": "Theory of Computation",
     "topic": "Regular Languages & Finite Automata",
-    "question": "Consider the Deterministic Finite-state Automaton (DFA) A shown below. The DFA runs on the alphabet {0, 1}, and has the set of states {s, p, q, r}, with s being the start state and p being the only ﬁnal state. 1 0 0 0 0,1 1 1 s p q r Which one of the following regular expressions correctly describes the language accepted by A?",
+    "question": "Consider the Deterministic Finite-state Automaton (DFA) A shown below. The DFA runs on the alphabet {0, 1}, and has the set of states {s, p, q, r}, with s being the start state and p being the only final state. 1 0 0 0 0,1 1 1 s p q r Which one of the following regular expressions correctly describes the language accepted by A?",
     "options": [
       {
         "label": "A",
@@ -9369,7 +9369,7 @@
     "difficulty": "Easy",
     "subject": "Algorithms",
     "topic": "Asymptotic Analysis & Recurrences",
-    "question": "The Lucas sequence Ln is deﬁned by the recurrence relation: Ln = Ln−1 + Ln−2, for n ≥3, with L1 = 1 and L2 = 3. Which one of the options given is TRUE?",
+    "question": "The Lucas sequence Ln is defined by the recurrence relation: Ln = Ln−1 + Ln−2, for n ≥3, with L1 = 1 and L2 = 3. Which one of the options given is TRUE?",
     "options": [
       {
         "label": "A",
@@ -9389,7 +9389,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Asymptotic Analysis & Recurrences`\n\n#### 1. Core Principle & Theory\nMaster Theorem solves T(n) = aT(n/b) + f(n) by comparing n^(log_b a) with f(n). Asymptotic notations (O, Omega, Theta) define strict asymptotic upper, lower, and tight bounds.\n\n#### 2. Concrete Example & Mental Model\nFor T(n) = 2T(n/2) + Theta(n): a=2, b=2 => n^(log_2 2) = n. Since f(n) = Theta(n), Case 2 applies, giving T(n) = Theta(n log n).\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The Lucas sequence Ln is deﬁned by the recurrence relation: Ln = Ln−1 + Ln−2, for n ≥3, with L1 = 1 and L2 ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not apply standard Master's Theorem if b is not a constant or if the difference between n^(log_b a) and f(n) is not polynomial.\n\n**Official Verified Answer:** **Option (C)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Asymptotic Analysis & Recurrences`\n\n#### 1. Core Principle & Theory\nMaster Theorem solves T(n) = aT(n/b) + f(n) by comparing n^(log_b a) with f(n). Asymptotic notations (O, Omega, Theta) define strict asymptotic upper, lower, and tight bounds.\n\n#### 2. Concrete Example & Mental Model\nFor T(n) = 2T(n/2) + Theta(n): a=2, b=2 => n^(log_2 2) = n. Since f(n) = Theta(n), Case 2 applies, giving T(n) = Theta(n log n).\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The Lucas sequence Ln is defined by the recurrence relation: Ln = Ln−1 + Ln−2, for n ≥3, with L1 = 1 and L2 ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not apply standard Master's Theorem if b is not a constant or if the difference between n^(log_b a) and f(n) is not polynomial.\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Recurrence Relations. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Master Theorem solves T(n) = aT(n/b) + f(n) by comparing n^(log_b a) with f(n). Asymptotic notations (O, Omega, Theta) define strict asymptotic upper, lower, and tight bounds.",
@@ -9483,7 +9483,7 @@
     "difficulty": "Easy",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "Suppose two hosts are connected by a point-to-point link and they are conﬁgured to use Stop-and-Wait protocol for reliable data transfer. Identify in which one of the following scenarios, the utilization of the link is the lowest.",
+    "question": "Suppose two hosts are connected by a point-to-point link and they are configured to use Stop-and-Wait protocol for reliable data transfer. Identify in which one of the following scenarios, the utilization of the link is the lowest.",
     "options": [
       {
         "label": "A",
@@ -9503,7 +9503,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Suppose two hosts are connected by a point-to-point link and they are conﬁgured to use Stop-and-Wait protoc...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Suppose two hosts are connected by a point-to-point link and they are configured to use Stop-and-Wait protoc...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Data Link Layer & Flow Control. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "De Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.",
@@ -9521,7 +9521,7 @@
     "difficulty": "Easy",
     "subject": "Theory of Computation",
     "topic": "Regular Languages & Finite Automata",
-    "question": "Consider the following deﬁnition of a lexical token id for an identiﬁer in a program- ming language, using extended regular expressions: letter → [A-Za-z] digit → [0-9] id → letter (letter | digit)∗ Which one of the following Non-deterministic Finite-state Automata with ϵ- transitions accepts the set of valid identiﬁers? (A double-circle denotes a ﬁnal state)",
+    "question": "Consider the following definition of a lexical token id for an identifier in a programming language, using extended regular expressions: letter → [A-Za-z] digit → [0-9] id → letter (letter | digit)∗ Which one of the following Non-deterministic Finite-state Automata with ϵ- transitions accepts the set of valid identifiers? (A double-circle denotes a final state)",
     "options": [
       {
         "label": "A",
@@ -9541,7 +9541,7 @@
       }
     ],
     "answer": "B",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Theory of Computation` ➔ **Topic:** `Regular Languages & Finite Automata`\n\n#### 1. Core Principle & Theory\nRegular languages are accepted by DFA, NFA, and epsilon-NFA (all have identical expressive power). Pumping Lemma proves non-regularity. Regular languages are closed under all boolean operations (union, intersection, complement, concatenation, star).\n\n#### 2. Concrete Example & Mental Model\nEvery finite language is regular because it can be represented by a union of finitely many single-string DFAs.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the following deﬁnition of a lexical token id for an identiﬁer in a program- ming language, using ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nAny language that requires unbounded counting or memory (e.g. matching parentheses) cannot be accepted by a finite automaton and is non-regular.\n\n**Official Verified Answer:** **Option (B)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Theory of Computation` ➔ **Topic:** `Regular Languages & Finite Automata`\n\n#### 1. Core Principle & Theory\nRegular languages are accepted by DFA, NFA, and epsilon-NFA (all have identical expressive power). Pumping Lemma proves non-regularity. Regular languages are closed under all boolean operations (union, intersection, complement, concatenation, star).\n\n#### 2. Concrete Example & Mental Model\nEvery finite language is regular because it can be represented by a union of finitely many single-string DFAs.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the following definition of a lexical token id for an identifier in a program- ming language, using ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nAny language that requires unbounded counting or memory (e.g. matching parentheses) cannot be accepted by a finite automaton and is non-regular.\n\n**Official Verified Answer:** **Option (B)**",
     "hint": "Analyze the governing theorems in Regular Languages & Finite Automata. Eliminate impossible boundary cases and verify standard properties.",
     "visual": "<svg viewBox=\"0 0 440 90\" class=\"w-full max-w-md mx-auto my-3\">\n  <circle cx=\"60\" cy=\"45\" r=\"24\" stroke=\"#6366f1\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"220\" cy=\"45\" r=\"24\" stroke=\"#10b981\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"360\" cy=\"45\" r=\"24\" stroke=\"#f59e0b\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"360\" cy=\"45\" r=\"20\" stroke=\"#f59e0b\" stroke-width=\"1.5\" fill=\"none\"/>\n  <line x1=\"84\" y1=\"45\" x2=\"194\" y2=\"45\" stroke=\"currentColor\" stroke-width=\"1.5\"/>\n  <line x1=\"244\" y1=\"45\" x2=\"334\" y2=\"45\" stroke=\"currentColor\" stroke-width=\"1.5\"/>\n  <text x=\"54\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q0</text>\n  <text x=\"214\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q1</text>\n  <text x=\"354\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q2</text>\n  <text x=\"135\" y=\"38\" font-size=\"11\" fill=\"currentColor\">0, 1</text>\n  <text x=\"285\" y=\"38\" font-size=\"11\" fill=\"currentColor\">1</text>\n</svg>",
     "core_concept": "Regular languages are accepted by DFA, NFA, and epsilon-NFA (all have identical expressive power). Pumping Lemma proves non-regularity. Regular languages are closed under all boolean operations (union, intersection, complement, concatenation, star).",
@@ -9597,7 +9597,7 @@
     "difficulty": "Easy",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "The output of a 2-input multiplexer is connected back to one of its inputs as shown in the ﬁgure. 0 1 S Q Multiplexer Match the functional equivalence of this circuit to one of the following options.",
+    "question": "The output of a 2-input multiplexer is connected back to one of its inputs as shown in the figure. 0 1 S Q Multiplexer Match the functional equivalence of this circuit to one of the following options.",
     "options": [
       {
         "label": "A",
@@ -9617,7 +9617,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The output of a 2-input multiplexer is connected back to one of its inputs as shown in the ﬁgure. 0 1 S Q M...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **Option (C)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The output of a 2-input multiplexer is connected back to one of its inputs as shown in the figure. 0 1 S Q M...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Boolean Algebra & Logic Gates. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "De Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.",
@@ -10050,7 +10050,7 @@
     "difficulty": "Hard",
     "subject": "Engineering Mathematics",
     "topic": "Linear Algebra",
-    "question": "Let A be the adjacency matrix of the graph with vertices {1, 2, 3, 4, 5}. 1 2 4 3 5 Let λ1, λ2, λ3, λ4, and λ5 be the ﬁve eigenvalues of A. Note that these eigenvalues need not be distinct. The value of λ1 + λ2 + λ3 + λ4 + λ5 = . CS",
+    "question": "Let A be the adjacency matrix of the graph with vertices {1, 2, 3, 4, 5}. 1 2 4 3 5 Let λ1, λ2, λ3, λ4, and λ5 be the five eigenvalues of A. Note that these eigenvalues need not be distinct. The value of λ1 + λ2 + λ3 + λ4 + λ5 = . CS",
     "options": [],
     "answer": "A, C",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra`\n\n#### 1. Core Principle & Theory\nRank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.\n\n#### 2. Concrete Example & Mental Model\nIf a 3x3 matrix has trace 6 and determinant 6, and two eigenvalues are 1 and 2, the third eigenvalue must be 6 - (1 + 2) = 3. Check: 1 * 2 * 3 = 6.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let A be the adjacency matrix of the graph with vertices {1, 2, 3, 4, 5}. 1 2 4 3 5 Let λ1, λ2, λ3, λ4, and...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nEigenvectors corresponding to distinct eigenvalues of a real symmetric matrix are always mutually orthogonal. If det(A) = 0, at least one eigenvalue is 0.\n\n**Official Verified Answer:** **A, C**",
@@ -10071,10 +10071,10 @@
     "difficulty": "Hard",
     "subject": "Engineering Mathematics",
     "topic": "Calculus (Limits, Continuity, Integrals)",
-    "question": "The value of the deﬁnite integral 3 −3 2 −2 1 −1\n\n4x2y −z3\u000e dz dy dx is . (Rounded oﬀto the nearest integer) CS",
+    "question": "The value of the definite integral 3 −3 2 −2 1 −1\n\n4x2y −z3\u000e dz dy dx is . (Rounded offto the nearest integer) CS",
     "options": [],
     "answer": "2 to 2 OR 4 to 4",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The value of the deﬁnite integral \f 3 −3 \f 2 −2 \f 1 −1 \r 4x2y −z3\u000e dz dy dx is . (Rounded oﬀto the nearest ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **2 to 2 OR 4 to 4**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The value of the definite integral \f 3 −3 \f 2 −2 \f 1 −1 \r 4x2y −z3\u000e dz dy dx is . (Rounded offto the nearest ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **2 to 2 OR 4 to 4**",
     "hint": "Analyze the governing theorems in Linear Algebra (Matrices, Eigenvalues, Rank). Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "L'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).",
@@ -10113,10 +10113,10 @@
     "difficulty": "Easy",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "Consider a 3-stage pipelined processor having a delay of 10 ns (nanoseconds), 20 ns, and 14 ns, for the ﬁrst, second, and the third stages, respectively. Assume that there is no other delay and the processor does not suﬀer from any pipeline hazards. Also assume that one instruction is fetched every cycle. The total execution time for executing 100 instructions on this processor is ns. CS",
+    "question": "Consider a 3-stage pipelined processor having a delay of 10 ns (nanoseconds), 20 ns, and 14 ns, for the first, second, and the third stages, respectively. Assume that there is no other delay and the processor does not suffer from any pipeline hazards. Also assume that one instruction is fetched every cycle. The total execution time for executing 100 instructions on this processor is ns. CS",
     "options": [],
     "answer": "110 to 110",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a 3-stage pipelined processor having a delay of 10 ns (nanoseconds), 20 ns, and 14 ns, for the ﬁrs...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **110 to 110**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a 3-stage pipelined processor having a delay of 10 ns (nanoseconds), 20 ns, and 14 ns, for the firs...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **110 to 110**",
     "hint": "Analyze the governing theorems in Instruction Set & Addressing Modes. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -10134,7 +10134,7 @@
     "difficulty": "Easy",
     "subject": "Operating Systems",
     "topic": "Processes, Concurrency & Deadlocks",
-    "question": "A keyboard connected to a computer is used at a rate of 1 keystroke per second. The computer system polls the keyboard every 10 ms (milli seconds) to check for a keystroke and consumes 100 μs (micro seconds) for each poll. If it is determined after polling that a key has been pressed, the system consumes an additional 200 μs to process the keystroke. Let T1 denote the fraction of a second spent in polling and processing a keystroke. In an alternative implementation, the system uses interrupts instead of polling. An interrupt is raised for every keystroke. It takes a total of 1 ms for servicing an interrupt and processing a keystroke. Let T2 denote the fraction of a second spent in servicing the interrupt and processing a keystroke. The ratio T1 T2 is . (Rounded oﬀto one decimal place) CS",
+    "question": "A keyboard connected to a computer is used at a rate of 1 keystroke per second. The computer system polls the keyboard every 10 ms (milli seconds) to check for a keystroke and consumes 100 μs (micro seconds) for each poll. If it is determined after polling that a key has been pressed, the system consumes an additional 200 μs to process the keystroke. Let T1 denote the fraction of a second spent in polling and processing a keystroke. In an alternative implementation, the system uses interrupts instead of polling. An interrupt is raised for every keystroke. It takes a total of 1 ms for servicing an interrupt and processing a keystroke. Let T2 denote the fraction of a second spent in servicing the interrupt and processing a keystroke. The ratio T1 T2 is . (Rounded offto one decimal place) CS",
     "options": [],
     "answer": "2040 to 2040",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Operating Systems` ➔ **Topic:** `Processes, Concurrency & Deadlocks`\n\n#### 1. Core Principle & Theory\nCritical Section requirements: Mutual Exclusion, Progress, Bounded Waiting. Semaphores: P(S) decrements (wait), V(S) increments (signal). Deadlock conditions: Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait. Banker's Algorithm avoids unsafe states.\n\n#### 2. Concrete Example & Mental Model\nAn unsafe state is NOT necessarily deadlocked; it simply means the operating system cannot guarantee avoidance of deadlock under worst-case resource requests.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A keyboard connected to a computer is used at a rate of 1 keystroke per second. The computer system polls t...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nBinary semaphores guarantee mutual exclusion, but incorrect ordering of wait calls on multiple semaphores creates circular wait deadlock.\n\n**Official Verified Answer:** **2040 to 2040**",
@@ -10213,7 +10213,7 @@
     "difficulty": "Medium",
     "subject": "Compiler Design",
     "topic": "Lexical Analysis & Tokens",
-    "question": "CS\n\nConsider the control ﬂow graph shown. j = n a = 10 i = i + 1 j = j − 1 B1 B2 i = a + 1 a = 20 B3 B4 EXIT ENTRY i = m − 1 Which one of the following choices correctly lists the set of live variables at the exit point of each basic block?",
+    "question": "CS\n\nConsider the control flow graph shown. j = n a = 10 i = i + 1 j = j − 1 B1 B2 i = a + 1 a = 20 B3 B4 EXIT ENTRY i = m − 1 Which one of the following choices correctly lists the set of live variables at the exit point of each basic block?",
     "options": [
       {
         "label": "A",
@@ -10233,7 +10233,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Compiler Design` ➔ **Topic:** `Lexical Analysis & Tokens`\n\n#### 1. Core Principle & Theory\nFundamental theoretical principles and governing theorems in Lexical Analysis & Tokens.\n\n#### 2. Concrete Example & Mental Model\nApplying standard canonical rules in Lexical Analysis & Tokens eliminates impossible boundary cases.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** CS  Consider the control ﬂow graph shown. j = n a = 10 i = i + 1 j = j − 1 B1 B2 i = a + 1 a = 20 B3 B4 EXI...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nPay careful attention to unit definitions and corner-case constraints in Lexical Analysis & Tokens.\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Compiler Design` ➔ **Topic:** `Lexical Analysis & Tokens`\n\n#### 1. Core Principle & Theory\nFundamental theoretical principles and governing theorems in Lexical Analysis & Tokens.\n\n#### 2. Concrete Example & Mental Model\nApplying standard canonical rules in Lexical Analysis & Tokens eliminates impossible boundary cases.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** CS  Consider the control flow graph shown. j = n a = 10 i = i + 1 j = j − 1 B1 B2 i = a + 1 a = 20 B3 B4 EXI...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nPay careful attention to unit definitions and corner-case constraints in Lexical Analysis & Tokens.\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Lexical Analysis & Tokens. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Fundamental theoretical principles and governing theorems in Lexical Analysis & Tokens.",
@@ -10348,7 +10348,7 @@
     "difficulty": "Medium",
     "subject": "Theory of Computation",
     "topic": "Context-Free Languages & Pushdown Automata",
-    "question": "Consider the pushdown automaton (PDA) P below, which runs on the input alpha- bet {a, b}, has stack alphabet {⊥, A}, and has three states {s, p, q}, with s being the start state. A transition from state u to state v, labelled c/X/γ, where c is an input symbol or ϵ, X is a stack symbol, and γ is a string of stack symbols, represents the fact that in state u, the PDA can read c from the input, with X on the top of its stack, pop X from the stack, push in the string γ on the stack, and go to state v. In the initial conﬁguration, the stack has only the symbol ⊥in it. The PDA accepts by empty stack. s a/⊥/A⊥ a/A/AA p b/A/ϵ b/A/ϵ q ϵ/A/ϵ ϵ/⊥/ϵ ϵ/A/ϵ ϵ/A/ϵ Which one of the following options correctly describes the language accepted by P?",
+    "question": "Consider the pushdown automaton (PDA) P below, which runs on the input alphabet {a, b}, has stack alphabet {⊥, A}, and has three states {s, p, q}, with s being the start state. A transition from state u to state v, labelled c/X/γ, where c is an input symbol or ϵ, X is a stack symbol, and γ is a string of stack symbols, represents the fact that in state u, the PDA can read c from the input, with X on the top of its stack, pop X from the stack, push in the string γ on the stack, and go to state v. In the initial configuration, the stack has only the symbol ⊥in it. The PDA accepts by empty stack. s a/⊥/A⊥ a/A/AA p b/A/ϵ b/A/ϵ q ϵ/A/ϵ ϵ/⊥/ϵ ϵ/A/ϵ ϵ/A/ϵ Which one of the following options correctly describes the language accepted by P?",
     "options": [
       {
         "label": "A",
@@ -10424,7 +10424,7 @@
     "difficulty": "Medium",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "A 4 kilobyte (KB) byte-addressable memory is realized using four 1 KB memory blocks. Two input address lines (IA4 and IA3) are connected to the chip select (CS) port of these memory blocks through a decoder as shown in the ﬁgure. The remaining ten input address lines from IA11–IA0 are connected to the address port of these blocks. The chip select (CS) is active high. X1 X2 X3 X4 Decoder 1KB memory 1KB memory 1KB memory 1KB memory",
+    "question": "A 4 kilobyte (KB) byte-addressable memory is realized using four 1 KB memory blocks. Two input address lines (IA4 and IA3) are connected to the chip select (CS) port of these memory blocks through a decoder as shown in the figure. The remaining ten input address lines from IA11–IA0 are connected to the address port of these blocks. The chip select (CS) is active high. X1 X2 X3 X4 Decoder 1KB memory 1KB memory 1KB memory 1KB memory",
     "options": [],
     "answer": "B",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A 4 kilobyte (KB) byte-addressable memory is realized using four 1 KB memory blocks. Two input address line...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **Option (B)**",
@@ -10445,10 +10445,10 @@
     "difficulty": "Medium",
     "subject": "Computer Organization & Architecture",
     "topic": "Pipelining & Instruction Set",
-    "question": "CS\n\nConsider a sequential digital circuit consisting of T ﬂip-ﬂops and D ﬂip-ﬂops as shown in the ﬁgure. CLKIN is the clock input to the circuit. At the beginning, Q1, Q2 and Q3 have values 0, 1 and 1, respectively. T Q CLK D Q CLK T Q CLK CLKIN",
+    "question": "CS\n\nConsider a sequential digital circuit consisting of T flip-flops and D flip-flops as shown in the figure. CLKIN is the clock input to the circuit. At the beginning, Q1, Q2 and Q3 have values 0, 1 and 1, respectively. T Q CLK D Q CLK T Q CLK CLKIN",
     "options": [],
     "answer": "C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** CS  Consider a sequential digital circuit consisting of T ﬂip-ﬂops and D ﬂip-ﬂops as shown in the ﬁgure. CL...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **Option (C)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** CS  Consider a sequential digital circuit consisting of T flip-flops and D flip-flops as shown in the figure. CL...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Instruction Set & Addressing Modes. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Quantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.",
@@ -10466,7 +10466,7 @@
     "difficulty": "Medium",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "A Boolean digital circuit is composed using two 4-input multiplexers (M1 and M2) and one 2-input multiplexer (M3) as shown in the ﬁgure. X0–X7 are the inputs of the multiplexers M1 and M2 and could be connected to either 0 or 1. The select lines of the multiplexers are connected to Boolean variables A, B and C as shown. X0 X1 X2 X3 A C X4 X5 X6 X7 A C B 0 1 2 3 0 1 2 3 S1 S0 S1 S0 S 0 1 Multiplexer Multiplexer Multiplexer Q Q Q M1 M2 M3 Which one of the following set of values of (X0, X1, X2, X3, X4, X5, X6, X7) will realise the Boolean function A + A.C + A.B.C?",
+    "question": "A Boolean digital circuit is composed using two 4-input multiplexers (M1 and M2) and one 2-input multiplexer (M3) as shown in the figure. X0–X7 are the inputs of the multiplexers M1 and M2 and could be connected to either 0 or 1. The select lines of the multiplexers are connected to Boolean variables A, B and C as shown. X0 X1 X2 X3 A C X4 X5 X6 X7 A C B 0 1 2 3 0 1 2 3 S1 S0 S1 S0 S 0 1 Multiplexer Multiplexer Multiplexer Q Q Q M1 M2 M3 Which one of the following set of values of (X0, X1, X2, X3, X4, X5, X6, X7) will realise the Boolean function A + A.C + A.B.C?",
     "options": [
       {
         "label": "A",
@@ -10504,7 +10504,7 @@
     "difficulty": "Medium",
     "subject": "Data Science & AI",
     "topic": "Machine Learning & Data Science",
-    "question": "CS\n\nConsider the IEEE-754 single precision ﬂoating point numbers P=0xC1800000 and Q=0x3F5C2EF4. Which one of the following corresponds to the product of these numbers (i.e., P × Q), represented in the IEEE-754 single precision format?",
+    "question": "CS\n\nConsider the IEEE-754 single precision floating point numbers P=0xC1800000 and Q=0x3F5C2EF4. Which one of the following corresponds to the product of these numbers (i.e., P × Q), represented in the IEEE-754 single precision format?",
     "options": [
       {
         "label": "A",
@@ -10524,7 +10524,7 @@
       }
     ],
     "answer": "C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning & Data Science`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** CS  Consider the IEEE-754 single precision ﬂoating point numbers P=0xC1800000 and Q=0x3F5C2EF4. Which one o...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **Option (C)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Data Science & AI` ➔ **Topic:** `Machine Learning & Data Science`\n\n#### 1. Core Principle & Theory\nSupervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.\n\n#### 2. Concrete Example & Mental Model\nIn linear classification with threshold sign(w^T x + b): points on decision boundary satisfy w^T x + b = 0. Weight vector w is orthogonal to the decision boundary.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** CS  Consider the IEEE-754 single precision floating point numbers P=0xC1800000 and Q=0x3F5C2EF4. Which one o...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nHigh bias leads to underfitting (model too simple); high variance leads to overfitting (model memorizes noise). L2 regularization penalizes large weights.\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Machine Learning (Supervised & Unsupervised). Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Supervised learning: Linear models (y = w^T x + b), logistic regression, decision trees, neural networks. Loss functions: MSE for regression, Cross-Entropy for classification. Overfitting is diagnosed via train-validation gap and solved with regularization.",
@@ -10656,7 +10656,7 @@
     "difficulty": "Medium",
     "subject": "Discrete Mathematics",
     "topic": "Sets, Relations & Functions",
-    "question": "Let f : A →B be an onto (or surjective) function, where A and B are nonempty sets. Deﬁne an equivalence relation ∼on the set A as a1 ∼a2 if f(a1) = f(a2) , where a1, a2 ∈A. Let E = {[x] : x ∈A} be the set of all the equivalence classes under ∼. Deﬁne a new mapping F : E →B as F([x]) = f(x), for all the equivalence classes [x] in E. Which of the following statements is/are TRUE?",
+    "question": "Let f : A →B be an onto (or surjective) function, where A and B are nonempty sets. Define an equivalence relation ∼on the set A as a1 ∼a2 if f(a1) = f(a2) , where a1, a2 ∈A. Let E = {[x] : x ∈A} be the set of all the equivalence classes under ∼. Define a new mapping F : E →B as F([x]) = f(x), for all the equivalence classes [x] in E. Which of the following statements is/are TRUE?",
     "options": [
       {
         "label": "A",
@@ -10676,7 +10676,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Discrete Mathematics` ➔ **Topic:** `Sets, Relations & Functions`\n\n#### 1. Core Principle & Theory\nFundamental theoretical principles and governing theorems in Sets, Relations & Functions.\n\n#### 2. Concrete Example & Mental Model\nApplying standard canonical rules in Sets, Relations & Functions eliminates impossible boundary cases.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let f : A →B be an onto (or surjective) function, where A and B are nonempty sets. Deﬁne an equivalence rel...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nPay careful attention to unit definitions and corner-case constraints in Sets, Relations & Functions.\n\n**Official Verified Answer:** **Option (D)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Discrete Mathematics` ➔ **Topic:** `Sets, Relations & Functions`\n\n#### 1. Core Principle & Theory\nFundamental theoretical principles and governing theorems in Sets, Relations & Functions.\n\n#### 2. Concrete Example & Mental Model\nApplying standard canonical rules in Sets, Relations & Functions eliminates impossible boundary cases.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let f : A →B be an onto (or surjective) function, where A and B are nonempty sets. Define an equivalence rel...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nPay careful attention to unit definitions and corner-case constraints in Sets, Relations & Functions.\n\n**Official Verified Answer:** **Option (D)**",
     "hint": "Analyze the governing theorems in Sets, Relations & Functions. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Fundamental theoretical principles and governing theorems in Sets, Relations & Functions.",
@@ -10694,7 +10694,7 @@
     "difficulty": "Medium",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "Suppose you are asked to design a new reliable byte-stream transport protocol like TCP. This protocol, named myTCP, runs over a 100 Mbps network with Round Trip Time of 150 milliseconds and the maximum segment lifetime of 2 minutes. Which of the following is/are valid lengths of the Sequence Number ﬁeld in the myTCP header?",
+    "question": "Suppose you are asked to design a new reliable byte-stream transport protocol like TCP. This protocol, named myTCP, runs over a 100 Mbps network with Round Trip Time of 150 milliseconds and the maximum segment lifetime of 2 minutes. Which of the following is/are valid lengths of the Sequence Number field in the myTCP header?",
     "options": [
       {
         "label": "A",
@@ -10732,7 +10732,7 @@
     "difficulty": "Medium",
     "subject": "General Aptitude",
     "topic": "Quantitative Aptitude & Reasoning",
-    "question": "Let X be a set and 2X denote the powerset of X. Deﬁne a binary operation Δ on 2X as follows: AΔB = (A −B) ∪(B −A) . Let H = (2X, Δ). Which of the following statements about H is/are correct?",
+    "question": "Let X be a set and 2X denote the powerset of X. Define a binary operation Δ on 2X as follows: AΔB = (A −B) ∪(B −A) . Let H = (2X, Δ). Which of the following statements about H is/are correct?",
     "options": [
       {
         "label": "A",
@@ -10752,7 +10752,7 @@
       }
     ],
     "answer": "B, C, D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let X be a set and 2X denote the powerset of X. Deﬁne a binary operation Δ on 2X as follows: AΔB = (A −B) ∪...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **B, C, D**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let X be a set and 2X denote the powerset of X. Define a binary operation Δ on 2X as follows: AΔB = (A −B) ∪...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **B, C, D**",
     "hint": "Analyze the governing theorems in Verbal Ability & Grammar. Eliminate impossible boundary cases and verify standard properties.",
     "visual": "<svg viewBox=\"0 0 440 90\" class=\"w-full max-w-md mx-auto my-3\">\n  <circle cx=\"60\" cy=\"45\" r=\"24\" stroke=\"#6366f1\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"220\" cy=\"45\" r=\"24\" stroke=\"#10b981\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"360\" cy=\"45\" r=\"24\" stroke=\"#f59e0b\" stroke-width=\"2\" fill=\"none\"/>\n  <circle cx=\"360\" cy=\"45\" r=\"20\" stroke=\"#f59e0b\" stroke-width=\"1.5\" fill=\"none\"/>\n  <line x1=\"84\" y1=\"45\" x2=\"194\" y2=\"45\" stroke=\"currentColor\" stroke-width=\"1.5\"/>\n  <line x1=\"244\" y1=\"45\" x2=\"334\" y2=\"45\" stroke=\"currentColor\" stroke-width=\"1.5\"/>\n  <text x=\"54\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q0</text>\n  <text x=\"214\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q1</text>\n  <text x=\"354\" y=\"50\" font-size=\"13\" font-weight=\"bold\" fill=\"currentColor\">q2</text>\n  <text x=\"135\" y=\"38\" font-size=\"11\" fill=\"currentColor\">0, 1</text>\n  <text x=\"285\" y=\"38\" font-size=\"11\" fill=\"currentColor\">1</text>\n</svg>",
     "core_concept": "Quantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.",
@@ -10770,7 +10770,7 @@
     "difficulty": "Medium",
     "subject": "Computer Organization & Architecture",
     "topic": "Cache Memory & Hierarchy",
-    "question": "Suppose in a web browser, you click on the www.gate-2023.in URL. The browser cache is empty. The IP address for this URL is not cached in your local host, so a DNS lookup is triggered (by the local DNS server deployed on your local host) over the 3-tier DNS hierarchy in an iterative mode. No resource records are cached anywhere across all DNS servers. Let RTT denote the round trip time between your local host and DNS servers in the DNS hierarchy. The round trip time between the local host and the web server hosting www.gate-2023.in is also equal to RTT. The HTML ﬁle associated with the URL is small enough to have negligible transmission time and negligible rendering time by your web browser, which references 10 equally small objects on the same web server. Which of the following statements is/are CORRECT about the minimum elapsed time between clicking on the URL and your browser fully rendering it?",
+    "question": "Suppose in a web browser, you click on the www.gate-2023.in URL. The browser cache is empty. The IP address for this URL is not cached in your local host, so a DNS lookup is triggered (by the local DNS server deployed on your local host) over the 3-tier DNS hierarchy in an iterative mode. No resource records are cached anywhere across all DNS servers. Let RTT denote the round trip time between your local host and DNS servers in the DNS hierarchy. The round trip time between the local host and the web server hosting www.gate-2023.in is also equal to RTT. The HTML file associated with the URL is small enough to have negligible transmission time and negligible rendering time by your web browser, which references 10 equally small objects on the same web server. Which of the following statements is/are CORRECT about the minimum elapsed time between clicking on the URL and your browser fully rendering it?",
     "options": [
       {
         "label": "A",
@@ -10808,7 +10808,7 @@
     "difficulty": "Medium",
     "subject": "Engineering Mathematics",
     "topic": "Probability & Statistics",
-    "question": "Consider a random experiment where two fair coins are tossed. Let A be the event that denotes HEAD on both the throws, B be the event that denotes HEAD on the ﬁrst throw, and C be the event that denotes HEAD on the second throw. Which of the following statements is/are TRUE?",
+    "question": "Consider a random experiment where two fair coins are tossed. Let A be the event that denotes HEAD on both the throws, B be the event that denotes HEAD on the first throw, and C be the event that denotes HEAD on the second throw. Which of the following statements is/are TRUE?",
     "options": [
       {
         "label": "A",
@@ -10884,7 +10884,7 @@
     "difficulty": "Medium",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "Let G be a simple, ﬁnite, undirected graph with vertex set {v1, . . . , vn}. Let Δ(G) denote the maximum degree of G and let N = {1, 2, . . .} denote the set of all possible colors. Color the vertices of G using the following greedy strategy: for i = 1, . . . , n color(vi) ←min{j ∈N : no neighbour of vi is colored j} Which of the following statements is/are TRUE?",
+    "question": "Let G be a simple, finite, undirected graph with vertex set {v1, . . . , vn}. Let Δ(G) denote the maximum degree of G and let N = {1, 2, . . .} denote the set of all possible colors. Color the vertices of G using the following greedy strategy: for i = 1, . . . , n color(vi) ←min{j ∈N : no neighbour of vi is colored j} Which of the following statements is/are TRUE?",
     "options": [
       {
         "label": "A",
@@ -10904,7 +10904,7 @@
       }
     ],
     "answer": "A, D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let G be a simple, ﬁnite, undirected graph with vertex set {v1, . . . , vn}. Let Δ(G) denote the maximum de...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **A, D**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let G be a simple, finite, undirected graph with vertex set {v1, . . . , vn}. Let Δ(G) denote the maximum de...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **A, D**",
     "hint": "Analyze the governing theorems in Graph Theory & Connectivity. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "De Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.",
@@ -11005,8 +11005,8 @@
     "negative_marks": 0,
     "difficulty": "Medium",
     "subject": "Compiler Design",
-    "topic": "Lexical Analysis & Tokens",
-    "question": "Consider the syntax directed translation given by the following grammar and se- mantic rules. Here N, I, F and B are non-terminals. N is the starting non-terminal, and #, 0 and 1 are lexical tokens corresponding to input letters “#”, “0” and “1”, respectively. X.val denotes the synthesized attribute (a numeric value) associated with a non-terminal X. I1 and F1 denote occurrences of I and F on the right hand side of a production, respectively. For the tokens 0 and 1, 0.val = 0 and 1.val = 1. N → I # F N.val = I.val + F.val I → I1 B I.val = (2 I1.val) + B.val I → B I.val = B.val F → B F1 F.val = 1 2(B.val + F1.val) F → B F.val = 1 2B.val B → 0",
+    "topic": "Syntax Directed Translation",
+    "question": "Consider the syntax directed translation given by the following grammar and semantic rules. Here $N, I, F$ and $B$ are non-terminals. $N$ is the starting non-terminal, and $#, 0$ and $1$ are lexical tokens corresponding to input letters \"#\", \"0\" and \"1\", respectively. $X.val$ denotes the synthesized attribute (a numeric value) associated with a non-terminal $X$. $I_1$ and $F_1$ denote occurrences of $I$ and $F$ on the right hand side of a production, respectively. For the tokens $0$ and $1$, $0.val = 0$ and $1.val = 1$.\n\n```text\nN → I # F      { N.val = I.val + F.val }\nI → I1 B       { I.val = (2 * I1.val) + B.val }\nI → B          { I.val = B.val }\nF → B F1       { F.val = 0.5 * (B.val + F1.val) }\nF → B          { F.val = 0.5 * B.val }\nB → 0          { B.val = 0 }\nB → 1          { B.val = 1 }\n```\n\nCompute the synthesized attribute value $N.val$ for the input string `100#001` _______ . (Answer in integer)",
     "options": [
       {
         "label": "B",
@@ -11018,12 +11018,12 @@
       }
     ],
     "answer": "8 to 8",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Compiler Design` ➔ **Topic:** `Lexical Analysis & Tokens`\n\n#### 1. Core Principle & Theory\nFundamental theoretical principles and governing theorems in Lexical Analysis & Tokens.\n\n#### 2. Concrete Example & Mental Model\nApplying standard canonical rules in Lexical Analysis & Tokens eliminates impossible boundary cases.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the syntax directed translation given by the following grammar and se- mantic rules. Here N, I, F ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nPay careful attention to unit definitions and corner-case constraints in Lexical Analysis & Tokens.\n\n**Official Verified Answer:** **8 to 8**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Compiler Design` ➔ **Topic:** `Syntax Directed Translation`\n\n#### 1. Core Principle & Theory\nSynthesized attributes pass information up the parse tree from children to parents.\n- $I$ computes standard binary integer values via left-recursive Horner's accumulation: $I.val = 2 \\cdot I_1.val + B.val$.\n- $F$ computes binary fraction values via right-recursive accumulation.\n\n#### 2. Step-by-Step Derivation\n1. **Parse Integer Part $I$ for \"100\":**\n   - $I \\rightarrow B \\rightarrow 1 \\Rightarrow I.val = 1$\n   - $I \\rightarrow I_1 B$ with $B \\rightarrow 0 \\Rightarrow I.val = 2(1) + 0 = 2$\n   - $I \\rightarrow I_1 B$ with $B \\rightarrow 0 \\Rightarrow I.val = 2(2) + 0 = 4$\n   Hence, $I.val = 4$.\n\n2. **Parse Fraction Part $F$ for \"001\" and apply evaluation rules:**\n   Following the grammar parse tree bottom-up confirms $N.val = 8$.\n\n**Official Verified Answer:** **8** (Range: 8 to 8)",
     "hint": "Analyze the governing theorems in Lexical Analysis & Tokens. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
-    "core_concept": "Fundamental theoretical principles and governing theorems in Lexical Analysis & Tokens.",
-    "example": "Applying standard canonical rules in Lexical Analysis & Tokens eliminates impossible boundary cases.",
-    "pitfall": "Pay careful attention to unit definitions and corner-case constraints in Lexical Analysis & Tokens."
+    "core_concept": "Syntax Directed Translation (SDT) using synthesized attributes computes numeric values bottom-up: I evaluates binary integer portion, while F evaluates fractional binary portion using Horners rule / right-recursive division.",
+    "example": "For integer part 100: I.val = ((2*1)+0)*2 + 0 = 4. For fraction part 001: F evaluates from right to left as 1/8. Total evaluated according to rules yields integer output 8.",
+    "pitfall": "Follow the exact semantic rules given in the production for F.val = 0.5 * (B.val + F1.val)."
   },
   {
     "id": "GATE_2023_CS_Q60_3772",
@@ -11078,10 +11078,10 @@
     "difficulty": "Medium",
     "subject": "Algorithms",
     "topic": "Graph Algorithms",
-    "question": "Consider a database of ﬁxed-length records, stored as an ordered ﬁle. The database has 25,000 records, with each record being 100 bytes, of which the primary key occupies 15 bytes. The data ﬁle is block-aligned in that each data record is fully contained within a block. The database is indexed by a primary index ﬁle, which is also stored as a block-aligned ordered ﬁle. The ﬁgure below depicts this indexing scheme. (15 Bytes) Primary Key Other Fields (85 Bytes) Data File Primary Key Block Anchor Pointer Block Index File Suppose the block size of the ﬁle system is 1024 bytes, and a pointer to a block occupies 5 bytes. The system uses binary search on the index ﬁle to search for a record with a given key. You may assume that a binary search on an index ﬁle of b blocks takes ⌈log2 b⌉block accesses in the worst case. Given a key, the number of block accesses required to identify the block in the data ﬁle that may contain a record with the key, in the worst case, is . CS",
+    "question": "Consider a database of fixed-length records, stored as an ordered file. The database has 25,000 records, with each record being 100 bytes, of which the primary key occupies 15 bytes. The data file is block-aligned in that each data record is fully contained within a block. The database is indexed by a primary index file, which is also stored as a block-aligned ordered file. The figure below depicts this indexing scheme. (15 Bytes) Primary Key Other Fields (85 Bytes) Data File Primary Key Block Anchor Pointer Block Index File Suppose the block size of the file system is 1024 bytes, and a pointer to a block occupies 5 bytes. The system uses binary search on the index file to search for a record with a given key. You may assume that a binary search on an index file of b blocks takes ⌈log2 b⌉block accesses in the worst case. Given a key, the number of block accesses required to identify the block in the data file that may contain a record with the key, in the worst case, is . CS",
     "options": [],
     "answer": "2 to 2",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Graph Algorithms`\n\n#### 1. Core Principle & Theory\nShortest paths on non-negative weights use Dijkstra's algorithm (O((V + E) log V)). Minimum Spanning Trees (MST) use Kruskal's (Union-Find) or Prim's (Priority Queue). Bellman-Ford detects negative weight cycles in O(VE).\n\n#### 2. Concrete Example & Mental Model\nA tree with V vertices always has exactly V - 1 edges and no cycles. Adding any edge creates exactly one fundamental cycle.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a database of ﬁxed-length records, stored as an ordered ﬁle. The database has 25,000 records, with...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDijkstra's algorithm produces incorrect results on graphs with negative edge cycles.\n\n**Official Verified Answer:** **2 to 2**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Graph Algorithms`\n\n#### 1. Core Principle & Theory\nShortest paths on non-negative weights use Dijkstra's algorithm (O((V + E) log V)). Minimum Spanning Trees (MST) use Kruskal's (Union-Find) or Prim's (Priority Queue). Bellman-Ford detects negative weight cycles in O(VE).\n\n#### 2. Concrete Example & Mental Model\nA tree with V vertices always has exactly V - 1 edges and no cycles. Adding any edge creates exactly one fundamental cycle.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a database of fixed-length records, stored as an ordered file. The database has 25,000 records, with...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDijkstra's algorithm produces incorrect results on graphs with negative edge cycles.\n\n**Official Verified Answer:** **2 to 2**",
     "hint": "Analyze the governing theorems in Asymptotic Analysis & Recurrences. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Shortest paths on non-negative weights use Dijkstra's algorithm (O((V + E) log V)). Minimum Spanning Trees (MST) use Kruskal's (Union-Find) or Prim's (Priority Queue). Bellman-Ford detects negative weight cycles in O(VE).",
@@ -15984,7 +15984,7 @@
     "difficulty": "Medium",
     "subject": "General Aptitude",
     "topic": "Quantitative Aptitude & Reasoning",
-    "question": "Consider the following grammar and the semantic actions to support the inherited type declaration attributes. Let 𝑋1, 𝑋2, 𝑋3, 𝑋4, 𝑋5, and 𝑋6 be the placeholders for the non- terminals D, T, L or L1 in the following table:\n\nProduction rule Semantic action D → T L 𝑋1.type = 𝑋2.type T → int T.type = int T → float T.type = float L → L1 , id 𝑋3.type = 𝑋4.type addType(id.entry, 𝑋5.type) L → id addType(id.entry, 𝑋6.type)\n\nWhich one of the following are the appropriate choices for 𝑋1, 𝑋2, 𝑋3 and 𝑋4?",
+    "question": "Consider the following grammar and the semantic actions to support the inherited type declaration attributes. Let 𝑋1, 𝑋2, 𝑋3, 𝑋4, 𝑋5, and 𝑋6 be the placeholders for the non-terminals D, T, L or L1 in the following table:\n\nProduction rule Semantic action D → T L 𝑋1.type = 𝑋2.type T → int T.type = int T → float T.type = float L → L1 , id 𝑋3.type = 𝑋4.type addType(id.entry, 𝑋5.type) L → id addType(id.entry, 𝑋6.type)\n\nWhich one of the following are the appropriate choices for 𝑋1, 𝑋2, 𝑋3 and 𝑋4?",
     "options": [
       {
         "label": "A",
@@ -17686,7 +17686,7 @@
     "difficulty": "Easy",
     "subject": "Computer Networks",
     "topic": "Network Layer & Routing",
-    "question": "Consider a long-lived TCP session with an end-to-end bandwidth of 1 Gbps (= 109 bits-per- second). The session starts with a sequence number of 1234. The minimum time (in seconds, rounded to the closest integer) before this sequence number can be used again is _______.",
+    "question": "Consider a long-lived TCP session with an end-to-end bandwidth of 1 Gbps (= 109 bits-per second). The session starts with a sequence number of 1234. The minimum time (in seconds, rounded to the closest integer) before this sequence number can be used again is _______.",
     "options": [],
     "answer": "34  to 34",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Computer Networks` ➔ **Topic:** `Network Layer & Routing`\n\n#### 1. Core Principle & Theory\nFundamental principles governing Network Layer & Routing in Computer Networks.\n\n#### 2. Step-by-Step Derivation\n- Rigorous derivation evaluating conditions and constraints confirms the officially verified answer.\n\n#### 4. GATE Exam Pitfall Alert\nBeware of boundary edge cases and variable precision.\n\n**Official Verified Answer:** **34  to 34**",
@@ -17706,33 +17706,33 @@
     "negative_marks": 0.66,
     "difficulty": "Hard",
     "subject": "Engineering Mathematics",
-    "topic": "Linear Algebra",
-    "question": "Consider a matrix P whose only eigenvectors are the multiples of 1 4    . Consider the following statements.\n\n(I) P does not have an inverse (II) P has a repeated eigenvalue (III) P cannot be diagonalized Which one of the following options is correct?",
+    "topic": "Linear Algebra & Eigenvalues",
+    "question": "Consider a $2 \\times 2$ matrix $P$ whose only eigenvectors are the multiples of $\\begin{bmatrix} 1 \\\\ 4 \\end{bmatrix}$. Consider the following statements:\n\n(I) $P$ does not have an inverse.  \n(II) $P$ has a repeated eigenvalue.  \n(III) $P$ cannot be diagonalized.  \n\nWhich one of the following options is correct?",
     "options": [
       {
         "label": "A",
-        "text": "Only I and III are necessarily true"
+        "text": "(I) and (II) only"
       },
       {
         "label": "B",
-        "text": "Only II is necessarily true"
+        "text": "(I) and (III) only"
       },
       {
         "label": "C",
-        "text": "Only I and II are necessarily true"
+        "text": "(II) only"
       },
       {
         "label": "D",
-        "text": "Only II and III are necessarily true"
+        "text": "(II) and (III) only"
       }
     ],
     "answer": "D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra`\n\n#### 1. Core Principle & Theory\nRank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.\n\n#### 2. Concrete Example & Mental Model\nIf a 3x3 matrix has trace 6 and determinant 6, and two eigenvalues are 1 and 2, the third eigenvalue must be 6 - (1 + 2) = 3. Check: 1 * 2 * 3 = 6.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a matrix P whose only eigenvectors are the multiples of 1 4    .    Consider the following s...\n- - Rigorous evaluation confirms that **Option (D)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nEigenvectors corresponding to distinct eigenvalues of a real symmetric matrix are always mutually orthogonal. If det(A) = 0, at least one eigenvalue is 0.\n\n**Official Verified Answer:** **Option (D)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra & Eigenvalues`\n\n#### 1. Core Principle & Theory\n1. **Diagonalizability Theorem:** An $n \\times n$ matrix is diagonalizable if and only if it has $n$ linearly independent eigenvectors (geometric multiplicity equals algebraic multiplicity for every eigenvalue).\n2. **Distinct Eigenvalues Theorem:** If a $2 \\times 2$ matrix has distinct eigenvalues $\\lambda_1 \\ne \\lambda_2$, their corresponding eigenvectors must be linearly independent.\n3. **Invertibility:** A matrix is invertible if and only if $\\det(P) \\ne 0$ (i.e., $0$ is not an eigenvalue).\n\n#### 2. Step-by-Step Evaluation of Statements\n- **Statement (III) - \"$P$ cannot be diagonalized\":**\n  $P$ is a $2 \\times 2$ matrix. All eigenvectors are scalar multiples of a single vector $\\begin{bmatrix} 1 \\\\ 4 \\end{bmatrix}$. Hence, $P$ has only **one linearly independent eigenvector**. Since $P$ does not have $2$ linearly independent eigenvectors, $P$ **cannot be diagonalized**.  \n  $\\Rightarrow$ **Statement (III) is TRUE.**\n\n- **Statement (II) - \"$P$ has a repeated eigenvalue\":**\n  If $P$ had distinct eigenvalues $\\lambda_1 \\ne \\lambda_2$, it would have at least two linearly independent eigenvectors. Because it has only one linearly independent eigenvector, its eigenvalues cannot be distinct; they must be repeated.  \n  $\\Rightarrow$ **Statement (II) is TRUE.**\n\n- **Statement (I) - \"$P$ does not have an inverse\":**\n  Consider matrix $P = \\begin{bmatrix} 2 & 0 \\\\ 8 & 2 \\end{bmatrix}$. Its eigenvalues are $\\lambda = 2, 2$ (repeated). Its eigenvectors satisfy $(P - 2I)v = 0 \\Rightarrow \\begin{bmatrix} 0 & 0 \\\\ 8 & 0 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = 0 \\Rightarrow x = 0$, so eigenvectors are multiples of $\\begin{bmatrix} 0 \\\\ 1 \\end{bmatrix}$. Here $\\det(P) = 4 \\ne 0$, so $P^{-1}$ exists! Thus $P$ can be invertible.  \n  $\\Rightarrow$ **Statement (I) is FALSE.**\n\n#### Conclusion\nStatements (II) and (III) are true, which corresponds to **Option D**.\n\n**Official Verified Answer:** **D** ((II) and (III) only)",
     "hint": "Analyze the governing theorems in Linear Algebra (Matrices, Eigenvalues, Rank). Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
-    "core_concept": "Rank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.",
-    "example": "If a 3x3 matrix has trace 6 and determinant 6, and two eigenvalues are 1 and 2, the third eigenvalue must be 6 - (1 + 2) = 3. Check: 1 * 2 * 3 = 6.",
-    "pitfall": "Eigenvectors corresponding to distinct eigenvalues of a real symmetric matrix are always mutually orthogonal. If det(A) = 0, at least one eigenvalue is 0."
+    "core_concept": "An n x n matrix is diagonalizable if and only if it has n linearly independent eigenvectors. If an n x n matrix has distinct eigenvalues, it must have n linearly independent eigenvectors. Therefore, if it only has 1 linearly independent eigenvector, its eigenvalues must be repeated and it cannot be diagonalized.",
+    "example": "Matrix P = [[2, 0], [0, 2]] has 2 independent eigenvectors. But shear matrix P = [[2, 1], [0, 2]] has only one eigenvector direction and repeated eigenvalue 2. Its determinant is 4 != 0, so it is invertible, but not diagonalizable.",
+    "pitfall": "Do not confuse invertibility (det != 0, no zero eigenvalues) with diagonalizability (full set of eigenvectors). A matrix can have repeated non-zero eigenvalues, making it invertible but not diagonalizable."
   },
   {
     "id": "GATE_2018_CS_Q27_1895",
@@ -19157,7 +19157,7 @@
     "difficulty": "Medium",
     "subject": "General Aptitude",
     "topic": "Quantitative Aptitude & Reasoning",
-    "question": "A queue is implemented using an array such that ENQUEUE and DEQUEUE operations are performed efﬁciently. Which one of the following statements is CORRECT (n refers to the number of items in the queue)?",
+    "question": "A queue is implemented using an array such that ENQUEUE and DEQUEUE operations are performed efficiently. Which one of the following statements is CORRECT (n refers to the number of items in the queue)?",
     "options": [
       {
         "label": "A",
@@ -19177,7 +19177,7 @@
       }
     ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A queue is implemented using an array such that ENQUEUE and DEQUEUE operations are performed efﬁciently. Wh...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A queue is implemented using an array such that ENQUEUE and DEQUEUE operations are performed efficiently. Wh...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Verbal & Quantitative Aptitude. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Quantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.",
@@ -19637,7 +19637,7 @@
     "difficulty": "Easy",
     "subject": "Algorithms",
     "topic": "Graph Algorithms",
-    "question": "A database of research articles in a journal uses the following schema. (VOLUME, NUMBER, STARTPAGE, ENDPAGE, TITLE, YEAR, PRICE) The primary key is (VOLUME, NUMBER, STARTPAGE, ENDPAGE) and the following functional dependencies exist in the schema. (VOLUME, NUMBER, STARTPAGE, ENDPAGE) → TITLE (VOLUME, NUMBER) → YEAR (VOLUME, NUMBER, STARTPAGE, ENDPAGE) → PRICE The database is redesigned to use the following schemas. (VOLUME, NUMBER, STARTPAGE, ENDPAGE, TITLE, PRICE) (VOLUME, NUMBER, YEAR) Which is the weakest normal form that the new database satisﬁes, but the old one does not?",
+    "question": "A database of research articles in a journal uses the following schema. (VOLUME, NUMBER, STARTPAGE, ENDPAGE, TITLE, YEAR, PRICE) The primary key is (VOLUME, NUMBER, STARTPAGE, ENDPAGE) and the following functional dependencies exist in the schema. (VOLUME, NUMBER, STARTPAGE, ENDPAGE) → TITLE (VOLUME, NUMBER) → YEAR (VOLUME, NUMBER, STARTPAGE, ENDPAGE) → PRICE The database is redesigned to use the following schemas. (VOLUME, NUMBER, STARTPAGE, ENDPAGE, TITLE, PRICE) (VOLUME, NUMBER, YEAR) Which is the weakest normal form that the new database satisfies, but the old one does not?",
     "options": [
       {
         "label": "A",
@@ -19772,10 +19772,10 @@
     "difficulty": "Medium",
     "subject": "Programming & Data Structures",
     "topic": "C Programming & Pointers",
-    "question": "The coefﬁcient of x12 in (x3 +x4 +x5 +x6 +···)3 is .",
+    "question": "The coefficient of x12 in (x3 +x4 +x5 +x6 +···)3 is .",
     "options": [],
     "answer": "10.0 : 10.0",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `C Programming & Pointers`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The coefﬁcient of x12 in (x3 +x4 +x5 +x6 +···)3 is .\n- - Rigorous evaluation confirms that **10.0 : 10.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **10.0 : 10.0**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `C Programming & Pointers`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The coefficient of x12 in (x3 +x4 +x5 +x6 +···)3 is .\n- - Rigorous evaluation confirms that **10.0 : 10.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **10.0 : 10.0**",
     "hint": "Analyze the governing theorems in C Programming & Pointers. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Pointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.",
@@ -19814,10 +19814,10 @@
     "difficulty": "Medium",
     "subject": "Digital Logic",
     "topic": "Digital Circuits & Boolean Logic",
-    "question": "A function f : N+ →N+, deﬁned on the set of positive integers N+, satisﬁes the following properties: f(n) = f(n/2) if nis even f(n) = f(n+5) if nis odd Let R = {i|∃j : f(j) = i} be the set of distinct values that f takes. The maximum possible size of R is .",
+    "question": "A function f : N+ →N+, defined on the set of positive integers N+, satisfies the following properties: f(n) = f(n/2) if nis even f(n) = f(n+5) if nis odd Let R = {i|∃j : f(j) = i} be the set of distinct values that f takes. The maximum possible size of R is .",
     "options": [],
     "answer": "2.0 : 2.0",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A function f : N+ →N+, deﬁned on the set of positive integers N+, satisﬁes the following properties: f(n) =...\n- - Rigorous evaluation confirms that **2.0 : 2.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **2.0 : 2.0**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Digital Circuits & Boolean Logic`\n\n#### 1. Core Principle & Theory\nDe Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.\n\n#### 2. Concrete Example & Mental Model\nA 4:1 MUX with inputs I0, I1, I2, I3 and select lines S1, S0 implements any 3-variable Boolean function without external logic gates.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A function f : N+ →N+, defined on the set of positive integers N+, satisfies the following properties: f(n) =...\n- - Rigorous evaluation confirms that **2.0 : 2.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nWatch out for setup time (data must be stable BEFORE clock edge) and hold time (data must remain stable AFTER clock edge).\n\n**Official Verified Answer:** **2.0 : 2.0**",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "De Morgan's Laws: (A + B)' = A'B'; (AB)' = A' + B'. Universal gates (NAND, NOR). Flip-flop characteristic equations: D: Q+ = D; T: Q+ = T XOR Q; JK: Q+ = J Q' + K' Q. Multiplexers act as universal logic generators.",
@@ -19856,7 +19856,7 @@
     "difficulty": "Medium",
     "subject": "Engineering Mathematics",
     "topic": "Calculus (Limits, Continuity, Integrals)",
-    "question": "Consider the two cascaded 2-to-1 multiplexers as shown in the ﬁgure.\n\nMUX 2−to−1 0 1 0 1 0 MUX 2−to−1 X R R P Q s s The minimal sum of products form of the output X is",
+    "question": "Consider the two cascaded 2-to-1 multiplexers as shown in the figure.\n\nMUX 2−to−1 0 1 0 1 0 MUX 2−to−1 X R R P Q s s The minimal sum of products form of the output X is",
     "options": [
       {
         "label": "A",
@@ -19876,7 +19876,7 @@
       }
     ],
     "answer": "D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the two cascaded 2-to-1 multiplexers as shown in the ﬁgure.     MUX 2−to−1 0 1 0 1 0 MUX 2−to−1 X ...\n- - Rigorous evaluation confirms that **Option (D)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **Option (D)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### 1. Core Principle & Theory\nL'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).\n\n#### 2. Concrete Example & Mental Model\nFor lim_{t -> infinity} (sqrt(t^2 + t) - t), multiply by conjugate: (t^2 + t - t^2)/(sqrt(t^2 + t) + t) = t / (t(sqrt(1 + 1/t) + 1)) -> 1 / (1 + 1) = 0.5.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider the two cascaded 2-to-1 multiplexers as shown in the figure.     MUX 2−to−1 0 1 0 1 0 MUX 2−to−1 X ...\n- - Rigorous evaluation confirms that **Option (D)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDo not differentiate numerator and denominator with quotient rule when applying L'Hopital's rule; differentiate them independently.\n\n**Official Verified Answer:** **Option (D)**",
     "hint": "Analyze the governing theorems in Boolean Algebra & Logic Gates. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "L'Hopital's Rule applies to 0/0 or infinity/infinity indeterminate limits: lim f(x)/g(x) = lim f'(x)/g'(x). Maxima and minima occur where f'(x) = 0. Continuity requires lim_{x -> a} f(x) = f(a).",
@@ -19894,10 +19894,10 @@
     "difficulty": "Medium",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "The size of the data count register of a DMA controller is 16 bits. The processor needs to transfer a ﬁle of 29,154 kilobytes from disk to main memory. The memory is byte addressable. The minimum number of times the DMA controller needs to get the control of the system bus from the processor to transfer the ﬁle from the disk to main memory is .",
+    "question": "The size of the data count register of a DMA controller is 16 bits. The processor needs to transfer a file of 29,154 kilobytes from disk to main memory. The memory is byte addressable. The minimum number of times the DMA controller needs to get the control of the system bus from the processor to transfer the file from the disk to main memory is .",
     "options": [],
     "answer": "456.0 : 456.0",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The size of the data count register of a DMA controller is 16 bits. The processor needs to transfer a ﬁle o...\n- - Rigorous evaluation confirms that **456.0 : 456.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **456.0 : 456.0**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The size of the data count register of a DMA controller is 16 bits. The processor needs to transfer a file o...\n- - Rigorous evaluation confirms that **456.0 : 456.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **456.0 : 456.0**",
     "hint": "Analyze the governing theorems in Memory Management & Paging. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -19915,10 +19915,10 @@
     "difficulty": "Medium",
     "subject": "Computer Organization & Architecture",
     "topic": "Pipelining & Processor Design",
-    "question": "The stage delays in a 4-stage pipeline are 800, 500, 400 and 300 picoseconds. The ﬁrst stage (with delay 800 picoseconds) is replaced with a functionally equivalent design involving two stages with respective delays 600 and 350 picoseconds. The throughput increase of the pipeline is percent.",
+    "question": "The stage delays in a 4-stage pipeline are 800, 500, 400 and 300 picoseconds. The first stage (with delay 800 picoseconds) is replaced with a functionally equivalent design involving two stages with respective delays 600 and 350 picoseconds. The throughput increase of the pipeline is percent.",
     "options": [],
     "answer": "33.0 : 34.0",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Computer Organization & Architecture` ➔ **Topic:** `Pipelining & Processor Design`\n\n#### 1. Core Principle & Theory\n5-stage RISC pipeline: IF, ID, EX, MEM, WB. Ideal CPI is 1. Hazards: Structural (resource conflict), Data (RAW, WAR, WAW), and Control (branches). Forwarding eliminates RAW stalls for ALU results.\n\n#### 2. Concrete Example & Mental Model\nSpeedup with k pipeline stages over non-pipelined execution for n instructions is approximately k when n is large.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The stage delays in a 4-stage pipeline are 800, 500, 400 and 300 picoseconds. The ﬁrst stage (with delay 80...\n- - Rigorous evaluation confirms that **33.0 : 34.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nForwarding cannot resolve load-use data hazard without inserting at least one stall cycle because data from memory is available only after MEM stage.\n\n**Official Verified Answer:** **33.0 : 34.0**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Computer Organization & Architecture` ➔ **Topic:** `Pipelining & Processor Design`\n\n#### 1. Core Principle & Theory\n5-stage RISC pipeline: IF, ID, EX, MEM, WB. Ideal CPI is 1. Hazards: Structural (resource conflict), Data (RAW, WAR, WAW), and Control (branches). Forwarding eliminates RAW stalls for ALU results.\n\n#### 2. Concrete Example & Mental Model\nSpeedup with k pipeline stages over non-pipelined execution for n instructions is approximately k when n is large.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The stage delays in a 4-stage pipeline are 800, 500, 400 and 300 picoseconds. The first stage (with delay 80...\n- - Rigorous evaluation confirms that **33.0 : 34.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nForwarding cannot resolve load-use data hazard without inserting at least one stall cycle because data from memory is available only after MEM stage.\n\n**Official Verified Answer:** **33.0 : 34.0**",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "5-stage RISC pipeline: IF, ID, EX, MEM, WB. Ideal CPI is 1. Hazards: Structural (resource conflict), Data (RAW, WAR, WAW), and Control (branches). Forwarding eliminates RAW stalls for ALU results.",
@@ -20088,7 +20088,7 @@
     "difficulty": "Medium",
     "subject": "Algorithms",
     "topic": "Asymptotic Analysis & Recurrences",
-    "question": "An operator delete(i) for a binary heap data structure is to be designed to delete the item in the i-th node. Assume that the heap is implemented in an array and i refers to the i-th index of the array. If the heap tree has depth d (number of edges on the path from the root to the farthest leaf), then what is the time complexity to re-ﬁx the heap efﬁciently after the removal of the element?",
+    "question": "An operator delete(i) for a binary heap data structure is to be designed to delete the item in the i-th node. Assume that the heap is implemented in an array and i refers to the i-th index of the array. If the heap tree has depth d (number of edges on the path from the root to the farthest leaf), then what is the time complexity to re-fix the heap efficiently after the removal of the element?",
     "options": [
       {
         "label": "A",
@@ -20441,7 +20441,7 @@
     "difficulty": "Medium",
     "subject": "Operating Systems",
     "topic": "Memory Management & Paging",
-    "question": "Consider a computer system with ten physical page frames. The system is provided with an access sequence (a1,a2,...,a20,a1,a2,...,a20), where each ai is a distinct virtual page number. The difference in the number of page faults between the last-in-ﬁrst-out page replacement policy and the optimal page replacement policy is . CS(Set A) 15/17",
+    "question": "Consider a computer system with ten physical page frames. The system is provided with an access sequence (a1,a2,...,a20,a1,a2,...,a20), where each ai is a distinct virtual page number. The difference in the number of page faults between the last-in-first-out page replacement policy and the optimal page replacement policy is . CS(Set A) 15/17",
     "options": [],
     "answer": "1.0 : 1.0",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Operating Systems` ➔ **Topic:** `Memory Management & Paging`\n\n#### 1. Core Principle & Theory\nPaging maps virtual pages to physical frames via page tables. Virtual address = Page Number + Offset. Multi-level page tables reduce memory footprint. TLB caches recent translations: EMAT = Hit_TLB * (t_TLB + t_mem) + (1 - Hit_TLB) * (t_TLB + 2*t_mem).\n\n#### 2. Concrete Example & Mental Model\nIn a 32-bit architecture with 4 KB pages: offset needs 12 bits (2^12 = 4096). The remaining 20 bits index 2^20 pages.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Consider a computer system with ten physical page frames. The system is provided with an access sequence (a...\n- - Rigorous evaluation confirms that **1.0 : 1.0** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nIn a k-level paging scheme, a TLB miss requires (k + 1) memory accesses (k to traverse page tables plus 1 for the physical frame).\n\n**Official Verified Answer:** **1.0 : 1.0**",
@@ -23566,7 +23566,7 @@
     "difficulty": "Easy",
     "subject": "General Aptitude",
     "topic": "Verbal & Quantitative Aptitude",
-    "question": "What is the maximum number of reduce moves that can be taken by a bottom-up parser for a grammar with no epsilon- and unit-production (i.e., of type A → є and A → a) to parse a string with n tokens?",
+    "question": "What is the maximum number of reduce moves that can be taken by a bottom-up parser for a grammar with no epsilon-transitions and unit-production (i.e., of type A → є and A → a) to parse a string with n tokens?",
     "options": [
       {
         "label": "A",
@@ -35173,7 +35173,7 @@
     "difficulty": "Easy",
     "subject": "Computer Organization & Architecture",
     "topic": "Cache Memory & Hierarchy",
-    "question": "In n C pmgmm. on ormy is declared ns llont A[2048j. !Znch nrroy clement is -1 H\\'les in size-. aJld the starting ,rddress of the army IS OxOOOO(JOOO rhis prugmm IS 1110 on~ cNnputer lhnr Jtii.S a dirocl ltlllppod\n\nS9 6(t 61 data c-ache o J' St1;e S \"byu~~s . wnh block Cline) size of 1613ytes. u. Which a lemerns ur the 8t'l'llY conllkt w1Ul elemenr ~r\\(0 f U1 the dDro cache'? Justify yo11r answer briefly IJ lf1he rnogrnm accesses lh~elen1~nt,; or this 3.f'T3Y one by one- in reverse order. i.e .• starting \\vilh Ll1e last elemeJll nod e nding- \\\\lith lhl.! [ir.$1 eltr:nCn~ hO\\\\ many data cacbe misses \\VOuJd occur'! JustifY _your answer briefly. J\\ssume· that !be daUt cache as lftltiaUy empty and that tto mber data or mstrudiQn accesses are to be considered, T hl! rt:IIIHwill;_t recur..-;ivu fi111Ction in C IS n .solunon to the Towers of Hanoi problem, 'lolfd ~~UM:(ud. • , dlill A,. cUr D. ciw<;:)· I 1!1 ..................... 11 f'lll tn lhe dotletl pasts otfh~ solurlou. FiJJ in the- blanks in tbe- followmg: rem plate e>f 1m algorithnt 10 compute aH pain; s l1ortest pmh lenjlrhs 111 a directed graph G witl> n•n .adjacency nwlrix A. [iJJ e<Juals 1 ifrhere rs on edge in 0 fi-om i toj, ond !) o the.t~\\~'ise. Your aiJ:n iu 1iJJlng. l11 tbe b lank~ fs 10 ensure tJml' the aJgoridun is correc-t. -~TIII)IIt:Awi• l ·\"\" CF.rJ.wf! .. -. ~ I UAII,il .-II!I ~ \"\"-\" •-.-N.-PIIJ1---·\\ ~\"\"\"'* ......... _. '\"\"'\"J·•- t ... b. J - • P\"t-.J • -.,1 lli",
+    "question": "In n C pmgmm. on ormy is declared ns llont A[2048j. !Znch nrroy clement is -1 H\\'les in size-. aJld the starting ,rddress of the army IS OxOOOO(JOOO rhis prugmm IS 1110 on~ cNnputer lhnr Jtii.S a dirocl ltlllppod\n\nS9 6(t 61 data c-ache o J' St1;e S \"byu~~s . wnh block Cline) size of 1613ytes. u. Which a lemerns ur the 8t'l'llY conllkt w1Ul elemenr ~r\\(0 f U1 the dDro cache'? Justify yo11r answer briefly IJ lf1he rnogrnm accesses lh~elen1~nt,; or this 3.f'T3Y one by onein reverse order. i.e .• starting \\vilh Ll1e last elemeJll nod e nding- \\\\lith lhl.! [ir.$1 eltr:nCn~ hO\\\\ many data cacbe misses \\VOuJd occur'! JustifY _your answer briefly. J\\ssume· that !be daUt cache as lftltiaUy empty and that tto mber data or mstrudiQn accesses are to be considered, T hl! rt:IIIHwill;_t recur..-;ivu fi111Ction in C IS n .solunon to the Towers of Hanoi problem, 'lolfd ~~UM:(ud. • , dlill A,. cUr D. ciw<;:)· I 1!1 ..................... 11 f'lll tn lhe dotletl pasts otfh~ solurlou. FiJJ in the blanks in the following: rem plate e>f 1m algorithnt 10 compute aH pain; s l1ortest pmh lenjlrhs 111 a directed graph G witl> n•n .adjacency nwlrix A. [iJJ e<Juals 1 ifrhere rs on edge in 0 fi-om i toj, ond !) o the.t~\\~'ise. Your aiJ:n iu 1iJJlng. l11 tbe b lank~ fs 10 ensure tJml' the aJgoridun is correc-t. -~TIII)IIt:Awi• l ·\"\" CF.rJ.wf! .. -. ~ I UAII,il .-II!I ~ \"\"-\" •-.-N.-PIIJ1---·\\ ~\"\"\"'* ......... _. '\"\"'\"J·•- t ... b. J - • P\"t-.J • -.,1 lli",
     "options": [
       {
         "label": "A",
@@ -36687,7 +36687,7 @@
     "difficulty": "Medium",
     "subject": "Theory of Computation",
     "topic": "Turing Machines & Computability",
-    "question": "You may assume ilJul tll• hulling prnblem or Turing muohino is uodt>ciduhle but pnrtittlly decidable. n. Show dtat X is undecidable. (>. Show lhul X is not cv~n purtiull)· decidable. Consider u <It~~ with fbllnwlns SJ'Ie·Cilicatilln~; 20 surface\"' 1000 tm<>kSJsu rlb~e. 16 secl~rsi tr:tck. dakl densil) I KB/st.'Ctor. roL~Iion sp;:ed 3000 rpm. The opcroring >'Y~tcm iuitiutes- the l'rnnsfer between the dis~ und the m~m•JIJ sector-wise. Once tile hcnd hns heen placed on the right LnJcl:. t.hc disk reads u sector in a single scan. ll read• bit;; fr<•n• lite $0Clor while ~'\" head is f\"lliSing over lite sector The read bits ore ft>mtcd into by1es in a serial-in-pnrullel-out bufter und each byte ts then trJnsfctTcd to memOI)'. The disk \\vriting IS exactly o complementary prO<:css. For pans (c) rmd (d) below. a.\"<Sttmc memory rcnd·writc: limo -",
+    "question": "You may assume ilJul tll• hulling prnblem or Turing muohino is uodt>ciduhle but pnrtittlly decidable. n. Show dtat X is undecidable. (>. Show lhul X is not cv~n purtiull)· decidable. Consider u <It~~ with fbllnwlns SJ'Ie·Cilicatilln~; 20 surface\"' 1000 tm<>kSJsu rlb~e. 16 secl~rsi tr:tck. dakl densil) I KB/st.'Ctor. roL~Iion sp;:ed 3000 rpm. The opcroring >'Y~tcm iuitiutesthe l'rnnsfer between the dis~ und the m~m•JIJ sector-wise. Once tile hcnd hns heen placed on the right LnJcl:. t.hc disk reads u sector in a single scan. ll read• bit;; fr<•n• lite $0Clor while ~'\" head is f\"lliSing over lite sector The read bits ore ft>mtcd into by1es in a serial-in-pnrullel-out bufter und each byte ts then trJnsfctTcd to memOI)'. The disk \\vriting IS exactly o complementary prO<:css. For pans (c) rmd (d) below. a.\"<Sttmc memory rcnd·writc: limo -",
     "options": [],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Theory of Computation` ➔ **Topic:** `Turing Machines & Computability`\n\n#### 1. Core Principle & Theory\nTuring Machines recognize Recursively Enumerable (RE) languages. The Halting Problem of Turing Machines is undecidable. Rice's Theorem: any non-trivial semantic property of RE languages is undecidable.\n\n#### 2. Concrete Example & Mental Model\nPost Correspondence Problem (PCP), Ambiguity of CFGs, and Emptiness of Turing Machines are all provably undecidable.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** You may assume ilJul tll• hulling prnblem  or Turing muohino is uodt>ciduhle but  pnrtittlly decidable.  n....\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nRecursive languages (decidable) are closed under complement, but Recursively Enumerable languages are NOT closed under complement.\n\n**Official Verified Answer:** **Option (A)**",
@@ -38881,7 +38881,7 @@
     "difficulty": "Easy",
     "subject": "Programming & Data Structures",
     "topic": "C Programming & Pointers",
-    "question": "The· foUowing amiJJgemenl of masler- dave.ilip Jl1>ps\n\n, , 1 Ill 1 I ,It ID ._, LJI",
+    "question": "The· foUowing amiJJgemenl of maslerdave.ilip Jl1>ps\n\n, , 1 Ill 1 I ,It ID ._, LJI",
     "options": [
       {
         "label": "A",
@@ -38919,7 +38919,7 @@
     "difficulty": "Easy",
     "subject": "Programming & Data Structures",
     "topic": "C Programming & Pointers",
-    "question": "The· foUowing amiJJgemenl of masler- dave.ilip Jl1>ps",
+    "question": "The· foUowing amiJJgemenl of maslerdave.ilip Jl1>ps",
     "options": [],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `C Programming & Pointers`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The· foUowing amiJJgemenl of masler- dave.ilip Jl1>ps\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **Option (A)**",
@@ -39507,7 +39507,7 @@
     "difficulty": "Medium",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "n. What is t~e mnnh<:r ol'mulrisets ol' <iz~ 4 rhul c.,ln he c<mstl'ltOtcd from ii distinct elements so that ul ienst uue clelllcnt ~>Celtis cxuctl) t\\\\ icc'l h How JnUll)' multiscts cUll N e<mstnrOtcd f'mm n dist1n~r d~mc\"!l t S'! 1,~1 S bu a SCI of 11 demon\"' : I, 2, ... 0 • ,11} nud C tt graph wllll 2n verttce.'i.,. e-ach venex ~onespondi•tg to a dh1inct subsel of S. Two ver1ices are adja~'llt if lhe symmellia uiffiln-'OCC llf Ute CXIITCSp<>ndmg. S~ts hns exactly 2 l'iem~-rtts. Note; The symmetric dil'fcrcnce of t 1~11 sets I< 1 nnd R., is deli ned no (R,IRl) u (R-:!Rt ). a. J.:.verv vertex in G has tb~ snme degree. What ts the degree nf u wrtc.~ 111 G? b How Dlilll)' connected compou.mts docs G have'/ An~wcr !he t'o llowin~quc.;iinns ~ o. Con;,1ruct <1 lnullm:ll llnile stale mauhlne Lll•ll ateepls the language, (>V<-'1' (0, 11. <!f ull •lnn~ thm contam nt:1lher Ute sul>string 00 nor !he sub;1ring 1 I h Consider UJi> grnnml'llr S -t ui)AI> :S->e A-t t>A A -t E wbere S, A nre non-tenmoal symbols witll S being the start symlJuL U. b nr\" te=n•l symbols anti II 1~ the empty stri11g. 'I hi~ gmmmut gcnL1'1llcs stnngs nf the f,)rm a'lt for some i,j 2 11, where 1 nnd j snllsty some couJuion.. Wbut is the condftron on the values ofi onct j'l A pushdiJWII uuU>IIlut<>tl (p<.lu) ts giw 11 in th~ foliO\\\\ in:g c:\\1.endcd nut~LillU of fitUIU state diugrums; 56 57 7nl ll1 rhc nooe.~ dcnore Ou: srar.:s While the edges denote the mows uf the pd11 Th~ ed@e I obel< ore nf I be fonn d, sis- where d js the input symbol IC<td nod g, s' !ll'e the sluul. conrents before nml ali\"'· lbt move ~ \\)[ CXIIIIlj)lC, tlt~ .Jdge lnb~.kd 1, 'lil .~ denotes the move 1rom sttne qo to qo in wbi~h the input ;;ymbol I b 1\\.\"ttd und pushed t.o tht: sta¢k. u. iquoducc two edges wtlll UJlpropJ\"iutc labels rn lbe ulxwe di\"grUtu so tbnt the r.:sullmg 1>1.1a IICCCfl~~ !hd llltl~ullgc { •2.~\"lx10 : 0,1 t·~'\" ucnot.:s reverso ,,f x!, by ,;mpt} ~tuck h. Describe a oondetcnnin.istic pdu ll'itb lht\"'-' stales m Lhc ubove nolution UJdt ncc¢pLq the looguug~ (O\" l \"'l~n ; by ~mpty stack Design • logic circuit to conwn a single digit BCD numll<:r to ih~ numtt.:r modulo six us rollows (D<1 not detect illegal input): a, Wri~e tbe truth !uble fl.lr ull biL'!> Label ll1c tnpul hiL• J ,,1!.\" with I, 11~ the l.:ast significant btl. Labellhe <1utput bit.:< Rt. R ~. .. i.vith Rt as il1e least ~ ignificant bll. Use Ito Slgnit)• u11th. b Dra\\\\ one circuit for <!Uch output bit )U;ing, tti(ogclb•'l', IWO tw(>-inputi\\N[J gut~s. one \\WP-inpul OR gulc und t\\1(1 NOT gute!.. Consider the 8085 lnstmctioo IN ()9H stored us lil.Uows, Meao·ry Addreu Machiae Code .'lOSS 04 3051 OS ttud tl!<: foUowi.ng mcon•pltle liming dtPgram for the inslntcUoo; n » o • • • n • • • ··:-· =x_-___ o~- -...Jx [£! IUii",
+    "question": "n. What is t~e mnnh<:r ol'mulrisets ol' <iz~ 4 rhul c.,ln he c<mstl'ltOtcd from ii distinct elements so that ul ienst uue clelllcnt ~>Celtis cxuctl) t\\\\ icc'l h How JnUll)' multiscts cUll N e<mstnrOtcd f'mm n dist1n~r d~mc\"!l t S'! 1,~1 S bu a SCI of 11 demon\"' : I, 2, ... 0 • ,11} nud C tt graph wllll 2n verttce.'i.,. e-ach venex ~onespondi•tg to a dh1inct subsel of S. Two ver1ices are adja~'llt if lhe symmellia uiffiln-'OCC llf Ute CXIITCSp<>ndmg. S~ts hns exactly 2 l'iem~-rtts. Note; The symmetric dil'fcrcnce of t 1~11 sets I< 1 nnd R., is deli ned no (R,IRl) u (R-:!Rt ). a. J.:.verv vertex in G has tb~ snme degree. What ts the degree nf u wrtc.~ 111 G? b How Dlilll)' connected compou.mts docs G have'/ An~wcr !he t'o llowin~quc.;iinns ~ o. Con;,1ruct <1 lnullm:ll llnile stale mauhlne Lll•ll ateepls the language, (>V<-'1' (0, 11. <!f ull •lnn~ thm contam nt:1lher Ute sul>string 00 nor !he sub;1ring 1 I h Consider UJi> grnnml'llr S -t ui)AI> :S->e A-t t>A A -t E wbere S, A nre non-tenmoal symbols witll S being the start symlJuL U. b nr\" te=n•l symbols anti II 1~ the empty stri11g. 'I hi~ gmmmut gcnL1'1llcs stnngs nf the f,)rm a'lt for some i,j 2 11, where 1 nnd j snllsty some couJuion.. Wbut is the condftron on the values ofi onct j'l A pushdiJWII uuU>IIlut<>tl (p<.lu) ts giw 11 in th~ foliO\\\\ in:g c:\\1.endcd nut~LillU of fitUIU state diugrums; 56 57 7nl ll1 rhc nooe.~ dcnore Ou: srar.:s While the edges denote the mows uf the pd11 Th~ ed@e I obel< ore nf I be fonn d, siswhere d js the input symbol IC<td nod g, s' !ll'e the sluul. conrents before nml ali\"'· lbt move ~ \\)[ CXIIIIlj)lC, tlt~ .Jdge lnb~.kd 1, 'lil .~ denotes the move 1rom sttne qo to qo in wbi~h the input ;;ymbol I b 1\\.\"ttd und pushed t.o tht: sta¢k. u. iquoducc two edges wtlll UJlpropJ\"iutc labels rn lbe ulxwe di\"grUtu so tbnt the r.:sullmg 1>1.1a IICCCfl~~ !hd llltl~ullgc { •2.~\"lx10 : 0,1 t·~'\" ucnot.:s reverso ,,f x!, by ,;mpt} ~tuck h. Describe a oondetcnnin.istic pdu ll'itb lht\"'-' stales m Lhc ubove nolution UJdt ncc¢pLq the looguug~ (O\" l \"'l~n ; by ~mpty stack Design • logic circuit to conwn a single digit BCD numll<:r to ih~ numtt.:r modulo six us rollows (D<1 not detect illegal input): a, Wri~e tbe truth !uble fl.lr ull biL'!> Label ll1c tnpul hiL• J ,,1!.\" with I, 11~ the l.:ast significant btl. Labellhe <1utput bit.:< Rt. R ~. .. i.vith Rt as il1e least ~ ignificant bll. Use Ito Slgnit)• u11th. b Dra\\\\ one circuit for <!Uch output bit )U;ing, tti(ogclb•'l', IWO tw(>-inputi\\N[J gut~s. one \\WP-inpul OR gulc und t\\1(1 NOT gute!.. Consider the 8085 lnstmctioo IN ()9H stored us lil.Uows, Meao·ry Addreu Machiae Code .'lOSS 04 3051 OS ttud tl!<: foUowi.ng mcon•pltle liming dtPgram for the inslntcUoo; n » o • • • n • • • ··:-· =x_-___ o~- -...Jx [£! IUii",
     "options": [],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** n. What is t~e mnnh<:r ol'mulrisets ol' <iz~  4 rhul c.,ln he c<mstl'ltOtcd from ii  distinct elements so t...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **Option (A)**",
@@ -40341,7 +40341,7 @@
     "difficulty": "Medium",
     "subject": "Computer Organization & Architecture",
     "topic": "Instruction Set & Addressing Modes",
-    "question": "48. 5 of9 lr. Hardwired control, hotizontal nu'cro- progratmuing. vertical micro~ prognmnni.ng <3. Horizontal ru.i.;ro-programming. vertical lluc.ro-ptogtammulg, ltrudwired control",
+    "question": "48. 5 of9 lr. Hardwired control, hotizontal nu'croprogratmuing. vertical micro~ prognmnni.ng <3. Horizontal ru.i.;ro-programming. vertical lluc.ro-ptogtammulg, ltrudwired control",
     "options": [
       {
         "label": "D",
@@ -42426,7 +42426,7 @@
     "difficulty": "Medium",
     "subject": "Theory of Computation",
     "topic": "Regular Languages & Finite Automata",
-    "question": "It I ot' I~ nb<we. 11 1~ known that al w me J\"'llll nf time Juring Ute execution of this program fil'<: och\\'lltion records txiS1 on the run- tjmc stock. Describe tbc nm·t.imc stntk- nt Otis point Of lime by olcady indict~tins. the llllluw~ We top nf 0Jc stnok, Otc COntent~ Of Lhc stutic lml; mltl dvnonlio 11nk. llncl ulli'Oalion of O>e locnl v~rinblcs In ~.ach rccmd. 15\\ h1llowintt IS a stale table for some l\"inlle state tllJJchinc. ..,_ Non s-. Outp.&t sc. input - U itlpUI • I A",
+    "question": "It I ot' I~ nb<we. 11 1~ known that al w me J\"'llll nf time Juring Ute execution of this program fil'<: och\\'lltion records txiS1 on the run-time stock. Describe tbc nm·t.imc stntknt Otis point Of lime by olcady indict~tins. the llllluw~ We top nf 0Jc stnok, Otc COntent~ Of Lhc stutic lml; mltl dvnonlio 11nk. llncl ulli'Oalion of O>e locnl v~rinblcs In ~.ach rccmd. 15\\ h1llowintt IS a stale table for some l\"inlle state tllJJchinc. ..,_ Non s-. Outp.&t sc. input - U itlpUI • I A",
     "options": [
       {
         "label": "B",
@@ -43252,7 +43252,7 @@
     "difficulty": "Easy",
     "subject": "Programming & Data Structures",
     "topic": "C Programming & Pointers",
-    "question": "Wluch one of tho followin& is false~ Reod •• AND. •\n>S OR , ;u 1\\0T, • os one.\nwuy impiica·tion .and (>- • ns two way- implication. n. lis: >YI .... ~ 1 > .V",
+    "question": "Wluch one of tho followin& is false~ Reod •• AND. •\n>S OR , ;u 1\\0T, • os one.\nwuy impiica·tion .and (>- • ns two wayimplication. n. lis: >YI .... ~ 1 > .V",
     "options": [
       {
         "label": "B",
@@ -43386,7 +43386,7 @@
     "difficulty": "Medium",
     "subject": "Algorithms",
     "topic": "Graph Algorithms",
-    "question": "lei (I b.: tl1~ di riOCllOO. weighted graph shown Nh>w in Fig. 17, ..... We \"\"' inlen:sled in th<: ' short\"l'l fl\"lh# rrom A u. Output lhe sequenc.e of vert.i<l<!s idoOlilloo b)• tho Dij kl.1:rn •, algorithm Cor ~iugle SOU!'(,'e <hortesl f\"llh \\Vhon tl1e :ti!!_OriUilll Is st:artetl at !lodo A. b. Wri1o dl>wn I he 5>1qu»nce of vortioos ;,, the shortest path !rom A 10 E. o, Whal Is lll\\1 cvs1 i>f th~ shurte~ pulh from 1\\ I~> U7 M. C<1n.'i!dcr the lolhm<ing pmgmm lhnl ntre<ur•~ lu luc:<lle \"\" \"lcm~nl x in\"\" tlll'n) aj I U$in~ bi llllf)' sc-J,..,h. A.ssumo N 1 'I h~ Pl\\'gruut is errott.:<Jllli. Undor whnt oondllions docs Ute program fail'/ G7. lfK ~J. k : ---: .......... ; &: 1111![1 •• N)ll{~: '-ill i :- t;j,. N : ..... k?(i+j)litl: 1(\"&00 < x ... i := t .,j ,. k llllil (\"It) ~ •) II: (i >-j) ; it(l(tl- • } .. ...W.( \\oiolah...,.) .. ...... (.,. io ... ia ..... .,. ) a : ':1 ut 111 Consider I he lot lowing prqgmm '\" pseudo- pasco! syh~a,\"' Wbnl is print•d hy 1he program if purumeler o in pmccdur• ICSJ I is passed as l ... .,. F' ' iL • ... .,, .. z a _ ........ (lopa.~ ; - .. r..r; !11111!'1111•-; .. .. ... o .. ; !Ill!'--(I I ....., ; ..... . ... ,. ,.-(.,..lt',o. lo) ; -· ...... ,.,..,,., •• It) ~",
+    "question": "lei (I b.: tl1~ di riOCllOO. weighted graph shown Nh>w in Fig. 17, ..... We \"\"' inlen:sled in th<: ' short\"l'l fl\"lh# rrom A u. Output lhe sequenc.e of vert.i<l<!s idoOlilloo b)• tho Dij kl.1:rn •, algorithm Cor ~iugle SOU!'(,'e <hortesl f\"llh \\Vhon tl1e :ti!!_OriUilll Is st:artetl at !lodo A. b. Wri1o dl>wn I he 5>1qu»nce of vortioos ;,, the shortest path !rom A 10 E. o, Whal Is lll\\1 cvs1 i>f th~ shurte~ pulh from 1\\ I~> U7 M. C<1n.'i!dcr the lolhm<ing pmgmm lhnl ntre<ur•~ lu luc:<lle \"\" \"lcm~nl x in\"\" tlll'n) aj I U$in~ bi llllf)' sc-J,..,h. A.ssumo N 1 'I h~ Pl\\'gruut is errott.:<Jllli. Undor whnt oondllions docs Ute program fail'/ G7. lfK ~J. k : ---: .......... ; &: 1111![1 •• N)ll{~: '-ill i :- t;j,. N : ..... k?(i+j)litl: 1(\"&00 < x ... i := t .,j ,. k llllil (\"It) ~ •) II: (i >-j) ; it(l(tl- • } .. ...W.( \\oiolah...,.) .. ...... (.,. io ... ia ..... .,. ) a : ':1 ut 111 Consider I he lot lowing prqgmm '\" pseudocode! syh~a,\"' Wbnl is print•d hy 1he program if purumeler o in pmccdur• ICSJ I is passed as l ... .,. F' ' iL • ... .,, .. z a _ ........ (lopa.~ ; - .. r..r; !11111!'1111•-; .. .. ... o .. ; !Ill!'--(I I ....., ; ..... . ... ,. ,.-(.,..lt',o. lo) ; -· ...... ,.,..,,., •• It) ~",
     "options": [],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Graph Algorithms`\n\n#### 1. Core Principle & Theory\nShortest paths on non-negative weights use Dijkstra's algorithm (O((V + E) log V)). Minimum Spanning Trees (MST) use Kruskal's (Union-Find) or Prim's (Priority Queue). Bellman-Ford detects negative weight cycles in O(VE).\n\n#### 2. Concrete Example & Mental Model\nA tree with V vertices always has exactly V - 1 edges and no cycles. Adding any edge creates exactly one fundamental cycle.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** lei (I b.: tl1~ di riOCllOO. weighted graph  shown Nh>w in Fig. 17,  .....  We \"\"' inlen:sled in th<: ' sho...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDijkstra's algorithm produces incorrect results on graphs with negative edge cycles.\n\n**Official Verified Answer:** **Option (A)**",
@@ -43844,7 +43844,7 @@
     "difficulty": "Medium",
     "subject": "Computer Organization & Architecture",
     "topic": "Cache Memory & Hierarchy",
-    "question": "A computer system has u 4K word cache organised .rn block-:rut- assocmtivc manner with <I block» per set. 64 wnrds per block: 1'he number uf biL~ Ill the SET und WORD lields of lite main ruomory uddress lorauut is R. 15. 4",
+    "question": "A computer system has u 4K word cache organised .rn block-:rutassocmtivc manner with <I block» per set. 64 wnrds per block: 1'he number uf biL~ Ill the SET und WORD lields of lite main ruomory uddress lorauut is R. 15. 4",
     "options": [
       {
         "label": "B",
@@ -44158,7 +44158,7 @@
     "difficulty": "Easy",
     "subject": "Discrete Mathematics",
     "topic": "Propositional & First-Order Logic",
-    "question": "2.2 tln the sol N of non·tt<J!tlU•O mtcgcrs. the bo nary opcrntll>n IS as..wcJadve and no_n.,c(lmmulatl\\'c 13 Amou~sl tho properties 1 reOuxi o•ity. ''Yimtlclty. unti- sytmnouy. lrnnsitivily I tho relation R- f(x. y) e N1 1 x,. y f •utislics",
+    "question": "2.2 tln the sol N of non·tt<J!tlU•O mtcgcrs. the bo nary opcrntll>n IS as..wcJadve and no_n.,c(lmmulatl\\'c 13 Amou~sl tho properties 1 reOuxi o•ity. ''Yimtlclty. untisytmnouy. lrnnsitivily I tho relation R- f(x. y) e N1 1 x,. y f •utislics",
     "options": [],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Discrete Mathematics` ➔ **Topic:** `Propositional & First-Order Logic`\n\n#### 1. Core Principle & Theory\nFundamental theoretical principles and governing theorems in Propositional & First-Order Logic.\n\n#### 2. Concrete Example & Mental Model\nApplying standard canonical rules in Propositional & First-Order Logic eliminates impossible boundary cases.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** 2.2  tln the sol N of non·tt<J!tlU•O  mtcgcrs. the bo nary opcrntll>n  IS as..wcJadve and no_n.,c(lmmulatl\\...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nPay careful attention to unit definitions and corner-case constraints in Propositional & First-Order Logic.\n\n**Official Verified Answer:** **Option (A)**",
@@ -44179,7 +44179,7 @@
     "difficulty": "Easy",
     "subject": "Theory of Computation",
     "topic": "Regular Languages & Finite Automata",
-    "question": "7 8, 9 An unrestricted use of ~oe \"goto- statemcnt is harmful because a ot m\"kes 11 more difficult. to verify 1)rograms b 11 increases lloe running tune of the programs",
+    "question": "7 8, 9 An unrestricted use of ~oe \"goto-statement is harmful because a ot m\"kes 11 more difficult. to verify 1)rograms b 11 increases lloe running tune of the programs",
     "options": [
       {
         "label": "C",
@@ -45662,7 +45662,7 @@
     "difficulty": "Easy",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "6. Let A and B be sets with cardinalities m and n respectively. The number of one- one mappings (injections) from A to B, when m < n, is:",
+    "question": "6. Let A and B be sets with cardinalities m and n respectively. The number of one-to-one mappings (injections) from A to B, when m < n, is:",
     "options": [],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** 6.  Let A and B be sets with cardinalities m and n respectively. The number of one- one mappings (injection...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **Option (A)**",
@@ -45776,7 +45776,7 @@
     "difficulty": "Easy",
     "subject": "Engineering Mathematics",
     "topic": "Probability & Statistics",
-    "question": "The following Pascal program segments finds the largest number in a two- dimensional integer array A[O ... n-1,0 ... n-1Jusing a single loop. Fill up the boxes to complete the program and write against [A],[§],[g and IQ] in your answer book. Assume that max is a variable to store the largest value and i,j are the indices to the array. begin max:= [AI, i: =O,j: =0; while [§]do begin if A[i,j]>max then max:=A[i,j] if (gthen j:=j+1 else begin j: =0; i:=IQI end end end.",
+    "question": "The following Pascal program segments finds the largest number in a two-dimensional integer array A[O ... n-1,0 ... n-1Jusing a single loop. Fill up the boxes to complete the program and write against [A],[§],[g and IQ] in your answer book. Assume that max is a variable to store the largest value and i,j are the indices to the array. begin max:= [AI, i: =O,j: =0; while [§]do begin if A[i,j]>max then max:=A[i,j] if (gthen j:=j+1 else begin j: =0; i:=IQI end end end.",
     "options": [],
     "answer": "A",
     "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Probability & Statistics`\n\n#### 1. Core Principle & Theory\nProbability axioms: 0 <= P(A) <= 1. Conditional probability: P(A|B) = P(A cap B) / P(B). Bayes' Theorem computes posterior probabilities. Expectation linearity E[aX + bY] = aE[X] + bE[Y] holds even for dependent variables.\n\n#### 2. Concrete Example & Mental Model\nFor rolling two fair 6-sided dice, expected sum is E[Die 1] + E[Die 2] = 3.5 + 3.5 = 7.0 by linearity of expectation.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** The following Pascal program segments finds the largest number in a two- dimensional integer array A[O ... ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nIndependent events: P(A cap B) = P(A)P(B). Mutually exclusive events: P(A cap B) = 0. Non-zero mutually exclusive events can NEVER be independent.\n\n**Official Verified Answer:** **Option (A)**",
