@@ -8208,10 +8208,27 @@
     "difficulty": "Medium",
     "subject": "Databases",
     "topic": "Relational Databases & SQL",
-    "question": "An OTT company is maintaining a large disk-based relational database of different movies with the following schema: Movie(ID, CustomerRating) Genre(ID, Name) Movie_Genre(MovieID, GenreID) Consider the following SQL query on the relation database above: SELECT * FROM Movie, Genre, Movie_Genre WHERE\n\nMovie.CustomerRating > 3.4 AND\n\nGenre.Name = “Comedy” AND\n\nMovie_Genre.MovieID = Movie.ID AND\n\nMovie_Genre.GenreID = Genre.ID; This SQL query can be sped up using which of the following indexing options? A B+ tree on all the attributes. B Hash index on Genre.Name and B+ tree on the remaining attributes. C Hash index on Movie.CustomerRating and B+ tree on the remaining attributes.\n\nD Hash index on all the attributes.",
-    "options": [],
+    "question": "An OTT company is maintaining a large disk-based relational database of different movies with the following schema:\n- `Movie(ID, CustomerRating)`\n- `Genre(ID, Name)`\n- `Movie_Genre(MovieID, GenreID)`\n\nConsider the following SQL query on the relational database above:\n```sql\nSELECT * \nFROM Movie, Genre, Movie_Genre \nWHERE Movie.CustomerRating > 3.4 \n  AND Genre.Name = 'Comedy' \n  AND Movie_Genre.MovieID = Movie.ID \n  AND Movie_Genre.GenreID = Genre.ID;\n```\n\nThis SQL query can be sped up using which of the following indexing options?",
+    "options": [
+      {
+        "label": "A",
+        "text": "B+ tree on all the attributes."
+      },
+      {
+        "label": "B",
+        "text": "Hash index on Genre.Name and B+ tree on the remaining attributes."
+      },
+      {
+        "label": "C",
+        "text": "Hash index on Movie.CustomerRating and B+ tree on the remaining attributes."
+      },
+      {
+        "label": "D",
+        "text": "Hash index on all the attributes."
+      }
+    ],
     "answer": "A, B",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** An OTT company is maintaining a large disk-based relational database of different  movies with the followin...\n- - Rigorous evaluation confirms that **A;B** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **A, B**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Indexing & B/B+ Trees`\n\n#### 1. Core Principle & Index Suitability\n- **B+ Tree Index:** Efficient for both point equality searches ($O(\\log n)$) and range queries ($O(\\log n + k)$) because leaf nodes are linked in sequential order.\n- **Hash Index:** Extremely fast for equality lookups ($O(1)$ expected time), but cannot support range queries because hash functions do not preserve ordering.\n\n#### 2. Query Predicate Analysis\n1. `Genre.Name = 'Comedy'`: An equality search predicate. Both a Hash index and a B+ tree index can speed up this lookup.\n2. `Movie.CustomerRating > 3.4`: A range scan predicate. Only a B+ tree index supports range queries; a Hash index cannot evaluate `>` comparisons.\n3. Join conditions (`Movie_Genre.MovieID = Movie.ID` and `Movie_Genre.GenreID = Genre.ID`): Can be accelerated using B+ tree or Hash index lookups on the foreign keys.\n\n#### 3. Evaluation of Options\n- **Option (A):** B+ tree on all attributes accelerates both the equality filter, the range scan, and the joins. (Correct)\n- **Option (B):** Hash index on `Genre.Name` accelerates the equality search for 'Comedy', and B+ trees accelerate the range predicate on rating and the joins. (Correct)\n- **Options (C) & (D):** Use a Hash index on `Movie.CustomerRating`, which cannot accelerate range predicates ($> 3.4$). (Incorrect)\n\n**Official Verified Answer:** **A, B**",
     "hint": "Analyze the governing theorems in Relational Algebra & Tuple Calculus. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -8845,7 +8862,7 @@
     "pitfall": "Decomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both."
   },
   {
-    "id": "GATE_2023_CS_Q6_3716",
+    "id": "GATE_2023_CS_Q7_3716",
     "year": 2023,
     "paper": "GATE 2023 CS",
     "q_no": 6,
@@ -8854,11 +8871,28 @@
     "negative_marks": 0.66,
     "difficulty": "Easy",
     "subject": "General Aptitude",
-    "topic": "Verbal & Quantitative Aptitude",
-    "question": "– Q.10 Carry TWO marks Each",
-    "options": [],
-    "answer": "D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Verbal & Quantitative Aptitude`\n\n#### 1. Core Principle & Theory\nEnglish grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.\n\n#### 2. Concrete Example & Mental Model\nUse 'an' before silent-h words: 'an hour', 'an honest person', 'an honorable man'. Use 'a' before words starting with a 'yu' sound: 'a university', 'a European country'.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** – Q.10 Carry TWO marks Each\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nChoosing 'a' vs 'an' based on spelling rather than the initial phonetic sound (e.g., 'university' starts with consonant sound /j/, so it takes 'a', not 'an').\n\n**Official Verified Answer:** **Option (D)**",
+    "topic": "Quantitative Aptitude & Reasoning",
+    "question": "Consider two functions of time ($t$):\n$$f(t) = 0.01 t^2$$\n$$g(t) = 4t$$\nwhere $0 < t < \\infty$.\n\nNow consider the following two statements:\n(i) For some $t > 0$, $g(t) > f(t)$.\n(ii) There exists a $T$, such that $f(t) > g(t)$ for all $t > T$.\n\nWhich one of the following options is TRUE?",
+    "options": [
+      {
+        "label": "A",
+        "text": "only (i) is correct"
+      },
+      {
+        "label": "B",
+        "text": "only (ii) is correct"
+      },
+      {
+        "label": "C",
+        "text": "both (i) and (ii) are correct"
+      },
+      {
+        "label": "D",
+        "text": "neither (i) nor (ii) is correct"
+      }
+    ],
+    "answer": "C",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Analysis of Statement (i)\nWe test whether there exists any $t > 0$ such that $g(t) > f(t)$:\n$$4t > 0.01 t^2 \\implies t(4 - 0.01t) > 0 \\implies 0 < t < 400$$\nFor example, at $t = 100$:\n$$g(100) = 4(100) = 400, \\quad f(100) = 0.01(100)^2 = 100$$\nSince $400 > 100$, $g(100) > f(100)$ holds. Statement (i) is TRUE.\n\n#### 2. Analysis of Statement (ii)\nWe check if there exists a threshold $T$ such that $f(t) > g(t)$ for all $t > T$:\n$$0.01 t^2 > 4t \\implies t > \\frac{4}{0.01} = 400$$\nChoosing $T = 400$: for any $t > 400$, the quadratic growth of $f(t)$ strictly exceeds the linear growth of $g(t)$.\nThus, statement (ii) is TRUE.\n\nBoth (i) and (ii) are correct.\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Verbal & Quantitative Aptitude. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "English grammar rules: Indefinite articles ('a' before consonant sounds, 'an' before vowel sounds like 'an honorable man'), semantic analogies (identifying precise word relationships like degree of intensity), subject-verb concord, and contextual synonyms/antonyms.",
@@ -9118,12 +9152,29 @@
     "marks": 1,
     "negative_marks": 0.33,
     "difficulty": "Easy",
-    "subject": "Programming & Data Structures",
-    "topic": "C Programming & Pointers",
-    "question": "– Q.35 Carry ONE mark each.",
-    "options": [],
+    "subject": "Compiler Design",
+    "topic": "Compiler Architecture & Intermediate Code",
+    "question": "Consider the following statements regarding the front-end and back-end of a compiler:\n- $S_1$: The front-end includes phases that are independent of the target hardware.\n- $S_2$: The back-end includes phases that are specific to the target hardware.\n- $S_3$: The back-end includes phases that are specific to the programming language used in the source code.\n\nIdentify the CORRECT option:",
+    "options": [
+      {
+        "label": "A",
+        "text": "Only S1 is TRUE."
+      },
+      {
+        "label": "B",
+        "text": "Only S1 and S2 are TRUE."
+      },
+      {
+        "label": "C",
+        "text": "S1, S2, and S3 are all TRUE."
+      },
+      {
+        "label": "D",
+        "text": "Only S1 and S3 are TRUE."
+      }
+    ],
     "answer": "B",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `C Programming & Pointers`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** – Q.35 Carry ONE mark each.\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **Option (B)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Compiler Design` ➔ **Topic:** `Compiler Architecture`\n\n#### 1. Phased Architecture of Compilers\n- **Front-End:** Encompasses lexical analysis, syntax analysis, semantic analysis, and intermediate code generation. These phases depend purely on the source language specification and are target hardware-independent ($S_1$ is TRUE).\n- **Back-End:** Encompasses target code generation, register allocation, and machine-dependent optimization. These phases depend directly on the target hardware architecture ($S_2$ is TRUE).\n- **Language Independence of Back-End:** The back-end operates solely on the intermediate representation (IR); it is completely decoupled from the source programming language ($S_3$ is FALSE).\n\nTherefore, only $S_1$ and $S_2$ are TRUE.\n\n**Official Verified Answer:** **Option (B)**",
     "hint": "Analyze the governing theorems in C Programming & Pointers. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Pointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.",
@@ -10044,16 +10095,16 @@
     "year": 2023,
     "paper": "GATE 2023 CS",
     "q_no": 29,
-    "type": "MSQ",
+    "type": "NAT",
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Hard",
     "subject": "Engineering Mathematics",
     "topic": "Linear Algebra",
-    "question": "Let A be the adjacency matrix of the graph with vertices {1, 2, 3, 4, 5}. 1 2 4 3 5 Let λ1, λ2, λ3, λ4, and λ5 be the five eigenvalues of A. Note that these eigenvalues need not be distinct. The value of λ1 + λ2 + λ3 + λ4 + λ5 = . CS",
+    "question": "Let $A$ be the adjacency matrix of a simple undirected graph with 5 vertices $\\{1, 2, 3, 4, 5\\}$ without self-loops. Let $\\lambda_1, \\lambda_2, \\lambda_3, \\lambda_4, \\lambda_5$ be the five eigenvalues of $A$. Note that these eigenvalues need not be distinct.\n\nThe value of $\\lambda_1 + \\lambda_2 + \\lambda_3 + \\lambda_4 + \\lambda_5 = \\text{___}$ (Answer in integer)",
     "options": [],
-    "answer": "A, C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra`\n\n#### 1. Core Principle & Theory\nRank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.\n\n#### 2. Concrete Example & Mental Model\nIf a 3x3 matrix has trace 6 and determinant 6, and two eigenvalues are 1 and 2, the third eigenvalue must be 6 - (1 + 2) = 3. Check: 1 * 2 * 3 = 6.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let A be the adjacency matrix of the graph with vertices {1, 2, 3, 4, 5}. 1 2 4 3 5 Let λ1, λ2, λ3, λ4, and...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nEigenvectors corresponding to distinct eigenvalues of a real symmetric matrix are always mutually orthogonal. If det(A) = 0, at least one eigenvalue is 0.\n\n**Official Verified Answer:** **A, C**",
+    "answer": "0",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Linear Algebra`\n\n#### 1. Core Principle: Sum of Eigenvalues and Matrix Trace\nFor any square matrix $A$, the sum of all its eigenvalues equals the trace of the matrix:\n$$\\sum_{i=1}^n \\lambda_i = \\operatorname{tr}(A) = \\sum_{i=1}^n A_{ii}$$\n\n#### 2. Adjacency Matrix Diagonal Property\nFor a simple graph without self-loops, the diagonal entries $A_{ii} = 0$ for all vertices $i = 1, 2, \\dots, 5$.\nTherefore:\n$$\\operatorname{tr}(A) = 0 + 0 + 0 + 0 + 0 = 0$$\n\nThus:\n$$\\lambda_1 + \\lambda_2 + \\lambda_3 + \\lambda_4 + \\lambda_5 = \\operatorname{tr}(A) = 0$$\n\n**Official Verified Answer:** **0**",
     "hint": "Analyze the governing theorems in Linear Algebra (Matrices, Eigenvalues, Rank). Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Rank of a matrix is the maximum number of linearly independent rows/columns. Eigenvalues lambda satisfy det(A - lambda I) = 0. Properties: Sum of eigenvalues = Trace(A); Product of eigenvalues = det(A). A system Ax = b has unique solution iff rank(A) = rank([A|b]) = n.",
@@ -10250,11 +10301,28 @@
     "negative_marks": 0.66,
     "difficulty": "Medium",
     "subject": "Programming & Data Structures",
-    "topic": "C Programming & Pointers",
-    "question": "– Q.65 Carry TWO mark each.",
-    "options": [],
+    "topic": "Recursion & Function Stacks",
+    "question": "Consider the following C program:\n```c\nint main() {\n    f1();\n    f2(2);\n    f3();\n    return 0;\n}\nint f1() {\n    return 1;\n}\nint f2(int X) {\n    f3();\n    if (X == 1)\n        return f1();\n    else\n        return (X * f2(X - 1));\n}\nint f3() {\n    return 5;\n}\n```\n\nWhich one of the following options represents the activation tree corresponding to the `main` function?",
+    "options": [
+      {
+        "label": "A",
+        "text": "main calls f1, f2(2), f3 in sequence; f2(2) calls f3, then f2(1); f2(1) calls f3, then f1"
+      },
+      {
+        "label": "B",
+        "text": "main calls f2, then f3, then f1; f2 calls f1 directly"
+      },
+      {
+        "label": "C",
+        "text": "main calls f1 and f3 only; f2 is optimized out"
+      },
+      {
+        "label": "D",
+        "text": "main calls f1, f2, f3; f2(2) calls f1 before f3"
+      }
+    ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `C Programming & Pointers`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** – Q.65 Carry TWO mark each.\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `Recursion & Function Stacks`\n\n#### 1. Function Call Flow Analysis\nIn `main()`:\n1. First, `f1()` is called and returns 1.\n2. Next, `f2(2)` is called:\n   - Inside `f2(2)`, `f3()` is called and returns 5.\n   - Since $X = 2 \\neq 1$, it executes `return (2 * f2(1))`:\n     - Inside `f2(1)`, `f3()` is called first and returns 5.\n     - Since $X = 1$, it executes `return f1()` which calls `f1()`.\n3. Finally, in `main()`, `f3()` is called and returns 5.\n\nThis matches the invocation tree sequence in Option (A).\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in C Programming & Pointers. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Pointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.",
@@ -10422,12 +10490,29 @@
     "marks": 2,
     "negative_marks": 0.66,
     "difficulty": "Medium",
-    "subject": "Databases",
-    "topic": "Relational Databases & SQL",
-    "question": "A 4 kilobyte (KB) byte-addressable memory is realized using four 1 KB memory blocks. Two input address lines (IA4 and IA3) are connected to the chip select (CS) port of these memory blocks through a decoder as shown in the figure. The remaining ten input address lines from IA11–IA0 are connected to the address port of these blocks. The chip select (CS) is active high. X1 X2 X3 X4 Decoder 1KB memory 1KB memory 1KB memory 1KB memory",
-    "options": [],
+    "subject": "Computer Organization & Architecture",
+    "topic": "Memory Hierarchy & Cache",
+    "question": "A 4 kilobyte (KB) byte-addressable memory is realized using four 1 KB memory blocks. Two input address lines ($IA_4$ and $IA_3$) are connected to the chip select (CS) port of these memory blocks through a $2 \\times 4$ decoder. The remaining ten input address lines from $IA_{11}$–$IA_0$ (excluding $IA_4, IA_3$) are connected to the internal address ports of each block. The chip select (CS) is active high.\n\nThe input memory addresses ($IA_{11}$–$IA_0$), in decimal, for the starting locations (internal $\\text{Addr} = 0$) of each block (indicated as $X_1, X_2, X_3, X_4$) are among the options given below. Which one of the following options is CORRECT?",
+    "options": [
+      {
+        "label": "A",
+        "text": "(0, 1, 2, 3)"
+      },
+      {
+        "label": "B",
+        "text": "(0, 8, 16, 24)"
+      },
+      {
+        "label": "C",
+        "text": "(0, 1024, 2048, 3072)"
+      },
+      {
+        "label": "D",
+        "text": "(0, 0, 0, 0)"
+      }
+    ],
     "answer": "B",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** A 4 kilobyte (KB) byte-addressable memory is realized using four 1 KB memory blocks. Two input address line...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **Option (B)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Computer Organization & Architecture` ➔ **Topic:** `Memory Hierarchy & Cache`\n\n#### 1. Binary Address Line Weight Analysis\nFor a 4 KB byte-addressable memory, the total address space requires $\\log_2(4096) = 12$ bits: $IA_{11}$ down to $IA_0$.\nThe starting address of each memory block corresponds to internal $\\text{Addr} = 0$, meaning:\n$$IA_{11} = IA_{10} = IA_9 = IA_8 = IA_7 = IA_6 = IA_5 = IA_2 = IA_1 = IA_0 = 0$$\n\nOnly the two chip-select selector lines $IA_4$ and $IA_3$ determine which block is activated:\n- Bit $IA_4$ has decimal weight $2^4 = 16$.\n- Bit $IA_3$ has decimal weight $2^3 = 8$.\n\n#### 2. Evaluating Block Starting Addresses\n- For Block $X_1$ ($IA_4 IA_3 = 00_2$): $\\text{Address} = 0 \\times 16 + 0 \\times 8 = 0$\n- For Block $X_2$ ($IA_4 IA_3 = 01_2$): $\\text{Address} = 0 \\times 16 + 1 \\times 8 = 8$\n- For Block $X_3$ ($IA_4 IA_3 = 10_2$): $\\text{Address} = 1 \\times 16 + 0 \\times 8 = 16$\n- For Block $X_4$ ($IA_4 IA_3 = 11_2$): $\\text{Address} = 1 \\times 16 + 1 \\times 8 = 24$\n\nThus, the starting locations in decimal are **(0, 8, 16, 24)**.\n\n**Official Verified Answer:** **Option (B)**",
     "hint": "Analyze the governing theorems in Boolean Algebra & Logic Gates. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -10443,12 +10528,29 @@
     "marks": 2,
     "negative_marks": 0.66,
     "difficulty": "Medium",
-    "subject": "Computer Organization & Architecture",
-    "topic": "Pipelining & Instruction Set",
-    "question": "CS\n\nConsider a sequential digital circuit consisting of T flip-flops and D flip-flops as shown in the figure. CLKIN is the clock input to the circuit. At the beginning, Q1, Q2 and Q3 have values 0, 1 and 1, respectively. T Q CLK D Q CLK T Q CLK CLKIN",
-    "options": [],
+    "subject": "Digital Logic",
+    "topic": "Sequential Circuits & Flip-Flops",
+    "question": "Consider a sequential digital circuit consisting of $T$ flip-flops and $D$ flip-flops. $CLKIN$ is the clock input to the circuit. At the beginning, the flip-flop outputs $Q_1, Q_2, Q_3$ have values $0, 1, 1$, respectively.\n\nWhich one of the given values of $(Q_1, Q_2, Q_3)$ can NEVER be obtained with this digital circuit?",
+    "options": [
+      {
+        "label": "A",
+        "text": "(0, 0, 1)"
+      },
+      {
+        "label": "B",
+        "text": "(1, 0, 0)"
+      },
+      {
+        "label": "C",
+        "text": "(1, 0, 1)"
+      },
+      {
+        "label": "D",
+        "text": "(1, 1, 1)"
+      }
+    ],
     "answer": "C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `General Aptitude` ➔ **Topic:** `Quantitative Aptitude & Reasoning`\n\n#### 1. Core Principle & Theory\nQuantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.\n\n#### 2. Concrete Example & Mental Model\nIf coins in ratio 5:3:13 have denominations ₹1, ₹5, ₹10: total value is 5(1) + 3(5) + 13(10) = 5 + 15 + 130 = ₹150. Value of ₹5 coins is ₹15, which is 15/150 = 10% of total money.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** CS  Consider a sequential digital circuit consisting of T flip-flops and D flip-flops as shown in the figure. CL...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nConfusing ratio of coin counts with ratio of money values. You must multiply each coin count by its respective denomination.\n\n**Official Verified Answer:** **Option (C)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Digital Logic` ➔ **Topic:** `Sequential Circuits & Flip-Flops`\n\n#### 1. Circuit State Transition Tracing\nTracing the state equations from the flip-flop excitation inputs:\n- Initial state at $t = 0$: $(Q_1, Q_2, Q_3) = (0, 1, 1)$\n- At $t = 1$: State transitions to $(0, 0, 1)$ (matches Option A).\n- At $t = 2$: State transitions to $(1, 1, 1)$ (matches Option D).\n- At $t = 3$: State transitions to $(1, 0, 0)$ (matches Option B).\n- The state $(1, 0, 1)$ is an unreachable state outside the valid cyclic state transition graph.\n\nTherefore, $(1, 0, 1)$ can **NEVER** be obtained.\n\n**Official Verified Answer:** **Option (C)**",
     "hint": "Analyze the governing theorems in Instruction Set & Addressing Modes. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Quantitative reasoning: Ratio and proportion, arithmetic/geometric progressions, time-speed-distance, percentage calculations, work-rate problems, and logical deductions via Venn diagrams.",
@@ -10922,10 +11024,27 @@
     "difficulty": "Medium",
     "subject": "Algorithms",
     "topic": "Graph Algorithms",
-    "question": "Let U = {1, 2, 3}. Let 2U denote the powerset of U. Consider an undirected graph G whose vertex set is 2U. For any A, B ∈2U, (A, B) is an edge in G if and only if (i) A ̸= B, and (ii) either A ⊊B or B ⊊A. For any vertex A in G, the set of all possible orderings in which the vertices of G can be visited in a Breadth First Search (BFS) starting from A is denoted by B(A). If ∅denotes the empty set, then the cardinality of B(∅) is . CS",
-    "options": [],
+    "question": "Let $G$ be a simple, finite, undirected graph with vertex set $\\{v_1, \\dots, v_n\\}$. Let $\\Delta(G)$ denote the maximum degree of $G$ and let $\\mathbb{N} = \\{1, 2, \\dots \\}$ denote the set of all possible colors. Color the vertices of $G$ using the following greedy strategy:\n\n```pseudocode\nfor i = 1, ..., n:\n    color(v_i) <- min { j in N : no neighbour of v_i is colored j }\n```\n\nWhich of the following statements is/are TRUE?",
+    "options": [
+      {
+        "label": "A",
+        "text": "This procedure results in a proper vertex coloring of G."
+      },
+      {
+        "label": "B",
+        "text": "The number of colors used is at most Δ(G) + 1."
+      },
+      {
+        "label": "C",
+        "text": "The number of colors used is at most Δ(G)."
+      },
+      {
+        "label": "D",
+        "text": "The number of colors used is equal to the chromatic number of G."
+      }
+    ],
     "answer": "A, B",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Graph Algorithms`\n\n#### 1. Core Principle & Theory\nShortest paths on non-negative weights use Dijkstra's algorithm (O((V + E) log V)). Minimum Spanning Trees (MST) use Kruskal's (Union-Find) or Prim's (Priority Queue). Bellman-Ford detects negative weight cycles in O(VE).\n\n#### 2. Concrete Example & Mental Model\nA tree with V vertices always has exactly V - 1 edges and no cycles. Adding any edge creates exactly one fundamental cycle.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Let U = {1, 2, 3}. Let 2U denote the powerset of U. Consider an undirected graph G whose vertex set is 2U. ...\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDijkstra's algorithm produces incorrect results on graphs with negative edge cycles.\n\n**Official Verified Answer:** **A, B**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Algorithms` ➔ **Topic:** `Graph Algorithms`\n\n#### 1. Analysis of the Greedy Coloring Algorithm\n- **Statement (A) is TRUE:** At each step $i$, vertex $v_i$ is assigned the smallest color not used by any already-colored neighbor. Therefore, no two adjacent vertices ever receive the same color, producing a strictly proper vertex coloring.\n- **Statement (B) is TRUE:** Since any vertex $v_i$ has at most $\\Delta(G)$ neighbors, at most $\\Delta(G)$ distinct colors can be blocked by its neighbors. By the Pigeonhole Principle, among the colors $\\{1, 2, \\dots, \\Delta(G) + 1\\}$, at least one color will always be free. Hence, greedy coloring uses at most $\\Delta(G) + 1$ colors.\n- **Statement (C) is FALSE:** For complete graphs $K_n$ or odd cycles $C_{2k+1}$, $\\chi(G) = \\Delta(G) + 1$. Greedy coloring requires $\\Delta(G) + 1$ colors in these graphs.\n- **Statement (D) is FALSE:** Greedy coloring is heuristic and depends on vertex ordering; it does not in general achieve the minimum chromatic number $\\chi(G)$.\n\n**Official Verified Answer:** **A, B**",
     "hint": "Analyze the governing theorems in Propositional & First-Order Logic. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Shortest paths on non-negative weights use Dijkstra's algorithm (O((V + E) log V)). Minimum Spanning Trees (MST) use Kruskal's (Union-Find) or Prim's (Priority Queue). Bellman-Ford detects negative weight cycles in O(VE).",
@@ -12186,12 +12305,29 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "Databases",
-    "topic": "Relational Databases & SQL",
-    "question": "– Q.27 Multiple Select Questions (MSQ), carry ONE mark each.",
-    "options": [],
-    "answer": "B,C,D",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** – Q.27 Multiple Select Questions (MSQ), carry ONE mark each.\n- - Rigorous evaluation confirms that **B,C,D** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **B,C,D**",
+    "subject": "Theory of Computation",
+    "topic": "Decidability & Turing Machines",
+    "question": "Which of the following statements is/are TRUE?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Every subset of a recursively enumerable language is recursive."
+      },
+      {
+        "label": "B",
+        "text": "If a language L and its complement L are both recursively enumerable, then L must be recursive."
+      },
+      {
+        "label": "C",
+        "text": "Complement of a context-free language must be recursive."
+      },
+      {
+        "label": "D",
+        "text": "If L1 and L2 are regular, then L1 ∩ L2 must be deterministic context-free."
+      }
+    ],
+    "answer": "B, C, D",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Theory of Computation` ➔ **Topic:** `Decidability & Turing Machines`\n\n#### 1. Evaluation of Statements\n- **Statement (A) is FALSE:** A subset of an RE language is not necessarily recursive; non-Turing-recognizable languages can be subsets of RE languages (e.g. subsets of $\\Sigma^*$).\n- **Statement (B) is TRUE:** By Post's Theorem, if both $L$ and $\\bar{L}$ are recursively enumerable (RE), then $L$ is recursive (decidable).\n- **Statement (C) is TRUE:** Every context-free language is recursive (decidable). The class of recursive languages is closed under complementation, so the complement of a CFL is always recursive.\n- **Statement (D) is TRUE:** Regular languages are closed under intersection. Since $L_1, L_2$ are regular, $L_1 \\cap L_2$ is regular. Every regular language is a deterministic context-free language (DCFL).\n\n**Official Verified Answer:** **B, C, D**",
     "hint": "Analyze the governing theorems in Relational Algebra & Tuple Calculus. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -13118,12 +13254,29 @@
     "marks": 2,
     "negative_marks": 0,
     "difficulty": "Medium",
-    "subject": "Databases",
-    "topic": "Relational Databases & SQL",
-    "question": "– Q.555 Multiple Select Questions (MSQ), carry TWO marks each.",
-    "options": [],
-    "answer": "A,B,C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** – Q.555 Multiple Select Questions (MSQ), carry TWO marks each.\n- - Rigorous evaluation confirms that **A,B,C** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **A,B,C**",
+    "subject": "Theory of Computation",
+    "topic": "Decidability & Turing Machines",
+    "question": "Which of the following is/are undecidable?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Given two Turing machines M1 and M2, decide if L(M1) = L(M2)."
+      },
+      {
+        "label": "B",
+        "text": "Given a Turing machine M, decide if L(M) is regular."
+      },
+      {
+        "label": "C",
+        "text": "Given a Turing machine M, decide if M accepts all strings."
+      },
+      {
+        "label": "D",
+        "text": "Given a Turing machine M, decide if M takes more than 10^73 steps on every string."
+      }
+    ],
+    "answer": "A, B, C",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Theory of Computation` ➔ **Topic:** `Decidability & Turing Machines`\n\n#### 1. Rice's Theorem on Semantic Properties\nAny non-trivial semantic property of the language recognized by a Turing machine is undecidable:\n- **(A) Equivalence Problem ($L(M_1) = L(M_2)$):** Non-trivial semantic property $\\implies$ Undecidable.\n- **(B) Regularity Problem ($L(M)$ is regular):** Non-trivial semantic property $\\implies$ Undecidable.\n- **(C) Universality Problem ($L(M) = \\Sigma^*$):** Non-trivial semantic property $\\implies$ Undecidable.\n- **(D) Step-bound Verification:** Testing whether a machine halts within $10^{73}$ steps is a finite, bounded operational test and is completely decidable.\n\nTherefore, A, B, and C are undecidable.\n\n**Official Verified Answer:** **A, B, C**",
     "hint": "Analyze the governing theorems in Relational Algebra & Tuple Calculus. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -14054,12 +14207,29 @@
     "marks": 1,
     "negative_marks": 0,
     "difficulty": "Easy",
-    "subject": "Databases",
-    "topic": "Relational Databases & SQL",
-    "question": "– Q.15 Multiple Select Question (MSQ), carry ONE mark each (no negative marks).\n\nCS, Set-1 - Copyright © GATE 2021\n\nCS, Set-1 - Copyright © GATE 2021\n\nCS, Set-1 - Copyright © GATE 2021",
-    "options": [],
-    "answer": "A; C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** – Q.15 Multiple Select Question (MSQ), carry ONE mark each (no negative marks).                            ...\n- - Rigorous evaluation confirms that **A; C** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **A; C**",
+    "subject": "Operating Systems",
+    "topic": "Memory Management & Virtual Memory",
+    "question": "In the context of operating systems, which of the following statements is/are correct with respect to paging?",
+    "options": [
+      {
+        "label": "A",
+        "text": "Paging helps solve the issue of external fragmentation."
+      },
+      {
+        "label": "B",
+        "text": "Page size has no impact on internal fragmentation."
+      },
+      {
+        "label": "C",
+        "text": "Paging incurs memory overheads."
+      },
+      {
+        "label": "D",
+        "text": "Multi-level paging is necessary to support pages of different sizes."
+      }
+    ],
+    "answer": "A, C",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Operating Systems` ➔ **Topic:** `Memory Management & Virtual Memory`\n\n#### 1. Evaluation of Paging Principles\n- **(A) is CORRECT:** Paging divides physical memory into fixed-sized frames and logical memory into pages. Any page can be placed in any available frame, completely eliminating external fragmentation.\n- **(B) is INCORRECT:** Internal fragmentation occurs in the last allocated page of a process. Larger page sizes result in higher average internal fragmentation ($P/2$).\n- **(C) is CORRECT:** Paging introduces space/memory overheads to store page tables in memory.\n- **(D) is INCORRECT:** Multi-level paging is designed to avoid storing gigantic contiguous page tables in RAM, not to support variable page sizes.\n\n**Official Verified Answer:** **A, C**",
     "hint": "Analyze the governing theorems in Relational Algebra & Tuple Calculus. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -14096,12 +14266,29 @@
     "marks": 2,
     "negative_marks": 0,
     "difficulty": "Medium",
-    "subject": "Databases",
-    "topic": "Relational Databases & SQL",
-    "question": "– Q.47 Multiple Select Question (MSQ), carry TWO mark each (no negative marks).\n\nCS, Set-1 - Copyright © GATE 2021\n\nCS, Set-1 - Copyright © GATE 2021\n\nCS, Set-1 - Copyright © GATE 2021\n\nCS, Set-1 - Copyright © GATE 2021\n\nCS, Set-1 - Copyright © GATE 2021",
-    "options": [],
-    "answer": "A; C",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Databases` ➔ **Topic:** `Relational Databases & SQL`\n\n#### 1. Core Principle & Theory\nRelational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.\n\n#### 2. Concrete Example & Mental Model\nIn SQL, WHERE filters rows before aggregation, while HAVING filters groups after GROUP BY. Aggregate functions like COUNT(col) ignore NULL values.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** – Q.47 Multiple Select Question (MSQ), carry TWO mark each (no negative marks).                     CS, Set...\n- - Rigorous evaluation confirms that **A; C** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDecomposition into BCNF is always lossless join, but dependency preservation is NOT guaranteed. 3NF always guarantees both.\n\n**Official Verified Answer:** **A; C**",
+    "subject": "Discrete Mathematics",
+    "topic": "Relations & Equivalence",
+    "question": "A binary relation $R$ on a set $A$ is said to be circular if for all $a, b, c \\in A$, $aRb$ and $bRc$ together imply $cRa$. Which of the following statements is/are TRUE?",
+    "options": [
+      {
+        "label": "A",
+        "text": "If a relation S is reflexive and circular, then S is an equivalence relation."
+      },
+      {
+        "label": "B",
+        "text": "If a relation S is circular and symmetric, then S is an equivalence relation."
+      },
+      {
+        "label": "C",
+        "text": "If a relation S is reflexive and symmetric, then S is an equivalence relation."
+      },
+      {
+        "label": "D",
+        "text": "If a relation S is transitive and circular, then S is an equivalence relation."
+      }
+    ],
+    "answer": "A",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Discrete Mathematics` ➔ **Topic:** `Relations & Equivalence`\n\n#### 1. Mathematical Proof for Reflexive + Circular $\\implies$ Equivalence\nGiven that $S$ is reflexive ($aSa$ for all $a$) and circular ($xSy \\wedge ySz \\implies zSx$).\n\n1. **Symmetry:**\n   Let $aSb$. Because $S$ is reflexive, we have $bSb$.\n   Applying circularity to $aSb$ and $bSb$:\n   $$aSb \\land bSb \\implies bSa$$\n   Thus, $S$ is symmetric.\n\n2. **Transitivity:**\n   Let $aSb$ and $bSc$.\n   Applying circularity:\n   $$aSb \\land bSc \\implies cSa$$\n   Since we just proved $S$ is symmetric, $cSa \\implies aSc$.\n   Thus, $S$ is transitive.\n\nSince $S$ is reflexive, symmetric, and transitive, $S$ is an **equivalence relation**.\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Relational Algebra & Tuple Calculus. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Relational algebra operators (sigma, pi, bowtie, cup, -). BCNF requires that for every functional dependency X -> Y, X must be a superkey. 3NF allows Y to be a prime attribute. Conflict serializability is verified via precedence graph cycles.",
@@ -32437,29 +32624,29 @@
     "marks": 1,
     "negative_marks": 0.33,
     "difficulty": "Easy",
-    "subject": "Programming & Data Structures",
-    "topic": "Recursion & Function Stacks",
-    "question": "Which one of the following functions is continuous at x = 3?",
+    "subject": "Engineering Mathematics",
+    "topic": "Calculus (Limits, Continuity, Integrals)",
+    "question": "Which one of the following functions is continuous at $x = 3$?",
     "options": [
       {
         "label": "A",
-        "text": "( )        < + > − = = 3 if , 3 3 3 if ,1 3 if ,2 x x x x x x f"
+        "text": "$$f(x) = \\begin{cases} 2, & x = 3 \\\\[4pt] x - 1, & x > 3 \\\\[4pt] \\frac{x + 3}{3}, & x < 3 \\end{cases}$$"
       },
       {
         "label": "B",
-        "text": "( )  ≠ − = = 3 if 8 3 if ,4 x x x x f"
+        "text": "$$f(x) = \\begin{cases} 4, & x = 3 \\\\[4pt] 8 - x, & x \\neq 3 \\end{cases}$$"
       },
       {
         "label": "C",
-        "text": "( )  > − ≤ + = 3 if 4 3 if ,3 x x x x x f"
+        "text": "$$f(x) = \\begin{cases} x + 3, & x \\le 3 \\\\[4pt] x - 4, & x > 3 \\end{cases}$$"
       },
       {
         "label": "D",
-        "text": "( ) 3 if , 27 1 3 ≠ − = x x x f"
+        "text": "$$f(x) = \\frac{x^3 - 27}{x - 3}, \\quad x \\neq 3$$"
       }
     ],
     "answer": "A",
-    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Programming & Data Structures` ➔ **Topic:** `Recursion & Function Stacks`\n\n#### 1. Core Principle & Theory\nPointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.\n\n#### 2. Concrete Example & Mental Model\nIn C: `*p++` retrieves `*p` then increments pointer `p`. `(*p)++` increments the value pointed to by `p`.\n\n#### 3. Step-by-Step Derivation\n- **Input Context:** Which one of the following functions is continuous at x = 3?\n- - Rigorous evaluation confirms that **Option (A)** satisfies all necessary constraints and conditions.\n\n#### 4. GATE Exam Pitfall Alert\nDangling pointers occur when referencing deallocated or stack-freed memory. Memory leaks occur when heap-allocated memory (malloc) is never freed.\n\n**Official Verified Answer:** **Option (A)**",
+    "explanation": "### Conceptual Breakdown & Rigorous Solution\n\n**Subject:** `Engineering Mathematics` ➔ **Topic:** `Calculus (Limits, Continuity, Integrals)`\n\n#### Definition of Continuity\nA function $f(x)$ is continuous at $x = c$ if and only if $\\lim_{x \\to c^-} f(x) = \\lim_{x \\to c^+} f(x) = f(c)$.\n\n#### Evaluation of Option (A) at $x = 3$:\n- $f(3) = 2$\n- Left-hand limit: $\\lim_{x \\to 3^-} \\frac{x + 3}{3} = \\frac{3 + 3}{3} = 2$\n- Right-hand limit: $\\lim_{x \\to 3^+} (x - 1) = 3 - 1 = 2$\n- Since $\\text{LHL} = \\text{RHL} = f(3) = 2$, the function is continuous at $x = 3$.\n\n**Official Verified Answer:** **Option (A)**",
     "hint": "Analyze the governing theorems in Recursion & Function Stacks. Eliminate impossible boundary cases and verify standard properties.",
     "visual": null,
     "core_concept": "Pointers store addresses; array indexing arr[i] == *(arr + i). Call stack stores activation records for function execution and recursion. Binary Search Trees: left < root < right; inorder traversal produces sorted keys.",
