@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import katex from 'katex';
 import { 
   Compass, 
@@ -8,7 +8,11 @@ import {
   Lightbulb, 
   Bookmark, 
   FileText,
-  HelpCircle
+  HelpCircle,
+  Copy,
+  Check,
+  Code2,
+  Terminal
 } from 'lucide-react';
 
 // Pre-clean LaTeX math syntax, bracket delimiters, exponents, and isolated raw LaTeX symbols
@@ -85,11 +89,212 @@ function preCleanMath(text) {
   return parts.join('');
 }
 
+// Dedicated IDE/Terminal-Style Code Block
+function CodeBlock({ code, lang = 'c' }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const displayLang = (lang || 'C').toUpperCase();
+
+  return (
+    <div className="my-3.5 rounded-2xl overflow-hidden border border-slate-750/90 dark:border-slate-800 bg-[#0b0f19] dark:bg-[#070b14] shadow-lg text-left">
+      {/* Code Header Bar */}
+      <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 dark:bg-slate-900/60 border-b border-slate-800/80 select-none">
+        <div className="flex items-center gap-2">
+          {/* Mac window dots */}
+          <div className="flex items-center gap-1.5 mr-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+          </div>
+          <div className="flex items-center gap-1.5 text-slate-400">
+            <Terminal className="w-3.5 h-3.5 text-blue-400" />
+            <span className="font-mono text-[11px] font-bold tracking-wider text-slate-300">
+              {displayLang}
+            </span>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-white bg-slate-800/60 hover:bg-slate-800 transition-colors"
+          title="Copy code to clipboard"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-400">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span>Copy</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Code Body */}
+      <div className="p-4 sm:p-5 overflow-x-auto font-mono text-xs sm:text-[13px] leading-relaxed text-slate-100 selection:bg-blue-600/50 selection:text-white">
+        <pre className="whitespace-pre font-mono tab-4">
+          <code>{code}</code>
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+// Helper to check if a raw line looks like C or pseudo-code
+function isCodeLine(line) {
+  const t = line.trim();
+  if (!t) return false;
+  return (
+    /^#include\s*<.+>/.test(t) ||
+    /^(int|void|float|char|double|bool|long|short)\s+[a-zA-Z_]\w*\s*\([^)]*\)\s*\{?/.test(t) ||
+    /^(int|void)\s+main\s*\([^)]*\)\s*\{?/.test(t) ||
+    /^(typedef\s+struct|struct\s+[a-zA-Z_]\w*\s*\{?)/.test(t) ||
+    /^(printf|scanf)\s*\(/.test(t) ||
+    /^(for|while|if|switch)\s*\(.+\)\s*\{?/.test(t) ||
+    /^return\s+[^;]+;/.test(t) ||
+    /^[{}]$/.test(t) ||
+    /^\*?[a-zA-Z_]\w*\s*=\s*[^;]+;/.test(t) ||
+    /^[a-zA-Z_]\w*\s*\([^)]*\)\s*;/.test(t) ||
+    /;\s*$/.test(t)
+  );
+}
+
+// Tokenize text into semantic blocks (code blocks, headings, quotes, lists, and unified paragraphs)
+function parseBlocks(text) {
+  if (!text) return [];
+  const lines = text.split('\n');
+  const blocks = [];
+  let currentParagraph = [];
+  let inCode = false;
+  let codeLang = '';
+  let codeLines = [];
+
+  const flushParagraph = () => {
+    if (currentParagraph.length > 0) {
+      blocks.push({ type: 'paragraph', text: currentParagraph.join(' ').trim() });
+      currentParagraph = [];
+    }
+  };
+
+  const flushCode = () => {
+    if (codeLines.length > 0) {
+      blocks.push({ type: 'code', lang: codeLang || 'c', code: codeLines.join('\n') });
+      codeLines = [];
+      codeLang = '';
+    }
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // 1. Explicit Markdown code fence ```
+    if (trimmed.startsWith('```')) {
+      if (inCode) {
+        flushCode();
+        inCode = false;
+      } else {
+        flushParagraph();
+        inCode = true;
+        codeLang = trimmed.slice(3).trim();
+      }
+      continue;
+    }
+
+    if (inCode) {
+      codeLines.push(line);
+      continue;
+    }
+
+    // 2. Headings (must have space after # to prevent collision with #include)
+    if (/^#{1,6}\s+/.test(trimmed)) {
+      flushParagraph();
+      const level = trimmed.match(/^#+/)[0].length;
+      blocks.push({ 
+        type: 'heading', 
+        level, 
+        text: trimmed.replace(/^#{1,6}\s+/, '').trim() 
+      });
+      continue;
+    }
+
+    // 3. Blockquotes
+    if (trimmed.startsWith('> ')) {
+      flushParagraph();
+      blocks.push({ type: 'quote', text: trimmed.slice(2).trim() });
+      continue;
+    }
+
+    // 4. Horizontal Rules
+    if (trimmed === '---' || trimmed === '***' || trimmed === '===') {
+      flushParagraph();
+      blocks.push({ type: 'hr' });
+      continue;
+    }
+
+    // 5. Bullet Lists
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+      flushParagraph();
+      blocks.push({ type: 'bullet', text: trimmed.slice(2).trim() });
+      continue;
+    }
+
+    // 6. Numbered Lists
+    const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+    if (numMatch) {
+      flushParagraph();
+      blocks.push({ type: 'number', num: numMatch[1], text: numMatch[2].trim() });
+      continue;
+    }
+
+    // 7. Blank Line => End of current paragraph
+    if (!trimmed) {
+      flushParagraph();
+      continue;
+    }
+
+    // 8. Auto-Detect Contiguous Raw Code Blocks (e.g., #include, int main, for loops without ```)
+    if (isCodeLine(line)) {
+      flushParagraph();
+      const rawCode = [line];
+      while (
+        i + 1 < lines.length && 
+        (isCodeLine(lines[i + 1]) || (!lines[i + 1].trim() && i + 2 < lines.length && isCodeLine(lines[i + 2])))
+      ) {
+        i++;
+        rawCode.push(lines[i]);
+      }
+      // Trim trailing blank lines
+      while (rawCode.length > 0 && !rawCode[rawCode.length - 1].trim()) {
+        rawCode.pop();
+      }
+      blocks.push({ type: 'code', lang: 'c', code: rawCode.join('\n') });
+      continue;
+    }
+
+    // 9. Normal Paragraph Text (joined with previous lines to allow natural browser wrapping)
+    currentParagraph.push(trimmed);
+  }
+
+  flushParagraph();
+  flushCode();
+  return blocks;
+}
+
 export default function MathText({ text, className = '' }) {
   if (!text) return null;
 
   const cleanedText = preCleanMath(text);
-  const lines = cleanedText.split('\n');
+  const blocks = parseBlocks(cleanedText);
 
   const renderInlineFormatted = (rawStr) => {
     if (!rawStr) return null;
@@ -165,174 +370,174 @@ export default function MathText({ text, className = '' }) {
   };
 
   return (
-    <div className={`space-y-2.5 break-words leading-relaxed text-slate-950 dark:text-slate-100 font-normal px-0.5 ${className}`}>
-      {lines.map((line, lineIdx) => {
-        const trimmed = line.trim();
-        if (!trimmed) {
-          return <div key={lineIdx} className="h-2" />;
+    <div className={`space-y-3 break-words leading-relaxed text-slate-950 dark:text-slate-100 font-normal px-0.5 ${className}`}>
+      {blocks.map((block, blockIdx) => {
+        // 1. Code Block
+        if (block.type === 'code') {
+          return <CodeBlock key={blockIdx} code={block.code} lang={block.lang} />;
         }
 
-        // 1. Heading 4 (####) - Specialized Pedagogical Section Cards
-        if (trimmed.startsWith('#### ')) {
-          const headingText = trimmed.slice(5).trim();
+        // 2. Headings
+        if (block.type === 'heading') {
+          const headingText = block.text;
           const lower = headingText.toLowerCase();
 
-          // Pitfall / Warning / Trap Heading
-          if (lower.includes('pitfall') || lower.includes('trap') || lower.includes('alert') || lower.includes('mistake')) {
+          // Heading 4 Specialized Pedagogical Cards
+          if (block.level === 4) {
+            // Pitfall / Warning / Trap Heading
+            if (lower.includes('pitfall') || lower.includes('trap') || lower.includes('alert') || lower.includes('mistake')) {
+              return (
+                <div 
+                  key={blockIdx} 
+                  className="mt-6 mb-3 p-3.5 sm:p-4 bg-rose-50/90 dark:bg-rose-950/40 border border-rose-300/90 dark:border-rose-800/80 rounded-2xl flex items-center gap-3 shadow-xs"
+                >
+                  <div className="p-2 rounded-xl bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 shrink-0">
+                    <AlertTriangle className="w-4.5 h-4.5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs sm:text-sm font-serif font-bold text-rose-950 dark:text-rose-200 tracking-wide uppercase">
+                      {renderInlineFormatted(headingText)}
+                    </h4>
+                  </div>
+                </div>
+              );
+            }
+
+            // Core Principle / Theory Heading
+            if (lower.includes('core principle') || lower.includes('theory') || lower.includes('concept') || lower.includes('theorem')) {
+              return (
+                <div 
+                  key={blockIdx} 
+                  className="mt-6 mb-3 p-3.5 sm:p-4 bg-blue-50/90 dark:bg-blue-950/40 border border-blue-300/90 dark:border-blue-800/80 rounded-2xl flex items-center gap-3 shadow-xs"
+                >
+                  <div className="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 shrink-0">
+                    <Compass className="w-4.5 h-4.5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs sm:text-sm font-serif font-bold text-blue-950 dark:text-blue-200 tracking-wide uppercase">
+                      {renderInlineFormatted(headingText)}
+                    </h4>
+                  </div>
+                </div>
+              );
+            }
+
+            // Concrete Example / Mental Model Heading
+            if (lower.includes('example') || lower.includes('mental model') || lower.includes('intuition')) {
+              return (
+                <div 
+                  key={blockIdx} 
+                  className="mt-6 mb-3 p-3.5 sm:p-4 bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300/90 dark:border-amber-800/80 rounded-2xl flex items-center gap-3 shadow-xs"
+                >
+                  <div className="p-2 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300 shrink-0">
+                    <Sparkles className="w-4.5 h-4.5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs sm:text-sm font-serif font-bold text-amber-950 dark:text-amber-200 tracking-wide uppercase">
+                      {renderInlineFormatted(headingText)}
+                    </h4>
+                  </div>
+                </div>
+              );
+            }
+
+            // Step-by-Step Derivation Heading
+            if (lower.includes('step') || lower.includes('derivation') || lower.includes('proof') || lower.includes('solution')) {
+              return (
+                <div 
+                  key={blockIdx} 
+                  className="mt-6 mb-3 p-3.5 sm:p-4 bg-slate-100/90 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-2xl flex items-center gap-3 shadow-xs"
+                >
+                  <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 shrink-0">
+                    <CheckCircle2 className="w-4.5 h-4.5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs sm:text-sm font-serif font-bold text-slate-950 dark:text-slate-100 tracking-wide uppercase">
+                      {renderInlineFormatted(headingText)}
+                    </h4>
+                  </div>
+                </div>
+              );
+            }
+
+            // Default Heading 4
             return (
-              <div 
-                key={lineIdx} 
-                className="mt-6 mb-3 p-3.5 sm:p-4 bg-rose-50/90 dark:bg-rose-950/40 border border-rose-300/90 dark:border-rose-800/80 rounded-2xl flex items-center gap-3 shadow-xs"
-              >
-                <div className="p-2 rounded-xl bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 shrink-0">
-                  <AlertTriangle className="w-4.5 h-4.5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-xs sm:text-sm font-serif font-bold text-rose-950 dark:text-rose-200 tracking-wide uppercase">
-                    {renderInlineFormatted(headingText)}
-                  </h4>
-                </div>
+              <div key={blockIdx} className="mt-5 mb-2.5 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 shrink-0" />
+                <h4 className="text-xs sm:text-sm font-serif font-bold text-slate-900 dark:text-slate-200">
+                  {renderInlineFormatted(headingText)}
+                </h4>
               </div>
             );
           }
 
-          // Core Principle / Theory Heading
-          if (lower.includes('core principle') || lower.includes('theory') || lower.includes('concept') || lower.includes('theorem')) {
+          // Heading 3 (###)
+          if (block.level === 3) {
             return (
-              <div 
-                key={lineIdx} 
-                className="mt-6 mb-3 p-3.5 sm:p-4 bg-blue-50/90 dark:bg-blue-950/40 border border-blue-300/90 dark:border-blue-800/80 rounded-2xl flex items-center gap-3 shadow-xs"
-              >
-                <div className="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 shrink-0">
-                  <Compass className="w-4.5 h-4.5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-xs sm:text-sm font-serif font-bold text-blue-950 dark:text-blue-200 tracking-wide uppercase">
-                    {renderInlineFormatted(headingText)}
-                  </h4>
-                </div>
-              </div>
+              <h3 key={blockIdx} className="text-sm sm:text-base font-serif font-extrabold text-blue-950 dark:text-blue-300 mt-4 mb-2 pb-1.5 border-b border-slate-250 dark:border-slate-800 flex items-center gap-2">
+                <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                <span>{renderInlineFormatted(headingText)}</span>
+              </h3>
             );
           }
 
-          // Concrete Example / Mental Model Heading
-          if (lower.includes('example') || lower.includes('mental model') || lower.includes('intuition')) {
+          // Heading 2 (##)
+          if (block.level === 2) {
             return (
-              <div 
-                key={lineIdx} 
-                className="mt-6 mb-3 p-3.5 sm:p-4 bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300/90 dark:border-amber-800/80 rounded-2xl flex items-center gap-3 shadow-xs"
-              >
-                <div className="p-2 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300 shrink-0">
-                  <Sparkles className="w-4.5 h-4.5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-xs sm:text-sm font-serif font-bold text-amber-950 dark:text-amber-200 tracking-wide uppercase">
-                    {renderInlineFormatted(headingText)}
-                  </h4>
-                </div>
-              </div>
-            );
-          }
-
-          // Step-by-Step Derivation Heading
-          if (lower.includes('step') || lower.includes('derivation') || lower.includes('proof') || lower.includes('solution')) {
-            return (
-              <div 
-                key={lineIdx} 
-                className="mt-6 mb-3 p-3.5 sm:p-4 bg-slate-100/90 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-2xl flex items-center gap-3 shadow-xs"
-              >
-                <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 shrink-0">
-                  <CheckCircle2 className="w-4.5 h-4.5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-xs sm:text-sm font-serif font-bold text-slate-950 dark:text-slate-100 tracking-wide uppercase">
-                    {renderInlineFormatted(headingText)}
-                  </h4>
-                </div>
-              </div>
-            );
-          }
-
-          // Default Heading 4
-          return (
-            <div key={lineIdx} className="mt-5 mb-2.5 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 shrink-0" />
-              <h4 className="text-xs sm:text-sm font-serif font-bold text-slate-900 dark:text-slate-200">
+              <h2 key={blockIdx} className="text-base sm:text-lg font-serif font-extrabold text-slate-950 dark:text-white mt-5 mb-2.5 pb-1.5 border-b border-slate-300 dark:border-slate-700">
                 {renderInlineFormatted(headingText)}
-              </h4>
-            </div>
-          );
-        }
+              </h2>
+            );
+          }
 
-        // 2. Heading 3 (###)
-        if (trimmed.startsWith('### ')) {
+          // Heading 1 (#)
           return (
-            <h3 key={lineIdx} className="text-sm sm:text-base font-serif font-extrabold text-blue-950 dark:text-blue-300 mt-4 mb-2 pb-1.5 border-b border-slate-250 dark:border-slate-800 flex items-center gap-2">
-              <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
-              <span>{renderInlineFormatted(trimmed.slice(4))}</span>
-            </h3>
-          );
-        }
-
-        // 3. Heading 2 (##)
-        if (trimmed.startsWith('## ')) {
-          return (
-            <h2 key={lineIdx} className="text-base sm:text-lg font-serif font-extrabold text-slate-950 dark:text-white mt-5 mb-2.5 pb-1.5 border-b border-slate-300 dark:border-slate-700">
-              {renderInlineFormatted(trimmed.slice(3))}
-            </h2>
-          );
-        }
-
-        // 4. Heading 1 (#)
-        if (trimmed.startsWith('# ')) {
-          return (
-            <h1 key={lineIdx} className="text-lg sm:text-xl font-serif font-black text-slate-950 dark:text-white mt-6 mb-3 pb-2 border-b-2 border-blue-600 dark:border-blue-500">
-              {renderInlineFormatted(trimmed.slice(2))}
+            <h1 key={blockIdx} className="text-lg sm:text-xl font-serif font-black text-slate-950 dark:text-white mt-6 mb-3 pb-2 border-b-2 border-blue-600 dark:border-blue-500">
+              {renderInlineFormatted(headingText)}
             </h1>
           );
         }
 
-        // 5. Blockquotes (> ...)
-        if (trimmed.startsWith('> ')) {
+        // 3. Blockquotes
+        if (block.type === 'quote') {
           return (
-            <div key={lineIdx} className="my-2.5 pl-4 py-2 border-l-4 border-amber-500 bg-amber-50/60 dark:bg-amber-950/20 text-slate-900 dark:text-slate-100 rounded-r-xl italic">
-              {renderInlineFormatted(trimmed.slice(2))}
+            <div key={blockIdx} className="my-2.5 pl-4 py-2 border-l-4 border-amber-500 bg-amber-50/60 dark:bg-amber-950/20 text-slate-900 dark:text-slate-100 rounded-r-xl italic">
+              {renderInlineFormatted(block.text)}
             </div>
           );
         }
 
-        // 6. Horizontal Rules (--- or ***)
-        if (trimmed === '---' || trimmed === '***') {
-          return <hr key={lineIdx} className="my-4 border-t border-slate-200 dark:border-slate-800" />;
+        // 4. Horizontal Rules
+        if (block.type === 'hr') {
+          return <hr key={blockIdx} className="my-4 border-t border-slate-200 dark:border-slate-800" />;
         }
 
-        // 7. Bullet lists (- or *)
-        if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        // 5. Bullet Lists
+        if (block.type === 'bullet') {
           return (
-            <div key={lineIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-950 dark:text-slate-100">
+            <div key={blockIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-950 dark:text-slate-100">
               <span className="text-amber-700 dark:text-amber-400 font-bold leading-tight select-none mt-1.5 text-[8px]">●</span>
-              <div className="flex-1 leading-relaxed">{renderInlineFormatted(trimmed.slice(2))}</div>
+              <div className="flex-1 leading-relaxed">{renderInlineFormatted(block.text)}</div>
             </div>
           );
         }
 
-        // 8. Numbered lists (1., 2.)
-        const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
-        if (numMatch) {
+        // 6. Numbered Lists
+        if (block.type === 'number') {
           return (
-            <div key={lineIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-950 dark:text-slate-100">
+            <div key={blockIdx} className="flex items-start gap-2.5 pl-2 my-1 text-slate-950 dark:text-slate-100">
               <span className="font-mono text-blue-700 dark:text-blue-400 font-bold text-xs min-w-[20px] text-right mt-0.5">
-                {numMatch[1]}.
+                {block.num}.
               </span>
-              <div className="flex-1 leading-relaxed">{renderInlineFormatted(numMatch[2])}</div>
+              <div className="flex-1 leading-relaxed">{renderInlineFormatted(block.text)}</div>
             </div>
           );
         }
 
-        // 9. Standard paragraph line with comfortable line-height and margin
+        // 7. Unified Natural Flowing Paragraphs
         return (
-          <p key={lineIdx} className="text-slate-950 dark:text-slate-100 font-normal leading-relaxed my-1.5 px-0.5">
-            {renderInlineFormatted(line)}
+          <p key={blockIdx} className="text-slate-950 dark:text-slate-100 font-normal leading-relaxed my-2 px-0.5">
+            {renderInlineFormatted(block.text)}
           </p>
         );
       })}
