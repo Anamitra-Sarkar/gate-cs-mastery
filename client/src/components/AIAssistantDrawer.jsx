@@ -35,8 +35,8 @@ Feel free to ask about the active question or any concept in the syllabus!`
 };
 
 export default function AIAssistantDrawer({ isOpen, onClose, activeQuestion }) {
-  const [models, setModels] = useState(['llama-3.3-70b-versatile']);
-  const [currentModel, setCurrentModel] = useState('llama-3.3-70b-versatile');
+  const [models, setModels] = useState(['openai/gpt-oss-120b', 'qwen/qwen3.8-27b', 'openai/gpt-oss-20b']);
+  const [currentModel, setCurrentModel] = useState('openai/gpt-oss-120b');
   const [copiedIdx, setCopiedIdx] = useState(null);
   const [messages, setMessages] = useState([INITIAL_WELCOME_MESSAGE]);
   const [inputPrompt, setInputPrompt] = useState('');

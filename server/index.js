@@ -226,8 +226,8 @@ app.post('/api/bookmarks/toggle', (req, res) => {
 app.get('/api/ai/models', (req, res) => {
   if (!GROQ_API_KEY) {
     return res.json({
-      active: 'qwen/qwen3.8-27b',
-      available: ['qwen/qwen3.8-27b', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b']
+      active: 'openai/gpt-oss-120b',
+      available: ['openai/gpt-oss-120b', 'qwen/qwen3.8-27b', 'openai/gpt-oss-20b']
     });
   }
 
@@ -255,18 +255,18 @@ app.get('/api/ai/models', (req, res) => {
             if (lower.includes('whisper') || lower.includes('guard') || lower.includes('tts') || lower.includes('embed') || lower.includes('arabic') || lower.includes('allam')) {
               return false;
             }
-            return lower.includes('llama') || lower.includes('qwen') || lower.includes('deepseek') || lower.includes('gemma') || lower.includes('mixtral');
+            return lower.includes('gpt-oss') || lower.includes('llama') || lower.includes('qwen') || lower.includes('deepseek') || lower.includes('gemma') || lower.includes('mixtral');
           });
         
-        const preferred = models.find(m => m.includes('llama-3.3-70b')) || models.find(m => m.includes('qwen')) || models[0] || 'llama-3.3-70b-versatile';
+        const preferred = models.find(m => m.includes('120b')) || models.find(m => m.includes('llama-3.3-70b')) || models.find(m => m.includes('qwen')) || models[0] || 'openai/gpt-oss-120b';
         res.json({
           active: preferred,
-          available: models.length ? models : ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant']
+          available: models.length ? models : ['openai/gpt-oss-120b', 'qwen/qwen3.8-27b', 'openai/gpt-oss-20b']
         });
       } catch (err) {
         res.json({
-          active: 'qwen/qwen3.8-27b',
-          available: ['qwen/qwen3.8-27b', 'openai/gpt-oss-120b']
+          active: 'openai/gpt-oss-120b',
+          available: ['openai/gpt-oss-120b', 'qwen/qwen3.8-27b', 'openai/gpt-oss-20b']
         });
       }
     });
@@ -274,8 +274,8 @@ app.get('/api/ai/models', (req, res) => {
 
   groqReq.on('error', (e) => {
     res.json({
-      active: 'qwen/qwen3.8-27b',
-      available: ['qwen/qwen3.8-27b']
+      active: 'openai/gpt-oss-120b',
+      available: ['openai/gpt-oss-120b', 'qwen/qwen3.8-27b', 'openai/gpt-oss-20b']
     });
   });
   groqReq.end();
@@ -283,7 +283,7 @@ app.get('/api/ai/models', (req, res) => {
 
 // AI Tutor Chat Endpoint
 app.post('/api/ai/chat', (req, res) => {
-  const { prompt, questionContext, model = 'qwen/qwen3.8-27b', history = [] } = req.body;
+  const { prompt, questionContext, model = 'openai/gpt-oss-120b', history = [] } = req.body;
 
   if (!GROQ_API_KEY) {
     return res.status(500).json({ error: 'Groq API Key not configured' });
@@ -293,10 +293,14 @@ app.post('/api/ai/chat', (req, res) => {
     role: 'system',
     content: `You are an elite GATE (Graduate Aptitude Test in Engineering) Computer Science & Data Science Master Tutor.
 You teach with exceptional pedagogical clarity, first-principles logic, mathematical rigor, and step-by-step clarity.
-Always use LaTeX formatting (e.g. $O(n \\log n)$, $\\Sigma = \\{0, 1\\}$, $\\det(A)$) for formulas.
+Always format mathematical equations and formulas using standard LaTeX delimiters:
+- For standalone display equations, wrap in $$ ... $$ (e.g., $$\\lim_{t \\to \\infty} \\frac{\\sqrt{t^2+t}-t}{1} = \\frac{1}{2}$$).
+- For inline formulas, wrap in $ ... $ (e.g., $\\frac{a}{b}$, $\\sqrt{x}$, $O(n \\log n)$, $\\Sigma = \\{0, 1\\}$, $\\det(A)$).
+- Always enclose fractions (\\frac{...}{...}), square roots (\\sqrt{...}), and mathematical expressions in LaTeX dollar delimiters ($...$ or $$...$$) so they render beautifully.
+- Complete your derivations and answers fully; never truncate or stop mid-derivation.
 If the student asks for a hint, provide an intuitive clue without giving away the full final option right away.
 Explain why incorrect distractors fail when asked.
-Keep responses concise, engaging, and directly helpful for scoring AIR 1.`
+Keep responses structured, engaging, and directly helpful for scoring AIR 1.`
   };
 
   const messages = [systemMessage];
@@ -322,9 +326,9 @@ Official Explanation: ${questionContext.explanation || 'N/A'}`
   messages.push({ role: 'user', content: prompt });
 
   const payload = JSON.stringify({
-    model: model || 'qwen/qwen3.8-27b',
+    model: model || 'openai/gpt-oss-120b',
     messages,
-    max_tokens: 800,
+    max_tokens: 4096,
     temperature: 0.6
   });
 

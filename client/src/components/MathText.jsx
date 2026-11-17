@@ -18,83 +18,204 @@ import {
   Code
 } from 'lucide-react';
 
+// Helper to parse balanced top-level LaTeX commands and wrap them in $...$
+function autoWrapLatexCommands(str) {
+  if (!str) return '';
+  const regex = /\\(?:frac|dfrac|tfrac|cfrac|sqrt|boxed|binom|sum|prod|int|iint|iiint|oint|lim)(?![a-zA-Z])/g;
+  let match;
+  const spans = [];
+  while ((match = regex.exec(str)) !== null) {
+    const start = match.index;
+    let i = match.index + match[0].length;
+    const isFracLike = match[0].includes('frac') || match[0].includes('tfrac');
+    let argsConsumed = 0;
+    const maxArgs = (match[0].includes('frac') || match[0].includes('tfrac') || match[0].includes('binom')) ? 2 : 1;
+
+    while (i < str.length) {
+      while (i < str.length && /\s/.test(str[i])) i++;
+      if (i >= str.length) break;
+
+      if (str[i] === '{') {
+        let depth = 1;
+        i++;
+        while (i < str.length && depth > 0) {
+          if (str[i] === '{') depth++;
+          else if (str[i] === '}') depth--;
+          i++;
+        }
+        argsConsumed++;
+        if (argsConsumed >= maxArgs && !str.slice(start, i).startsWith('\\sqrt')) break;
+      } else if (str[i] === '[') {
+        let depth = 1;
+        i++;
+        while (i < str.length && depth > 0) {
+          if (str[i] === '[') depth++;
+          else if (str[i] === ']') depth--;
+          i++;
+        }
+      } else if (str[i] === '_' || str[i] === '^') {
+        i++;
+        if (i < str.length && str[i] === '{') {
+          let depth = 1;
+          i++;
+          while (i < str.length && depth > 0) {
+            if (str[i] === '{') depth++;
+            else if (str[i] === '}') depth--;
+            i++;
+          }
+        } else if (i < str.length && /[0-9a-zA-Z\\]/.test(str[i])) {
+          if (str[i] === '\\') {
+            i++;
+            while (i < str.length && /[a-zA-Z]/.test(str[i])) i++;
+          } else {
+            i++;
+          }
+        }
+      } else if (/[0-9a-zA-Z]/.test(str[i]) && isFracLike && argsConsumed < 2) {
+        i++;
+        argsConsumed++;
+        if (argsConsumed >= 2) break;
+      } else {
+        break;
+      }
+    }
+
+    const last = spans[spans.length - 1];
+    if (last && start < last.end) {
+      if (i > last.end) last.end = i;
+    } else {
+      spans.push({ start, end: i });
+    }
+    regex.lastIndex = i;
+  }
+
+  if (spans.length === 0) return str;
+
+  let result = '';
+  let lastIdx = 0;
+  for (const span of spans) {
+    result += str.slice(lastIdx, span.start);
+    result += ` $${str.slice(span.start, span.end).trim()}$ `;
+    lastIdx = span.end;
+  }
+  result += str.slice(lastIdx);
+  return result;
+}
+
 // Pre-clean LaTeX math syntax, bracket delimiters, exponents, and isolated raw LaTeX symbols
 function preCleanMath(text) {
   if (!text) return '';
-  
-  // Protect markdown code fences ```...``` from being modified by math cleanup
-  const codeBlockSegments = text.split(/(```[\s\S]*?```)/g);
-  for (let c = 0; c < codeBlockSegments.length; c += 2) {
-    if (!codeBlockSegments[c]) continue;
-    let s = codeBlockSegments[c];
+  let s = text;
 
-    // 1. Standardize \[ ... \] and \( ... \) to $$ and $
-    s = s.replace(/\\\[([\s\S]+?)\\\]/g, '\n\n$$$$$1$$$$\n\n');
-    s = s.replace(/\\\(([\s\S]+?)\\\)/g, ' $$$1$$ ');
+  // 1. Protect markdown code fences ```...``` from being modified by math cleanup
+  const codeBlocks = [];
+  s = s.replace(/(```[\s\S]*?```)/g, m => {
+    codeBlocks.push(m);
+    return `__CODE_BLOCK_${codeBlocks.length - 1}__`;
+  });
 
-    // 2. Clean isolated raw LaTeX symbol commands and exponent corruption outside of math blocks
-    const rawReplacements = [
-      [/\\to\b/g, '→'],
-      [/\\rightarrow\b/g, '→'],
-      [/\\leftarrow\b/g, '←'],
-      [/\\Rightarrow\b/g, '⇒'],
-      [/\\Leftarrow\b/g, '⇐'],
-      [/\\iff\b/g, '⟺'],
-      [/\\times\b/g, '×'],
-      [/\\le\b|\\leq\b/g, '≤'],
-      [/\\ge\b|\\geq\b/g, '≥'],
-      [/\\neq\b/g, '≠'],
-      [/\\pm\b/g, '±'],
-      [/\\approx\b/g, '≈'],
-      [/\\equiv\b/g, '≡'],
-      [/\\in\b/g, '∈'],
-      [/\\notin\b/g, '∉'],
-      [/\\subset\b/g, '⊂'],
-      [/\\subseteq\b/g, '⊆'],
-      [/\\cup\b/g, '∪'],
-      [/\\cap\b/g, '∩'],
-      [/\\cdot\b/g, '·'],
-      [/\\ldots\b|\\dots\b/g, '…'],
-      [/\\infty\b/g, '∞'],
-      [/\\Theta\b/g, 'Θ'],
-      [/\\Omega\b/g, 'Ω'],
-      [/\\Sigma\b/g, 'Σ'],
-      [/\\Delta\b/g, 'Δ'],
-      [/\\alpha\b/g, 'α'],
-      [/\\beta\b/g, 'β'],
-      [/\\gamma\b/g, 'γ'],
-      [/\\lambda\b/g, 'λ'],
-      [/\\mu\b/g, 'μ'],
-      [/\\pi\b/g, 'π'],
-      [/\\sigma\b/g, 'σ'],
-      [/\\phi\b/g, 'φ'],
-    ];
+  // 2. Protect inline code `...`
+  const inlineCodes = [];
+  s = s.replace(/(`[^`\n]+`)/g, m => {
+    inlineCodes.push(m);
+    return `__INLINE_CODE_${inlineCodes.length - 1}__`;
+  });
 
-    const parts = s.split(/(\$\$[\s\S]+?\$\$|\$.+?\$)/g);
+  // 3. Auto-close unclosed $$ or $ FIRST so math regions are correctly bounded
+  if ((s.match(/\$\$/g) || []).length % 2 !== 0) {
+    s += '\n$$';
+  }
+  const singleDollars = (s.replace(/\$\$/g, '').match(/(?<!\\)\$/g) || []).length;
+  if (singleDollars % 2 !== 0) {
+    s += '$';
+  }
+
+  // 4. Standardize \[ ... \] and \( ... \) to $$ and $ (supporting 1 or 2 backslashes)
+  s = s.replace(/\\{1,2}\[([\s\S]+?)\\{1,2}\]/g, '\n\n$$$$$1$$$$\n\n');
+  s = s.replace(/\\{1,2}\(([\s\S]+?)\\{1,2}\)/g, ' $$$1$$ ');
+
+  // Helper to apply transforms only OUTSIDE of $$...$$ and $...$
+  const transformOutsideMath = (input, transform) => {
+    const parts = input.split(/(\$\$[\s\S]+?\$\$|\$[^\$\n]+?\$)/g);
     for (let i = 0; i < parts.length; i += 2) {
       if (parts[i]) {
-        let seg = parts[i];
-        seg = seg.replace(/105\s*distinct/g, '10⁵ distinct');
-        seg = seg.replace(/\bO\(n2\)/g, 'O(n²)');
-        seg = seg.replace(/\bO\(n3\)/g, 'O(n³)');
-        seg = seg.replace(/\b2([nNkK])\b/g, '2^$1');
-
-        seg = seg.replace(/\$\\to\$/g, '→');
-        seg = seg.replace(/\$\\rightarrow\$/g, '→');
-        seg = seg.replace(/\$\\times\$/g, '×');
-        seg = seg.replace(/\$\\le\$/g, '≤');
-        seg = seg.replace(/\$\\ge\$/g, '≥');
-        seg = seg.replace(/\$\\neq\$/g, '≠');
-
-        for (const [re, rep] of rawReplacements) {
-          seg = seg.replace(re, rep);
-        }
-        parts[i] = seg;
+        parts[i] = transform(parts[i]);
       }
     }
-    codeBlockSegments[c] = parts.join('');
-  }
-  return codeBlockSegments.join('');
+    return parts.join('');
+  };
+
+  // 5. Wrap LaTeX environments: aligned, matrix, cases, etc.
+  s = transformOutsideMath(s, str => 
+    str.replace(/(\\begin\{(?:aligned|matrix|pmatrix|bmatrix|cases|array)\}[\s\S]+?\\end\{(?:aligned|matrix|pmatrix|bmatrix|cases|array)\})/g, '\n\n$$$$$1$$$$\n\n')
+  );
+
+  // 6. Balanced top-level LaTeX command wrapping (handles \frac, \dfrac, \tfrac, \sqrt, \boxed, \binom, \lim)
+  s = transformOutsideMath(s, autoWrapLatexCommands);
+
+  // 7. Clean isolated raw LaTeX symbol commands and exponent corruption outside of math blocks
+  const rawReplacements = [
+    [/\\to\b/g, '→'],
+    [/\\rightarrow\b/g, '→'],
+    [/\\leftarrow\b/g, '←'],
+    [/\\Rightarrow\b/g, '⇒'],
+    [/\\Leftarrow\b/g, '⇐'],
+    [/\\iff\b/g, '⟺'],
+    [/\\times\b/g, '×'],
+    [/\\le\b|\\leq\b/g, '≤'],
+    [/\\ge\b|\\geq\b/g, '≥'],
+    [/\\neq\b/g, '≠'],
+    [/\\pm\b/g, '±'],
+    [/\\approx\b/g, '≈'],
+    [/\\equiv\b/g, '≡'],
+    [/\\in\b/g, '∈'],
+    [/\\notin\b/g, '∉'],
+    [/\\subset\b/g, '⊂'],
+    [/\\subseteq\b/g, '⊆'],
+    [/\\cup\b/g, '∪'],
+    [/\\cap\b/g, '∩'],
+    [/\\cdot\b/g, '·'],
+    [/\\ldots\b|\\dots\b/g, '…'],
+    [/\\infty\b/g, '∞'],
+    [/\\Theta\b/g, 'Θ'],
+    [/\\Omega\b/g, 'Ω'],
+    [/\\Sigma\b/g, 'Σ'],
+    [/\\Delta\b/g, 'Δ'],
+    [/\\alpha\b/g, 'α'],
+    [/\\beta\b/g, 'β'],
+    [/\\gamma\b/g, 'γ'],
+    [/\\lambda\b/g, 'λ'],
+    [/\\mu\b/g, 'μ'],
+    [/\\pi\b/g, 'π'],
+    [/\\sigma\b/g, 'σ'],
+    [/\\phi\b/g, 'φ'],
+  ];
+
+  s = transformOutsideMath(s, str => {
+    let seg = str;
+    seg = seg.replace(/105\s*distinct/g, '10⁵ distinct');
+    seg = seg.replace(/\bO\(n2\)/g, 'O(n²)');
+    seg = seg.replace(/\bO\(n3\)/g, 'O(n³)');
+    seg = seg.replace(/\b2([nNkK])\b/g, '2^$1');
+
+    seg = seg.replace(/\$\\to\$/g, '→');
+    seg = seg.replace(/\$\\rightarrow\$/g, '→');
+    seg = seg.replace(/\$\\times\$/g, '×');
+    seg = seg.replace(/\$\\le\$/g, '≤');
+    seg = seg.replace(/\$\\ge\$/g, '≥');
+    seg = seg.replace(/\$\\neq\$/g, '≠');
+
+    for (const [re, rep] of rawReplacements) {
+      seg = seg.replace(re, rep);
+    }
+    return seg;
+  });
+
+  // 8. Restore protected inline code and code fences
+  s = s.replace(/__INLINE_CODE_(\d+)__/g, (_, idx) => inlineCodes[idx]);
+  s = s.replace(/__CODE_BLOCK_(\d+)__/g, (_, idx) => codeBlocks[idx]);
+
+  return s;
 }
 
 // Dedicated IDE/Terminal-Style Code Block
@@ -450,6 +571,7 @@ function parseBlocks(text) {
 function sanitizeFormula(formula) {
   if (!formula) return '';
   let s = formula.trim();
+  s = s.replace(/\\\\([a-zA-Z]+)/g, '\\$1');
   s = s.replace(/\\text\{_+([a-zA-Z0-9\s]*)\}/g, '\\underline{\\hspace{1.5cm}}');
   s = s.replace(/_{2,}/g, '\\underline{\\hspace{1.5cm}}');
   return s;
